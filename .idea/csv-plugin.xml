@@ -52,6 +52,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\code_check_csvs\all_tdf_export.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\edsas_export.csv">
           <value>
             <Attribute>
@@ -60,6 +67,13 @@
           </value>
         </entry>
         <entry key="\edsas_missing_codes.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\edsas_missing_codes_tdf.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
