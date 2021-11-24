@@ -1,11 +1,11 @@
 import pandas as pd
 
 # Subjects from Timetabler
-yr7_subjects = pd.read_csv("7_sof_export.csv")
-yr8_subjects = pd.read_csv("8_sof_export.csv")
-yr9_subjects = pd.read_csv("9_sof_export.csv")
-yr10_subjects = pd.read_csv("10_sof_export.csv")
-yrSS_subjects = pd.read_csv("ss_sof_export.csv")
+yr7_subjects = pd.read_csv("code_check_csvs/7_sof_export.csv")
+yr8_subjects = pd.read_csv("code_check_csvs/8_sof_export.csv")
+yr9_subjects = pd.read_csv("code_check_csvs/9_sof_export.csv")
+yr10_subjects = pd.read_csv("code_check_csvs/10_sof_export.csv")
+yrSS_subjects = pd.read_csv("code_check_csvs/ss_sof_export.csv")
 # Concat into one Dataframe
 all_subjects = pd.concat([yr7_subjects, yr8_subjects, yr9_subjects, yr10_subjects, yrSS_subjects]).reset_index(drop=True)
 # Remove Unwanted Columns
@@ -22,7 +22,7 @@ all_subjects.rename(columns={'Name': 'sub_name', 'Code ': 'sub_code'}, inplace=T
 # print(all_subjects)
 
 # EDSAS Subjects and Codes Export
-edsas_subjects = pd.read_csv("edsas_export.csv")
+edsas_subjects = pd.read_csv("code_check_csvs/edsas_export.csv")
 # Tidy up EDSAS Subject Export
 edsas_subjects.drop(edsas_subjects.iloc[:, 1:2], inplace=True, axis=1)
 edsas_subjects.drop(edsas_subjects.iloc[:, 2:], inplace=True, axis=1)

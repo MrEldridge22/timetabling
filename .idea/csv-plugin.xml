@@ -24,7 +24,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\9_sof_export.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\All Subjects.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\EDSASCodes.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -53,6 +67,13 @@
           </value>
         </entry>
         <entry key="\edsas_rename.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\ss_sof_export.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
