@@ -3,55 +3,6 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\10_sof_export.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\7_sof_export.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\8_sof_export.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\9_sof_export.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\All Subjects.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\EDSASCodes.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\SSCodes.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\code_check_csvs\all_tdf_export.csv">
           <value>
             <Attribute>
@@ -59,14 +10,21 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\edsas_export.csv">
+        <entry key="\code_check_csvs\edsas_export.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\edsas_missing_codes.csv">
+        <entry key="\code_check_csvs\edsas_missing_codes.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\code_check_csvs\edsas_rename.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -80,14 +38,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\edsas_rename.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\ss_sof_export.csv">
+        <entry key="\edsas_rename_tdf.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

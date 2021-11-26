@@ -51,7 +51,6 @@ for row in all_subjects.itertuples():
 
 # Remove Year Level at the start of the name
 for row in all_subjects.itertuples():
-
     if row.sub_name[0:2] in ["07", "08", "09", "10", "11", "12"]:
         all_subjects.at[row.Index, 'sub_name'] = row.sub_name[3:]
 
@@ -82,10 +81,10 @@ for row in all_subjects.itertuples():
 
 # Output to CSV Files
 missing_subjects.rename(columns={'sub_code': 'Subject Code', 'sub_name_x': 'Subject Name'}, inplace=True)
-missing_subjects.to_csv('edsas_missing_codes_tdf.csv', index=False)
+missing_subjects.to_csv('code_check_output/edsas_missing_codes_tdf.csv', index=False)
 
 incorrect_names_df = pd.DataFrame.from_records(incorrect_names, columns=['sub_code', 'sub_name'])
 incorrect_names_df.rename(columns={'sub_code': 'Subject Code', 'sub_name': 'Subject Name'}, inplace=True)
-incorrect_names_df.to_csv('edsas_rename_tdf.csv', index=False)
+incorrect_names_df.to_csv('code_check_output/edsas_rename_tdf.csv', index=False)
 
 print("Completed!")
