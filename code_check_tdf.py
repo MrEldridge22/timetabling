@@ -40,6 +40,12 @@ for row in all_subjects.itertuples():
         else:
             pass
 
+# Remove Suffix / Number from SWD Class Codes
+for row in all_subjects.itertuples():
+    if row.sub_code[0] == "S":
+        all_subjects.at[row.Index, 'sub_code'] = row.sub_code[:-1]
+        print("Found SWD Code")
+
 # Remove spaces and Core Group Codes at the end of the Subject Name
 for row in all_subjects.itertuples():
     if row.sub_name[-1:] == " ":
@@ -49,14 +55,14 @@ for row in all_subjects.itertuples():
     else:
         pass
 
-# Remove Year Level at the start of the name
+# Remove Year Level at the start of the name and last number from SWD
 for row in all_subjects.itertuples():
     if row.sub_name[0:2] in ["07", "08", "09", "10", "11", "12"]:
         all_subjects.at[row.Index, 'sub_name'] = row.sub_name[3:]
 
 # Drop Duplicates
 all_subjects.drop_duplicates(inplace=True)
-# print(all_subjects)
+
 
 # Compare codes in Timetabler to codes in EDSAS, Get list of codes not in EDSAS
 # Merge the two dataframes together using left join, finding all the codes which exist in EDSAS

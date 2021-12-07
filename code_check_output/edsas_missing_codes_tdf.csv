@@ -2,7 +2,6 @@ Subject Code,Subject Name
 0DTPRO,Digital Products
 0MDAN,Media Arts Animation
 0MDFL,Media Arts Film & Cinematography
-0PHE,Health and Physical Education
 1ABGMS,SAASTA Aboriginal Studies
 1ABGSS,SAASTA Aboriginal Studies
 1IESDPUB,Digital Publishing
@@ -45,49 +44,20 @@ Subject Code,Subject Name
 7SCIP,Science
 7TECH,Design & Technology
 8EAL,English as a Sec Lang
-9FODN,Food & Nutrition
 9MDFL,Media Arts Film & Cinematography
 9PGHD,Digital Photography
-SC1DT1,SC1 Digital Tech
-SC1ENG1,SC1 English
-SC1HUM1,SC1 Humanities
-SC1MTH1,SC1 Mathematics
-SC1ART1,SC1 Art
-SC1SCI1,SC1 Science
-SC2ENG1,SC2 English
-SC2HUM1,SC2 Humanities
-SC2MTH1,SC2 Mathematics
-SC2MUS1,SC2 Music
-SC2SCI1,SC2 Science
-SC3ARTS1,SC3 Drama
-SC3ENG1,SC3 English
-SC3MTH1,SC3 Mathematics
-SC3SC1,SC3 Science
-SU1ART1,SU1 Arts (Music)
-SU1ENG1,SU1 English
-SU1FD1,SU1 Food Technology
-SU1HUM1,SU1 Humanities
-SU1MTH1,SU1 Mathematics
-SU1SCI1,SU1 Science
-SU2ARTS1,SU2 Art
-SU2ENG1,SU2 English
-SU2HUM1,SU2 Humanities
-SU2MTH1,SU2 Mathematics
-SU2SCI1,SU2 Science
-SU3ENG1,SU3 English
-SU3HE1,SU3 Health
-SU3MTH1,SU3 Mathematics
-SWDPE1,SWD Physical Education
-SC3HUM1,SC3 Humanities
-SC2DT1,SC2 Digital Technology
-SC3HWB1,SC3 Health & Wellbeing
-SU2FD1,SU2 Food Technology
-SU3CXD1,SU3 Cross Disciplinary Studies
-SU3SCI1,SU3 Scientific Studies
-SU3SC1,SU3 Society & Culture
-SC4SCI1,SC4 Scientific Studies
-SC4SC1,SC4 Society & Culture
-SC4ENG1,SC4 English
-SC4DTE1,SC4 Design Tech
-SC4LCU1,SC4 Language & Culture
-SC4MTH1,SC4 Mathematics
+SC3HUM,SC3 Humanities
+SC3HWB,SC3 Health & Wellbeing
+SC4DTE,SC4 Design Tech
+SC4ENG,SC4 English
+SC4LCU,SC4 Language & Culture
+SC4MTH,SC4 Mathematics
+SC4SC,SC4 Society & Culture
+SC4SCI,SC4 Scientific Studies
+SU2FD,SU2 Food Technology
+SU3CXD,SU3 Cross Disciplinary Studies
+SU3SCI,SU3 Scientific Studies
+1CARESW,Care SWD
+1PDSW,Personal Development SWD
+2CARESW,Care SWD
+2PDSW,Personal Development SWD

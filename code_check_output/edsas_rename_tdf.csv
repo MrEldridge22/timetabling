@@ -28,3 +28,36 @@ Subject Code,Subject Name
 9CARE,Care
 9MDNM,Material Design with Metal
 9MDNW,Material Design with Wood
+SC1ART,SC1 Art
+SC1DT,SC1 Digital Tech
+SC1ENG,SC1 English
+SC1HUM,SC1 Humanities
+SC1MTH,SC1 Mathematics
+SC1SCI,SC1 Science
+SC2DT,SC2 Digital Technology
+SC2ENG,SC2 English
+SC2HUM,SC2 Humanities
+SC2MTH,SC2 Mathematics
+SC2MUS,SC2 Music
+SC2SCI,SC2 Science
+SC3ARTS,SC3 Drama
+SC3ENG,SC3 English
+SC3MTH,SC3 Mathematics
+SC3SC,SC3 Science
+SU1ART,SU1 Arts (Music)
+SU1ENG,SU1 English
+SU1FD,SU1 Food Technology
+SU1HUM,SU1 Humanities
+SU1MTH,SU1 Mathematics
+SU1SCI,SU1 Science
+SU2ARTS,SU2 Art
+SU2ENG,SU2 English
+SU2HUM,SU2 Humanities
+SU2MTH,SU2 Mathematics
+SU2SCI,SU2 Science
+SU3ENG,SU3 English
+SU3HE,SU3 Health
+SU3MTH,SU3 Mathematics
+SU3SC,SU3 Society & Culture
+SWDPE,SWD Physical Education
+9FOD,Food & Nutrition

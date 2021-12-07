@@ -1,463 +1,469 @@
 ﻿No,Faculty,Subject Code,Subject Name,Class Code,Class Name,Class Suffix,BOS Class Code,BOS Code 2,BOS Code 3,Periods,Load,Students,Teachers Taking,Teachers In Faculty
-1,Arts,0ARTA,10 Visual Art A,0ARTA1A,10 Visual Art A1A,1A,,,,4,4.00,21,0,7
-2,Arts,0ARTA,10 Visual Art A,0ARTA1B,10 Visual Art A1B,1B,,,,4,4.00,19,0,7
-3,Arts,0ARTA,10 Visual Art A,0ARTA1C,10 Visual Art A1C,1C,,,,4,4.00,11,0,7
-4,Care Groups,0CARE,10 Care,0CAREA,10 CareA,A,,,,4,0.32,0,1,55
-5,Care Groups,0CARE,10 Care,0CAREB,10 CareB,B,,,,4,0.32,0,1,55
-6,Care Groups,0CARE,10 Care,0CAREC,10 CareC,C,,,,4,0.32,0,1,55
-7,Care Groups,0CARE,10 Care,0CAREE,10 CareE,E,,,,4,0.32,0,1,55
-8,Care Groups,0CARE,10 Care,0CAREF,10 CareF,F,,,,4,0.32,0,1,55
-9,Care Groups,0CARE,10 Care,0CAREG,10 CareG,G,,,,4,0.32,0,1,55
-10,Care Groups,0CARE,10 Care,0CAREH,10 CareH,H,,,,4,0.32,0,1,55
-11,Care Groups,0CARE,10 Care,0CARED,10 CareD,D,,,,4,0.32,0,1,55
-12,Humanities,0CIV,10 Civics Citizenship Economics,0CIV1A,10 Civics Citizenship Economics1A,1A,,,,4,4.00,24,0,10
-13,Arts,0DANA,10 Dance A,0DANA1A,10 Dance A1A,1A,,,,4,4.00,20,0,7
-14,Arts,0DRAA,10 Drama A,0DRAA1A,10 Drama A1A,1A,,,,4,4.00,12,0,7
-15,Design Technology,0DTPRO,10 Digital Products,0DTPRO1A,10 Digital Products1A,1A,,,,4,4.00,14,0,6
-16,English,0EALA,10 English E,0EALAE1A,10 English EE1A,E1A,,,,4,4.00,0,0,11
-17,English,0ENGL,10 English L,0ENGL1A,10 English L1A,1A,,,,4,4.00,0,0,11
-18,English,0ENGO,10 English O1,0ENGO1A,10 English O11A,1A,,,,4,4.00,0,0,11
-19,English,0ENGO,10 English O2,0ENGO2A,10 English O22A,2A,,,,4,4.00,0,0,11
-20,English,0ENGO,10 English O4,0ENGO4A,10 English O44A,4A,,,,4,4.00,0,0,11
-21,English,0ENGO,10 English O3,0ENGO3B,10 English O33B,3B,,,,4,4.00,0,0,11
-22,English,0ENGP,10 English P,0ENGP1A,10 English P1A,1A,,,,4,4.00,0,0,11
-23,Design Technology,0ENTEC,10 Engineering Technology,0ENTEC1A,10 Engineering Technology1A,1A,,,,4,4.00,20,0,6
-24,Food Tech,0FDINV,10 Food Innovation,0FDINV1A,10 Food Innovation1A,1A,,,,4,4.00,20,0,6
-25,Food Tech,0FODA,10 Food & Nutrition,0FODA1A,10 Food & Nutrition1A,1A,,,,4,4.00,20,0,6
-26,Humanities,0HUML1,10 Humanities L1,0HUML1A,10 Humanities L1A,A,,,,4,4.00,0,0,10
-27,Humanities,0HUMO1,10 Humanities O1,0HUMO1A,10 Humanities O1A,A,,,,4,4.00,0,0,10
-28,Humanities,0HUMO3,10 Humanities O3,0HUMO3A,10 Humanities O3A,A,,,,4,4.00,0,0,10
-29,Intervention,0LNSP,10 Learning Support,0LNSP1A,10 Learning Support1A,1A,,,,4,4.00,17,0,0
-30,Arts,0MDAN,10 Media Arts Animation,0MDAN1A,10 Media Arts Animation1A,1A,,,,4,4.00,21,0,7
-31,Arts,0MDFL,10 Media Arts Film & Cinematography,0MDFL1A,10 Media Arts Film & Cinematography1A,1A,,,,4,4.00,12,0,7
-32,Design Technology,0MDNM,10 Material Design with Metal,0MDNM1A,10 Material Design with Metal1A,1A,,,,4,4.00,18,0,6
-33,Design Technology,0MDNM,10 Material Design with Metal,0MDNM1B,10 Material Design with Metal1B,1B,,,,4,4.00,17,0,6
-34,Design Technology,0MDTW,10 Material Design with Wood,0MDTW1A,10 Material Design with Wood1A,1A,,,,4,4.00,18,0,6
-35,Design Technology,0MDTW,10 Material Design with Wood,0MDTW1B,10 Material Design with Wood1B,1B,,,,4,4.00,16,0,6
-36,Mathematics,0MTHE,10 Mathematics E,0MTHE1A,10 Mathematics E1A,1A,,,,4,4.00,0,0,13
-37,Mathematics,0MTHL,10 Mathematics L1,0MTHL1A,10 Mathematics L11A,1A,,,,4,4.00,0,0,13
-38,Mathematics,0MTHO,10 Mathematics O1,0MTHO1A,10 Mathematics O11A,1A,,,,4,4.00,0,0,13
-39,Mathematics,0MTHO,10 Mathematics O2,0MTHO2A,10 Mathematics O22A,2A,,,,4,4.00,0,0,13
-40,Mathematics,0MTHO,10 Mathematics O3,0MTHO3A,10 Mathematics O33A,3A,,,,4,4.00,0,0,13
-41,Mathematics,0MTHO,10 Mathematics O4,0MTHO4A,10 Mathematics O44A,4A,,,,4,4.00,0,0,13
-42,Mathematics,0MTHP,10 Mathematics P1,0MTHP1A,10 Mathematics P11A,1A,,,,4,4.00,0,0,13
-43,Arts,0MUSA,10 Music A,0MUSA1A,10 Music A1A,1A,,,,4,4.00,20,0,7
-44,Arts,0MUSA,10 Music A,0MUSA1B,10 Music A1B,1B,,,,4,4.00,19,0,7
-45,Care Groups,0PD,10 Personal Development,0PDA,10 Personal DevelopmentA,A,,,,2,1.30,0,1,55
-46,Care Groups,0PD,10 Personal Development,0PDB,10 Personal DevelopmentB,B,,,,2,1.30,0,1,55
-47,Care Groups,0PD,10 Personal Development,0PDC,10 Personal DevelopmentC,C,,,,2,1.30,0,1,55
-48,Care Groups,0PD,10 Personal Development,0PDE,10 Personal DevelopmentE,E,,,,2,1.30,0,1,55
-49,Care Groups,0PD,10 Personal Development,0PDF,10 Personal DevelopmentF,F,,,,2,1.30,0,1,55
-50,Care Groups,0PD,10 Personal Development,0PDG,10 Personal DevelopmentG,G,,,,2,1.30,0,1,55
-51,Care Groups,0PD,10 Personal Development,0PDH,10 Personal DevelopmentH,H,,,,2,1.30,0,1,55
-52,Care Groups,0PD,10 Personal Development,0PDD,10 Personal DevelopmentD,D,,,,2,1.30,0,1,55
-53,Design Technology,0PGH,10 Digital Photography,0PGH1A,10 Digital Photography1A,1A,,,,4,4.00,22,0,6
-54,Health & PE,0PHE1,10 Health and Physical Education 1,0PHE11A,10 Health and Physical Education 11A,1A,,,,4,4.00,23,0,11
-55,Health & PE,0PHE1,10 Health and Physical Education 1,0PHE11B,10 Health and Physical Education 11B,1B,,,,4,4.00,21,0,11
-56,Health & PE,0PHE1,10 Health and Physical Education 1,0PHE11C,10 Health and Physical Education 11C,1C,,,,4,4.00,20,0,11
-57,Health & PE,0PHE1,10 Health and Physical Education 1,0PHE11D,10 Health and Physical Education 11D,1D,,,,4,4.00,20,0,11
-58,Health & PE,0PHE1,10 Health and Physical Education 1,0PHE11E,10 Health and Physical Education 11E,1E,,,,4,4.00,20,0,11
-59,Health & PE,0PHE1,10 Health and Physical Education 1,0PHE11F,10 Health and Physical Education 11F,1F,,,,4,4.00,19,0,11
-60,Science,0SCIE,10 Science E1,0SCIE1A,10 Science E11A,1A,,,,4,4.00,0,0,12
-61,Science,0SCIL,10 Science L,0SCIL1A,10 Science L1A,1A,,,,4,4.00,0,0,12
-62,Science,0SCIO,10 Science O1,0SCIO1A,10 Science O11A,1A,,,,4,4.00,0,0,12
-63,Science,0SCIO,10 Science O2,0SCIO2A,10 Science O22A,2A,,,,4,4.00,0,0,12
-64,Science,0SCIO,10 Science O3,0SCIO3A,10 Science O33A,3A,,,,4,4.00,0,0,12
-65,Science,0SCIO,10 Science O4,0SCIO4A,10 Science O44A,4A,,,,4,4.00,0,0,12
-66,Science,0SCIP,10 Science P1,0SCIP1A,10 Science P11A,1A,,,,4,4.00,0,0,12
-67,Aboriginal Education,1ABGMS,10 SAASTA Aboriginal Studies,1ABGMS1A,10 SAASTA Aboriginal Studies1A,1A,,,,4,4.00,8,0,2
-68,Aboriginal Education,1ABGSS,11 SAASTA Aboriginal Studies,1ABGSS1A,11 SAASTA Aboriginal Studies1A,1A,,,,4,4.00,8,0,2
-69,Science,1BGYA,11 Biology A,1BGYA1A,11 Biology A1A,1A,,,,4,4.00,26,0,12
-70,Care Groups,1CARE,11 Care,1CAREA,11 CareA,A,,,,4,0.32,0,1,55
-71,Care Groups,1CARE,11 Care,1CAREB,11 CareB,B,,,,4,0.32,0,1,55
-72,Care Groups,1CARE,11 Care,1CAREC,11 CareC,C,,,,4,0.32,0,1,55
-73,Care Groups,1CARE,11 Care,1CARED,11 CareD,D,,,,4,0.32,0,1,55
-74,Care Groups,1CARE,11 Care,1CAREE,11 CareE,E,,,,4,0.32,0,1,55
-75,Care Groups,1CARE,11 Care,1CAREF,11 CareF,F,,,,4,0.32,0,1,55
-76,Care Groups,1CARE,11 Care,1CAREG,11 CareG,G,,,,4,0.32,0,1,55
-77,Science,1CEM1,11 Chemistry A,1CEM11A,11 Chemistry A1A,1A,,,,4,4.00,23,0,12
-78,Health & PE,1CSDA,11 Child Studies A,1CSDA1A,11 Child Studies A1A,1A,,,,4,4.00,24,0,11
-79,Arts,1CVA,11 Creative Arts - Music,1CVA1A,11 Creative Arts - Music1A,1A,,,,4,4.00,1,0,7
-80,Design Technology,1DCSPHA,11 Photography A,1DCSPHA1A,11 Photography A1A,1A,,,,4,4.00,14,0,6
-81,English,1EAL1,11 English as an Additional Language 1,1EAL11A,11 English as an Additional Language 11A,1A,,,,4,4.00,21,0,11
-82,English,1EGH1,11 English 1,1EGH11A,11 English 11A,1A,,,,4,4.00,25,0,11
-83,English,1EGH1,11 English 1,1EGH11B,11 English 11B,1B,,,,4,4.00,24,0,11
-84,English,1ETE1,11 Essential English 1,1ETE11A,11 Essential English 11A,1A,,,,4,4.00,23,0,11
-85,English,1ETE1,11 Essential English 1,1ETE11B,11 Essential English 11B,1B,,,,4,4.00,23,0,11
-86,English,1ETEEAL1,11 Essential English (EALD) 1,1ETEEAL11A,11 Essential English (EALD) 11A,1A,,,,4,4.00,11,0,11
-87,English,1ETELT1,11 Essential English (Literacy) 1,1ETELT11A,11 Essential English (Literacy) 11A,1A,,,,4,4.00,31,0,11
-88,English,1ETELT1,11 Essential English (Literacy) 1,1ETELT11B,11 Essential English (Literacy) 11B,1B,,,,4,4.00,0,0,11
-89,Food Tech,1FOH,11 Food and Hospitality,1FOH1A,11 Food and Hospitality1A,1A,,,,4,4.00,16,0,6
-90,Health & PE,1HEWA,11 Health & Wellbeing A,1HEWA1A,11 Health & Wellbeing A1A,1A,,,,4,4.00,25,0,11
-91,Design Technology,1IESDPUB,11 Digital Publishing,1IESDPUB1A,11 Digital Publishing1A,1A,,,,4,4.00,8,0,6
-92,Arts,1ILNDN1,11 Dance (Integrated Learning),1ILNDN11A,11 Dance (Integrated Learning)1A,1A,,,,4,4.00,1,0,7
-93,Arts,1ILNSP,11 Stage Production (Integrated Leaning),1ILNSP1A,11 Stage Production (Integrated Leaning)1A,1A,,,,4,4.00,3,0,7
-94,Mathematics,1MAMA,11 Mathematical Methods A,1MAMA1A,11 Mathematical Methods A1A,1A,,,,4,4.00,21,0,13
-95,Mathematics,1MAMSPA,11 Specalist Mathematics A,1MAMSPA1A,11 Specalist Mathematics A1A,1A,,,,4,4.00,5,0,13
-96,Mathematics,1MEM1,11 Essential Mathematics (Vocational) 1,1MEM11A,11 Essential Mathematics (Vocational) 11A,1A,,,,4,4.00,23,0,13
-97,Mathematics,1MEM1,11 Essential Mathematics (Vocational) 1,1MEM11B,11 Essential Mathematics (Vocational) 11B,1B,,,,4,4.00,22,0,13
-98,Mathematics,1MEMN,11 Essential Mathematics (Numeracy),1MEMN1A,11 Essential Mathematics (Numeracy)1A,1A,,,,4,4.00,22,0,13
-99,Mathematics,1MEMN,11 Essential Mathematics (Numeracy),1MEMN1B,11 Essential Mathematics (Numeracy)1B,1B,,,,4,4.00,21,0,13
-100,Mathematics,1MGMA,11 General Mathematics A,1MGMA1A,11 General Mathematics A1A,1A,,,,4,4.00,26,0,13
-101,Mathematics,1MGMA,11 General Mathematics A,1MGMA1B,11 General Mathematics A1B,1B,,,,4,4.00,25,0,13
-102,Humanities,1MOD,11 Modern History,1MOD1A,11 Modern History1A,1A,,,,4,4.00,25,0,10
-103,Design Technology,1MRSJ,11 Material Solutions with Jewlery,1MRSJ1A,11 Material Solutions with Jewlery1A,1A,,,,4,4.00,18,0,6
-104,Design Technology,1MRSM,11 Material Solutions with Metal,1MRSM1A,11 Material Solutions with Metal1A,1A,,,,4,4.00,21,0,6
-105,Design Technology,1MRSW,11 Material Soluctions with Wood,1MRSW1A,11 Material Soluctions with Wood1A,1A,,,,4,4.00,19,0,6
-106,Arts,1MXEA,11 Music Experience A,1MXEA1A,11 Music Experience A1A,1A,,,,4,4.00,8,0,7
-107,Science,1NUTA,11 Nutrition A,1NUTA1A,11 Nutrition A1A,1A,,,,4,4.00,22,0,12
-108,Health & PE,1OUTA,11 Outdoor Education A,1OUTA1A,11 Outdoor Education A1A,1A,,,,4,4.00,18,0,11
-109,Health & PE,1OUTA,11 Outdoor Education A,1OUTA1B,11 Outdoor Education A1B,1B,,,,4,4.00,22,0,11
-110,Care Groups,1PD,11 Personal Development,1PDA,11 Personal DevelopmentA,A,,,,2,1.30,0,1,55
-111,Care Groups,1PD,11 Personal Development,1PDB,11 Personal DevelopmentB,B,,,,2,1.30,0,1,55
-112,Care Groups,1PD,11 Personal Development,1PDC,11 Personal DevelopmentC,C,,,,2,1.30,0,1,55
-113,Care Groups,1PD,11 Personal Development,1PDD,11 Personal DevelopmentD,D,,,,2,1.30,0,1,55
-114,Care Groups,1PD,11 Personal Development,1PDE,11 Personal DevelopmentE,E,,,,2,1.30,0,1,55
-115,Care Groups,1PD,11 Personal Development,1PDF,11 Personal DevelopmentF,F,,,,2,1.30,0,1,55
-116,Care Groups,1PD,11 Personal Development,1PDG,11 Personal DevelopmentG,G,,,,2,1.30,0,1,55
-117,Health & PE,1PHDA,11 Physical Education A,1PHDA1A,11 Physical Education A1A,1A,,,,4,4.00,23,0,11
-118,Health & PE,1PHDA,11 Physical Education A,1PHDA1B,11 Physical Education A1B,1B,,,,4,4.00,24,0,11
-119,Health & PE,1PHDA,11 Physical Education A,1PHDA1C,11 Physical Education A1C,1C,,,,4,4.00,23,0,11
+1,Arts,0ARTA,10 Visual Art A,0ARTA1A,10 Visual Art A1A,1A,,,,4,4.00,22,1,9
+2,Arts,0ARTA,10 Visual Art A,0ARTA1B,10 Visual Art A1B,1B,,,,4,4.00,21,1,9
+3,Arts,0ARTA,10 Visual Art A,0ARTA1C,10 Visual Art A1C,1C,,,,4,4.00,9,1,9
+4,Care Groups,0CARE,10 Care,0CAREA,10 CareA,A,,,,4,0.32,0,1,57
+5,Care Groups,0CARE,10 Care,0CAREB,10 CareB,B,,,,4,0.32,0,1,57
+6,Care Groups,0CARE,10 Care,0CAREC,10 CareC,C,,,,4,0.32,0,1,57
+7,Care Groups,0CARE,10 Care,0CAREE,10 CareE,E,,,,4,0.32,0,1,57
+8,Care Groups,0CARE,10 Care,0CAREF,10 CareF,F,,,,4,0.32,0,1,57
+9,Care Groups,0CARE,10 Care,0CAREG,10 CareG,G,,,,4,0.32,0,1,57
+10,Care Groups,0CARE,10 Care,0CAREH,10 CareH,H,,,,4,0.32,0,1,57
+11,Care Groups,0CARE,10 Care,0CARED,10 CareD,D,,,,4,0.32,0,1,57
+12,Humanities,0CIV,10 Civics Citizenship Economics,0CIV1A,10 Civics Citizenship Economics1A,1A,,,,4,4.00,24,1,15
+13,Arts,0DANA,10 Dance A,0DANA1A,10 Dance A1A,1A,,,,4,4.00,20,1,9
+14,Arts,0DRAA,10 Drama A,0DRAA1A,10 Drama A1A,1A,,,,4,4.00,10,1,9
+15,Design Technology,0DTPRO,10 Digital Products,0DTPRO1A,10 Digital Products1A,1A,,,,4,4.00,13,1,9
+16,English,0EALA,10 English E,0EALAE1A,10 English EE1A,E1A,,,,4,4.00,20,1,19
+17,English,0ENGL,10 English L,0ENGL1A,10 English L1A,1A,,,,4,4.00,28,1,19
+18,English,0ENGO,10 English O1,0ENGO1A,10 English O11A,1A,,,,4,4.00,24,1,19
+19,English,0ENGO,10 English O2,0ENGO2A,10 English O22A,2A,,,,4,4.00,24,1,19
+20,English,0ENGO,10 English O4,0ENGO4A,10 English O44A,4A,,,,4,4.00,24,1,19
+21,English,0ENGO,10 English O3,0ENGO3B,10 English O33B,3B,,,,4,4.00,25,1,19
+22,English,0ENGP,10 English P,0ENGP1A,10 English P1A,1A,,,,4,4.00,20,1,19
+23,Design Technology,0ENTEC,10 Engineering Technology,0ENTEC1A,10 Engineering Technology1A,1A,,,,4,4.00,20,1,9
+24,Food Tech,0FDINV,10 Food Innovation,0FDINV1A,10 Food Innovation1A,1A,,,,4,4.00,19,1,7
+25,Food Tech,0FODA,10 Food & Nutrition,0FODA1A,10 Food & Nutrition1A,1A,,,,4,4.00,21,1,7
+26,Health & PE,0HPE1,10 Health and Physical Education 1,0HPE11A,10 Health and Physical Education 11A,1A,,,,4,4.00,23,1,15
+27,Health & PE,0HPE1,10 Health and Physical Education 1,0HPE11B,10 Health and Physical Education 11B,1B,,,,4,4.00,20,1,15
+28,Health & PE,0HPE1,10 Health and Physical Education 1,0HPE11C,10 Health and Physical Education 11C,1C,,,,4,4.00,20,1,15
+29,Health & PE,0HPE1,10 Health and Physical Education 1,0HPE11D,10 Health and Physical Education 11D,1D,,,,4,4.00,20,1,15
+30,Health & PE,0HPE1,10 Health and Physical Education 1,0HPE11E,10 Health and Physical Education 11E,1E,,,,4,4.00,20,1,15
+31,Health & PE,0HPE1,10 Health and Physical Education 1,0HPE11F,10 Health and Physical Education 11F,1F,,,,4,4.00,19,1,15
+32,Humanities,0HUML1,10 Humanities L1,0HUML1A,10 Humanities L1A,A,,,,4,4.00,28,1,15
+33,Humanities,0HUMO1,10 Humanities O1,0HUMO1A,10 Humanities O1A,A,,,,4,4.00,24,1,15
+34,Humanities,0HUMO3,10 Humanities O3,0HUMO3A,10 Humanities O3A,A,,,,4,4.00,25,1,15
+35,Intervention,0LNSP,10 Learning Support,0LNSP1A,10 Learning Support1A,1A,,,,4,4.00,17,0,4
+36,Arts,0MDAN,10 Media Arts Animation,0MDAN1A,10 Media Arts Animation1A,1A,,,,4,4.00,22,1,9
+37,Arts,0MDFL,10 Media Arts Film & Cinematography,0MDFL1A,10 Media Arts Film & Cinematography1A,1A,,,,4,4.00,12,1,9
+38,Design Technology,0MDNM,10 Material Design with Metal,0MDNM1A,10 Material Design with Metal1A,1A,,,,4,4.00,19,1,9
+39,Design Technology,0MDNM,10 Material Design with Metal,0MDNM1B,10 Material Design with Metal1B,1B,,,,4,4.00,15,1,9
+40,Design Technology,0MDTW,10 Material Design with Wood,0MDTW1A,10 Material Design with Wood1A,1A,,,,4,4.00,19,1,9
+41,Design Technology,0MDTW,10 Material Design with Wood,0MDTW1B,10 Material Design with Wood1B,1B,,,,4,4.00,18,1,9
+42,Mathematics,0MTHE,10 Mathematics E,0MTHE1A,10 Mathematics E1A,1A,,,,4,4.00,20,1,18
+43,Mathematics,0MTHL,10 Mathematics L1,0MTHL1A,10 Mathematics L11A,1A,,,,4,4.00,28,1,18
+44,Mathematics,0MTHO,10 Mathematics O1,0MTHO1A,10 Mathematics O11A,1A,,,,4,4.00,24,1,18
+45,Mathematics,0MTHO,10 Mathematics O2,0MTHO2A,10 Mathematics O22A,2A,,,,4,4.00,24,1,18
+46,Mathematics,0MTHO,10 Mathematics O3,0MTHO3A,10 Mathematics O33A,3A,,,,4,4.00,25,1,18
+47,Mathematics,0MTHO,10 Mathematics O4,0MTHO4A,10 Mathematics O44A,4A,,,,4,4.00,24,1,18
+48,Mathematics,0MTHP,10 Mathematics P1,0MTHP1A,10 Mathematics P11A,1A,,,,4,4.00,20,1,18
+49,Arts,0MUSA,10 Music A,0MUSA1A,10 Music A1A,1A,,,,4,4.00,22,1,9
+50,Arts,0MUSA,10 Music A,0MUSA1B,10 Music A1B,1B,,,,4,4.00,19,1,9
+51,Care Groups,0PD,10 Personal Development,0PDA,10 Personal DevelopmentA,A,,,,2,1.30,0,1,57
+52,Care Groups,0PD,10 Personal Development,0PDB,10 Personal DevelopmentB,B,,,,2,1.30,0,1,57
+53,Care Groups,0PD,10 Personal Development,0PDC,10 Personal DevelopmentC,C,,,,2,1.30,0,1,57
+54,Care Groups,0PD,10 Personal Development,0PDE,10 Personal DevelopmentE,E,,,,2,1.30,0,1,57
+55,Care Groups,0PD,10 Personal Development,0PDF,10 Personal DevelopmentF,F,,,,2,1.30,0,1,57
+56,Care Groups,0PD,10 Personal Development,0PDG,10 Personal DevelopmentG,G,,,,2,1.30,0,1,57
+57,Care Groups,0PD,10 Personal Development,0PDH,10 Personal DevelopmentH,H,,,,2,1.30,0,1,57
+58,Care Groups,0PD,10 Personal Development,0PDD,10 Personal DevelopmentD,D,,,,2,1.30,0,1,57
+59,Design Technology,0PGH,10 Digital Photography,0PGH1A,10 Digital Photography1A,1A,,,,4,4.00,22,1,9
+60,Science,0SCIE,10 Science E1,0SCIE1A,10 Science E11A,1A,,,,4,4.00,20,1,17
+61,Science,0SCIL,10 Science L,0SCIL1A,10 Science L1A,1A,,,,4,4.00,28,1,17
+62,Science,0SCIO,10 Science O1,0SCIO1A,10 Science O11A,1A,,,,4,4.00,24,1,17
+63,Science,0SCIO,10 Science O2,0SCIO2A,10 Science O22A,2A,,,,4,4.00,24,1,17
+64,Science,0SCIO,10 Science O3,0SCIO3A,10 Science O33A,3A,,,,4,4.00,25,1,17
+65,Science,0SCIO,10 Science O4,0SCIO4A,10 Science O44A,4A,,,,4,4.00,24,1,17
+66,Science,0SCIP,10 Science P1,0SCIP1A,10 Science P11A,1A,,,,4,4.00,20,1,17
+67,Aboriginal Education,1ABGMS,10 SAASTA Aboriginal Studies,1ABGMS1A,10 SAASTA Aboriginal Studies1A,1A,,,,4,4.00,8,1,2
+68,Aboriginal Education,1ABGSS,11 SAASTA Aboriginal Studies,1ABGSS1A,11 SAASTA Aboriginal Studies1A,1A,,,,4,4.00,8,1,2
+69,Science,1BGYA,11 Biology A,1BGYA1A,11 Biology A1A,1A,,,,4,4.00,24,1,17
+70,Care Groups,1CARE,11 Care,1CAREA,11 CareA,A,,,,4,0.32,0,1,57
+71,Care Groups,1CARE,11 Care,1CAREB,11 CareB,B,,,,4,0.32,0,1,57
+72,Care Groups,1CARE,11 Care,1CAREC,11 CareC,C,,,,4,0.32,0,1,57
+73,Care Groups,1CARE,11 Care,1CARED,11 CareD,D,,,,4,0.32,0,1,57
+74,Care Groups,1CARE,11 Care,1CAREE,11 CareE,E,,,,4,0.32,0,1,57
+75,Care Groups,1CARE,11 Care,1CAREF,11 CareF,F,,,,4,0.32,0,1,57
+76,Care Groups,1CARE,11 Care,1CAREG,11 CareG,G,,,,4,0.32,0,1,57
+77,Science,1CEM1,11 Chemistry A,1CEM11A,11 Chemistry A1A,1A,,,,4,4.00,23,1,17
+78,Health & PE,1CSDA,11 Child Studies A,1CSDA1A,11 Child Studies A1A,1A,,,,4,4.00,26,1,15
+79,Arts,1CVA,11 Creative Arts - Music,1CVA1A,11 Creative Arts - Music1A,1A,,,,0,0.00,0,0,9
+80,Design Technology,1DCSPHA,11 Photography A,1DCSPHA1A,11 Photography A1A,1A,,,,4,4.00,17,1,9
+81,English,1EAL1,11 English as an Additional Language 1,1EAL11A,11 English as an Additional Language 11A,1A,,,,4,4.00,23,1,19
+82,English,1EGH1,11 English 1,1EGH11A,11 English 11A,1A,,,,4,4.00,24,1,19
+83,English,1EGH1,11 English 1,1EGH11B,11 English 11B,1B,,,,4,4.00,24,1,19
+84,English,1ETE1,11 Essential English 1,1ETE11A,11 Essential English 11A,1A,,,,4,4.00,25,1,19
+85,English,1ETE1,11 Essential English 1,1ETE11B,11 Essential English 11B,1B,,,,4,4.00,22,1,19
+86,English,1ETEEAL1,11 Essential English (EALD) 1,1ETEEAL11A,11 Essential English (EALD) 11A,1A,,,,0,0.00,0,0,19
+87,English,1ETELT1,11 Essential English (Literacy) 1,1ETELT11A,11 Essential English (Literacy) 11A,1A,,,,4,4.00,23,1,19
+88,English,1ETELT1,11 Essential English (Literacy) 1,1ETELT11B,11 Essential English (Literacy) 11B,1B,,,,4,4.00,22,1,19
+89,Food Tech,1FOH,11 Food and Hospitality,1FOH1A,11 Food and Hospitality1A,1A,,,,4,4.00,17,1,7
+90,Health & PE,1HEWA,11 Health & Wellbeing A,1HEWA1A,11 Health & Wellbeing A1A,1A,,,,4,4.00,26,1,15
+91,Design Technology,1IESDPUB,11 Digital Publishing,1IESDPUB1A,11 Digital Publishing1A,1A,,,,0,0.00,0,0,9
+92,Arts,1ILNDN1,11 Dance (Integrated Learning),1ILNDN11A,11 Dance (Integrated Learning)1A,1A,,,,4,4.00,1,1,9
+93,Arts,1ILNSP,11 Stage Production (Integrated Leaning),1ILNSP1A,11 Stage Production (Integrated Leaning)1A,1A,,,,4,4.00,4,1,9
+94,Mathematics,1MAMA,11 Mathematical Methods A,1MAMA1A,11 Mathematical Methods A1A,1A,,,,4,4.00,21,1,18
+95,Mathematics,1MAMSPA,11 Specalist Mathematics A,1MAMSPA1A,11 Specalist Mathematics A1A,1A,,,,4,4.00,5,1,18
+96,Mathematics,1MEM1,11 Essential Mathematics (Vocational) 1,1MEM11A,11 Essential Mathematics (Vocational) 11A,1A,,,,4,4.00,23,1,18
+97,Mathematics,1MEM1,11 Essential Mathematics (Vocational) 1,1MEM11B,11 Essential Mathematics (Vocational) 11B,1B,,,,4,4.00,24,1,18
+98,Mathematics,1MEMN,11 Essential Mathematics (Numeracy),1MEMN1A,11 Essential Mathematics (Numeracy)1A,1A,,,,4,4.00,20,1,18
+99,Mathematics,1MEMN,11 Essential Mathematics (Numeracy),1MEMN1B,11 Essential Mathematics (Numeracy)1B,1B,,,,4,4.00,23,1,18
+100,Mathematics,1MGMA,11 General Mathematics A,1MGMA1A,11 General Mathematics A1A,1A,,,,4,4.00,26,1,18
+101,Mathematics,1MGMA,11 General Mathematics A,1MGMA1B,11 General Mathematics A1B,1B,,,,4,4.00,26,1,18
+102,Humanities,1MOD,11 Modern History,1MOD1A,11 Modern History1A,1A,,,,4,4.00,26,1,15
+103,Design Technology,1MRSJ,11 Material Solutions with Jewlery,1MRSJ1A,11 Material Solutions with Jewlery1A,1A,,,,4,4.00,21,1,9
+104,Design Technology,1MRSM,11 Material Solutions with Metal,1MRSM1A,11 Material Solutions with Metal1A,1A,,,,4,4.00,20,1,9
+105,Design Technology,1MRSW,11 Material Soluctions with Wood,1MRSW1A,11 Material Soluctions with Wood1A,1A,,,,4,4.00,20,1,9
+106,Arts,1MXEA,11 Music Experience A,1MXEA1A,11 Music Experience A1A,1A,,,,0,0.00,0,0,9
+107,Science,1NUTA,11 Nutrition A,1NUTA1A,11 Nutrition A1A,1A,,,,4,4.00,26,1,17
+108,Health & PE,1OUTA,11 Outdoor Education A,1OUTA1A,11 Outdoor Education A1A,1A,,,,4,4.00,14,1,15
+109,Health & PE,1OUTA,11 Outdoor Education A,1OUTA1B,11 Outdoor Education A1B,1B,,,,4,4.00,23,1,15
+110,Care Groups,1PD,11 Personal Development,1PDA,11 Personal DevelopmentA,A,,,,2,1.30,0,1,57
+111,Care Groups,1PD,11 Personal Development,1PDB,11 Personal DevelopmentB,B,,,,2,1.30,0,1,57
+112,Care Groups,1PD,11 Personal Development,1PDC,11 Personal DevelopmentC,C,,,,2,1.30,0,1,57
+113,Care Groups,1PD,11 Personal Development,1PDD,11 Personal DevelopmentD,D,,,,2,1.30,0,1,57
+114,Care Groups,1PD,11 Personal Development,1PDE,11 Personal DevelopmentE,E,,,,2,1.30,0,1,57
+115,Care Groups,1PD,11 Personal Development,1PDF,11 Personal DevelopmentF,F,,,,2,1.30,0,1,57
+116,Care Groups,1PD,11 Personal Development,1PDG,11 Personal DevelopmentG,G,,,,2,1.30,0,1,57
+117,Health & PE,1PHDA,11 Physical Education A,1PHDA1A,11 Physical Education A1A,1A,,,,4,4.00,25,1,15
+118,Health & PE,1PHDA,11 Physical Education A,1PHDA1B,11 Physical Education A1B,1B,,,,4,4.00,24,1,15
+119,Health & PE,1PHDA,11 Physical Education A,1PHDA1C,11 Physical Education A1C,1C,,,,4,4.00,26,1,15
 120,Special Education,1PL,11 PLP (Special Education),1PLM,11 PLP (Special Education)M,M,,,,4,4.00,0,1,14
-121,Research Project & PLP,1PLPE,11 Personal Learning Plan E,1PLPEA,11 Personal Learning Plan EA,A,,,,4,4.00,0,0,4
-122,Research Project & PLP,1PLPO2,11 Personal Learning Plan O2,1PLPO2A,11 Personal Learning Plan O2A,A,,,,4,4.00,0,0,4
-123,Research Project & PLP,1PLPO4,11 Personal Learning Plan O4,1PLPO4A,11 Personal Learning Plan O4A,A,,,,4,4.00,0,0,4
-124,Research Project & PLP,1PLPP1,11 Personal Learning Plan P,1PLPP1A,11 Personal Learning Plan PA,A,,,,4,4.00,0,0,4
-125,Arts,1PPP,11 Politics Power and People,1PPP1A,11 Politics Power and People1A,1A,,,,4,4.00,17,0,7
-126,Science,1PSCA,11 Psychology A,1PSCA1A,11 Psychology A1A,1A,,,,4,4.00,25,0,12
-127,Science,1PYI1,11 Physics A,1PYI11A,11 Physics A1A,1A,,,,4,4.00,20,0,12
-128,Design Technology,1RESA,11 Robotic and Electronic Systems A,1RESA1A,11 Robotic and Electronic Systems A1A,1A,,,,4,4.00,10,0,6
-129,Design Technology,1RESB,11 Robotic and Electronic Systems B,1RESB1A,11 Robotic and Electronic Systems B1A,1A,,,,4,4.00,1,0,6
-130,Science,1STUA,11 Scientific Studies A,1STUA1A,11 Scientific Studies A1A,1A,,,,4,4.00,22,0,12
-131,Science,1STUA,11 Scientific Studies A,1STUA1B,11 Scientific Studies A1B,1B,,,,4,4.00,18,0,12
-132,Arts,1VAAA,11 Art Practical A,1VAAA1A,11 Art Practical A1A,1A,,,,4,4.00,18,0,7
-133,Care Groups,2CARE,12 Care,2CAREA,12 CareA,A,,,,4,0.32,0,1,55
-134,Care Groups,2CARE,12 Care,2CAREB,12 CareB,B,,,,4,0.32,0,1,55
-135,Care Groups,2CARE,12 Care,2CAREC,12 CareC,C,,,,4,0.32,0,1,55
-136,Care Groups,2CARE,12 Care,2CARED,12 CareD,D,,,,4,0.32,0,1,55
-137,Care Groups,2CARE,12 Care,2CAREE,12 CareE,E,,,,4,0.32,0,1,55
-138,Care Groups,2CARE,12 Care,2CAREF,12 CareF,F,,,,4,0.32,0,1,55
-139,Science,2CEM,12 Chemistry,2CEM1A,12 Chemistry1A,1A,,,,5,5.00,12,0,12
-140,Health & PE,2CSD,12 Child Studies,2CSD1A,12 Child Studies1A,1A,,,,4,4.00,13,0,11
-141,Arts,2CVAMU,12 Creative Arts (Music Focus),2CVAMU1A,12 Creative Arts (Music Focus)1A,1A,,,,4,4.00,9,0,7
-142,English,2EAL,12 English as an Additional Language,2EAL1A,12 English as an Additional Language1A,1A,,,,5,5.00,15,0,11
-143,English,2ESH,12 English,2ESH1A,12 English1A,1A,,,,4,4.00,16,0,11
-144,English,2ETE,12 Essential English,2ETE1A,12 Essential English1A,1A,,,,4,4.00,21,0,11
-145,English,2ETE,12 Essential English,2ETE1B,12 Essential English1B,1B,,,,4,4.00,20,0,11
-146,Food Tech,2FOH,12 Food & Hospitality Studies,2FOH1A,12 Food & Hospitality Studies1A,1A,,,,4,4.00,3,0,6
-147,Health & PE,2HEW,12 Health and Wellbeing,2HEW1A,12 Health and Wellbeing1A,1A,,,,4,4.00,16,0,11
-148,Design Technology,2IESDPR,12 Digital Products,2IESDPR1A,12 Digital Products1A,1A,,,,4,4.00,8,0,6
-149,Design Technology,2IESMW,12 Material Products with Metal,2IESMW1A,12 Material Products with Metal1A,1A,,,,4,4.00,16,0,6
-150,Health & PE,2ILASS,12 Sport Health & Physical Act,2ILASS1A,12 Sport Health & Physical Act1A,1A,,,,4,4.00,16,0,11
-151,Aboriginal Education,2ILBPWR,12 SAASTA (Integrated Learning),2ILBPWR1A,12 SAASTA (Integrated Learning)1A,1A,,,,4,4.00,9,0,2
-152,Arts,2ILBSP,12 Stage Production (Integrated Learning),2ILBSP1A,12 Stage Production (Integrated Learning)1A,1A,,,,4,4.00,6,0,7
-153,Mathematics,2ILNMTH,12 Math Skills for Life,2ILNMTH1A,12 Math Skills for Life1A,1A,,,,4,4.00,26,0,13
-154,Humanities,2ILPP,12 Political Philosophy,2ILPP1A,12 Political Philosophy1A,1A,,,,4,4.00,0,0,10
-155,Mathematics,2MGM,12 General Mathematics,2MGM1A,12 General Mathematics1A,1A,,,,5,5.00,17,0,13
-156,Mathematics,2MHS,12 Mathematical Methods,2MHS1A,12 Mathematical Methods1A,1A,,,,5,5.00,13,0,13
-157,Design Technology,2MRSW,12 Furniture Construction,2MRSW1A,12 Furniture Construction1A,1A,,,,4,4.00,14,0,6
-158,Mathematics,2MSC,12 Specialist Mathematics,2MSC1A,12 Specialist Mathematics1A,1A,,,,5,5.00,6,0,13
-159,Care Groups,2PD,12 Personal Development,2PDA,12 Personal DevelopmentA,A,,,,2,1.30,0,1,55
-160,Care Groups,2PD,12 Personal Development,2PDB,12 Personal DevelopmentB,B,,,,2,1.30,0,1,55
-161,Care Groups,2PD,12 Personal Development,2PDC,12 Personal DevelopmentC,C,,,,2,1.30,0,1,55
-162,Care Groups,2PD,12 Personal Development,2PDD,12 Personal DevelopmentD,D,,,,2,1.30,0,1,55
-163,Care Groups,2PD,12 Personal Development,2PDE,12 Personal DevelopmentE,E,,,,2,1.30,0,1,55
-164,Care Groups,2PD,12 Personal Development,2PDF,12 Personal DevelopmentF,F,,,,2,1.30,0,1,55
-165,Health & PE,2PHD,12 Physical Education,2PHD1A,12 Physical Education1A,1A,,,,4,4.00,16,0,11
-166,Humanities,2PPP,12 Politics Power and People,2PPP1A,12 Politics Power and People1A,1A,,,,4,4.00,2,0,10
-167,Humanities,2PPS,12 Philosophy,2PPS1A,12 Philosophy1A,1A,,,,4,4.00,4,0,10
-168,Science,2PSC,12 Psychology,2PSC1A,12 Psychology1A,1A,,,,4,4.00,7,0,12
-169,Science,2PYI,12 Physics,2PYI1A,12 Physics1A,1A,,,,5,5.00,11,0,12
+121,Research Project & PLP,1PLPE,11 Personal Learning Plan E,1PLPEA,11 Personal Learning Plan EA,A,,,,4,4.00,20,1,7
+122,Research Project & PLP,1PLPO2,11 Personal Learning Plan O2,1PLPO2A,11 Personal Learning Plan O2A,A,,,,4,4.00,24,1,7
+123,Research Project & PLP,1PLPO4,11 Personal Learning Plan O4,1PLPO4A,11 Personal Learning Plan O4A,A,,,,4,4.00,24,1,7
+124,Research Project & PLP,1PLPP1,11 Personal Learning Plan P,1PLPP1A,11 Personal Learning Plan PA,A,,,,4,4.00,20,1,7
+125,Arts,1PPP,11 Politics Power and People,1PPP1A,11 Politics Power and People1A,1A,,,,4,4.00,17,1,9
+126,Science,1PSCA,11 Psychology A,1PSCA1A,11 Psychology A1A,1A,,,,4,4.00,19,1,17
+127,Science,1PYI1,11 Physics A,1PYI11A,11 Physics A1A,1A,,,,4,4.00,20,1,17
+128,Design Technology,1RESA,11 Robotic and Electronic Systems A,1RESA1A,11 Robotic and Electronic Systems A1A,1A,,,,4,4.00,10,1,9
+129,Design Technology,1RESB,11 Robotic and Electronic Systems B,1RESB1A,11 Robotic and Electronic Systems B1A,1A,,,,0,0.00,0,0,9
+130,Science,1STUA,11 Scientific Studies A,1STUA1A,11 Scientific Studies A1A,1A,,,,4,4.00,23,1,17
+131,Science,1STUA,11 Scientific Studies A,1STUA1B,11 Scientific Studies A1B,1B,,,,4,4.00,21,1,17
+132,Arts,1VAAA,11 Art Practical A,1VAAA1A,11 Art Practical A1A,1A,,,,4,4.00,16,1,9
+133,Care Groups,2CARE,12 Care,2CAREA,12 CareA,A,,,,4,0.32,0,1,57
+134,Care Groups,2CARE,12 Care,2CAREB,12 CareB,B,,,,4,0.32,0,1,57
+135,Care Groups,2CARE,12 Care,2CAREC,12 CareC,C,,,,4,0.32,0,1,57
+136,Care Groups,2CARE,12 Care,2CARED,12 CareD,D,,,,4,0.32,0,1,57
+137,Care Groups,2CARE,12 Care,2CAREE,12 CareE,E,,,,4,0.32,0,1,57
+138,Care Groups,2CARE,12 Care,2CAREF,12 CareF,F,,,,4,0.32,0,1,57
+139,Science,2CEM,12 Chemistry,2CEM1A,12 Chemistry1A,1A,,,,5,5.00,12,1,17
+140,Health & PE,2CSD,12 Child Studies,2CSD1A,12 Child Studies1A,1A,,,,4,4.00,14,1,15
+141,Arts,2CVAMU,12 Creative Arts (Music Focus),2CVAMU1A,12 Creative Arts (Music Focus)1A,1A,,,,0,0.00,0,0,9
+142,English,2EAL,12 English as an Additional Language,2EAL1A,12 English as an Additional Language1A,1A,,,,5,5.00,15,1,19
+143,English,2ESH,12 English,2ESH1A,12 English1A,1A,,,,4,4.00,18,1,19
+144,English,2ETE,12 Essential English,2ETE1A,12 Essential English1A,1A,,,,4,4.00,21,1,19
+145,English,2ETE,12 Essential English,2ETE1B,12 Essential English1B,1B,,,,4,4.00,21,1,19
+146,Food Tech,2FOH,12 Food & Hospitality Studies,2FOH1A,12 Food & Hospitality Studies1A,1A,,,,4,4.00,3,1,7
+147,Health & PE,2HEW,12 Health and Wellbeing,2HEW1A,12 Health and Wellbeing1A,1A,,,,4,4.00,19,1,15
+148,Design Technology,2IESDPR,12 Digital Products,2IESDPR1A,12 Digital Products1A,1A,,,,4,4.00,8,1,9
+149,Design Technology,2IESMW,12 Material Products with Metal,2IESMW1A,12 Material Products with Metal1A,1A,,,,4,4.00,17,1,9
+150,Health & PE,2ILASS,12 Sport Health & Physical Act,2ILASS1A,12 Sport Health & Physical Act1A,1A,,,,4,4.00,17,1,15
+151,Aboriginal Education,2ILBPWR,12 SAASTA (Integrated Learning),2ILBPWR1A,12 SAASTA (Integrated Learning)1A,1A,,,,4,4.00,9,1,2
+152,Arts,2ILBSP,12 Stage Production (Integrated Learning),2ILBSP1A,12 Stage Production (Integrated Learning)1A,1A,,,,4,4.00,5,1,9
+153,Mathematics,2ILNMTH,12 Math Skills for Life,2ILNMTH1A,12 Math Skills for Life1A,1A,,,,4,4.00,26,1,18
+154,Humanities,2ILPP,12 Political Philosophy,2ILPP1A,12 Political Philosophy1A,1A,,,,4,4.00,8,1,15
+155,Mathematics,2MGM,12 General Mathematics,2MGM1A,12 General Mathematics1A,1A,,,,5,5.00,19,1,18
+156,Mathematics,2MHS,12 Mathematical Methods,2MHS1A,12 Mathematical Methods1A,1A,,,,5,5.00,14,1,18
+157,Design Technology,2MRSW,12 Furniture Construction,2MRSW1A,12 Furniture Construction1A,1A,,,,4,4.00,14,1,9
+158,Mathematics,2MSC,12 Specialist Mathematics,2MSC1A,12 Specialist Mathematics1A,1A,,,,5,5.00,6,1,18
+159,Care Groups,2PD,12 Personal Development,2PDA,12 Personal DevelopmentA,A,,,,2,1.30,0,1,57
+160,Care Groups,2PD,12 Personal Development,2PDB,12 Personal DevelopmentB,B,,,,2,1.30,0,1,57
+161,Care Groups,2PD,12 Personal Development,2PDC,12 Personal DevelopmentC,C,,,,2,1.30,0,1,57
+162,Care Groups,2PD,12 Personal Development,2PDD,12 Personal DevelopmentD,D,,,,2,1.30,0,1,57
+163,Care Groups,2PD,12 Personal Development,2PDE,12 Personal DevelopmentE,E,,,,2,1.30,0,1,57
+164,Care Groups,2PD,12 Personal Development,2PDF,12 Personal DevelopmentF,F,,,,2,1.30,0,1,57
+165,Health & PE,2PHD,12 Physical Education,2PHD1A,12 Physical Education1A,1A,,,,4,4.00,18,1,15
+166,Humanities,2PPP,12 Politics Power and People,2PPP1A,12 Politics Power and People1A,1A,,,,4,4.00,0,1,15
+167,Humanities,2PPS,12 Philosophy,2PPS1A,12 Philosophy1A,1A,,,,4,4.00,0,1,15
+168,Science,2PSC,12 Psychology,2PSC1A,12 Psychology1A,1A,,,,4,4.00,7,1,17
+169,Science,2PYI,12 Physics,2PYI1A,12 Physics1A,1A,,,,5,5.00,10,1,17
 170,Special Education,2RP,12 Research Project (Special Education),2RPM,12 Research Project (Special Education)M,M,,,,4,4.00,0,1,14
-171,Research Project & PLP,2RPJ1A,12 Research Project A,2RPJ1A1A,12 Research Project A1A,1A,,,,4,4.00,21,0,4
-172,Research Project & PLP,2RPJ1A,12 Research Project A,2RPJ1A1B,12 Research Project A1B,1B,,,,4,4.00,22,0,4
-173,Research Project & PLP,2RPJ1A,12 Research Project A,2RPJ1A1C,12 Research Project A1C,1C,,,,4,4.00,22,0,4
-174,Humanities,2SOR,12 Society & Culture,2SOR1A,12 Society & Culture1A,1A,,,,4,4.00,21,0,10
-175,Science,2STU,12 Scientific Studies,2STU1A,12 Scientific Studies1A,1A,,,,4,4.00,18,0,12
-176,Arts,2VAA,12 Visual Arts - Art,2VAA1A,12 Visual Arts - Art1A,1A,,,,4,4.00,6,0,7
-177,Research Project & PLP,2WPC,12 Workplace Practices,2WPC1A,12 Workplace Practices1A,1A,,,,4,4.00,28,0,4
-178,Arts,7ART,07 Visual Arts,7ART1A,07 Visual Arts1A,1A,,,,4,4.00,22,0,7
-179,Care Groups,7CARE,07 Care,7CAREA,07 CareA,A,,,,4,0.32,0,1,55
-180,Care Groups,7CARE,07 Care,7CAREB,07 CareB,B,,,,4,0.32,0,1,55
-181,Care Groups,7CARE,07 Care,7CAREC,07 CareC,C,,,,4,0.32,0,1,55
-182,Care Groups,7CARE,07 Care,7CARED,07 CareD,D,,,,4,0.32,0,1,55
-183,Care Groups,7CARE,07 Care,7CAREE,07 CareE,E,,,,4,0.32,0,1,55
-184,Care Groups,7CARE,07 Care,7CAREF,07 CareF,F,,,,4,0.32,0,1,55
-185,Care Groups,7CARE,07 Care,7CAREG,07 CareG,G,,,,4,0.32,0,1,55
-186,Care Groups,7CARE,07 Care,7CAREH,07 CareH,H,,,,4,0.32,0,1,55
-187,Care Groups,7CARE,07 Care,7CAREI,07 CareI,I,,,,4,0.32,0,1,55
-188,Design Technology,7DPD,07 Digital Products,7DPD1A,07 Digital Products1A,1A,,,,4,4.00,22,0,6
-189,Design Technology,7DPD,07 Digital Products,7DPD1B,07 Digital Products1B,1B,,,,4,4.00,17,0,6
-190,Arts,7DRA,07 Drama,7DRA1A,07 Drama1A,1A,,,,4,4.00,18,0,7
-191,Digital Tech,7DTE,07 Digital Technology,7DTE1A,07 Digital Technology1A,1A,,,,4,4.00,22,0,4
-192,Digital Tech,7DTE,07 Digital Technology,7DTE1C,07 Digital Technology1C,1C,,,,4,4.00,15,0,4
-193,English,7EALB,07 English as a Sec Lang B,7EALB1A,07 English as a Sec Lang B1A,1A,,,,4,4.00,19,0,11
-194,English,7ENGE,07 English E,7ENGE1,07 English E1,1,,,,4,4.00,0,0,11
-195,English,7ENGL,07 English L,7ENGL1,07 English L1,1,,,,4,4.00,0,0,11
-196,English,7ENGO,07 English O1,7ENGO1,07 English O11,1,,,,4,4.00,0,0,11
-197,English,7ENGO,07 English O2,7ENGO2,07 English O22,2,,,,4,4.00,0,0,11
-198,English,7ENGO,07 English O3,7ENGO3,07 English O33,3,,,,4,4.00,0,0,11
-199,English,7ENGO,07 English O4,7ENGO4,07 English O44,4,,,,4,4.00,0,0,11
-200,English,7ENGO,07 English O5,7ENGO5,07 English O55,5,,,,4,4.00,0,0,11
-201,English,7ENGP,07 English P,7ENGP1,07 English P1,1,,,,4,4.00,0,0,11
-202,Food Tech,7FOD,07 Food and Nutrition,7FOD1A,07 Food and Nutrition1A,1A,,,,4,4.00,19,0,6
-203,Food Tech,7FOD,07 Food and Nutrition,7FOD1B,07 Food and Nutrition1B,1B,,,,4,4.00,18,0,6
-204,Food Tech,7FOD,07 Food and Nutrition,7FOD1E,07 Food and Nutrition1E,1E,,,,4,4.00,22,0,6
-205,Health & PE,7HPE,07 Health and Physical Education,7HPE1A,07 Health and Physical Education1A,1A,,,,4,4.00,23,0,11
-206,Health & PE,7HPE,07 Health and Physical Education,7HPE1B,07 Health and Physical Education1B,1B,,,,4,4.00,22,0,11
-207,Health & PE,7HPE,07 Health and Physical Education,7HPE1D,07 Health and Physical Education1D,1D,,,,4,4.00,24,0,11
-208,Health & PE,7HPE,07 Health and Physical Education,7HPE1E,07 Health and Physical Education1E,1E,,,,4,4.00,24,0,11
-209,Health & PE,7HPE,07 Health and Physical Education,7HPE1F,07 Health and Physical Education1F,1F,,,,4,4.00,22,0,11
-210,Health & PE,7HPE,07 Health and Physical Education,7HPE1G,07 Health and Physical Education1G,1G,,,,4,4.00,22,0,11
-211,Health & PE,7HPE,07 Health and Physical Education,7HPE1H,07 Health and Physical Education1H,1H,,,,4,4.00,21,0,11
-212,Health & PE,7HPE,07 Health and Physical Education,7HPE1I,07 Health and Physical Education1I,1I,,,,4,4.00,21,0,11
-213,Humanities,7HUME,07 Humanities E,7HUME1,07 Humanities E1,1,,,,4,4.00,0,0,10
-214,Humanities,7HUML,07 Humanities L,7HUML1,07 Humanities L1,1,,,,4,4.00,0,0,10
-215,Humanities,7HUMO,07 Humanities O1,7HUMO1,07 Humanities O11,1,,,,4,4.00,0,0,10
-216,Humanities,7HUMO,07 Humanities O2,7HUMO2,07 Humanities O22,2,,,,4,4.00,0,0,10
-217,Humanities,7HUMO,07 Humanities O4,7HUMO4,07 Humanities O44,4,,,,4,4.00,0,0,10
-218,Humanities,7HUMO,07 Humanities O5,7HUMO5,07 Humanities O55,5,,,,4,4.00,0,0,10
-219,Humanities,7HUMO,07 Humanities O3,7HUMO3,07 Humanities O33,3,,,,4,4.00,0,0,10
-220,Humanities,7HUMP,07 Humanities E,7HUMP1,07 Humanities E1,1,,,,4,4.00,0,0,10
-221,Languages,7ITA,07 Italian,7ITA1A,07 Italian1A,1A,,,,4,4.00,20,0,2
-222,Languages,7ITA,07 Italian,7ITA1B,07 Italian1B,1B,,,,4,4.00,21,0,2
-223,Languages,7ITA,07 Italian,7ITA1C,07 Italian1C,1C,,,,4,4.00,24,0,2
-224,Languages,7ITA,07 Italian,7ITA1D,07 Italian1D,1D,,,,4,4.00,22,0,2
-225,Intervention,7LITAF,07 Literacy (ATSI Focus),7LITAF1A,07 Literacy (ATSI Focus)1A,1A,,,,4,4.00,6,0,0
-226,Intervention,7LITP,07 Literacy P,7LITP1A,07 Literacy P1A,1A,,,,4,4.00,20,0,0
-227,Intervention,7LNSP,07 Learning Support,7LNSP1A,07 Learning Support1A,1A,,,,4,4.00,4,0,0
-228,Mathematics,7MTHE,07 Mathematics E,7MTHE1,07 Mathematics E1,1,,,,4,4.00,0,0,13
-229,Mathematics,7MTHL,07 Mathematics L,7MTHL1,07 Mathematics L1,1,,,,4,4.00,0,0,13
-230,Humanities,7MTHO,07 Mathematics O1,7MTHO1,07 Mathematics O11,1,,,,4,4.00,0,0,10
-231,Mathematics,7MTHO,07 Mathematics O2,7MTHO2,07 Mathematics O22,2,,,,4,4.00,0,0,13
-232,Mathematics,7MTHO,07 Mathematics O3,7MTHO3,07 Mathematics O33,3,,,,4,4.00,0,0,13
-233,Mathematics,7MTHO,07 Mathematics O4,7MTHO4,07 Mathematics O44,4,,,,4,4.00,0,0,13
-234,Mathematics,7MTHO,07 Mathematics O5,7MTHO5,07 Mathematics O55,5,,,,4,4.00,0,0,13
-235,Mathematics,7MTHP,07 Mathematics P,7MTHP1,07 Mathematics P1,1,,,,4,4.00,0,0,13
-236,Arts,7MUS,07 Music,7MUS1A,07 Music1A,1A,,,,4,4.00,22,0,7
-237,Care Groups,7PD,07 Personal Development,7PDA,07 Personal DevelopmentA,A,,,,2,1.30,0,1,55
-238,Care Groups,7PD,07 Personal Development,7PDB,07 Personal DevelopmentB,B,,,,2,1.30,0,1,55
-239,Care Groups,7PD,07 Personal Development,7PDC,07 Personal DevelopmentC,C,,,,2,1.30,0,1,55
-240,Care Groups,7PD,07 Personal Development,7PDD,07 Personal DevelopmentD,D,,,,2,1.30,0,1,55
-241,Care Groups,7PD,07 Personal Development,7PDE,07 Personal DevelopmentE,E,,,,2,1.30,0,1,55
-242,Care Groups,7PD,07 Personal Development,7PDF,07 Personal DevelopmentF,F,,,,2,1.30,0,1,55
-243,Care Groups,7PD,07 Personal Development,7PDG,07 Personal DevelopmentG,G,,,,2,1.30,0,1,55
-244,Care Groups,7PD,07 Personal Development,7PDH,07 Personal DevelopmentH,H,,,,2,1.30,0,1,55
-245,Care Groups,7PD,07 Personal Development,7PDI,07 Personal DevelopmentI,I,,,,2,1.30,0,1,55
-246,Science,7SCIE,07 Science E,7SCIE1,07 Science E1,1,,,,4,4.00,0,0,12
-247,Science,7SCIL,07 Science L,7SCIL1,07 Science L1,1,,,,4,4.00,0,0,12
-248,Science,7SCIO,07 Science O2,7SCIO2,07 Science O22,2,,,,4,4.00,0,0,12
-249,Science,7SCIO,07 Science O3,7SCIO3,07 Science O33,3,,,,4,4.00,0,0,12
-250,Science,7SCIO,07 Science O4,7SCIO4,07 Science O44,4,,,,4,4.00,0,0,12
-251,Science,7SCIO,07 Science O5,7SCIO5,07 Science O55,5,,,,4,4.00,0,0,12
-252,Science,7SCIO,07 Science O1,7SCIO1,07 Science O11,1,,,,4,4.00,0,0,12
-253,Science,7SCIP,07 Science P,7SCIP1,07 Science P1,1,,,,4,4.00,0,0,12
-254,Design Technology,7TECH,07 Design & Technology,7TECH1A,07 Design & Technology1A,1A,,,,4,4.00,19,0,6
-255,Design Technology,7TECH,07 Design & Technology,7TECH1C,07 Design & Technology1C,1C,,,,4,4.00,20,0,6
-256,Arts,8ART,08 Visual Arts,8ART1A,08 Visual Arts1A,1A,,,,4,4.00,12,0,7
-257,Care Groups,8CARE,08 Care,8CAREA,08 CareA,A,,,,4,0.32,0,1,55
-258,Care Groups,8CARE,08 Care,8CAREB,08 CareB,B,,,,4,0.32,0,1,55
-259,Care Groups,8CARE,08 Care,8CAREC,08 CareC,C,,,,4,0.32,0,1,55
-260,Care Groups,8CARE,08 Care,8CARED,08 CareD,D,,,,4,0.32,0,1,55
-261,Care Groups,8CARE,08 Care,8CAREE,08 CareE,E,,,,4,0.32,0,1,55
-262,Care Groups,8CARE,08 Care,8CAREF,08 CareF,F,,,,4,0.32,0,1,55
-263,Care Groups,8CARE,08 Care,8CAREG,08 CareG,G,,,,4,0.32,0,1,55
-264,Care Groups,8CARE,08 Care,8CAREH,08 CareH,H,,,,4,0.32,0,1,55
-265,Care Groups,8CARE,08 Care,8CAREI,08 CareI,I,,,,4,0.32,0,1,55
-266,Arts,8DAN,08 Dance,8DAN1A,08 Dance1A,1A,,,,4,4.00,16,0,7
-267,Arts,8DAN,08 Dance,8DAN1B,08 Dance1B,1B,,,,4,4.00,20,0,7
-268,Digital Tech,8DTE,08 Digital Technology,8DTE1A,08 Digital Technology1A,1A,,,,4,4.00,19,0,4
-269,Digital Tech,8DTE,08 Digital Technology,8DTE1D,08 Digital Technology1D,1D,,,,4,4.00,23,0,4
-270,English,8EALA,08 English E,8EALA1A,08 English E1A,1A,,,,4,4.00,0,0,11
-271,English,8EALB,08 English as a Sec Lang B,8EALB1A,08 English as a Sec Lang B1A,1A,,,,4,4.00,20,0,11
-272,English,8ENGL,08 English L1,8ENGL1A,08 English L11A,1A,,,,4,4.00,0,0,11
-273,English,8ENGO,08 English O1,8ENGO1A,08 English O11A,1A,,,,4,4.00,0,0,11
-274,English,8ENGO,08 English O2,8ENGO2A,08 English O22A,2A,,,,4,4.00,0,0,11
-275,English,8ENGO,08 English O3,8ENGO3A,08 English O33A,3A,,,,4,4.00,0,0,11
-276,English,8ENGO,08 English O4,8ENGO4A,08 English O44A,4A,,,,4,4.00,0,0,11
-277,English,8ENGO,08 English O5,8ENGO5A,08 English O55A,5A,,,,4,4.00,0,0,11
-278,English,8ENGP,08 English P1,8ENGP1A,08 English P11A,1A,,,,4,4.00,0,0,11
-279,Food Tech,8FOD,08 Food and Nutrition,8FOD1A,08 Food and Nutrition1A,1A,,,,4,4.00,22,0,6
-280,Food Tech,8FOD,08 Food and Nutrition,8FOD1B,08 Food and Nutrition1B,1B,,,,4,4.00,21,0,6
-281,Food Tech,8FOD,08 Food and Nutrition,8FOD1E,08 Food and Nutrition1E,1E,,,,4,4.00,22,0,6
-282,Food Tech,8FOD,08 Food and Nutrition,8FOD1F,08 Food and Nutrition1F,1F,,,,4,4.00,22,0,6
-283,Health & PE,8HPE,08 Health and Physical Education,8HPE1A,08 Health and Physical Education1A,1A,,,,4,4.00,23,0,11
-284,Health & PE,8HPE,08 Health and Physical Education,8HPE1B,08 Health and Physical Education1B,1B,,,,4,4.00,23,0,11
-285,Health & PE,8HPE,08 Health and Physical Education,8HPE1D,08 Health and Physical Education1D,1D,,,,4,4.00,25,0,11
-286,Health & PE,8HPE,08 Health and Physical Education,8HPE1E,08 Health and Physical Education1E,1E,,,,4,4.00,25,0,11
-287,Health & PE,8HPE,08 Health and Physical Education,8HPE1F,08 Health and Physical Education1F,1F,,,,4,4.00,23,0,11
-288,Health & PE,8HPE,08 Health and Physical Education,8HPE1G,08 Health and Physical Education1G,1G,,,,4,4.00,23,0,11
-289,Health & PE,8HPE,08 Health and Physical Education,8HPE1H,08 Health and Physical Education1H,1H,,,,4,4.00,22,0,11
-290,Health & PE,8HPE,08 Health and Physical Education,8HPE1I,08 Health and Physical Education1I,1I,,,,4,4.00,22,0,11
-291,Humanities,8HUME,08 Humanities E,8HUME1A,08 Humanities E1A,1A,,,,4,4.00,0,0,10
-292,Humanities,8HUML,08 Humanities L,8HUML1A,08 Humanities L1A,1A,,,,4,4.00,0,0,10
-293,Humanities,8HUMO,08 Humanities O,8HUMO1A,08 Humanities O1A,1A,,,,4,4.00,0,0,10
-294,Humanities,8HUMO,08 Humanities O2,8HUMO2A,08 Humanities O22A,2A,,,,4,4.00,0,0,10
-295,Humanities,8HUMO,08 Humanities O3,8HUMO3A,08 Humanities O33A,3A,,,,4,4.00,0,0,10
-296,Humanities,8HUMO,08 Humanities O4,8HUMO4A,08 Humanities O44A,4A,,,,4,4.00,0,0,10
-297,Humanities,8HUMO,08 Humanities O5,8HUMO5A,08 Humanities O55A,5A,,,,4,4.00,0,0,10
-298,Humanities,8HUMP,08 Humanities P,8HUMP1A,08 Humanities P1A,1A,,,,4,4.00,0,0,10
-299,Languages,8ITA,08 Italian,8ITA1A,08 Italian1A,1A,,,,4,4.00,24,0,2
-300,Languages,8ITA,08 Italian,8ITA1B,08 Italian1B,1B,,,,4,4.00,24,0,2
-301,Languages,8ITA,08 Italian,8ITA1C,08 Italian1C,1C,,,,4,4.00,24,0,2
-302,Intervention,8LITAF,08 Literacy (ATSI Focus),8LITAF1A,08 Literacy (ATSI Focus)1A,1A,,,,4,4.00,5,0,0
-303,Intervention,8LITP,08 Literacy P,8LITP1A,08 Literacy P1A,1A,,,,4,4.00,18,0,0
-304,Intervention,8LNSP,08 Learning Support,8LNSP1A,08 Learning Support1A,1A,,,,4,4.00,11,0,0
-305,Design Technology,8MDNM,08 Materials Design with Metal,8MDNM1A,08 Materials Design with Metal1A,1A,,,,4,4.00,20,0,6
-306,Design Technology,8MDNM,08 Materials Design with Metal,8MDNM1C,08 Materials Design with Metal1C,1C,,,,4,4.00,16,0,6
-307,Design Technology,8MDNW,08 Materials Design with Wood,8MDNW1B,08 Materials Design with Wood1B,1B,,,,4,4.00,19,0,6
-308,Mathematics,8MTHE,08 Mathematics E1,8MTHE1A,08 Mathematics E11A,1A,,,,4,4.00,0,0,13
-309,Mathematics,8MTHL,08 Mathematics L1,8MTHL1A,08 Mathematics L11A,1A,,,,4,4.00,0,0,13
-310,Mathematics,8MTHO,08 Mathematics O1,8MTHO1A,08 Mathematics O11A,1A,,,,4,4.00,0,0,13
-311,Mathematics,8MTHO,08 Mathematics O2,8MTHO2A,08 Mathematics O22A,2A,,,,4,4.00,0,0,13
-312,Mathematics,8MTHO,08 Mathematics O3,8MTHO3A,08 Mathematics O33A,3A,,,,4,4.00,0,0,13
-313,Mathematics,8MTHO,08 Mathematics O4,8MTHO4A,08 Mathematics O44A,4A,,,,4,4.00,0,0,13
-314,Mathematics,8MTHO,08 Mathematics O5,8MTHO5A,08 Mathematics O55A,5A,,,,4,4.00,0,0,13
-315,Mathematics,8MTHP,08 Mathematics P1,8MTHP1A,08 Mathematics P11A,1A,,,,4,4.00,0,0,13
-316,Arts,8MUS,08 Music,8MUS1A,08 Music1A,1A,,,,4,4.00,21,0,7
-317,Care Groups,8PD,08 Personal Development,8PDA,08 Personal DevelopmentA,A,,,,2,1.30,0,1,55
-318,Care Groups,8PD,08 Personal Development,8PDB,08 Personal DevelopmentB,B,,,,2,1.30,0,1,55
-319,Care Groups,8PD,08 Personal Development,8PDC,08 Personal DevelopmentC,C,,,,2,1.30,0,1,55
-320,Care Groups,8PD,08 Personal Development,8PDD,08 Personal DevelopmentD,D,,,,2,1.30,0,1,55
-321,Care Groups,8PD,08 Personal Development,8PDE,08 Personal DevelopmentE,E,,,,2,1.30,0,1,55
-322,Care Groups,8PD,08 Personal Development,8PDF,08 Personal DevelopmentF,F,,,,2,1.30,0,1,55
-323,Care Groups,8PD,08 Personal Development,8PDG,08 Personal DevelopmentG,G,,,,2,1.30,0,1,55
-324,Care Groups,8PD,08 Personal Development,8PDH,08 Personal DevelopmentH,H,,,,2,1.30,0,1,55
-325,Care Groups,8PD,08 Personal Development,8PDI,08 Personal DevelopmentI,I,,,,2,1.30,0,1,55
-326,Science,8SCIE,08 Science E1,8SCIE1A,08 Science E11A,1A,,,,4,4.00,0,0,12
-327,Science,8SCIL,08 Science L1,8SCIL1A,08 Science L11A,1A,,,,4,4.00,0,0,12
-328,Science,8SCIO,08 Science O1,8SCIO1A,08 Science O11A,1A,,,,4,4.00,0,0,12
-329,Science,8SCIO,08 Science O2,8SCIO2A,08 Science O22A,2A,,,,4,4.00,0,0,12
-330,Science,8SCIO,08 Science O3,8SCIO3A,08 Science O33A,3A,,,,4,4.00,0,0,12
-331,Science,8SCIO,08 Science O4,8SCIO4A,08 Science O44A,4A,,,,4,4.00,0,0,12
-332,Science,8SCIO,08 Science O5,8SCIO5A,08 Science O55A,5A,,,,4,4.00,0,0,12
-333,Science,8SCIP,08 Science P,8SCIP1A,08 Science P1A,1A,,,,4,4.00,0,0,12
-334,Arts,9ART,09 Visual Art,9ART1A,09 Visual Art1A,1A,,,,4,4.00,20,0,7
-335,Arts,9ART,09 Visual Art,9ART1B,09 Visual Art1B,1B,,,,4,4.00,19,0,7
-336,Care Groups,9CARE,09 Care,9CAREA,09 CareA,A,,,,4,0.32,0,1,55
-337,Care Groups,9CARE,09 Care,9CAREB,09 CareB,B,,,,4,0.32,0,1,55
-338,Care Groups,9CARE,09 Care,9CAREC,09 CareC,C,,,,4,0.32,0,1,55
-339,Care Groups,9CARE,09 Care,9CARED,09 CareD,D,,,,4,0.32,0,1,55
-340,Care Groups,9CARE,09 Care,9CAREE,09 CareE,E,,,,4,0.32,0,1,55
-341,Care Groups,9CARE,09 Care,9CAREF,09 CareF,F,,,,4,0.32,0,1,55
-342,Care Groups,9CARE,09 Care,9CAREG,09 CareG,G,,,,4,0.32,0,1,55
-343,Care Groups,9CARE,09 Care,9CAREH,09 CareH,H,,,,4,0.32,0,1,55
-344,Care Groups,9CARE,09 Care,9CAREI,09 CareI,I,,,,4,0.32,0,1,55
-345,Food Tech,9CR8FD,09 Creative Food for Life,9CR8FD1A,09 Creative Food for Life1A,1A,,,,4,4.00,18,0,6
-346,Arts,9DAN,09 Dance,9DAN1A,09 Dance1A,1A,,,,4,4.00,15,0,7
-347,Arts,9DAN,09 Dance,9DAN1B,09 Dance1B,1B,,,,4,4.00,19,0,7
-348,Arts,9DRA,09 Drama,9DRA1A,09 Drama1A,1A,,,,4,4.00,20,0,7
-349,Digital Tech,9DTE,09 Digital Technology,9DTE1A,09 Digital Technology1A,1A,,,,4,4.00,15,0,4
-350,English,9EALA,09 English E,9EALA1A,09 English E1A,1A,,,,4,4.00,0,0,11
-351,English,9ENGL,09 English L1,9ENGL1A,09 English L11A,1A,,,,4,4.00,0,0,11
-352,English,9ENGO,09 English O1,9ENGO1A,09 English O11A,1A,,,,4,4.00,0,0,11
-353,English,9ENGO,09 English O2,9ENGO2A,09 English O22A,2A,,,,4,4.00,0,0,11
-354,English,9ENGO,09 English O3,9ENGO3A,09 English O33A,3A,,,,4,4.00,0,0,11
-355,English,9ENGO,09 English O4,9ENGO4A,09 English O44A,4A,,,,4,4.00,0,0,11
-356,English,9ENGO,09 English O5,9ENGO5,09 English O55,5,,,,4,4.00,0,0,11
-357,English,9ENGP,09 English P1,9ENGP1A,09 English P11A,1A,,,,4,4.00,0,0,11
-358,Design Technology,9ENGTEC,09 Engineering Tech,9ENGTEC1A,09 Engineering Tech1A,1A,,,,4,4.00,12,0,6
-359,English,9ESLB,09 English as an Additional Language,9ESLB1A,09 English as an Additional Language1A,1A,,,,4,4.00,19,0,11
-360,Food Tech,9FODN,09 Food & Nutrition,9FODN1A,09 Food & Nutrition1A,1A,,,,4,4.00,20,0,6
-361,Food Tech,9FODN,09 Food & Nutrition,9FODN1B,09 Food & Nutrition1B,1B,,,,4,4.00,20,0,6
-362,Humanities,9HUME,09 Humanities E1,9HUME1A,09 Humanities E11A,1A,,,,4,4.00,0,0,10
-363,Humanities,9HUML,09 Humanities L1,9HUML1A,09 Humanities L11A,1A,,,,4,4.00,0,0,10
-364,Humanities,9HUMO,09 Humanities O1,9HUMO1A,09 Humanities O11A,1A,,,,4,4.00,0,0,10
-365,Humanities,9HUMO,09 Humanities O2,9HUMO2A,09 Humanities O22A,2A,,,,4,4.00,0,0,10
-366,Humanities,9HUMO,09 Humanities O3,9HUMO3A,09 Humanities O33A,3A,,,,4,4.00,0,0,10
-367,Humanities,9HUMO,09 Humanities O4,9HUMO4A,09 Humanities O44A,4A,,,,4,4.00,0,0,10
-368,Humanities,9HUMO,09 Humanities O5,9HUMO5,09 Humanities O55,5,,,,4,4.00,0,0,10
-369,Humanities,9HUMP,09 Humanities P1,9HUMP1A,09 Humanities P11A,1A,,,,4,4.00,0,0,10
-370,Languages,9ITA,09 Italian,9ITA1A,09 Italian1A,1A,,,,4,4.00,23,0,2
-371,Intervention,9LITP,09 Literacy P,9LITP1A,09 Literacy P1A,1A,,,,4,4.00,19,0,0
-372,Intervention,9LNSP,09 Learning Support,9LNSP1A,09 Learning Support1A,1A,,,,4,4.00,11,0,0
-373,Arts,9MDFL,09 Media Arts Film & Cinematography,9MDFL1A,09 Media Arts Film & Cinematography1A,1A,,,,4,4.00,10,0,7
-374,Design Technology,9MDNM,09 Material Design with Metal,9MDNM1A,09 Material Design with Metal1A,1A,,,,4,4.00,19,0,6
-375,Design Technology,9MDNW,09 Material Design with Wood,9MDNW1A,09 Material Design with Wood1A,1A,,,,4,4.00,20,0,6
-376,Design Technology,9MDNW,09 Material Design with Wood,9MDNW1B,09 Material Design with Wood1B,1B,,,,4,4.00,20,0,6
-377,Mathematics,9MTHE,09 Mathematics E1,9MTHE1A,09 Mathematics E11A,1A,,,,4,4.00,0,0,13
-378,Mathematics,9MTHL,09 Mathematics L1,9MTHL1A,09 Mathematics L11A,1A,,,,4,4.00,0,0,13
-379,Mathematics,9MTHO,09 Mathematics O1,9MTHO1A,09 Mathematics O11A,1A,,,,4,4.00,0,0,13
-380,Mathematics,9MTHO,09 Mathematics O2,9MTHO2A,09 Mathematics O22A,2A,,,,4,4.00,0,0,13
-381,Mathematics,9MTHO,09 Mathematics O3,9MTHO3A,09 Mathematics O33A,3A,,,,4,4.00,0,0,13
-382,Mathematics,9MTHO,09 Mathematics O4,9MTHO4A,09 Mathematics O44A,4A,,,,4,4.00,0,0,13
-383,Mathematics,9MTHO,09 Mathematics O5,9MTHO5,09 Mathematics O55,5,,,,4,4.00,0,0,13
-384,English,9MTHP,09 English P,9MTHP1A,09 English P1A,1A,,,,4,4.00,0,0,11
-385,Arts,9MUS,09 Music,9MUS1A,09 Music1A,1A,,,,4,4.00,22,0,7
-386,Care Groups,9PD,09 Personal Development,9PDA,09 Personal DevelopmentA,A,,,,2,1.30,0,1,55
-387,Care Groups,9PD,09 Personal Development,9PDB,09 Personal DevelopmentB,B,,,,2,1.30,0,1,55
-388,Care Groups,9PD,09 Personal Development,9PDC,09 Personal DevelopmentC,C,,,,2,1.30,0,1,55
-389,Care Groups,9PD,09 Personal Development,9PDD,09 Personal DevelopmentD,D,,,,2,1.30,0,1,55
-390,Care Groups,9PD,09 Personal Development,9PDE,09 Personal DevelopmentE,E,,,,2,1.30,0,1,55
-391,Care Groups,9PD,09 Personal Development,9PDF,09 Personal DevelopmentF,F,,,,2,1.30,0,1,55
-392,Care Groups,9PD,09 Personal Development,9PDG,09 Personal DevelopmentG,G,,,,2,1.30,0,1,55
-393,Care Groups,9PD,09 Personal Development,9PDH,09 Personal DevelopmentH,H,,,,2,1.30,0,1,55
-394,Care Groups,9PD,09 Personal Development,9PDI,09 Personal DevelopmentI,I,,,,2,1.30,0,1,55
-395,Design Technology,9PGHD,09 Digital Photography,9PGHD1A,09 Digital Photography1A,1A,,,,4,4.00,16,0,6
-396,Health & PE,9PHE,09 Health and Physical Education,9PHE1A,09 Health and Physical Education1A,1A,,,,4,4.00,23,0,11
-397,Health & PE,9PHE,09 Health and Physical Education,9PHE1B,09 Health and Physical Education1B,1B,,,,4,4.00,22,0,11
-398,Health & PE,9PHE,09 Health and Physical Education,9PHE1C,09 Health and Physical Education1C,1C,,,,4,4.00,21,0,11
-399,Health & PE,9PHE,09 Health and Physical Education,9PHE1D,09 Health and Physical Education1D,1D,,,,4,4.00,21,0,11
-400,Health & PE,9PHE,09 Health and Physical Education,9PHE1E,09 Health and Physical Education1E,1E,,,,4,4.00,20,0,11
-401,Health & PE,9PHE,09 Health and Physical Education,9PHE1F,09 Health and Physical Education1F,1F,,,,4,4.00,21,0,11
-402,Health & PE,9PHE,09 Health and Physical Education,9PHE1G,09 Health and Physical Education1G,1G,,,,4,4.00,21,0,11
-403,Health & PE,9PHE,09 Health and Physical Education,9PHE1H,09 Health and Physical Education1H,1H,,,,4,4.00,20,0,11
-404,Health & PE,9PHE,09 Health and Physical Education,9PHE1I,09 Health and Physical Education1I,1I,,,,4,4.00,17,0,11
-405,Science,9SCIE,09 Science E,9SCIE1A,09 Science E1A,1A,,,,4,4.00,0,0,12
-406,Science,9SCIL,09 Science L,9SCIL1A,09 Science L1A,1A,,,,4,4.00,0,0,12
-407,Science,9SCIO,09 Science O1,9SCIO1A,09 Science O11A,1A,,,,4,4.00,0,0,12
-408,Science,9SCIO,09 Science O2,9SCIO2A,09 Science O22A,2A,,,,4,4.00,0,0,12
-409,Science,9SCIO,09 Science O3,9SCIO3A,09 Science O33A,3A,,,,4,4.00,0,0,12
-410,Science,9SCIO,09 Science O4,9SCIO4A,09 Science O44A,4A,,,,4,4.00,0,0,12
-411,Science,9SCIO,09 Science O5,9SCIO5,09 Science O55,5,,,,4,4.00,0,0,12
-412,Science,9SCIP,09 Science P,9SCIP1A,09 Science P1A,1A,,,,4,4.00,0,0,12
-413,Special Education,SC1DT1,SC1 Digital Tech,SC1DT1A,SC1 Digital TechA,A,,,,4,4.00,8,1,14
-414,Special Education,SC1ENG1,SC1 English,SC1ENG1A,SC1 EnglishA,A,,,,5,5.00,8,1,14
-415,Special Education,SC1HUM1,SC1 Humanities,SC1HUM1A,SC1 HumanitiesA,A,,,,4,4.00,8,1,14
-416,Special Education,SC1MTH1,SC1 Mathematics,SC1MTH1A,SC1 MathematicsA,A,,,,4,4.00,8,1,14
-417,Special Education,SC1ART1,SC1 Art,SC1MUS1A,SC1 ArtA,A,,,,4,4.00,8,1,14
-418,Special Education,SC1SCI1,SC1 Science,SC1SCI1A,SC1 ScienceA,A,,,,3,3.00,8,1,14
-419,Special Education,SC2ENG1,SC2 English,SC2ENG1A,SC2 EnglishA,A,,,,5,5.00,11,1,14
-420,Special Education,SC2HUM1,SC2 Humanities,SC2HUM1A,SC2 HumanitiesA,A,,,,3,3.00,11,1,14
-421,Special Education,SC2MTH1,SC2 Mathematics,SC2MTH1A,SC2 MathematicsA,A,,,,4,4.00,11,1,14
-422,Special Education,SC2MUS1,SC2 Music,SC2MUS1A,SC2 MusicA,A,,,,4,4.00,11,1,14
-423,Special Education,SC2SCI1,SC2 Science,SC2SCI1A,SC2 ScienceA,A,,,,4,4.00,11,1,14
-424,Special Education,SC3ARTS1,SC3 Drama,SC3ARTS1A,SC3 DramaA,A,,,,4,4.00,11,1,14
-425,Special Education,SC3ENG1,SC3 English,SC3ENG1A,SC3 EnglishA,A,,,,5,5.00,11,1,14
-426,Special Education,SC3MTH1,SC3 Mathematics,SC3MTH1A,SC3 MathematicsA,A,,,,4,4.00,11,1,14
-427,Special Education,SC3SC1,SC3 Science,SC3SC1A,SC3 ScienceA,A,,,,4,4.00,11,1,14
-428,Special Education,SU1ART1,SU1 Arts (Music),SU1ART1A,SU1 Arts (Music)A,A,,,,4,4.00,4,1,14
-429,Special Education,SU1ENG1,SU1 English,SU1ENG1A,SU1 EnglishA,A,,,,5,5.00,4,1,14
-430,Special Education,SU1FD1,SU1 Food Technology,SU1FD1A,SU1 Food TechnologyA,A,,,,4,4.00,4,1,14
-431,Special Education,SU1HUM1,SU1 Humanities,SU1HUM1A,SU1 HumanitiesA,A,,,,4,4.00,4,1,14
-432,Special Education,SU1MTH1,SU1 Mathematics,SU1MTH1A,SU1 MathematicsA,A,,,,4,4.00,4,1,14
-433,Special Education,SU1SCI1,SU1 Science,SU1SCI1A,SU1 ScienceA,A,,,,3,3.00,4,1,14
-434,Special Education,SU2ARTS1,SU2 Art,SU2ARTS1A,SU2 ArtA,A,,,,4,4.00,5,1,14
-435,Special Education,SU2ENG1,SU2 English,SU2ENG1A,SU2 EnglishA,A,,,,5,5.00,5,1,14
-436,Special Education,SU2HUM1,SU2 Humanities,SU2HUM1A,SU2 HumanitiesA,A,,,,3,3.00,5,1,14
-437,Special Education,SU2MTH1,SU2 Mathematics,SU2MTH1A,SU2 MathematicsA,A,,,,4,4.00,5,1,14
-438,Special Education,SU2SCI1,SU2 Science,SU2SCI1A,SU2 ScienceA,A,,,,4,4.00,5,1,14
-439,Special Education,SU3ENG1,SU3 English,SU3ENG1A,SU3 EnglishA,A,,,,5,5.00,0,1,14
-440,Special Education,SU3HE1,SU3 Health,SU3HE1A,SU3 HealthA,A,,,,4,4.00,0,1,14
-441,Special Education,SU3MTH1,SU3 Mathematics,SU3MTH1A,SU3 MathematicsA,A,,,,4,4.00,0,1,14
-442,Special Education,SWDPE1,SWD Physical Education,SWDPE1A,SWD Physical EducationA,A,,,,4,4.00,8,1,14
-443,Special Education,SWDPE1,SWD Physical Education,SWDPE1B,SWD Physical EducationB,B,,,,4,4.00,11,1,14
-444,Special Education,SWDPE1,SWD Physical Education,SWDPE1F,SWD Physical EducationF,F,,,,4,4.00,11,1,14
-445,Special Education,SWDPE1,SWD Physical Education,SWDPE1C,SWD Physical EducationC,C,,,,4,4.00,0,1,14
-446,Special Education,SWDPE1,SWD Physical Education,SWDPE1D,SWD Physical EducationD,D,,,,4,4.00,5,1,14
-447,Special Education,SWDPE1,SWD Physical Education,SWDPE1E,SWD Physical EducationE,E,,,,4,4.00,0,1,14
-448,Special Education,SC3HUM1,SC3 Humanities,SC3HUM1A,SC3 HumanitiesA,A,,,,4,4.00,11,1,14
-449,Special Education,SC2DT1,SC2 Digital Technology,SC2DT1A,SC2 Digital TechnologyA,A,,,,4,4.00,11,1,14
-450,Special Education,SC3HWB1,SC3 Health & Wellbeing,SC3HWB1A,SC3 Health & WellbeingA,A,,,,3,3.00,11,1,14
-451,Special Education,SU2FD1,SU2 Food Technology,SU2FD1A,SU2 Food TechnologyA,A,,,,4,4.00,5,1,14
-452,Special Education,SU3CXD1,SU3 Cross Disciplinary Studies,SU3CXD1A,SU3 Cross Disciplinary StudiesA,A,,,,3,3.00,0,1,14
-453,Special Education,SU3SCI1,SU3 Scientific Studies,SU3SCI1A,SU3 Scientific StudiesA,A,,,,4,4.00,0,1,14
-454,Special Education,SU3SC1,SU3 Society & Culture,SU3SC1A,SU3 Society & CultureA,A,,,,4,4.00,0,1,14
-455,Special Education,SC4SCI1,SC4 Scientific Studies,SC4SCI1A,SC4 Scientific StudiesA,A,,,,4,4.00,0,1,14
-456,Special Education,SC4SC1,SC4 Society & Culture,SC4SC1A,SC4 Society & CultureA,A,,,,3,3.00,0,1,14
-457,Special Education,SWDPE1,SWD Physical Education,SWDPE1G,SWD Physical EducationG,G,,,,4,4.00,0,1,14
-458,Special Education,SC4ENG1,SC4 English,SC4ENG1A,SC4 EnglishA,A,,,,5,5.00,0,1,14
-459,Special Education,SC4DTE1,SC4 Design Tech,SC4DTE1A,SC4 Design TechA,A,,,,4,4.00,0,1,14
-460,Special Education,SC4LCU1,SC4 Language & Culture,SC4LCU1A,SC4 Language & CultureA,A,,,,4,4.00,0,1,14
-461,Special Education,SC4MTH1,SC4 Mathematics,SC4MTH1A,SC4 MathematicsA,A,,,,4,4.00,0,1,14
+171,Research Project & PLP,2RPJ1A,12 Research Project A,2RPJ1A1A,12 Research Project A1A,1A,,,,4,4.00,21,1,7
+172,Research Project & PLP,2RPJ1A,12 Research Project A,2RPJ1A1B,12 Research Project A1B,1B,,,,4,4.00,21,1,7
+173,Research Project & PLP,2RPJ1A,12 Research Project A,2RPJ1A1C,12 Research Project A1C,1C,,,,4,4.00,21,1,7
+174,Humanities,2SOR,12 Society & Culture,2SOR1A,12 Society & Culture1A,1A,,,,4,4.00,18,1,15
+175,Science,2STU,12 Scientific Studies,2STU1A,12 Scientific Studies1A,1A,,,,4,4.00,16,1,17
+176,Arts,2VAA,12 Visual Arts - Art,2VAA1A,12 Visual Arts - Art1A,1A,,,,4,4.00,3,1,9
+177,Research Project & PLP,2WPC,12 Workplace Practices,2WPC1A,12 Workplace Practices1A,1A,,,,4,4.00,26,1,7
+178,Arts,7ART,07 Visual Arts,7ART1A,07 Visual Arts1A,1A,,,,4,4.00,20,1,9
+179,Care Groups,7CARE,07 Care,7CAREA,07 CareA,A,,,,4,0.32,0,1,57
+180,Care Groups,7CARE,07 Care,7CAREB,07 CareB,B,,,,4,0.32,0,1,57
+181,Care Groups,7CARE,07 Care,7CAREC,07 CareC,C,,,,4,0.32,0,1,57
+182,Care Groups,7CARE,07 Care,7CARED,07 CareD,D,,,,4,0.32,0,1,57
+183,Care Groups,7CARE,07 Care,7CAREE,07 CareE,E,,,,4,0.32,0,1,57
+184,Care Groups,7CARE,07 Care,7CAREF,07 CareF,F,,,,4,0.32,0,1,57
+185,Care Groups,7CARE,07 Care,7CAREG,07 CareG,G,,,,4,0.32,0,1,57
+186,Care Groups,7CARE,07 Care,7CAREH,07 CareH,H,,,,4,0.32,0,1,57
+187,Care Groups,7CARE,07 Care,7CAREI,07 CareI,I,,,,4,0.32,0,1,57
+188,Design Technology,7DPD,07 Digital Products,7DPD1A,07 Digital Products1A,1A,,,,4,4.00,21,1,9
+189,Design Technology,7DPD,07 Digital Products,7DPD1B,07 Digital Products1B,1B,,,,4,4.00,16,1,9
+190,Arts,7DRA,07 Drama,7DRA1A,07 Drama1A,1A,,,,4,4.00,18,1,9
+191,Digital Tech,7DTE,07 Digital Technology,7DTE1A,07 Digital Technology1A,1A,,,,4,4.00,20,1,4
+192,Digital Tech,7DTE,07 Digital Technology,7DTE1C,07 Digital Technology1C,1C,,,,4,4.00,13,1,4
+193,English,7EALB,07 English as a Sec Lang B,7EALB1A,07 English as a Sec Lang B1A,1A,,,,4,4.00,19,1,19
+194,English,7ENGE,07 English E,7ENGE1,07 English E1,1,,,,4,4.00,18,1,19
+195,English,7ENGL,07 English L,7ENGL1,07 English L1,1,,,,4,4.00,29,1,19
+196,English,7ENGO,07 English O1,7ENGO1,07 English O11,1,,,,4,4.00,22,1,19
+197,English,7ENGO,07 English O2,7ENGO2,07 English O22,2,,,,4,4.00,22,1,19
+198,English,7ENGO,07 English O3,7ENGO3,07 English O33,3,,,,4,4.00,20,1,19
+199,English,7ENGO,07 English O4,7ENGO4,07 English O44,4,,,,4,4.00,19,1,19
+200,English,7ENGO,07 English O5,7ENGO5,07 English O55,5,,,,4,4.00,24,1,19
+201,English,7ENGP,07 English P,7ENGP1,07 English P1,1,,,,4,4.00,20,1,19
+202,Food Tech,7FOD,07 Food and Nutrition,7FOD1A,07 Food and Nutrition1A,1A,,,,4,4.00,18,1,7
+203,Food Tech,7FOD,07 Food and Nutrition,7FOD1B,07 Food and Nutrition1B,1B,,,,4,4.00,17,1,7
+204,Food Tech,7FOD,07 Food and Nutrition,7FOD1E,07 Food and Nutrition1E,1E,,,,4,4.00,21,1,7
+205,Health & PE,7HPE,07 Health and Physical Education,7HPE1A,07 Health and Physical Education1A,1A,,,,4,4.00,20,1,15
+206,Health & PE,7HPE,07 Health and Physical Education,7HPE1B,07 Health and Physical Education1B,1B,,,,4,4.00,21,1,15
+207,Health & PE,7HPE,07 Health and Physical Education,7HPE1D,07 Health and Physical Education1D,1D,,,,4,4.00,22,1,15
+208,Health & PE,7HPE,07 Health and Physical Education,7HPE1E,07 Health and Physical Education1E,1E,,,,4,4.00,20,1,15
+209,Health & PE,7HPE,07 Health and Physical Education,7HPE1F,07 Health and Physical Education1F,1F,,,,4,4.00,21,1,15
+210,Health & PE,7HPE,07 Health and Physical Education,7HPE1G,07 Health and Physical Education1G,1G,,,,4,4.00,22,1,15
+211,Health & PE,7HPE,07 Health and Physical Education,7HPE1H,07 Health and Physical Education1H,1H,,,,4,4.00,21,1,15
+212,Health & PE,7HPE,07 Health and Physical Education,7HPE1I,07 Health and Physical Education1I,1I,,,,4,4.00,21,1,15
+213,Humanities,7HUME,07 Humanities E,7HUME1,07 Humanities E1,1,,,,4,4.00,18,1,15
+214,Humanities,7HUML,07 Humanities L,7HUML1,07 Humanities L1,1,,,,4,4.00,29,1,15
+215,Humanities,7HUMO,07 Humanities O1,7HUMO1,07 Humanities O11,1,,,,4,4.00,22,1,15
+216,Humanities,7HUMO,07 Humanities O2,7HUMO2,07 Humanities O22,2,,,,4,4.00,22,1,15
+217,Humanities,7HUMO,07 Humanities O4,7HUMO4,07 Humanities O44,4,,,,4,4.00,19,1,15
+218,Humanities,7HUMO,07 Humanities O5,7HUMO5,07 Humanities O55,5,,,,4,4.00,24,1,15
+219,Humanities,7HUMO,07 Humanities O3,7HUMO3,07 Humanities O33,3,,,,4,4.00,20,1,15
+220,Humanities,7HUMP,07 Humanities E,7HUMP1,07 Humanities E1,1,,,,4,4.00,20,1,15
+221,Languages,7ITA,07 Italian,7ITA1A,07 Italian1A,1A,,,,4,4.00,19,1,4
+222,Languages,7ITA,07 Italian,7ITA1B,07 Italian1B,1B,,,,4,4.00,19,1,4
+223,Languages,7ITA,07 Italian,7ITA1C,07 Italian1C,1C,,,,4,4.00,20,1,4
+224,Languages,7ITA,07 Italian,7ITA1D,07 Italian1D,1D,,,,4,4.00,19,1,4
+225,Intervention,7LITAF,07 Literacy (ATSI Focus),7LITAF1A,07 Literacy (ATSI Focus)1A,1A,,,,4,4.00,6,1,4
+226,Intervention,7LITP,07 Literacy P,7LITP1A,07 Literacy P1A,1A,,,,4,4.00,20,1,4
+227,Intervention,7LNSP,07 Learning Support,7LNSP1A,07 Learning Support1A,1A,,,,4,4.00,6,0,4
+228,Mathematics,7MTHE,07 Mathematics E,7MTHE1,07 Mathematics E1,1,,,,4,4.00,18,1,18
+229,Mathematics,7MTHL,07 Mathematics L,7MTHL1,07 Mathematics L1,1,,,,4,4.00,29,1,18
+230,Humanities,7MTHO,07 Mathematics O1,7MTHO1,07 Mathematics O11,1,,,,4,4.00,22,1,15
+231,Mathematics,7MTHO,07 Mathematics O2,7MTHO2,07 Mathematics O22,2,,,,4,4.00,22,1,18
+232,Mathematics,7MTHO,07 Mathematics O3,7MTHO3,07 Mathematics O33,3,,,,4,4.00,20,1,18
+233,Mathematics,7MTHO,07 Mathematics O4,7MTHO4,07 Mathematics O44,4,,,,4,4.00,19,1,18
+234,Mathematics,7MTHO,07 Mathematics O5,7MTHO5,07 Mathematics O55,5,,,,4,4.00,24,1,18
+235,Mathematics,7MTHP,07 Mathematics P,7MTHP1,07 Mathematics P1,1,,,,4,4.00,20,1,18
+236,Arts,7MUS,07 Music,7MUS1A,07 Music1A,1A,,,,4,4.00,21,1,9
+237,Care Groups,7PD,07 Personal Development,7PDA,07 Personal DevelopmentA,A,,,,2,1.30,0,1,57
+238,Care Groups,7PD,07 Personal Development,7PDB,07 Personal DevelopmentB,B,,,,2,1.30,0,1,57
+239,Care Groups,7PD,07 Personal Development,7PDC,07 Personal DevelopmentC,C,,,,2,1.30,0,1,57
+240,Care Groups,7PD,07 Personal Development,7PDD,07 Personal DevelopmentD,D,,,,2,1.30,0,1,57
+241,Care Groups,7PD,07 Personal Development,7PDE,07 Personal DevelopmentE,E,,,,2,1.30,0,1,57
+242,Care Groups,7PD,07 Personal Development,7PDF,07 Personal DevelopmentF,F,,,,2,1.30,0,1,57
+243,Care Groups,7PD,07 Personal Development,7PDG,07 Personal DevelopmentG,G,,,,2,1.30,0,1,57
+244,Care Groups,7PD,07 Personal Development,7PDH,07 Personal DevelopmentH,H,,,,2,1.30,0,1,57
+245,Care Groups,7PD,07 Personal Development,7PDI,07 Personal DevelopmentI,I,,,,2,1.30,0,1,57
+246,Science,7SCIE,07 Science E,7SCIE1,07 Science E1,1,,,,4,4.00,18,1,17
+247,Science,7SCIL,07 Science L,7SCIL1,07 Science L1,1,,,,4,4.00,29,1,17
+248,Science,7SCIO,07 Science O2,7SCIO2,07 Science O22,2,,,,4,4.00,22,1,17
+249,Science,7SCIO,07 Science O3,7SCIO3,07 Science O33,3,,,,4,4.00,20,1,17
+250,Science,7SCIO,07 Science O4,7SCIO4,07 Science O44,4,,,,4,4.00,19,1,17
+251,Science,7SCIO,07 Science O5,7SCIO5,07 Science O55,5,,,,4,4.00,24,1,17
+252,Science,7SCIO,07 Science O1,7SCIO1,07 Science O11,1,,,,4,4.00,22,1,17
+253,Science,7SCIP,07 Science P,7SCIP1,07 Science P1,1,,,,4,4.00,20,1,17
+254,Design Technology,7TECH,07 Design & Technology,7TECH1A,07 Design & Technology1A,1A,,,,4,4.00,18,1,9
+255,Design Technology,7TECH,07 Design & Technology,7TECH1C,07 Design & Technology1C,1C,,,,4,4.00,19,1,9
+256,Arts,8ART,08 Visual Arts,8ART1A,08 Visual Arts1A,1A,,,,4,4.00,15,1,9
+257,Care Groups,8CARE,08 Care,8CAREA,08 CareA,A,,,,4,0.32,0,1,57
+258,Care Groups,8CARE,08 Care,8CAREB,08 CareB,B,,,,4,0.32,0,1,57
+259,Care Groups,8CARE,08 Care,8CAREC,08 CareC,C,,,,4,0.32,0,1,57
+260,Care Groups,8CARE,08 Care,8CARED,08 CareD,D,,,,4,0.32,0,1,57
+261,Care Groups,8CARE,08 Care,8CAREE,08 CareE,E,,,,4,0.32,0,1,57
+262,Care Groups,8CARE,08 Care,8CAREF,08 CareF,F,,,,4,0.32,0,1,57
+263,Care Groups,8CARE,08 Care,8CAREG,08 CareG,G,,,,4,0.32,0,1,57
+264,Care Groups,8CARE,08 Care,8CAREH,08 CareH,H,,,,4,0.32,0,1,57
+265,Care Groups,8CARE,08 Care,8CAREI,08 CareI,I,,,,4,0.32,0,1,57
+266,Arts,8DAN,08 Dance,8DAN1A,08 Dance1A,1A,,,,4,4.00,19,1,9
+267,Arts,8DAN,08 Dance,8DAN1B,08 Dance1B,1B,,,,4,4.00,21,1,9
+268,Digital Tech,8DTE,08 Digital Technology,8DTE1A,08 Digital Technology1A,1A,,,,4,4.00,23,1,4
+269,Digital Tech,8DTE,08 Digital Technology,8DTE1D,08 Digital Technology1D,1D,,,,4,4.00,21,1,4
+270,English,8EALA,08 English E,8EALA1A,08 English E1A,1A,,,,4,4.00,18,1,19
+271,English,8EALB,08 English as a Sec Lang B,8EALB1A,08 English as a Sec Lang B1A,1A,,,,4,4.00,17,1,19
+272,English,8ENGL,08 English L1,8ENGL1A,08 English L11A,1A,,,,4,4.00,28,1,19
+273,English,8ENGO,08 English O1,8ENGO1A,08 English O11A,1A,,,,4,4.00,24,1,19
+274,English,8ENGO,08 English O2,8ENGO2A,08 English O22A,2A,,,,4,4.00,24,1,19
+275,English,8ENGO,08 English O3,8ENGO3A,08 English O33A,3A,,,,4,4.00,24,1,19
+276,English,8ENGO,08 English O4,8ENGO4A,08 English O44A,4A,,,,4,4.00,22,1,19
+277,English,8ENGO,08 English O5,8ENGO5A,08 English O55A,5A,,,,4,4.00,21,1,19
+278,English,8ENGP,08 English P1,8ENGP1A,08 English P11A,1A,,,,4,4.00,19,1,19
+279,Food Tech,8FOD,08 Food and Nutrition,8FOD1A,08 Food and Nutrition1A,1A,,,,4,4.00,16,1,7
+280,Food Tech,8FOD,08 Food and Nutrition,8FOD1B,08 Food and Nutrition1B,1B,,,,4,4.00,17,1,7
+281,Food Tech,8FOD,08 Food and Nutrition,8FOD1E,08 Food and Nutrition1E,1E,,,,4,4.00,22,1,7
+282,Food Tech,8FOD,08 Food and Nutrition,8FOD1F,08 Food and Nutrition1F,1F,,,,4,4.00,17,1,7
+283,Health & PE,8HPE,08 Health and Physical Education,8HPE1A,08 Health and Physical Education1A,1A,,,,4,4.00,19,1,15
+284,Health & PE,8HPE,08 Health and Physical Education,8HPE1B,08 Health and Physical Education1B,1B,,,,4,4.00,19,1,15
+285,Health & PE,8HPE,08 Health and Physical Education,8HPE1D,08 Health and Physical Education1D,1D,,,,4,4.00,23,1,15
+286,Health & PE,8HPE,08 Health and Physical Education,8HPE1E,08 Health and Physical Education1E,1E,,,,4,4.00,23,1,15
+287,Health & PE,8HPE,08 Health and Physical Education,8HPE1F,08 Health and Physical Education1F,1F,,,,4,4.00,22,1,15
+288,Health & PE,8HPE,08 Health and Physical Education,8HPE1G,08 Health and Physical Education1G,1G,,,,4,4.00,23,1,15
+289,Health & PE,8HPE,08 Health and Physical Education,8HPE1H,08 Health and Physical Education1H,1H,,,,4,4.00,21,1,15
+290,Health & PE,8HPE,08 Health and Physical Education,8HPE1I,08 Health and Physical Education1I,1I,,,,4,4.00,19,1,15
+291,Humanities,8HUME,08 Humanities E,8HUME1A,08 Humanities E1A,1A,,,,4,4.00,18,1,15
+292,Humanities,8HUML,08 Humanities L,8HUML1A,08 Humanities L1A,1A,,,,4,4.00,28,1,15
+293,Humanities,8HUMO,08 Humanities O,8HUMO1A,08 Humanities O1A,1A,,,,4,4.00,24,1,15
+294,Humanities,8HUMO,08 Humanities O2,8HUMO2A,08 Humanities O22A,2A,,,,4,4.00,24,1,15
+295,Humanities,8HUMO,08 Humanities O3,8HUMO3A,08 Humanities O33A,3A,,,,4,4.00,24,1,15
+296,Humanities,8HUMO,08 Humanities O4,8HUMO4A,08 Humanities O44A,4A,,,,4,4.00,22,1,15
+297,Humanities,8HUMO,08 Humanities O5,8HUMO5A,08 Humanities O55A,5A,,,,4,4.00,21,1,15
+298,Humanities,8HUMP,08 Humanities P,8HUMP1A,08 Humanities P1A,1A,,,,4,4.00,19,1,15
+299,Languages,8ITA,08 Italian,8ITA1A,08 Italian1A,1A,,,,4,4.00,22,1,4
+300,Languages,8ITA,08 Italian,8ITA1B,08 Italian1B,1B,,,,4,4.00,22,1,4
+301,Languages,8ITA,08 Italian,8ITA1C,08 Italian1C,1C,,,,4,4.00,18,1,4
+302,Intervention,8LITAF,08 Literacy (ATSI Focus),8LITAF1A,08 Literacy (ATSI Focus)1A,1A,,,,4,4.00,5,1,4
+303,Intervention,8LITP,08 Literacy P,8LITP1A,08 Literacy P1A,1A,,,,4,4.00,18,1,4
+304,Intervention,8LNSP,08 Learning Support,8LNSP1A,08 Learning Support1A,1A,,,,4,4.00,9,0,4
+305,Design Technology,8MDNM,08 Materials Design with Metal,8MDNM1A,08 Materials Design with Metal1A,1A,,,,4,4.00,16,1,9
+306,Design Technology,8MDNM,08 Materials Design with Metal,8MDNM1C,08 Materials Design with Metal1C,1C,,,,4,4.00,17,1,9
+307,Design Technology,8MDNW,08 Materials Design with Wood,8MDNW1B,08 Materials Design with Wood1B,1B,,,,4,4.00,14,1,9
+308,Mathematics,8MTHE,08 Mathematics E1,8MTHE1A,08 Mathematics E11A,1A,,,,4,4.00,18,1,18
+309,Mathematics,8MTHL,08 Mathematics L1,8MTHL1A,08 Mathematics L11A,1A,,,,4,4.00,28,1,18
+310,Mathematics,8MTHO,08 Mathematics O1,8MTHO1A,08 Mathematics O11A,1A,,,,4,4.00,24,1,18
+311,Mathematics,8MTHO,08 Mathematics O2,8MTHO2A,08 Mathematics O22A,2A,,,,4,4.00,24,1,18
+312,Mathematics,8MTHO,08 Mathematics O3,8MTHO3A,08 Mathematics O33A,3A,,,,4,4.00,24,1,18
+313,Mathematics,8MTHO,08 Mathematics O4,8MTHO4A,08 Mathematics O44A,4A,,,,4,4.00,22,1,18
+314,Mathematics,8MTHO,08 Mathematics O5,8MTHO5A,08 Mathematics O55A,5A,,,,4,4.00,21,1,18
+315,Mathematics,8MTHP,08 Mathematics P1,8MTHP1A,08 Mathematics P11A,1A,,,,4,4.00,19,1,18
+316,Arts,8MUS,08 Music,8MUS1A,08 Music1A,1A,,,,4,4.00,22,1,9
+317,Care Groups,8PD,08 Personal Development,8PDA,08 Personal DevelopmentA,A,,,,2,1.30,0,1,57
+318,Care Groups,8PD,08 Personal Development,8PDB,08 Personal DevelopmentB,B,,,,2,1.30,0,1,57
+319,Care Groups,8PD,08 Personal Development,8PDC,08 Personal DevelopmentC,C,,,,2,1.30,0,1,57
+320,Care Groups,8PD,08 Personal Development,8PDD,08 Personal DevelopmentD,D,,,,2,1.30,0,1,57
+321,Care Groups,8PD,08 Personal Development,8PDE,08 Personal DevelopmentE,E,,,,2,1.30,0,1,57
+322,Care Groups,8PD,08 Personal Development,8PDF,08 Personal DevelopmentF,F,,,,2,1.30,0,1,57
+323,Care Groups,8PD,08 Personal Development,8PDG,08 Personal DevelopmentG,G,,,,2,1.30,0,1,57
+324,Care Groups,8PD,08 Personal Development,8PDH,08 Personal DevelopmentH,H,,,,2,1.30,0,1,57
+325,Care Groups,8PD,08 Personal Development,8PDI,08 Personal DevelopmentI,I,,,,2,1.30,0,1,57
+326,Science,8SCIE,08 Science E1,8SCIE1A,08 Science E11A,1A,,,,4,4.00,18,1,17
+327,Science,8SCIL,08 Science L1,8SCIL1A,08 Science L11A,1A,,,,4,4.00,28,1,17
+328,Science,8SCIO,08 Science O1,8SCIO1A,08 Science O11A,1A,,,,4,4.00,24,1,17
+329,Science,8SCIO,08 Science O2,8SCIO2A,08 Science O22A,2A,,,,4,4.00,24,1,17
+330,Science,8SCIO,08 Science O3,8SCIO3A,08 Science O33A,3A,,,,4,4.00,24,1,17
+331,Science,8SCIO,08 Science O4,8SCIO4A,08 Science O44A,4A,,,,4,4.00,22,1,17
+332,Science,8SCIO,08 Science O5,8SCIO5A,08 Science O55A,5A,,,,4,4.00,21,1,17
+333,Science,8SCIP,08 Science P,8SCIP1A,08 Science P1A,1A,,,,4,4.00,19,1,17
+334,Arts,9ART,09 Visual Art,9ART1A,09 Visual Art1A,1A,,,,4,4.00,22,1,9
+335,Arts,9ART,09 Visual Art,9ART1B,09 Visual Art1B,1B,,,,4,4.00,20,1,9
+336,Care Groups,9CARE,09 Care,9CAREA,09 CareA,A,,,,4,0.32,0,1,57
+337,Care Groups,9CARE,09 Care,9CAREB,09 CareB,B,,,,4,0.32,0,1,57
+338,Care Groups,9CARE,09 Care,9CAREC,09 CareC,C,,,,4,0.32,0,1,57
+339,Care Groups,9CARE,09 Care,9CARED,09 CareD,D,,,,4,0.32,0,1,57
+340,Care Groups,9CARE,09 Care,9CAREE,09 CareE,E,,,,4,0.32,0,1,57
+341,Care Groups,9CARE,09 Care,9CAREF,09 CareF,F,,,,4,0.32,0,1,57
+342,Care Groups,9CARE,09 Care,9CAREG,09 CareG,G,,,,4,0.32,0,1,57
+343,Care Groups,9CARE,09 Care,9CAREH,09 CareH,H,,,,4,0.32,0,1,57
+344,Care Groups,9CARE,09 Care,9CAREI,09 CareI,I,,,,4,0.32,0,1,57
+345,Food Tech,9CR8FD,09 Creative Food for Life,9CR8FD1A,09 Creative Food for Life1A,1A,,,,4,4.00,16,1,7
+346,Arts,9DAN,09 Dance,9DAN1A,09 Dance1A,1A,,,,4,4.00,18,1,9
+347,Arts,9DAN,09 Dance,9DAN1B,09 Dance1B,1B,,,,4,4.00,19,1,9
+348,Arts,9DRA,09 Drama,9DRA1A,09 Drama1A,1A,,,,4,4.00,20,1,9
+349,Digital Tech,9DTE,09 Digital Technology,9DTE1A,09 Digital Technology1A,1A,,,,4,4.00,15,1,4
+350,English,9EALA,09 English E,9EALA1A,09 English E1A,1A,,,,4,4.00,17,1,19
+351,English,9ENGL,09 English L1,9ENGL1A,09 English L11A,1A,,,,4,4.00,28,1,19
+352,English,9ENGO,09 English O1,9ENGO1A,09 English O11A,1A,,,,4,4.00,24,1,19
+353,English,9ENGO,09 English O2,9ENGO2A,09 English O22A,2A,,,,4,4.00,25,1,19
+354,English,9ENGO,09 English O3,9ENGO3A,09 English O33A,3A,,,,4,4.00,24,1,19
+355,English,9ENGO,09 English O4,9ENGO4A,09 English O44A,4A,,,,4,4.00,25,1,19
+356,English,9ENGO,09 English O5,9ENGO5,09 English O55,5,,,,4,4.00,24,1,19
+357,English,9ENGP,09 English P1,9ENGP1A,09 English P11A,1A,,,,4,4.00,20,1,19
+358,Design Technology,9ENGTEC,09 Engineering Tech,9ENGTEC1A,09 Engineering Tech1A,1A,,,,4,4.00,15,1,9
+359,English,9ESLB,09 English as an Additional Language,9ESLB1A,09 English as an Additional Language1A,1A,,,,4,4.00,17,1,19
+360,Humanities,9HUME,09 Humanities E1,9HUME1A,09 Humanities E11A,1A,,,,4,4.00,17,1,15
+361,Humanities,9HUML,09 Humanities L1,9HUML1A,09 Humanities L11A,1A,,,,4,4.00,28,1,15
+362,Humanities,9HUMO,09 Humanities O1,9HUMO1A,09 Humanities O11A,1A,,,,4,4.00,24,1,15
+363,Humanities,9HUMO,09 Humanities O2,9HUMO2A,09 Humanities O22A,2A,,,,4,4.00,25,1,15
+364,Humanities,9HUMO,09 Humanities O3,9HUMO3A,09 Humanities O33A,3A,,,,4,4.00,24,1,15
+365,Humanities,9HUMO,09 Humanities O4,9HUMO4A,09 Humanities O44A,4A,,,,4,4.00,25,1,15
+366,Humanities,9HUMO,09 Humanities O5,9HUMO5,09 Humanities O55,5,,,,4,4.00,24,1,15
+367,Humanities,9HUMP,09 Humanities P1,9HUMP1A,09 Humanities P11A,1A,,,,4,4.00,20,1,15
+368,Languages,9ITA,09 Italian,9ITA1A,09 Italian1A,1A,,,,4,4.00,21,1,4
+369,Intervention,9LITP,09 Literacy P,9LITP1A,09 Literacy P1A,1A,,,,4,4.00,20,1,4
+370,Intervention,9LNSP,09 Learning Support,9LNSP1A,09 Learning Support1A,1A,,,,4,4.00,14,0,4
+371,Arts,9MDFL,09 Media Arts Film & Cinematography,9MDFL1A,09 Media Arts Film & Cinematography1A,1A,,,,4,4.00,17,1,9
+372,Design Technology,9MDNM,09 Material Design with Metal,9MDNM1A,09 Material Design with Metal1A,1A,,,,4,4.00,20,1,9
+373,Design Technology,9MDNW,09 Material Design with Wood,9MDNW1A,09 Material Design with Wood1A,1A,,,,4,4.00,20,1,9
+374,Design Technology,9MDNW,09 Material Design with Wood,9MDNW1B,09 Material Design with Wood1B,1B,,,,4,4.00,18,1,9
+375,Mathematics,9MTHE,09 Mathematics E1,9MTHE1A,09 Mathematics E11A,1A,,,,4,4.00,17,1,18
+376,Mathematics,9MTHL,09 Mathematics L1,9MTHL1A,09 Mathematics L11A,1A,,,,4,4.00,28,1,18
+377,Mathematics,9MTHO,09 Mathematics O1,9MTHO1A,09 Mathematics O11A,1A,,,,4,4.00,24,1,18
+378,Mathematics,9MTHO,09 Mathematics O2,9MTHO2A,09 Mathematics O22A,2A,,,,4,4.00,25,1,18
+379,Mathematics,9MTHO,09 Mathematics O3,9MTHO3A,09 Mathematics O33A,3A,,,,4,4.00,24,1,18
+380,Mathematics,9MTHO,09 Mathematics O4,9MTHO4A,09 Mathematics O44A,4A,,,,4,4.00,25,1,18
+381,Mathematics,9MTHO,09 Mathematics O5,9MTHO5,09 Mathematics O55,5,,,,4,4.00,24,1,18
+382,English,9MTHP,09 English P,9MTHP1A,09 English P1A,1A,,,,4,4.00,20,1,19
+383,Arts,9MUS,09 Music,9MUS1A,09 Music1A,1A,,,,4,4.00,22,1,9
+384,Care Groups,9PD,09 Personal Development,9PDA,09 Personal DevelopmentA,A,,,,2,1.30,0,1,57
+385,Care Groups,9PD,09 Personal Development,9PDB,09 Personal DevelopmentB,B,,,,2,1.30,0,1,57
+386,Care Groups,9PD,09 Personal Development,9PDC,09 Personal DevelopmentC,C,,,,2,1.30,0,1,57
+387,Care Groups,9PD,09 Personal Development,9PDD,09 Personal DevelopmentD,D,,,,2,1.30,0,1,57
+388,Care Groups,9PD,09 Personal Development,9PDE,09 Personal DevelopmentE,E,,,,2,1.30,0,1,57
+389,Care Groups,9PD,09 Personal Development,9PDF,09 Personal DevelopmentF,F,,,,2,1.30,0,1,57
+390,Care Groups,9PD,09 Personal Development,9PDG,09 Personal DevelopmentG,G,,,,2,1.30,0,1,57
+391,Care Groups,9PD,09 Personal Development,9PDH,09 Personal DevelopmentH,H,,,,2,1.30,0,1,57
+392,Care Groups,9PD,09 Personal Development,9PDI,09 Personal DevelopmentI,I,,,,2,1.30,0,1,57
+393,Design Technology,9PGHD,09 Digital Photography,9PGHD1A,09 Digital Photography1A,1A,,,,4,4.00,15,1,9
+394,Health & PE,9PHE,09 Health and Physical Education,9PHE1A,09 Health and Physical Education1A,1A,,,,4,4.00,25,1,15
+395,Health & PE,9PHE,09 Health and Physical Education,9PHE1B,09 Health and Physical Education1B,1B,,,,4,4.00,24,1,15
+396,Health & PE,9PHE,09 Health and Physical Education,9PHE1C,09 Health and Physical Education1C,1C,,,,4,4.00,20,1,15
+397,Health & PE,9PHE,09 Health and Physical Education,9PHE1D,09 Health and Physical Education1D,1D,,,,4,4.00,20,1,15
+398,Health & PE,9PHE,09 Health and Physical Education,9PHE1E,09 Health and Physical Education1E,1E,,,,4,4.00,20,1,15
+399,Health & PE,9PHE,09 Health and Physical Education,9PHE1F,09 Health and Physical Education1F,1F,,,,4,4.00,20,1,15
+400,Health & PE,9PHE,09 Health and Physical Education,9PHE1G,09 Health and Physical Education1G,1G,,,,4,4.00,20,1,15
+401,Health & PE,9PHE,09 Health and Physical Education,9PHE1H,09 Health and Physical Education1H,1H,,,,4,4.00,20,1,15
+402,Health & PE,9PHE,09 Health and Physical Education,9PHE1I,09 Health and Physical Education1I,1I,,,,4,4.00,19,1,15
+403,Science,9SCIE,09 Science E,9SCIE1A,09 Science E1A,1A,,,,4,4.00,17,1,17
+404,Science,9SCIL,09 Science L,9SCIL1A,09 Science L1A,1A,,,,4,4.00,28,1,17
+405,Science,9SCIO,09 Science O1,9SCIO1A,09 Science O11A,1A,,,,4,4.00,24,1,17
+406,Science,9SCIO,09 Science O2,9SCIO2A,09 Science O22A,2A,,,,4,4.00,25,1,17
+407,Science,9SCIO,09 Science O3,9SCIO3A,09 Science O33A,3A,,,,4,4.00,24,1,17
+408,Science,9SCIO,09 Science O4,9SCIO4A,09 Science O44A,4A,,,,4,4.00,25,1,17
+409,Science,9SCIO,09 Science O5,9SCIO5,09 Science O55,5,,,,4,4.00,24,1,17
+410,Science,9SCIP,09 Science P,9SCIP1A,09 Science P1A,1A,,,,4,4.00,20,1,17
+411,Special Education,SC1ART1,SC1 Art,SC1MUS1A,SC1 ArtA,A,,,,4,4.00,8,1,14
+412,Special Education,SC1DT1,SC1 Digital Tech,SC1DT1A,SC1 Digital TechA,A,,,,4,4.00,8,1,14
+413,Special Education,SC1ENG1,SC1 English,SC1ENG1A,SC1 EnglishA,A,,,,5,5.00,8,1,14
+414,Special Education,SC1HUM1,SC1 Humanities,SC1HUM1A,SC1 HumanitiesA,A,,,,4,4.00,8,1,14
+415,Special Education,SC1MTH1,SC1 Mathematics,SC1MTH1A,SC1 MathematicsA,A,,,,4,4.00,8,1,14
+416,Special Education,SC1SCI1,SC1 Science,SC1SCI1A,SC1 ScienceA,A,,,,3,3.00,8,1,14
+417,Special Education,SC2DT1,SC2 Digital Technology,SC2DT1A,SC2 Digital TechnologyA,A,,,,4,4.00,11,1,14
+418,Special Education,SC2ENG1,SC2 English,SC2ENG1A,SC2 EnglishA,A,,,,5,5.00,11,1,14
+419,Special Education,SC2HUM1,SC2 Humanities,SC2HUM1A,SC2 HumanitiesA,A,,,,3,3.00,11,1,14
+420,Special Education,SC2MTH1,SC2 Mathematics,SC2MTH1A,SC2 MathematicsA,A,,,,4,4.00,11,1,14
+421,Special Education,SC2MUS1,SC2 Music,SC2MUS1A,SC2 MusicA,A,,,,4,4.00,11,1,14
+422,Special Education,SC2SCI1,SC2 Science,SC2SCI1A,SC2 ScienceA,A,,,,4,4.00,11,1,14
+423,Special Education,SC3ARTS1,SC3 Drama,SC3ARTS1A,SC3 DramaA,A,,,,4,4.00,11,1,14
+424,Special Education,SC3ENG1,SC3 English,SC3ENG1A,SC3 EnglishA,A,,,,5,5.00,11,1,14
+425,Special Education,SC3HUM1,SC3 Humanities,SC3HUM1A,SC3 HumanitiesA,A,,,,4,4.00,11,1,14
+426,Special Education,SC3HWB1,SC3 Health & Wellbeing,SC3HWB1A,SC3 Health & WellbeingA,A,,,,3,3.00,11,1,14
+427,Special Education,SC3MTH1,SC3 Mathematics,SC3MTH1A,SC3 MathematicsA,A,,,,4,4.00,11,1,14
+428,Special Education,SC3SC1,SC3 Science,SC3SC1A,SC3 ScienceA,A,,,,4,4.00,11,1,14
+429,Special Education,SC4DTE1,SC4 Design Tech,SC4DTE1A,SC4 Design TechA,A,,,,4,4.00,4,1,14
+430,Special Education,SC4ENG1,SC4 English,SC4ENG1A,SC4 EnglishA,A,,,,5,5.00,4,1,14
+431,Special Education,SC4LCU1,SC4 Language & Culture,SC4LCU1A,SC4 Language & CultureA,A,,,,4,4.00,4,1,14
+432,Special Education,SC4MTH1,SC4 Mathematics,SC4MTH1A,SC4 MathematicsA,A,,,,4,4.00,4,1,14
+433,Special Education,SC4SC1,SC4 Society & Culture,SC4SC1A,SC4 Society & CultureA,A,,,,3,3.00,4,1,14
+434,Special Education,SC4SCI1,SC4 Scientific Studies,SC4SCI1A,SC4 Scientific StudiesA,A,,,,4,4.00,4,1,14
+435,Special Education,SU1ART1,SU1 Arts (Music),SU1ART1A,SU1 Arts (Music)A,A,,,,4,4.00,4,1,14
+436,Special Education,SU1ENG1,SU1 English,SU1ENG1A,SU1 EnglishA,A,,,,5,5.00,4,1,14
+437,Special Education,SU1FD1,SU1 Food Technology,SU1FD1A,SU1 Food TechnologyA,A,,,,4,4.00,4,1,14
+438,Special Education,SU1HUM1,SU1 Humanities,SU1HUM1A,SU1 HumanitiesA,A,,,,4,4.00,4,1,14
+439,Special Education,SU1MTH1,SU1 Mathematics,SU1MTH1A,SU1 MathematicsA,A,,,,4,4.00,4,1,14
+440,Special Education,SU1SCI1,SU1 Science,SU1SCI1A,SU1 ScienceA,A,,,,3,3.00,4,1,14
+441,Special Education,SU2ARTS1,SU2 Art,SU2ARTS1A,SU2 ArtA,A,,,,4,4.00,5,1,14
+442,Special Education,SU2ENG1,SU2 English,SU2ENG1A,SU2 EnglishA,A,,,,5,5.00,5,1,14
+443,Special Education,SU2FD1,SU2 Food Technology,SU2FD1A,SU2 Food TechnologyA,A,,,,4,4.00,5,1,14
+444,Special Education,SU2HUM1,SU2 Humanities,SU2HUM1A,SU2 HumanitiesA,A,,,,3,3.00,5,1,14
+445,Special Education,SU2MTH1,SU2 Mathematics,SU2MTH1A,SU2 MathematicsA,A,,,,4,4.00,5,1,14
+446,Special Education,SU2SCI1,SU2 Science,SU2SCI1A,SU2 ScienceA,A,,,,4,4.00,5,1,14
+447,Special Education,SU3CXD1,SU3 Cross Disciplinary Studies,SU3CXD1A,SU3 Cross Disciplinary StudiesA,A,,,,3,3.00,0,1,14
+448,Special Education,SU3ENG1,SU3 English,SU3ENG1A,SU3 EnglishA,A,,,,5,5.00,0,1,14
+449,Special Education,SU3HE1,SU3 Health,SU3HE1A,SU3 HealthA,A,,,,4,4.00,0,1,14
+450,Special Education,SU3MTH1,SU3 Mathematics,SU3MTH1A,SU3 MathematicsA,A,,,,4,4.00,0,1,14
+451,Special Education,SU3SC1,SU3 Society & Culture,SU3SC1A,SU3 Society & CultureA,A,,,,4,4.00,0,1,14
+452,Special Education,SU3SCI1,SU3 Scientific Studies,SU3SCI1A,SU3 Scientific StudiesA,A,,,,4,4.00,0,1,14
+453,Special Education,SWDPE1,SWD Physical Education,SWDPE1A,SWD Physical EducationA,A,,,,4,4.00,8,1,14
+454,Special Education,SWDPE1,SWD Physical Education,SWDPE1B,SWD Physical EducationB,B,,,,4,4.00,11,1,14
+455,Special Education,SWDPE1,SWD Physical Education,SWDPE1F,SWD Physical EducationF,F,,,,4,4.00,11,1,14
+456,Special Education,SWDPE1,SWD Physical Education,SWDPE1C,SWD Physical EducationC,C,,,,4,4.00,0,1,14
+457,Special Education,SWDPE1,SWD Physical Education,SWDPE1D,SWD Physical EducationD,D,,,,4,4.00,5,1,14
+458,Special Education,SWDPE1,SWD Physical Education,SWDPE1E,SWD Physical EducationE,E,,,,4,4.00,0,1,14
+459,Special Education,SWDPE1,SWD Physical Education,SWDPE1G,SWD Physical EducationG,G,,,,4,4.00,4,1,14
+460,Food Tech,9FOD,09 Food & Nutrition,9FOD1A,09 Food & Nutrition1A,1A,,,,4,4.00,22,1,7
+461,Food Tech,9FOD,09 Food & Nutrition,9FOD1B,09 Food & Nutrition1B,1B,,,,4,4.00,21,1,7
+462,,2PSC,12 Psychology,2PSC1B,12 Psychology1B,1B,,,,0,0.00,0,0,0
+463,Design Technology,1IESDPRO,11 Digital Products,1IESDPRO1A,11 Digital Products1A,1A,,,,4,4.00,10,1,9
+464,Care Groups,1CARESW,11 Care SWD,1CARESWD,11 Care SWDD,D,,,,4,0.32,0,1,57
+465,Care Groups,1PDSW,11 Personal Development SWD,1PDSWD,11 Personal Development SWDD,D,,,,2,1.30,0,1,57
+466,Care Groups,2CARESW,12 Care SWD,2CARESWD,12 Care SWDD,D,,,,4,0.32,0,1,57
+467,Care Groups,2PDSW,12 Personal Development SWD,2PDSWD,12 Personal Development SWDD,D,,,,2,1.30,0,1,57
 ,,,,,,,,,,,,,,

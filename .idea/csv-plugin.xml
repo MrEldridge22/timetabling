@@ -17,28 +17,21 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\code_check_csvs\edsas_missing_codes.csv">
+        <entry key="\code_check_output\edsas_missing_codes_tdf.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\code_check_csvs\edsas_rename.csv">
+        <entry key="\code_check_output\edsas_rename_tdf.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\edsas_missing_codes_tdf.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\edsas_rename_tdf.csv">
+        <entry key="\code_check_output\edsas_rename_tdf_check.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
