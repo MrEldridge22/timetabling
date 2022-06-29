@@ -17,9 +17,12 @@ subject_allocation_df = pd.DataFrame(columns=['code',
                                                 'line6_class', 'line6_loc',
                                                 'line7_class', 'line7_loc'])
 
-code_list = []
 
-
-# Grab Teachers and Teachers ID
-for teacher in root.findall(".//{http://www.timetabling.com.au/TDV9}Teachers/{http://www.timetabling.com.au/TDV9}Teacher/{http://www.timetabling.com.au/TDV9}Code"):
-    print(teacher)
+# Grab Teacher UUID, Code and Name
+for teacher_all in root.findall(".//{http://www.timetabling.com.au/TDV9}Teachers/{http://www.timetabling.com.au/TDV9}Teacher"):   
+    teacher_id = teacher_all.find('.{http://www.timetabling.com.au/TDV9}TeacherID').text
+    teacher_code = teacher_all.find('.{http://www.timetabling.com.au/TDV9}Code').text
+    firstname = teacher_all.find('.{http://www.timetabling.com.au/TDV9}FirstName').text
+    lastname = teacher_all.find('.{http://www.timetabling.com.au/TDV9}LastName').text
+    # print("{0}: {1} {2}".format(code, firstname, lastname))
+    
