@@ -57,6 +57,14 @@ def createTables(conn):
         FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id)
     );''')
 
+    conn.execute('''CREATE TABLE teacher_faculties(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        faculty_id TEXT NOT NULL,
+        teacher_id TEXT NOT NULL,
+        FOREIGN KEY (faculty_id) REFERENCES faculties(faculty_id),
+        FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id)
+    );''')
+
 
 def read_in_data(conn, root):
     """
@@ -117,6 +125,11 @@ def read_in_data(conn, root):
         room_id = timetables.find('{http://www.timetabling.com.au/TDV9}RoomID').text
         teacher_id = timetables.find('{http://www.timetabling.com.au/TDV9}TeacherID').text
         populate_timetable(conn, (tt_id, period_id, class_id, room_id, teacher_id))
+    
+    for teacher_faculties in root.findall(".//{http://www.timetabling.com.au/TDV9}FacultyTeachers/{http://www.timetabling.com.au/TDV9}FacultyTeacher"):
+        faculty_id = teacher_faculties.find('{http://www.timetabling.com.au/TDV9}FacultyID').text
+        teacher_id = teacher_faculties.find('{http://www.timetabling.com.au/TDV9}TeacherID').text
+        populate_teacher_faculties(conn, (faculty_id, teacher_id))
 
 
 def populate_teachers(conn, teacher_data):
@@ -198,12 +211,15 @@ def populate_periods(conn, period_data):
 
 
 def populate_timetable(conn, tt_data):
-
     """
     Insert data into Timetable Table
-    :param conn (db connection):
-    :param tt_data (timetable_id, period_id, class_id, room_id, teacher_id)
-    :return:
+
+    Parameters
+    conn : db connection:
+    tt_data (tuple) : Timetable Data (timetable_id, period_id, class_id, room_id, teacher_id)
+    
+    Return
+    None : 
     """
     sql = ''' INSERT INTO timetable(timetable_id, period_id, class_id, room_id, teacher_id) VALUES(?,?,?,?,?)'''
     cur = conn.cursor()
@@ -211,4 +227,33 @@ def populate_timetable(conn, tt_data):
     conn.commit()
 
 
-# def get_faculties(conn):
+def populate_teacher_faculties(conn, teacher_faculties):
+    """
+    Insert data into Teacher Faculties Table
+
+    Parameters
+    conn : db connection:
+    teacher_faculties (tuple) : Teachers in Faculty Data (timetable_id, period_id, class_id, room_id, teacher_id)
+    
+    Return
+    None : 
+    """
+    sql = ''' INSERT INTO teacher_faculties(faculty_id, teacher_id) VALUES(?,?)'''
+    cur = conn.cursor()
+    cur.execute(sql, teacher_faculties)
+    conn.commit()
+
+
+def get_faculties(conn):
+    """
+    Retrieve Faculty List from Database
+
+    Parameters:
+    conn : Database Connection object
+    
+    Returns:
+    faculty_list (list) : List of all faculties in database
+    
+    """
+    faculty_list = [r[0] for r in conn.cursor().execute('SELECT code FROM faculties').fetchall()]
+    return faculty_list
