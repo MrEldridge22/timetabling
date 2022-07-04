@@ -14,6 +14,7 @@ TODO:
 - Output to Excel sheet - All Staff Done!
 - Output tabs into Excel Sheet
 - Fix SWD Lines - DONE!
+- Get Class Groups for Core Lines
 """
 
 # Database setup
@@ -37,9 +38,9 @@ read_in_data(conn, root)
 workbook = xlsxwriter.Workbook('Subject Allocations.xlsx')
 
 # Populate excel sheet
-# all_staff = get_df(conn, "all")
-# create_excel_sheet(workbook, all_staff, "All Staff")
-# write_workbook(workbook)
+all_staff = get_df(conn, "all")
+create_excel_sheet(workbook, all_staff, "All Staff")
+write_workbook(workbook)
 
 # Testing Area
 sql = """SELECT 
