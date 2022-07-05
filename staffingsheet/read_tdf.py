@@ -62,8 +62,8 @@ INNER JOIN teachers t ON tf.teacher_id = t.teacher_id
 GROUP BY t.code;
 """
 
-cur = conn.cursor()
-cur.execute(sql)
-rows = cur.fetchall()
-for r in rows:
-    print(r)
+# cur = conn.cursor()
+# cur.execute(sql)
+# rows = cur.fetchall()
+# for r in rows:
+#     print(r)

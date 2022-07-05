@@ -1,7 +1,13 @@
 import textwrap
+from typing import _ProtocolMeta
 import xlsxwriter
 import pandas as pd
+import math
 from datetime import date, datetime
+
+
+core_groups_list = ['L', 'L1', 'E', 'E1', 'P', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6']
+
 
 def create_excel_sheet(workbook, staffing_df, sheet_name):
     """
@@ -13,6 +19,9 @@ def create_excel_sheet(workbook, staffing_df, sheet_name):
     """
     # Create new sheet
     sheet = workbook.add_worksheet(name=sheet_name)
+    sheet.set_margins(left=0.04, right=0.04, top=0.15, bottom=0.15)
+    sheet.freeze_panes(3, 0)
+    sheet.repeat_rows(0, 2)
    
     # Heading Information
     heading = "2022 Teaching Staff Sem 2"
@@ -29,7 +38,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name):
     sheet.write('I1', export_from_tdf_date, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'font_color': 'red'}))
 
     # Line Structures and column Headings
-    col_headings = ["Staff Member",
+    col_headings = ["Staff",
                     "Care",
                     "Load",
                     "Line 1",
@@ -45,7 +54,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name):
     sheet.merge_range('E2:F2', "W - 4 PD 5 3 2", cell_format=line_struct_format)
     sheet.merge_range('G2:H2', "Th -  2 1 6 7", cell_format=line_struct_format)
     sheet.merge_range('I2:J2', "F - 1 7 5 4 3", cell_format=line_struct_format)
-    sheet.write('A3', col_headings[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'bold': True, 'bottom': True, 'right': True}))
+    sheet.write('A3', col_headings[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'bold': True, 'bottom': True, 'left': True, 'right': True}))
     sheet.write('B3', col_headings[1], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'bold': True, 'align': "center", 'bg_color': "#A6A6A6", 'bottom': True, 'right': True}))
     sheet.write('C3', col_headings[2], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'bold': True, 'align': "center", 'bottom': True, 'right': True}))
     sheet.write('D3', col_headings[3], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'bold': True, 'align': "center", 'bg_color': "#FFC000", 'bottom': True, 'right': True}))
@@ -59,21 +68,29 @@ def create_excel_sheet(workbook, staffing_df, sheet_name):
     # Populate Sheet Data
     start_row = 4   # Row to start writing staffing data in at
     num_rows = 4   # Number of Rows per staff member
-    subject_cell_format = workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True})
-    for row in staffing_df.itertuples():
+    staff_per_page = 11
+    page_breaks_list = []
 
+    # Calculate where pagebreaks need to be
+    for i in range (1, math.ceil(staffing_df.shape[0] / 11) + 1):
+        page_breaks_list.append(i * staff_per_page * num_rows + start_row - 1)
+    sheet.set_h_pagebreaks(page_breaks_list)
+
+    subject_cell_format = workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True})
+    
+    # Iterate over the data and populate the sheet
+    for row in staffing_df.itertuples():
         # Set row heights for subjects to be slightly larger to accomodate long subject names, set_row is 0 indexed, so this affects the 2nd and 3rd row for each teacher
         sheet.set_row(int(start_row + 0), 18)
         sheet.set_row(int(start_row + 1), 18)
         
-    
-        # Name
-        sheet.write('A' + str(start_row + 0), row.firstname, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'right': True}))
-        sheet.write('A' + str(start_row + 1), row.lastname, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'right': True}))
-        sheet.write('A' + str(start_row + 2), row.code, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'right': True}))
-        sheet.write('A' + str(start_row + 3), "FTE", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'bottom': True, 'right': True}))
+        # Staff Name
+        sheet.write('A' + str(start_row + 0), row.firstname, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'right': True}))
+        sheet.write('A' + str(start_row + 1), row.lastname, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'right': True}))
+        sheet.write('A' + str(start_row + 2), row.code, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'right': True}))
+        sheet.write('A' + str(start_row + 3), "FTE", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'bottom': True, 'right': True}))
 
-        # Care
+        # Care Class
         if row.care != 0:
             sheet.write('B' + str(start_row + 1), row.care[:2], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
             sheet.write('B' + str(start_row + 2), row.care_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
@@ -93,113 +110,86 @@ def create_excel_sheet(workbook, staffing_df, sheet_name):
         ###Lines###
         # Line 1
         if row.line1_class != 0:
-            try:
-                sheet.write('D' + str(start_row + 0), row.line1_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.merge_range('D' + str(start_row + 1) + ':' + 'D' + str(start_row + 2), row.line1_class.split(" ",1)[1], subject_cell_format)
-                sheet.write('D' + str(start_row + 3), row.line1_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-            except:
-                sheet.write('D' + str(start_row + 0), row.line1_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.write('D' + str(start_row + 3), row.line1_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_line_details(row.line1_class, row.line1_room, 'D', start_row, sheet, workbook, subject_cell_format)
         else:
-            # Blank Cell with Bottom and Side Boarders
-            sheet.write('D' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-            sheet.merge_range('D' + str(start_row + 1) + ':' + 'D' + str(start_row + 2), " ", subject_cell_format)
-            sheet.write('D' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-
+            write_blank_cell('D', start_row, sheet, workbook, subject_cell_format)
+            
         # Line 2
         if row.line2_class != 0:
-            try:
-                sheet.write('E' + str(start_row + 0), row.line2_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.merge_range('E' + str(start_row + 1) + ':' + 'E' + str(start_row + 2), row.line2_class.split(" ",1)[1], subject_cell_format)
-                sheet.write('E' + str(start_row + 3), row.line2_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-            except:
-                sheet.write('E' + str(start_row + 0), row.line2_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.write('E' + str(start_row + 3), row.line2_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_line_details(row.line2_class, row.line2_room, 'E', start_row, sheet, workbook, subject_cell_format)
         else:
-            # Blank Cell with Bottom and Side Boarders
-            sheet.write('E' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-            sheet.merge_range('E' + str(start_row + 1) + ':' + 'E' + str(start_row + 2), " ", subject_cell_format)
-            sheet.write('E' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_blank_cell('E', start_row, sheet, workbook, subject_cell_format)
         
         # Line 3
         if row.line3_class != 0:
-            try:
-                sheet.write('F' + str(start_row + 0), row.line3_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.merge_range('F' + str(start_row + 1) + ':' + 'F' + str(start_row + 2), row.line3_class.split(" ",1)[1], subject_cell_format)
-                sheet.write('F' + str(start_row + 3), row.line3_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-            except:
-                sheet.write('F' + str(start_row + 0), row.line3_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.write('F' + str(start_row + 3), row.line3_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_line_details(row.line3_class, row.line3_room, 'F', start_row, sheet, workbook, subject_cell_format)
         else:
-            # Blank Cell with Bottom and Side Boarders
-            sheet.write('F' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-            sheet.merge_range('F' + str(start_row + 1) + ':' + 'F' + str(start_row + 2), " ", subject_cell_format)
-            sheet.write('F' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-        
+            write_blank_cell('F', start_row, sheet, workbook, subject_cell_format)
+
         # Line 4
         if row.line4_class != 0:
-            try:
-                sheet.write('G' + str(start_row + 0), row.line4_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.merge_range('G' + str(start_row + 1) + ':' + 'G' + str(start_row + 2), row.line4_class.split(" ",1)[1], subject_cell_format)
-                sheet.write('G' + str(start_row + 3), row.line4_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-            except:
-                sheet.write('G' + str(start_row + 0), row.line4_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.write('G' + str(start_row + 3), row.line4_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_line_details(row.line4_class, row.line4_room, 'G', start_row, sheet, workbook, subject_cell_format)
         else:
-            # Blank Cell with Bottom and Side Boarders
-            sheet.write('G' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-            sheet.merge_range('G' + str(start_row + 1) + ':' + 'G' + str(start_row + 2), " ", subject_cell_format)
-            sheet.write('G' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-
+            write_blank_cell('G', start_row, sheet, workbook, subject_cell_format)
+        
         # Line 5
         if row.line5_class != 0:
-            try:
-                sheet.write('H' + str(start_row + 0), row.line5_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.merge_range('H' + str(start_row + 1) + ':' + 'H' + str(start_row + 2), row.line5_class.split(" ",1)[1], subject_cell_format)
-                sheet.write('H' + str(start_row + 3), row.line5_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-            except:
-                sheet.write('H' + str(start_row + 0), row.line5_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center"}))
-                sheet.write('H' + str(start_row + 3), row.line5_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_line_details(row.line5_class, row.line5_room, 'H', start_row, sheet, workbook, subject_cell_format)
         else:
-            # Blank Cell with Bottom and Side Boarders
-            sheet.write('H' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-            sheet.merge_range('H' + str(start_row + 1) + ':' + 'H' + str(start_row + 2), " ", subject_cell_format)
-            sheet.write('H' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_blank_cell('H', start_row, sheet, workbook, subject_cell_format)
 
         # Line 6
         if row.line6_class != 0:
-            try:
-                sheet.write('I' + str(start_row + 0), row.line6_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.merge_range('I' + str(start_row + 1) + ':' + 'I' + str(start_row + 2), row.line6_class.split(" ",1)[1], subject_cell_format)
-                sheet.write('I' + str(start_row + 3), row.line6_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-            except:
-                sheet.write('I' + str(start_row + 0), row.line6_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.write('I' + str(start_row + 3), row.line6_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_line_details(row.line6_class, row.line6_room, 'I', start_row, sheet, workbook, subject_cell_format)
         else:
-            # Blank Cell with Bottom and Side Boarders
-            sheet.write('I' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-            sheet.merge_range('I' + str(start_row + 1) + ':' + 'I' + str(start_row + 2), " ", subject_cell_format)
-            sheet.write('I' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-
+            write_blank_cell('I', start_row, sheet, workbook, subject_cell_format)
+        
         # Line 7
         if row.line7_class != 0:
-            try:
-                sheet.write('J' + str(start_row + 0), row.line7_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.merge_range('J' + str(start_row + 1) + ':' + 'J' + str(start_row + 2), row.line7_class.split(" ",1)[1], subject_cell_format)
-                sheet.write('J' + str(start_row + 3), row.line7_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
-            except:
-                sheet.write('J' + str(start_row + 0), row.line7_class.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-                sheet.write('J' + str(start_row + 3), row.line7_room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_line_details(row.line7_class, row.line7_room, 'J', start_row, sheet, workbook, subject_cell_format)
         else:
-            # Blank Cell with Bottom and Side Boarders
-            sheet.write('J' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-            sheet.merge_range('J' + str(start_row + 1) + ':' + 'J' + str(start_row + 2), " ", subject_cell_format)
-            sheet.write('J' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+            write_blank_cell('J', start_row, sheet, workbook, subject_cell_format)
 
         # Increment start_row for next staff member
         start_row = start_row + num_rows
     
-    
+
+def write_line_details(subject, room, line_column, start_row, sheet, workbook, cell_format):
+    """
+    Function to write subjects to cells in worksheet
+
+    """
+    try:
+        # Test to get groups
+        if subject.split(" ",2)[2] in core_groups_list:
+            year = subject.split(" ",2)[0] + " " + subject.split(" ",2)[2]
+            subject = subject.split(" ",1)[1].replace(subject.split(" ",2)[2], '')
+            sheet.write(line_column + str(start_row + 0), year, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
+            sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), subject, cell_format)
+            sheet.write(line_column + str(start_row + 3), room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+        else:
+            sheet.write(line_column + str(start_row + 0), subject.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
+            sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), subject.split(" ",1)[1], cell_format)
+            sheet.write(line_column + str(start_row + 3), room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+    except:
+        try:
+            sheet.write(line_column + str(start_row + 0), subject.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
+            sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), subject.split(" ",1)[1], cell_format)
+            sheet.write(line_column + str(start_row + 3), room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
+        except:
+            print("Subject name in incorrect format: " + subject)
+
+
+def write_blank_cell(line_column, start_row, sheet, workbook, cell_format):
+    """
+    Write a blank cell to the sheet
+    """
+    # Blank Cell with Bottom and Side Boarders
+    sheet.write(line_column + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
+    sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), " ", cell_format)
+    sheet.write(line_column + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))    
+
+
 def write_workbook(excel_doc):
     """
     Close the excel document once complete

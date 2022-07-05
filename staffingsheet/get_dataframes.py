@@ -46,7 +46,7 @@ def get_df(conn, faculty):
                                     conn)
     tt_df = pd.DataFrame(sql_query)
 
-    print(tt_df)
+    # print(tt_df)
 
     # Sort data out to calculate which subjects are on which line and put into a dataframe with one entry of each
     teacher_data_list = []
