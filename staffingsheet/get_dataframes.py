@@ -18,35 +18,48 @@ mainstream_lines_df = pd.DataFrame(data=mainstream_lines_dict, index=["L1", "L2"
 swd_lines_df = pd.DataFrame(data=swd_lines_dict, index=["L1", "L2", "CG", "L3", "L4", "L5", "L6"])
 
 
-def get_df(conn, faculty):
+def get_df(conn, faculty=None):
     """
     Get a Dataframe of Subject Allocations based on faculty
    
     Parameters
     ----------
     conn : Database Connection object
-    faculty : str
+    faculty : str (Default None)
 
     Returns
     -------
     subject_allocation_df : pd.dataframe
     """
-
     # Pull out data in Human Readable Format and into Dataframe
-    sql_query = pd.read_sql_query('''SELECT 
-                                    d.name AS day, p.name as lesson, t.first_name, t.last_name, t.code, c.name as subject, f.code as faculty, r.name as room
-                                    FROM timetable tt
-                                    INNER JOIN periods p ON tt.period_id = p.period_id
-                                    INNER JOIN days d ON p.day_id = d.day_id
-                                    INNER JOIN classes c ON tt.class_id = c.class_id
-                                    INNER JOIN faculties f ON c.faculty_id = f.faculty_id
-                                    INNER JOIN rooms r ON tt.room_id = r.room_id
-                                    INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
-                                    ORDER BY t.code ASC;''',
-                                    conn)
-    tt_df = pd.DataFrame(sql_query)
+    # Check to see if faculty has been supplied
+    if faculty is None:
+        sql_query = pd.read_sql_query('''SELECT 
+                                        d.name AS day, p.name as lesson, t.first_name, t.last_name, t.code, c.name as subject, f.code as faculty, r.name as room
+                                        FROM timetable tt
+                                        INNER JOIN periods p ON tt.period_id = p.period_id
+                                        INNER JOIN days d ON p.day_id = d.day_id
+                                        INNER JOIN classes c ON tt.class_id = c.class_id
+                                        INNER JOIN faculties f ON c.faculty_id = f.faculty_id
+                                        INNER JOIN rooms r ON tt.room_id = r.room_id
+                                        INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
+                                        ORDER BY t.last_name ASC;''',
+                                        conn)
+    else:
+        sql_query = pd.read_sql_query('''SELECT 
+                                        d.name AS day, p.name as lesson, t.first_name, t.last_name, t.code, c.name as subject, f.code as faculty, r.name as room
+                                        FROM timetable tt
+                                        INNER JOIN periods p ON tt.period_id = p.period_id
+                                        INNER JOIN days d ON p.day_id = d.day_id
+                                        INNER JOIN classes c ON tt.class_id = c.class_id
+                                        INNER JOIN faculties f ON c.faculty_id = f.faculty_id
+                                        INNER JOIN rooms r ON tt.room_id = r.room_id
+                                        INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
+                                        WHERE f.code = (?)
+                                        ORDER BY t.last_name ASC;''',
+                                        conn, params=(faculty, ))
 
-    # print(tt_df)
+    tt_df = pd.DataFrame(sql_query)
 
     # Sort data out to calculate which subjects are on which line and put into a dataframe with one entry of each
     teacher_data_list = []
