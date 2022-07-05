@@ -139,7 +139,7 @@ def populate_teachers(conn, teacher_data):
     :param teachers:
     :return:
     """
-    sql = ''' INSERT INTO teachers(teacher_id, code, first_name, last_name) VALUES(?,?,?,?)'''
+    sql = ''' INSERT OR IGNORE INTO teachers(teacher_id, code, first_name, last_name) VALUES(?,?,?,?)'''
     cur = conn.cursor()
     cur.execute(sql, teacher_data)
     conn.commit()
@@ -165,7 +165,7 @@ def populate_rooms(conn, room_data):
     :param room_data:
     :return:
     """
-    sql = ''' INSERT INTO rooms(room_id, name) VALUES(?,?)'''
+    sql = ''' INSERT OR IGNORE INTO rooms(room_id, name) VALUES(?,?)'''
     cur = conn.cursor()
     cur.execute(sql, room_data)
     conn.commit()
@@ -191,7 +191,7 @@ def populate_days(conn, day_data):
     :param day_data (day_id, day_name):
     :return:
     """
-    sql = ''' INSERT INTO days(day_id, name) VALUES(?,?)'''
+    sql = ''' INSERT OR IGNORE INTO days(day_id, name) VALUES(?,?)'''
     cur = conn.cursor()
     cur.execute(sql, day_data)
     conn.commit()
@@ -204,7 +204,7 @@ def populate_periods(conn, period_data):
     :param perioddata (period_id, day_id, period_name):
     :return:
     """
-    sql = ''' INSERT INTO periods(period_id, day_id, name) VALUES(?,?,?)'''
+    sql = ''' INSERT OR IGNORE INTO periods(period_id, day_id, name) VALUES(?,?,?)'''
     cur = conn.cursor()
     cur.execute(sql, period_data)
     conn.commit()
@@ -255,5 +255,5 @@ def get_faculties(conn):
     faculty_list (list) : List of all faculties in database
     
     """
-    faculty_list = [r[0] for r in conn.cursor().execute('SELECT code FROM faculties').fetchall()]
+    faculty_list = [r[0] for r in conn.cursor().execute('SELECT DISTINCT code FROM faculties ORDER BY code ASC').fetchall()]
     return faculty_list
