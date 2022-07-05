@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 # Line structures
 mainstream_lines_dict = {"Monday": ["Line 6", "Line 4", "Care", "Line 3", "Line 3", "PD", "Line 5"],
@@ -104,8 +105,22 @@ def get_df(conn, faculty=None):
             flattened_list[2] = row.lastname
             # Put classes into lines else put into care class slot
             if row.line[-1].isnumeric():
-                flattened_list[2* int(row.line[-1]) + 3] = row.subject
-                flattened_list[2* int(row.line[-1]) + 4] = row.room
+                # Get Term Based Subjects or Combined classes as these contain a /
+                if "/" in row.subject:
+                    split_subject = row.subject.split('/')
+                    year = split_subject[0].split(" ", 1)[0] + "/" + split_subject[1].split(" ", 1)[0]
+                    
+                    # Don't repeat same subject name
+                    if  split_subject[0].split(" ", 1)[1] == split_subject[1].split(" ", 1)[1]:
+                        subject = split_subject[0].split(" ", 1)[1]
+                    else:
+                        subject = split_subject[0].split(" ", 1)[1] + "/" + split_subject[1].split(" ", 1)[1] 
+                    
+                    flattened_list[2* int(row.line[-1]) + 3] = year + ' ' + subject
+                    flattened_list[2* int(row.line[-1]) + 4] = row.room
+                else:
+                    flattened_list[2* int(row.line[-1]) + 3] = row.subject
+                    flattened_list[2* int(row.line[-1]) + 4] = row.room
             else:
                 flattened_list[3] = row.subject
                 flattened_list[4] = row.room

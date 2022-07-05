@@ -6,7 +6,7 @@ import math
 from datetime import date, datetime
 
 
-core_groups_list = ['L', 'L1', 'E', 'E1', 'P', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6']
+core_groups_list = [' L', 'L1', ' E', 'E1', ' P', 'P1', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6']
 
 
 def create_excel_sheet(workbook, staffing_df, sheet_name):
@@ -161,11 +161,12 @@ def write_line_details(subject, room, line_column, start_row, sheet, workbook, c
     """
     try:
         # Test to get groups
-        if subject.split(" ",2)[2] in core_groups_list:
-            year = subject.split(" ",2)[0] + " " + subject.split(" ",2)[2]
-            subject = subject.split(" ",1)[1].replace(subject.split(" ",2)[2], '')
+        if str(subject[-2:]) in core_groups_list:
+            year = subject.split(" ")[0] + " " + subject.split(" ")[-1]
+            subject_name = " ".join(subject.split(" ")[1:-1])
+            print(subject_name)
             sheet.write(line_column + str(start_row + 0), year, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-            sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), subject, cell_format)
+            sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), subject_name, cell_format)
             sheet.write(line_column + str(start_row + 3), room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
         else:
             sheet.write(line_column + str(start_row + 0), subject.split(" ",1)[0], workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
