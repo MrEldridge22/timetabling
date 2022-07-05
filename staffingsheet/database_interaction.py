@@ -233,7 +233,7 @@ def populate_teacher_faculties(conn, teacher_faculties):
 
     Parameters
     conn : db connection:
-    teacher_faculties (tuple) : Teachers in Faculty Data (timetable_id, period_id, class_id, room_id, teacher_id)
+    teacher_faculties (tuple) : Teachers in Faculty Data (faculty_id, teacher_id)
     
     Return
     None : 

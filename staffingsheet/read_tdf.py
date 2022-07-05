@@ -58,3 +58,15 @@ for faculty in get_faculties(conn):
 write_workbook(workbook)
 
 # Testing area
+sql_query = pd.read_sql_query('''
+                                    SELECT t.code, GROUP_CONCAT(f.code) AS faculty
+                                    FROM teachers t
+                                    INNER JOIN teacher_faculties tf ON t.teacher_id = tf.teacher_id
+                                    INNER JOIN faculties f ON tf.faculty_id = f.faculty_id
+                                    GROUP BY t.code
+                                    ORDER BY t.last_name ASC;
+                                ''',
+                                conn)
+    # Put into dataframe
+tt_df = pd.DataFrame(sql_query)
+print(tt_df.loc[tt_df["code"] == "MUST"])

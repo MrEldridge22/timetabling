@@ -164,7 +164,6 @@ def write_line_details(subject, room, line_column, start_row, sheet, workbook, c
         if str(subject[-2:]) in core_groups_list:
             year = subject.split(" ")[0] + " " + subject.split(" ")[-1]
             subject_name = " ".join(subject.split(" ")[1:-1])
-            print(subject_name)
             sheet.write(line_column + str(start_row + 0), year, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
             sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), subject_name, cell_format)
             sheet.write(line_column + str(start_row + 3), room, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
