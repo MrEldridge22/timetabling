@@ -10,11 +10,12 @@ import pandas as pd
 """ 
 TODO:
 - Sort into lines - DONE!
-- Read in Term 2 / 4 data
+- Read in Term 2 / 4 data - Done!
 - Output to Excel sheet - All Staff Done!
 - Output Faculty tabs into Excel Sheet - Done
 - Fix SWD Lines - DONE!
 - Get Class Groups for Core Lines - Done!
+- Need to fix up faculty Tabs - Get teachers who are currently teaching in that faculty, but all their subjects, not just those in that faculty!
 """
 
 # Database setup
