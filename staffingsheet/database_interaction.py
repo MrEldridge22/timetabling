@@ -13,7 +13,10 @@ def createTables(conn):
         teacher_id TEXT PRIMARY KEY NOT NULL,
         code TEXT NOT NULL,
         first_name TEXT NOT NULL,
-        last_name TEXT NOT NULL
+        last_name TEXT NOT NULL,
+        proposed_load TEXT NOT NULL,
+        actual_load TEXT NOT NULL,
+        notes TEXT
     );''')
 
     conn.execute('''CREATE TABLE faculties(
@@ -23,6 +26,11 @@ def createTables(conn):
 
     conn.execute('''CREATE TABLE rooms(
         room_id TEXT PRIMARY KEY NOT NULL,
+        name TEXT NOT NULL
+    );''')
+
+    conn.execute('''CREATE TABLE roll_classes(
+        roll_class_id TEXT PRIMARY KEY NOT NULL,
         name TEXT NOT NULL
     );''')
 
@@ -47,11 +55,13 @@ def createTables(conn):
 
     conn.execute('''CREATE TABLE timetable(
         timetable_id TEXT PRIMARY KEY NOT NULL,
+        roll_class_id TEXT NOT NULL,
         period_id TEXT NOT NULL,
         class_id TEXT NOT NULL,
         room_id TEXT NOT NULL,
         teacher_id TEXT NOT NULL,
         FOREIGN KEY (period_id) REFERENCES periods(period_id),
+        FOREIGN KEY (roll_class_id) REFERENCES roll_classes(roll_class_id)
         FOREIGN KEY (class_id) REFERENCES classes(class_id),
         FOREIGN KEY (room_id) REFERENCES rooms(room_id),
         FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id)
@@ -82,13 +92,16 @@ def read_in_data(conn, root):
         # print("{1}: {0}".format(faculty_code, faculty_id))
 
     # Grab Teacher ID, Code and Name, insert into database
-    # Do I need proposed Load???
+    # Do I need proposed Load??? - YES!
     for teacher_all in root.findall(".//{http://www.timetabling.com.au/TDV9}Teachers/{http://www.timetabling.com.au/TDV9}Teacher"):   
         teacher_id = teacher_all.find('.{http://www.timetabling.com.au/TDV9}TeacherID').text
         teacher_code = teacher_all.find('.{http://www.timetabling.com.au/TDV9}Code').text
         firstname = teacher_all.find('.{http://www.timetabling.com.au/TDV9}FirstName').text
         lastname = teacher_all.find('.{http://www.timetabling.com.au/TDV9}LastName').text
-        populate_teachers(conn, (teacher_id, teacher_code, firstname, lastname))
+        proposed_load = teacher_all.find('.{http://www.timetabling.com.au/TDV9}ProposedLoad').text
+        actual_load = teacher_all.find('.{http://www.timetabling.com.au/TDV9}ActualLoad').text
+        notes = teacher_all.find('.{http://www.timetabling.com.au/TDV9}SpareField1').text
+        populate_teachers(conn, (teacher_id, teacher_code, firstname, lastname, proposed_load, actual_load, notes))
         # print("{0}: {1} {2}: {3}".format(teacher_code, firstname, lastname, teacher_id))
 
     # Get all rooms and insert into Database
@@ -96,6 +109,13 @@ def read_in_data(conn, root):
         room_id = rooms_all.find('{http://www.timetabling.com.au/TDV9}RoomID').text
         room_name = rooms_all.find('{http://www.timetabling.com.au/TDV9}Code').text
         populate_rooms(conn, (room_id, room_name))
+    
+    # Get all Roll Class Groups and insert into Database
+    for roll_class_all in root.findall(".//{http://www.timetabling.com.au/TDV9}RollClasses/{http://www.timetabling.com.au/TDV9}RollClass"):
+        roll_class_id = roll_class_all.find("{http://www.timetabling.com.au/TDV9}RollClassID").text
+        roll_class_name = roll_class_all.find("{http://www.timetabling.com.au/TDV9}Name").text
+        populate_roll_classes(conn, (roll_class_id, roll_class_name))
+        
 
     # Get all Classes and insert into database
     for classes_all in root.findall(".//{http://www.timetabling.com.au/TDV9}Classes/{http://www.timetabling.com.au/TDV9}Class"):
@@ -120,16 +140,31 @@ def read_in_data(conn, root):
     # Get timetables and insert into database
     for timetables in root.findall(".//{http://www.timetabling.com.au/TDV9}Timetables/{http://www.timetabling.com.au/TDV9}Timetable"):
         tt_id = timetables.find('{http://www.timetabling.com.au/TDV9}TimetableID').text
+        roll_class_id = timetables.find('{http://www.timetabling.com.au/TDV9}RollClassID').text
         period_id = timetables.find('{http://www.timetabling.com.au/TDV9}PeriodID').text
         class_id = timetables.find('{http://www.timetabling.com.au/TDV9}ClassID').text
         room_id = timetables.find('{http://www.timetabling.com.au/TDV9}RoomID').text
         teacher_id = timetables.find('{http://www.timetabling.com.au/TDV9}TeacherID').text
-        populate_timetable(conn, (tt_id, period_id, class_id, room_id, teacher_id))
+        populate_timetable(conn, (tt_id, roll_class_id, period_id, class_id, room_id, teacher_id))
     
     for teacher_faculties in root.findall(".//{http://www.timetabling.com.au/TDV9}FacultyTeachers/{http://www.timetabling.com.au/TDV9}FacultyTeacher"):
         faculty_id = teacher_faculties.find('{http://www.timetabling.com.au/TDV9}FacultyID').text
         teacher_id = teacher_faculties.find('{http://www.timetabling.com.au/TDV9}TeacherID').text
         populate_teacher_faculties(conn, (faculty_id, teacher_id))
+
+
+def get_fte(root):
+    """
+    Get the Full Time Equalvent Value
+    
+    Parameters
+    root: xml root
+    
+    Returns
+    Text: Proposed Full Time Teacher Load
+    """
+    for settings_all in root.findall(".//{http://www.timetabling.com.au/TDV9}Settings"):
+        return(settings_all.find('{http://www.timetabling.com.au/TDV9}ProposedTeacherLoad').text)
 
 
 def populate_teachers(conn, teacher_data):
@@ -139,7 +174,7 @@ def populate_teachers(conn, teacher_data):
     :param teachers:
     :return:
     """
-    sql = ''' INSERT OR IGNORE INTO teachers(teacher_id, code, first_name, last_name) VALUES(?,?,?,?)'''
+    sql = ''' INSERT OR IGNORE INTO teachers(teacher_id, code, first_name, last_name, proposed_load, actual_load, notes) VALUES(?,?,?,?,?,?,?)'''
     cur = conn.cursor()
     cur.execute(sql, teacher_data)
     conn.commit()
@@ -168,6 +203,23 @@ def populate_rooms(conn, room_data):
     sql = ''' INSERT OR IGNORE INTO rooms(room_id, name) VALUES(?,?)'''
     cur = conn.cursor()
     cur.execute(sql, room_data)
+    conn.commit()
+
+
+def populate_roll_classes(conn, roll_class_data):
+    """
+    Insert into Roll Class table
+    
+    Parameters
+    conn: database connection
+    roll_class_data: tuple (roll_class_id, roll_class_name)
+    
+    Returns
+    None
+    """
+    sql = '''INSERT OR IGNORE INTO roll_classes(roll_class_id, name) VALUES(?,?)'''
+    cur = conn.cursor()
+    cur.execute(sql, roll_class_data)
     conn.commit()
 
 
@@ -216,12 +268,12 @@ def populate_timetable(conn, tt_data):
 
     Parameters
     conn : db connection:
-    tt_data (tuple) : Timetable Data (timetable_id, period_id, class_id, room_id, teacher_id)
+    tt_data (tuple) : Timetable Data (timetable_id, roll_class_id, period_id, class_id, room_id, teacher_id)
     
     Return
     None : 
     """
-    sql = ''' INSERT INTO timetable(timetable_id, period_id, class_id, room_id, teacher_id) VALUES(?,?,?,?,?)'''
+    sql = ''' INSERT INTO timetable(timetable_id, roll_class_id, period_id, class_id, room_id, teacher_id) VALUES(?,?,?,?,?,?)'''
     cur = conn.cursor()
     cur.execute(sql, tt_data)
     conn.commit()

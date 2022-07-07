@@ -1,22 +1,25 @@
-import textwrap
-from typing import _ProtocolMeta
-import xlsxwriter
-import pandas as pd
 import math
-from datetime import date, datetime
+from datetime import datetime
+from unittest import findTestCases
 
 # List of Core Groups, Could this be read in an a csv in the future?
 core_groups_list = [' L', 'L1', ' E', 'E1', ' P', 'P1', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6']
 
 
-def create_excel_sheet(workbook, staffing_df, sheet_name):
+def create_excel_sheet(workbook, staffing_df, fte_load, sheet_name):
     """
     Creates the various sheets on the excel document
-    :param workbook (excel workbook object):
-    :param staffing_df Pandas Dataframe:
-    :param sheet_name (string of the sheet name)
-    :return None:
+    
+    Parameters
+    workbook: (excel workbook object):
+    staffing_df: Pandas Dataframe:
+    fte_load: Str (FTE load from tdf)
+    sheet_name: Str (Sheet Name to be created)
+    
+    Returns
+    None:
     """
+
     # Create new sheet
     sheet = workbook.add_worksheet(name=sheet_name)
     sheet.set_margins(left=0.04, right=0.04, top=0.15, bottom=0.15)
@@ -85,10 +88,11 @@ def create_excel_sheet(workbook, staffing_df, sheet_name):
         sheet.set_row(int(start_row + 1), 18)
         
         # Staff Name
+        fte = float(row.proposed_load) / float(fte_load)
         sheet.write('A' + str(start_row + 0), row.firstname, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'right': True}))
         sheet.write('A' + str(start_row + 1), row.lastname, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'right': True}))
         sheet.write('A' + str(start_row + 2), row.code, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'right': True}))
-        sheet.write('A' + str(start_row + 3), "FTE", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'bottom': True, 'right': True}))
+        sheet.write('A' + str(start_row + 3), fte, workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'left': True, 'bottom': True, 'right': True, 'num_format': '0.0'}))
 
         # Care Class
         if row.care != 0:
@@ -102,6 +106,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name):
         sheet.write('B' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
 
         # Load?? - To Come!
+
         sheet.write('C' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 1), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 2), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))

@@ -1,5 +1,4 @@
 import pandas as pd
-import re
 
 # Line structures
 mainstream_lines_dict = {"Monday": ["Line 6", "Line 4", "Care", "Line 3", "Line 3", "PD", "Line 5"],
@@ -36,7 +35,18 @@ def get_df(conn, faculty=None):
     # Check to see if faculty has been supplied
     if faculty is None:
         sql_query = pd.read_sql_query('''
-                                        SELECT d.name AS day, p.name AS lesson, t.first_name, t.last_name, t.code, c.name AS subject, r.name AS room, f.code AS faculty, c.class_id AS id
+                                        SELECT d.name AS day,
+                                            p.name AS lesson,
+                                            t.first_name,
+                                            t.last_name,
+                                            t.code,
+                                            t.proposed_load,
+                                            t.actual_load,
+                                            t.notes,
+                                            c.name AS subject, 
+                                            r.name AS room, 
+                                            f.code AS faculty, 
+                                            c.class_id AS id
                                         FROM timetable tt
                                         INNER JOIN periods p ON tt.period_id = p.period_id
                                         INNER JOIN days d ON p.day_id = d.day_id
@@ -55,6 +65,9 @@ def get_df(conn, faculty=None):
                                             t.first_name,
                                             t.last_name,
                                             t.code,
+                                            t.proposed_load,
+                                            t.actual_load,
+                                            t.notes,
                                             c.name AS subject,
                                             r.name AS room,
                                             f.code AS faculty,
@@ -79,7 +92,7 @@ def get_df(conn, faculty=None):
 
     # Put into dataframe
     tt_df = pd.DataFrame(sql_query)
-
+    # print(tt_df)
     # Sort data out to calculate which subjects are on which line and put into a dataframe with one entry of each
     teacher_data_list = []
     # Iterates over the tt_df dataframe finding corresponding line for each daily lesson and put into a list if the lesson is found.
@@ -88,20 +101,20 @@ def get_df(conn, faculty=None):
             for i, line_num in mainstream_lines_df[row.day].iteritems():
                 # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
-                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.subject, row.room, line_num])
+                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num])
         else:    # SWD Lines
             for i, line_num in swd_lines_df[row.day].iteritems():
                 # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
-                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.subject, row.room, line_num])
+                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num])
 
     # Put list into a dataframe, drop the duplicates
-    teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'subject', 'room', 'line'])
+    teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line'])
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
 
     # Get the Term based subjects and combine them together.
-    teacher_data_df['subject'] = teacher_data_df[['code', 'firstname', 'lastname', 'subject', 'room', 'line']].groupby(['code', 'line'])['subject'].transform(lambda x: '/'.join(x))
-    teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'subject', 'room', 'line']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
+    teacher_data_df['subject'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line']].groupby(['code', 'line'])['subject'].transform(lambda x: '/'.join(x))
+    teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
     teacher_data_df.drop(columns=['id'], inplace=True)
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
     # Put all data into one line per staff member ready for export
@@ -115,11 +128,15 @@ def get_df(conn, faculty=None):
     # Check the dataframe below to ensure classes are going in the correct spots
     # Semester data will appear first, then term based subjects
     for code in staff_codes:
-        flattened_list = [0] * 19
+        flattened_list = [0] * 22
         for row in teacher_data_df.loc[teacher_data_df["code"] == code].itertuples():
             flattened_list[0] = row.code
             flattened_list[1] = row.firstname
             flattened_list[2] = row.lastname
+            flattened_list[3] = row.proposed_load
+            flattened_list[4] = row.actual_load
+            flattened_list[5] = row.notes
+            
             # Put classes into lines else put into care class slot
             if row.line[-1].isnumeric():
                 # Get Term Based Subjects or Combined classes as these contain a /
@@ -133,14 +150,14 @@ def get_df(conn, faculty=None):
                     else:
                         subject = split_subject[0].split(" ", 1)[1] + "/" + split_subject[1].split(" ", 1)[1] 
                     
-                    flattened_list[2* int(row.line[-1]) + 3] = year + ' ' + subject
-                    flattened_list[2* int(row.line[-1]) + 4] = row.room
+                    flattened_list[2* int(row.line[-1]) + 6] = year + ' ' + subject
+                    flattened_list[2* int(row.line[-1]) + 7] = row.room
                 else:
-                    flattened_list[2* int(row.line[-1]) + 3] = row.subject
-                    flattened_list[2* int(row.line[-1]) + 4] = row.room
+                    flattened_list[2* int(row.line[-1]) + 6] = row.subject
+                    flattened_list[2* int(row.line[-1]) + 7] = row.room
             else:
-                flattened_list[3] = row.subject
-                flattened_list[4] = row.room
+                flattened_list[6] = row.subject
+                flattened_list[7] = row.room
         
         full_line_alloc_list.append(flattened_list)
 
@@ -148,6 +165,9 @@ def get_df(conn, faculty=None):
     subject_allocation_df = pd.DataFrame(full_line_alloc_list, columns=['code',
                                                     'firstname',    
                                                     'lastname',
+                                                    'proposed_load',
+                                                    'actual_load',
+                                                    'notes',
                                                     'care', 'care_room',
                                                     'line1_class', 'line1_room',
                                                     'line2_class', 'line2_room',
