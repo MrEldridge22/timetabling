@@ -105,11 +105,12 @@ def create_excel_sheet(workbook, staffing_df, fte_load, sheet_name):
         sheet.write('B' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
         sheet.write('B' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
 
-        # Load?? - To Come!
-
+        # Load
+        # Calculates how much underloaded a teacher is and returns 0 if overloaded by minutes
+        under_load = max(0, (int(row.proposed_load) - int(row.actual_load)))
         sheet.write('C' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-        sheet.write('C' + str(start_row + 1), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
-        sheet.write('C' + str(start_row + 2), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
+        sheet.write('C' + str(start_row + 1), (int(row.proposed_load) / 100), workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
+        sheet.write('C' + str(start_row + 2), (under_load / 100), workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 9, 'align': "center", 'bottom': True, 'right': True}))
 
         ###Lines###

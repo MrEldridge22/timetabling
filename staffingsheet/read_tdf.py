@@ -9,10 +9,8 @@ import xlsxwriter
 """ 
 TODO:
 - UI to load tdf files, line strucutre and core groups
-- Teacher Loads - Loaded Data, need to display it
 - Exec / ECT / Teacher Leader Indicators - Loaded Data, need to display it
 - Year 12 Extra Lesson Highlighting - Loaded Data, need to display it
-- something screwy with some staff, need to check outputs again!
 """
 
 # Database setup
@@ -59,3 +57,6 @@ for faculty in get_faculties(conn):
 write_workbook(workbook)
 
 # Testing area
+debugging_df = get_df(conn)
+
+# print(debugging_df.loc[debugging_df["code"] == "BEDJ"])
