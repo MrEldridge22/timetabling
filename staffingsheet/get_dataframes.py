@@ -50,16 +50,29 @@ def get_df(conn, faculty=None):
                                         conn)
     else:
         sql_query = pd.read_sql_query('''
-                                        SELECT d.name AS day, p.name AS lesson, t.first_name, t.last_name, t.code, c.name AS subject, r.name AS room, f.code AS faculty, c.class_id AS id
+                                        SELECT d.name AS day,
+                                            p.name AS lesson,
+                                            t.first_name,
+                                            t.last_name,
+                                            t.code,
+                                            c.name AS subject,
+                                            r.name AS room,
+                                            f.code AS faculty,
+                                            c.class_id AS id
                                         FROM timetable tt
                                         INNER JOIN periods p ON tt.period_id = p.period_id
                                         INNER JOIN days d ON p.day_id = d.day_id
                                         INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
                                         INNER JOIN classes c ON tt.class_id = c.class_id
                                         INNER JOIN rooms r ON tt.room_id = r.room_id
-                                        INNER JOIN teacher_faculties tf ON t.teacher_id = tf.teacher_id
-                                        INNER JOIN faculties f ON tf.faculty_id = f.faculty_id
-                                        WHERE f.code = (?)
+                                        LEFT JOIN faculties f ON f.faculty_id = c.faculty_id
+                                        WHERE t.code IN (SELECT t.code
+                                                            FROM teachers t
+                                                            INNER JOIN timetable tt ON tt.teacher_id = t.teacher_id
+                                                            INNER JOIN classes c ON c.class_id = tt.class_id
+                                                            INNER JOIN faculties f ON f.faculty_id = c.faculty_id
+                                                            WHERE f.code = (?)
+                                                        )
                                         ORDER BY t.last_name ASC;
                                     ''',
                                     conn, params=(faculty, ))

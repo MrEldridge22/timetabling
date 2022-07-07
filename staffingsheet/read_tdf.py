@@ -4,18 +4,14 @@ from database_interaction import *
 from get_dataframes import *
 from export_to_excel import *
 import xlsxwriter
-
 import pandas as pd
 
 """ 
 TODO:
-- Sort into lines - DONE!
-- Read in Term 2 / 4 data - Done!
-- Output to Excel sheet - All Staff Done!
-- Output Faculty tabs into Excel Sheet - Done
-- Fix SWD Lines - DONE!
-- Get Class Groups for Core Lines - Done!
-- Need to fix up faculty Tabs - Get teachers who are currently teaching in that faculty, but all their subjects, not just those in that faculty!
+- UI to load tdf files, line strucutre and core groups
+- Teacher Loads
+- Notes for Early Career Teachers, Leaders etc.
+- Year 12 Extra Lesson
 """
 
 # Database setup
@@ -59,15 +55,3 @@ for faculty in get_faculties(conn):
 write_workbook(workbook)
 
 # Testing area
-sql_query = pd.read_sql_query('''
-                                    SELECT t.code, GROUP_CONCAT(f.code) AS faculty
-                                    FROM teachers t
-                                    INNER JOIN teacher_faculties tf ON t.teacher_id = tf.teacher_id
-                                    INNER JOIN faculties f ON tf.faculty_id = f.faculty_id
-                                    GROUP BY t.code
-                                    ORDER BY t.last_name ASC;
-                                ''',
-                                conn)
-    # Put into dataframe
-tt_df = pd.DataFrame(sql_query)
-print(tt_df.loc[tt_df["code"] == "MUST"])
