@@ -48,6 +48,7 @@ def get_df(conn, faculty=None):
                                             t.notes,
                                             c.name AS subject,
                                             r.name AS room,
+                                            rc.name as roll_class,
                                             f.code AS faculty,
                                             c.class_id AS id
                                         FROM timetable tt
@@ -56,6 +57,7 @@ def get_df(conn, faculty=None):
                                         INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
                                         INNER JOIN classes c ON tt.class_id = c.class_id
                                         INNER JOIN rooms r ON tt.room_id = r.room_id
+                                        INNER JOIN roll_classes rc ON tt.roll_class_id = rc.roll_class_id
                                         INNER JOIN faculties f ON c.faculty_id = f.faculty_id
                                         ORDER BY t.last_name ASC;
                                         ''',
@@ -72,6 +74,7 @@ def get_df(conn, faculty=None):
                                             t.notes,
                                             c.name AS subject,
                                             r.name AS room,
+                                            rc.name as roll_class,
                                             f.code AS faculty,
                                             c.class_id AS id
                                         FROM timetable tt
@@ -80,6 +83,7 @@ def get_df(conn, faculty=None):
                                         INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
                                         INNER JOIN classes c ON tt.class_id = c.class_id
                                         INNER JOIN rooms r ON tt.room_id = r.room_id
+                                        INNER JOIN roll_classes rc ON tt.roll_class_id = rc.roll_class_id
                                         LEFT JOIN faculties f ON f.faculty_id = c.faculty_id
                                         WHERE t.code IN (SELECT t.code
                                                             FROM teachers t
@@ -103,7 +107,13 @@ def get_df(conn, faculty=None):
             for i, line_num in mainstream_lines_df[row.day].iteritems():
                 # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
-                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num])
+                    # 12 Extra Class - Modify the Name
+                    if row.roll_class == '12X' and line_num == "Line 4":
+                        subject = row.roll_class + " " + row.subject.split(" ", 1)[1] + " " + row.day[0] + row.lesson[1]
+                        teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num])
+                    else:
+                        teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num])
+        
         else:    # SWD Lines
             for i, line_num in swd_lines_df[row.day].iteritems():
                 # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
@@ -141,26 +151,37 @@ def get_df(conn, faculty=None):
             
             # Put classes into lines else put into care class slot
             if row.line[-1].isnumeric():
+    
                 # Get Term Based Subjects or Combined classes as these contain a /
                 if "/" in row.subject:
+                    # Combined and Term based Classes
                     split_subject = row.subject.split('/')
-                    year = split_subject[0].split(" ", 1)[0] + "/" + split_subject[1].split(" ", 1)[0]
+                    year = split_subject[0].split(" ", 1)[0] + " / " + split_subject[1].split(" ", 1)[0]
+                    
+                    # Catch one teacher teaching 2 12X Classes and put them on seperate lines in Excel
+                    if "12X" in row.subject:
+                        subject = split_subject[0].split(" ", 1)[1] + "\n" + split_subject[1].split(" ", 1)[1]
                     
                     # Don't repeat same subject name
-                    if  split_subject[0].split(" ", 1)[1] == split_subject[1].split(" ", 1)[1]:
+                    elif  split_subject[0].split(" ", 1)[1] == split_subject[1].split(" ", 1)[1]:
                         subject = split_subject[0].split(" ", 1)[1]
                     else:
-                        subject = split_subject[0].split(" ", 1)[1] + "/" + split_subject[1].split(" ", 1)[1] 
-                    
+                        subject = split_subject[0].split(" ", 1)[1] + " / " + split_subject[1].split(" ", 1)[1] 
+                        
                     flattened_list[2* int(row.line[-1]) + 6] = year + ' ' + subject
                     flattened_list[2* int(row.line[-1]) + 7] = row.room
+                
+                # Standard Semester Based Single Classes
                 else:
                     flattened_list[2* int(row.line[-1]) + 6] = row.subject
                     flattened_list[2* int(row.line[-1]) + 7] = row.room
+            
+            # Care Classes
             else:
                 flattened_list[6] = row.subject
                 flattened_list[7] = row.room
         
+        # Add to list
         full_line_alloc_list.append(flattened_list)
 
     # Final dataframe for processing into excel sheet
@@ -178,6 +199,10 @@ def get_df(conn, faculty=None):
                                                     'line5_class', 'line5_room',
                                                     'line6_class', 'line6_room',
                                                     'line7_class', 'line7_room'])
-    subject_allocation_df.sort_values('code', inplace=True)
+    subject_allocation_df.sort_values('lastname', inplace=True)
     
+    # # Modify Subject Names for 12X Class to indicate when Extra Class is
+    # for row in subject_allocation_df.loc[subject_allocation_df['line4_class'].str.contains("12Extra") == True]:
+    #     row.line4_class
+
     return(subject_allocation_df)

@@ -57,6 +57,3 @@ for faculty in get_faculties(conn):
 write_workbook(workbook)
 
 # Testing area
-debugging_df = get_df(conn)
-
-# print(debugging_df.loc[debugging_df["code"] == "BEDJ"])
