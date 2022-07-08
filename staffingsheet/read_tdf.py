@@ -9,8 +9,6 @@ import xlsxwriter
 """ 
 TODO:
 - UI to load tdf files, line strucutre and core groups
-- Exec / ECT / Teacher Leader Indicators - Loaded Data, need to display it
-- Year 12 Extra Lesson Highlighting - Loaded Data, need to display it
 """
 
 # Database setup
