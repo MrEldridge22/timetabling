@@ -1,4 +1,3 @@
-from logging import root
 import xml.etree.ElementTree as ET
 import sqlite3
 from database_interaction import *
@@ -9,6 +8,7 @@ import xlsxwriter
 """ 
 TODO:
 - UI to load tdf files, line strucutre and core groups
+- Convert to V10 Files
 """
 
 # Database setup

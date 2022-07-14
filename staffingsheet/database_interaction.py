@@ -6,8 +6,12 @@ Database interaction for the Staffing Sheet Creator"""
 def createTables(conn):
     """
     Create all the database tables needed for the script
-    :param conn:
-    :return:
+    
+    Parameters:
+    conn: sqlite3 Database Connection
+    
+    Returns:
+    None
     """
     conn.execute('''CREATE TABLE teachers(
         teacher_id TEXT PRIMARY KEY NOT NULL,
