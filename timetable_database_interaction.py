@@ -182,7 +182,7 @@ def read_in_v10_data(conn, tfx_file):
     timetables_df.to_sql('timetable', conn, if_exists='append')
 
     # ### Teacher Faculties ###
-    # tf_df = pd.json_normalize(tfx_file, record_path=['Periods'])
+    # tf_df = pd.json_normalize(tfx_file, record_path=['Faculties'])
     # for col in tf_df.columns:
     #     if col not in ["PeriodID", "DayID", "Name"]:
     #         tf_df.drop([col], inplace=True, axis=1)
