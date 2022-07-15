@@ -1,17 +1,20 @@
 import sqlite3
+import pandas as pd
+
 """
-Database interaction for the Staffing Sheet Creator"""
+Database interaction for the Staffing Sheet Creator
+"""
 
 
 def createTables(conn):
     """
     Create all the database tables needed for the script
     
-    Parameters:
-    conn: sqlite3 Database Connection
+        Parameters:
+            conn: sqlite3 Database Connection
     
-    Returns:
-    None
+        Returns:
+            None
     """
     conn.execute('''CREATE TABLE teachers(
         teacher_id TEXT PRIMARY KEY NOT NULL,
@@ -19,7 +22,7 @@ def createTables(conn):
         first_name TEXT NOT NULL,
         last_name TEXT NOT NULL,
         proposed_load TEXT NOT NULL,
-        actual_load TEXT NOT NULL,
+        actual_load TEXT,
         notes TEXT
     );''')
 
@@ -80,12 +83,129 @@ def createTables(conn):
     );''')
 
 
-def read_in_data(conn, root):
+def read_in_v10_data(conn, tfx_file):
+    """
+    Reads in the data from a tfx json encoded file
+    
+        Parameters:
+            conn (sqlite3): A SQLite3 Database Connection
+            tfx_file (File): A json encoded tfx (TT V10) file
+
+        Returns:
+            None (None)
+    """
+    
+    ### Teachers ###
+        # Loads are now not in teacher section, need to manaually get this out at a later point!
+    teachers_df = pd.json_normalize(tfx_file, record_path=['Teachers'])
+    for col in teachers_df.columns:
+        if col not in ["TeacherID", "Code", "FirstName", "LastName", "SpareField1", "LoadProposed"]:
+            teachers_df.drop([col], inplace=True, axis=1)
+    
+    # Rename columns to match database table columns
+    teachers_df.rename(columns={"TeacherID": "teacher_id",
+                                "Code": "code",
+                                "FirstName": "first_name",
+                                "LastName": "last_name",
+                                "SpareField1": "notes",
+                                "LoadProposed": "proposed_load"
+                                }, inplace=True)
+    
+    # Write to Database
+    teachers_df.to_sql('teachers', conn, if_exists='append', index=False)
+
+    ### Faculties ###
+    faculties_df = pd.json_normalize(tfx_file, record_path=['Faculties'])
+    for col in faculties_df.columns:
+        if col not in ["FacultyID", "Code"]:
+            faculties_df.drop([col], inplace=True, axis=1)
+
+    # Rename to match database table columns
+    faculties_df.rename(columns={"FacultyID": "faculty_id", "Code": "code"}, inplace=True)
+    faculties_df.to_sql('faculties', conn, if_exists='append', index=False)
+
+    ### Rooms ###
+    rooms_df = pd.json_normalize(tfx_file, record_path=['Rooms'])
+    for col in rooms_df.columns:
+        if col not in ["RoomID", "Code"]:
+            rooms_df.drop([col], inplace=True, axis=1)
+
+    # Rename to match database table columns
+    rooms_df.rename(columns={"RoomID": "room_id", "Code": "name"}, inplace=True)
+    rooms_df.to_sql('rooms', conn, if_exists='append', index=False)
+
+    ### Roll Classes ###
+    roll_classes_df = pd.json_normalize(tfx_file, record_path=['RollClasses'])
+    for col in roll_classes_df.columns:
+        if col not in ["RollClassID", "Code"]:
+            roll_classes_df.drop([col], inplace=True, axis=1)
+
+    # Rename to match database table columns
+    roll_classes_df.rename(columns={"RollClassID": "roll_class_id", "Code": "name"}, inplace=True)
+    roll_classes_df.to_sql('roll_classes', conn, if_exists='append', index=False)
+
+    ### Classes ###
+    classes_df = pd.json_normalize(tfx_file, record_path=['ClassNames'])
+    for col in classes_df.columns:
+        if col not in ["ClassNameID", "FacultyID", "Name"]:
+            classes_df.drop([col], inplace=True, axis=1)
+
+    # Rename to match database table columns
+    classes_df.rename(columns={"ClassNameID": "class_id", "FacultyID": "faculty_id", "Name": "name"}, inplace=True)
+    classes_df.to_sql('classes', conn, if_exists='append', index=False)
+
+    ### Days ###
+    days_df = pd.json_normalize(tfx_file, record_path=['Days'])
+    for col in days_df.columns:
+        if col not in ["DayID", "Name"]:
+            days_df.drop([col], inplace=True, axis=1)
+
+    # Rename to match database table columns
+    days_df.rename(columns={"DayID": "day_id", "Name": "name"}, inplace=True)
+    days_df.to_sql('days', conn, if_exists='append', index=False)
+
+    ### Periods ###
+    periods_df = pd.json_normalize(tfx_file, record_path=['Periods'])
+    for col in periods_df.columns:
+        if col not in ["PeriodID", "DayID", "Name"]:
+            periods_df.drop([col], inplace=True, axis=1)
+
+    # Rename to match database table columns
+    periods_df.rename(columns={"PeriodID": "period_id", "DayID": "day_id", "Name": "name"}, inplace=True)
+    periods_df.to_sql('periods', conn, if_exists='append', index=False)
+
+    ### Timetables ###
+    timetables_df = pd.json_normalize(tfx_file, record_path=['Timetable'])
+    # Rename to match database table columns
+    timetables_df.index.names = ["timetable_id"]
+    timetables_df.rename(columns={"RollClassID": "roll_class_id", "PeriodID": "period_id", "ClassNameID": "class_id", "TeacherID": "teacher_id", "RoomID": "room_id"}, inplace=True)
+    timetables_df.to_sql('timetable', conn, if_exists='append')
+
+    # ### Teacher Faculties ###
+    # tf_df = pd.json_normalize(tfx_file, record_path=['Periods'])
+    # for col in tf_df.columns:
+    #     if col not in ["PeriodID", "DayID", "Name"]:
+    #         tf_df.drop([col], inplace=True, axis=1)
+
+    # # Rename to match database table columns
+    # tf_df.rename(columns={"PeriodID": "period_id", "DayID": "day_id", "Name": "name"}, inplace=True)
+    # tf_df.to_sql('teacher_faculties', conn, if_exists='append', index=False)
+
+
+
+
+### These funcions apply to the V9 TDF File, the V10 being easily in a Dataframe uses the to_sql method to put into tables ###
+
+
+def read_in_v9_data(conn, root):
     """
     Reads in the tdf xml file data to the database
-    :param conn (database connection):
-    :param root (xml root):
-    :return None:
+        Parameters:
+            conn (sqlite3 connection): SQLite3 Database Connection
+            root (xml room object): Root XML Object
+    
+        Returns:
+            None
     """
    
     # Get Faculty ID and code (short name) and Insert into Database
@@ -120,7 +240,6 @@ def read_in_data(conn, root):
         roll_class_name = roll_class_all.find("{http://www.timetabling.com.au/TDV9}Name").text
         populate_roll_classes(conn, (roll_class_id, roll_class_name))
         
-
     # Get all Classes and insert into database
     for classes_all in root.findall(".//{http://www.timetabling.com.au/TDV9}Classes/{http://www.timetabling.com.au/TDV9}Class"):
         class_id = classes_all.find('{http://www.timetabling.com.au/TDV9}ClassID').text
@@ -157,15 +276,15 @@ def read_in_data(conn, root):
         populate_teacher_faculties(conn, (faculty_id, teacher_id))
 
 
-def get_fte(root):
+def get_v9_fte(root):
     """
     Get the Full Time Equalvent Value
     
-    Parameters
-    root: xml root
-    
-    Returns
-    Text: Proposed Full Time Teacher Load
+        Parameters
+            root: xml root
+        
+        Returns
+            Text: Proposed Full Time Teacher Load
     """
     for settings_all in root.findall(".//{http://www.timetabling.com.au/TDV9}Settings"):
         return(settings_all.find('{http://www.timetabling.com.au/TDV9}ProposedTeacherLoad').text)
