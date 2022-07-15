@@ -5,6 +5,7 @@ from timetable_database_interaction import get_v9_fte, createTables, read_in_v9_
 from staffingsheet_get_dataframes import get_df
 import xlsxwriter
 import json
+import pandas as pd
 
 """ 
 TODO:
@@ -92,4 +93,7 @@ else:
 # # Write out the workbook
 # write_workbook(workbook)
 
-# # Testing area
+# Testing area
+tf_df = pd.json_normalize(tfx_raw, ['Faculties', "FacultyTeachers"], ['Faculties', "FacultyID"])
+
+print(tf_df)
