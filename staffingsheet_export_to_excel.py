@@ -14,7 +14,7 @@ coordinator_color =     '#CCC0DA'
 other_color =           '#0066CC'
 
 
-def create_excel_sheet(workbook, staffing_df, fte_load, sheet_name):
+def create_excel_sheet(workbook, staffing_df, sheet_name, fte_load="1260"):
     """
     Creates the various sheets on the excel document
     
@@ -115,7 +115,8 @@ def create_excel_sheet(workbook, staffing_df, fte_load, sheet_name):
 
         # Load
         # Calculates how much underloaded a teacher is and returns 0 if overloaded by minutes
-        under_load = max(0, (int(row.proposed_load) - int(row.actual_load)))
+        # under_load = max(0, (int(row.proposed_load) - int(row.actual_load)))
+        under_load = 0 ## Temp as need to add this back with V10
         sheet.write('C' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 1), (int(row.proposed_load) / 100), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 2), (under_load / 100), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
@@ -200,17 +201,17 @@ def write_line_details(subject, room, line_column, start_row, sheet, workbook, c
     """
     Function to write subjects to cells in worksheet
 
-    Parameters
-    subject: str (subject details)
-    room: str (room name)
-    line_column: str (Column in Excel for a particular Line)
-    start_row: str (Row in Excel to begin writing data in)
-    sheet: str (Excel sheet name)
-    workbook: xlsxwriter workbook object
-    cell_format: dict (xlsxwriting cell format)
+    Parameters:
+        subject: str (subject details)
+        room: str (room name)
+        line_column: str (Column in Excel for a particular Line)
+        start_row: str (Row in Excel to begin writing data in)
+        sheet: str (Excel sheet name)
+        workbook: xlsxwriter workbook object
+        cell_format: dict (xlsxwriting cell format)
 
-    Returns
-    None:
+    Returns:
+        None
     """
     try:
         # Test to get groups

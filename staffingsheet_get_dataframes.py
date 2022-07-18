@@ -25,14 +25,12 @@ def get_df(conn, faculty=None):
     """
     Get a Dataframe of Subject Allocations based on faculty
    
-    Parameters
-    ----------
-    conn : Database Connection object
-    faculty : str (Default None)
+    Parameters:
+        conn : Database Connection object
+        faculty : str (Default None)
 
-    Returns
-    -------
-    subject_allocation_df : pd.dataframe
+    Returns:
+        subject_allocation_df : pd.dataframe
     """
     # Pull out data in Human Readable Format and into Dataframe
     # Check to see if faculty has been supplied

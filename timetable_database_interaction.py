@@ -1,5 +1,6 @@
 import sqlite3
 import pandas as pd
+import numpy as np
 
 """
 Database interaction for the Staffing Sheet Creator
@@ -110,6 +111,7 @@ def read_in_v10_data(conn, tfx_file):
                                 "SpareField1": "notes",
                                 "LoadProposed": "proposed_load"
                                 }, inplace=True)
+    teachers_df['notes'].replace('', np.nan, inplace=True)
     
     # Write to Database
     teachers_df.to_sql('teachers', conn, if_exists='append', index=False)
@@ -147,11 +149,11 @@ def read_in_v10_data(conn, tfx_file):
     ### Classes ###
     classes_df = pd.json_normalize(tfx_file, record_path=['ClassNames'])
     for col in classes_df.columns:
-        if col not in ["ClassNameID", "FacultyID", "Name"]:
+        if col not in ["ClassNameID", "FacultyID", "SubjectName"]:
             classes_df.drop([col], inplace=True, axis=1)
 
     # Rename to match database table columns
-    classes_df.rename(columns={"ClassNameID": "class_id", "FacultyID": "faculty_id", "Name": "name"}, inplace=True)
+    classes_df.rename(columns={"ClassNameID": "class_id", "FacultyID": "faculty_id", "SubjectName": "name"}, inplace=True)
     classes_df.to_sql('classes', conn, if_exists='append', index=False)
 
     ### Days ###
@@ -182,16 +184,18 @@ def read_in_v10_data(conn, tfx_file):
     timetables_df.to_sql('timetable', conn, if_exists='append')
 
     # ### Teacher Faculties ###
-    # tf_df = pd.json_normalize(tfx_file, record_path=['Faculties'])
-    # for col in tf_df.columns:
-    #     if col not in ["PeriodID", "DayID", "Name"]:
-    #         tf_df.drop([col], inplace=True, axis=1)
+    tf_df = pd.json_normalize(tfx_file, record_path='Faculties')
 
-    # # Rename to match database table columns
-    # tf_df.rename(columns={"PeriodID": "period_id", "DayID": "day_id", "Name": "name"}, inplace=True)
-    # tf_df.to_sql('teacher_faculties', conn, if_exists='append', index=False)
+    # No idea how this work except it does!
+    temp_df = pd.DataFrame([*tf_df['FacultyTeachers']], tf_df.index).stack().rename_axis([None,'drop1']).reset_index(1, name='Teachers')
+    tf_df = tf_df[['FacultyID']].join(temp_df)
+    tf_df = pd.concat([tf_df, tf_df["Teachers"].apply(pd.Series)], axis=1)
+    tf_df.drop(columns=['drop1', 'Teachers'], inplace=True)
+    tf_df.reset_index(drop=True, inplace=True)
 
-
+    # Rename to match database table columns
+    tf_df.rename(columns={"FacultyID": "faculty_id", "TeacherID": "teacher_id"}, inplace=True)
+    tf_df.to_sql('teacher_faculties', conn, if_exists='append', index=False)
 
 
 ### These funcions apply to the V9 TDF File, the V10 being easily in a Dataframe uses the to_sql method to put into tables ###

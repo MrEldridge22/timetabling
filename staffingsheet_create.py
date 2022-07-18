@@ -52,12 +52,12 @@ if v9:
     workbook = xlsxwriter.Workbook('staffing_sheet_output\Subject Allocations.xlsx')
 
     # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
-    create_excel_sheet(workbook, get_df(conn), get_v9_fte(root_semester), "All Staff")
+    create_excel_sheet(workbook, get_df(conn), "All Staff", get_v9_fte(root_semester))
 
     # Create separate sheets for each faculty
     for faculty in get_faculties(conn):
-        if faculty not in ["Care", "Exec"]:
-            create_excel_sheet(workbook, get_df(conn, faculty), get_v9_fte(root_semester), faculty)
+        if faculty not in ["Care", "Exec", "PT"]:
+            create_excel_sheet(workbook, get_df(conn, faculty), faculty, get_v9_fte(root_semester))
         else:
             pass
 
@@ -70,30 +70,28 @@ elif v10:
     with open('ttd_files\TTDS2-2022.tfx', "r") as read_content:
         tfx_raw = json.load(read_content)
     
+    # Read In The Data!
     read_in_v10_data(conn, tfx_raw)
+
+    # Create the workbook object with filename
+    workbook = xlsxwriter.Workbook('staffing_sheet_output\Subject Allocations.xlsx')
+
+    # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
+    create_excel_sheet(workbook, get_df(conn), "All Staff")
+
+    # Create separate sheets for each faculty
+    for faculty in get_faculties(conn):
+        if faculty not in ["Care", "Exec", "PT"]:
+            create_excel_sheet(workbook, get_df(conn, faculty), faculty)
+        else:
+            pass
+
+    # Write out the workbook
+    write_workbook(workbook)
 
 else:
     print("You need to ensure either V9 or V10 is set to True!")
 
 
-
-# # Create the workbook object with filename
-# workbook = xlsxwriter.Workbook('staffing_sheet_output\Subject Allocations.xlsx')
-
-# # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
-# create_excel_sheet(workbook, get_df(conn), database_interaction.get_v9_fte(root_semester), "All Staff")
-
-# # Create separate sheets for each faculty
-# for faculty in database_interaction.get_faculties(conn):
-#     if faculty not in ["Care", "Exec"]:
-#         create_excel_sheet(workbook, get_df(conn, faculty), database_interaction.get_v9_fte(root_semester), faculty)
-#     else:
-#         pass
-
-# # Write out the workbook
-# write_workbook(workbook)
-
 # Testing area
-tf_df = pd.json_normalize(tfx_raw, ['Faculties', "FacultyTeachers"], ['Faculties', "FacultyID"])
-
-print(tf_df)
+print(get_df(conn))
