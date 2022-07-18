@@ -58,6 +58,7 @@ def createTables(conn):
         period_id TEXT PRIMARY KEY NOT NULL,
         day_id TEXT NOT NULL,
         name TEXT NOT NULL,
+        load INT,
         FOREIGN KEY (day_id) REFERENCES days(day_id)
     );''')
 
@@ -169,11 +170,11 @@ def read_in_v10_data(conn, tfx_file):
     ### Periods ###
     periods_df = pd.json_normalize(tfx_file, record_path=['Periods'])
     for col in periods_df.columns:
-        if col not in ["PeriodID", "DayID", "Name"]:
+        if col not in ["PeriodID", "DayID", "Name", "Load"]:
             periods_df.drop([col], inplace=True, axis=1)
 
     # Rename to match database table columns
-    periods_df.rename(columns={"PeriodID": "period_id", "DayID": "day_id", "Name": "name"}, inplace=True)
+    periods_df.rename(columns={"PeriodID": "period_id", "DayID": "day_id", "Name": "name", "Load": "load"}, inplace=True)
     periods_df.to_sql('periods', conn, if_exists='append', index=False)
 
     ### Timetables ###
@@ -196,6 +197,24 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     tf_df.rename(columns={"FacultyID": "faculty_id", "TeacherID": "teacher_id"}, inplace=True)
     tf_df.to_sql('teacher_faculties', conn, if_exists='append', index=False)
+
+    # Populate proposed column with data from tfx file.
+    # TODO: Filter out by term based subjects
+
+    calc_actual_load_sql = """
+                            SELECT t.code AS code, SUM(p.load) AS actual_load FROM timetable tt
+                            INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
+                            INNER JOIN periods p on tt.period_id = p.period_id
+                            GROUP BY t.code;
+                            """  
+    load_df = pd.read_sql(calc_actual_load_sql, conn)
+    # Iterate over all staff and update values in table
+    for row in load_df.itertuples():
+        sql = """UPDATE teachers SET actual_load = (?) WHERE code = (?);"""
+        cur = conn.cursor()
+        cur.execute(sql, (row.actual_load, row.code))
+        conn.commit()
+    
 
 
 ### These funcions apply to the V9 TDF File, the V10 being easily in a Dataframe uses the to_sql method to put into tables ###

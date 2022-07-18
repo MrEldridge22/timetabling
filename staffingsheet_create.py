@@ -93,5 +93,4 @@ else:
     print("You need to ensure either V9 or V10 is set to True!")
 
 
-# Testing area
-print(get_df(conn))
+# Testing Area
