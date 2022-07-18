@@ -216,9 +216,7 @@ def read_in_v10_data(conn, tfx_file):
         conn.commit()
     
 
-
 ### These funcions apply to the V9 TDF File, the V10 being easily in a Dataframe uses the to_sql method to put into tables ###
-
 
 def read_in_v9_data(conn, root):
     """

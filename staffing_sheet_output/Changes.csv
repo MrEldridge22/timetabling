@@ -1,0 +1,39 @@
+,code,firstname,lastname,care,care_room,line1_class,line1_room,line2_class,line2_room,line3_class,line3_room,line4_class,line4_room,line5_class,line5_room,line6_class,line6_room,line7_class,line7_room
+1,ALHN,Noor,Alhuda,08,AC5, , ,   , ,   , ,07 Digital Technology,AC5,07 Digital Technology,AC5,10 Digital Technology,AC5,08 Digital Technology,AD1
+4,BEERM,Mel,Beer,No,Care,  0.6, ,   , ,12 English,L2,12 Research Project B,E2,11 English 2,B9,   , ,   , 
+10,BRU,Dora,Bruno,No,Care,07 Italian,L5, , ,09 Italian,L5,   , ,07 Italian (Optional),L5,   , ,08 Italian,L5
+12,CARE,Emma,Carbone,08,B6,09 O3 English,B6,09 O2 English,B6,12 Essential English,B6,   , ,08 O5 Humanities,B6, , ,07 O4 English,B6
+14,CHR,Mary,Chrysostomou,07,AB8,   , ,  Wellbeing Leader, ,   , ,   , ,   , ,   , ,   , 
+18,CREA,Alex,Cretan,No,Care,   , ,   , , , ,11 Material Soluctions with Wood,D1,12 Material Products with Metal,D3,   , ,   , 
+22,DAWC,Cherie,Dawkins,08,M4,   , ,SU3 Health and Wellbeing,M4,   , ,SC2 English,M4,SC4 Technology,M4, , ,SC2 Mathematics,M4
+25,DOAH,Hang,Doan,No,Care,09 O2 Science,AC4,   , ,07 O3 Science,AD2, , ,08 O2 Science,AD2,07 O1 Science,AB4,07 L Science,AC4
+35,HAI,Debra,Haines,12,B8, , ,12 Workplace Practices,B9,11 O3 Personal Learning Plan,E1,11 Food Innovation,B8,   , ,   , ,12 Child Studies,B9
+36,HARM,Megan,Haronen,09,B1,   , ,07 O5 English,AB4,12 Essential English,AB9,10 O3 English,B2,   , ,   , , , 
+46,KAR,Leon,Karvelis,10,B3,10 Health and Physical Education 1,K2,   , ,   , ,   , ,   , , , ,08 Health and Physical Education,F2
+51,MSK,Sarah,Macaskill,No,Care,11 / 11 Dance (Integrated Learning) / Stage Production (Integrated Leaning),C3 / C3 / C3 / C3,08 Drama,C4,   , ,   , , , ,09 Drama,C4,08 Dance,C3
+52,MAN,Adrian,Mann,11,SC,   , ,SC4 Society and Culture,M3,   , ,   , , , ,   , ,   , 
+53,MARD,Danni,Margan,07,B9, , ,   , ,   , ,12 Math Skills for Life,AB5,   , ,   , ,   , 
+58,MUST,Therese,Musolino,07,B5, , ,   , ,   , ,07 Food and Nutrition,B7,   , ,   , ,   , 
+66,PRJ,Jason,Price,12,B7,   , , , ,11 General Mathematics B,AB10,   , ,   , ,   , ,   , 
+68,RYAD,Daniel,Ryan,11,AD3,   , , , ,10 O2 Mathematics,F1,07 Health and Physical Education,F1,   , ,09 Health and Physical Education,F1,08 Health and Physical Education,L3
+74,JNEM,Morgan,Thorpe,No,Care, , ,09 O3 Science,AB1,08 P Science,AD3,09 E Science,AD4,10 P1 Science,AD4,   , ,   , 
+82,ZIEC,Christine,Zientara,11,E2,12 Research Project,E2,   , ,11 Essential English 2,E2,   , ,08 O3 Humanities,E2,12 Research Project,E2, , 
+1,ALHN,Noor,Alhuda,08,AC5, , ,   , ,   , ,8 Digital Products,AC5,07 Digital Technology,AC5,10 Digital Technology,AC5,08 Digital Technology,AD1
+4,BEERM,Mel,Beer,No,Care,   , ,   , ,12 English,L2,12 Research Project B,E2,11 English 2,B9,   , ,  0.6, 
+10,BRU,Dora,Bruno,No,Care,07 Italian,L5,   , ,09 Italian,L5, , ,07 Italian (Optional),L5,   , ,08 Italian,L5
+12,CARE,Emma,Carbone,08,B6,09 O3 English,B6,09 O2 English,B6,12 Essential English,B6, , ,08 O5 Humanities,B6,   , ,07 O4 English,B6
+14,CHR,Mary,Chrysostomou,07,AB8,   , ,   , ,   , ,   , ,   , ,  Wellbeing Leader, ,   , 
+18,CREA,Alex,Cretan,No,Care,   , ,   , ,   , ,11 Material Soluctions with Wood,D1,12 Material Products with Metal,D3, , ,   , 
+22,DAWC,Cherie,Dawkins,08,M4,   , ,SU3 Health and Wellbeing,M4, , ,SC2 English,M4,SC4 Technology,M4,   , ,SC2 Mathematics,M4
+25,DOAH,Hang,Doan,No,Care,09 O2 Science,AC4, , ,07 O3 Science,AD2,   , ,08 O2 Science,AD2,07 O1 Science,AB4,07 L Science,AC4
+35,HAI,Debra,Haines,12,B8,   , ,12 Workplace Practices,B9,11 O3 Personal Learning Plan,E1,11 Food Innovation,B8, , ,   , ,12 Child Studies,B9
+36,HARM,Megan,Haronen,09,B1,   , ,07 O5 English,AB4,12 Essential English,AB9,10 O3 English,B2, , ,   , ,   , 
+46,KAR,Leon,Karvelis,10,B3,10 Health and Physical Education 1,K2,   , ,   , , , ,   , ,   , ,08 Health and Physical Education,F2
+51,MSK,Sarah,Macaskill,No,Care,11 / 11 Dance (Integrated Learning) / Stage Production (Integrated Leaning),C3 / C3 / C3 / C3,08 Drama,C4, , ,   , ,   , ,09 Drama,C4,08 Dance,C3
+52,MAN,Adrian,Mann,11,SC,   , ,SC4 Society and Culture,M3,   , ,   , ,   , ,   , , , 
+53,MARD,Danni,Margan,07,B9,   , ,   , ,   , ,12 Math Skills for Life,AB5, , ,   , ,   , 
+58,MUST,Therese,Musolino,07,B5,   , ,   , ,   , ,07 Food and Nutrition,B7,   , ,   , , , 
+66,PRJ,Jason,Price,12,B7, , ,   , ,11 General Mathematics B,AB10,   , ,   , ,   , ,   , 
+68,RYAD,Daniel,Ryan,11,AD3,   , ,   , ,10 O2 Mathematics,F1,07 Health and Physical Education,F1, , ,09 Health and Physical Education,F1,08 Health and Physical Education,L3
+74,JNEM,Morgan,Thorpe,No,Care,   , ,09 O3 Science,AB1,08 P Science,AD3,09 E Science,AD4,10 P1 Science,AD4, , ,   , 
+82,ZIEC,Christine,Zientara,11,E2,12 Research Project,E2,   , ,11 Essential English 2,E2, , ,08 O3 Humanities,E2,12 Research Project,E2,   , 

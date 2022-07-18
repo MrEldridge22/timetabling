@@ -94,3 +94,4 @@ else:
 
 
 # Testing Area
+print(get_df(conn))
