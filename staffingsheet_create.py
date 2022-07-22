@@ -10,7 +10,6 @@ import pandas as pd
 """ 
 TODO:
 - UI to load tdf files, line strucutre and core groups
-- Convert to V10 Files
 """
 
 # Which version of Timetable Solutions are you using?
