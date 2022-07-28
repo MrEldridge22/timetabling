@@ -30,11 +30,11 @@ if v9:
     print("Using Verion 9 of Timetable Solutions")
     
     # Open tdf File, encoded in xml anyway.
-    tdf_semester = ET.parse('staffingsheet\TTDS2-2022.tdf9')
+    tdf_semester = ET.parse('ttd_files\TTDS2-2022.tdf9')
     # Get the root element
     root_semester = tdf_semester.getroot()
 
-    tdf_term = ET.parse('staffingsheet\TTDTerm4-2022.tdf9')
+    tdf_term = ET.parse('ttd_files\TTDTerm4-2022.tdf9')
     room_term = tdf_term.getroot()
 
     # populate database
