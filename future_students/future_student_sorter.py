@@ -2,6 +2,28 @@ import pandas as pd
 import numpy as np
 import sqlite3
 
+###
+# Note that the paths below to the files will need to be updated each year.
+# Also need access to V Drive
+# Outputs:
+# 1 Students with options in right order for timetabler
+#       Option Order - Arts1, Arts2, Free Choice1, Free Choice2, Reserve1, Reserve2, ReserveArt
+# 2 Students who don't have EDID or StudentID
+# 3 Students who haven't selected subjects but allocated based on projections
+#
+# TODO
+# - Output a csv / excel of students with all data but mis-matched names or no student ID (aka not in EDSAS yet!)
+###
+
+# File imports
+# Future students from EDSAS
+future_students_df = pd.read_csv('V:\\Timetabler\\Documentation\\2023\\7 Selections\\Output.TXT', sep='\t', skip_blank_lines=True, skiprows=[0,1])
+# Import Student Subject Selections
+subject_selections_df = pd.read_excel('V:\\Timetabler\\Documentation\\2023\\7 Selections\\Subject Selections.xlsx')
+# Drop DOB Column
+subject_selections_df.drop(['DOB'], axis=1, inplace=True)
+
+# Create tempory database in memory.
 conn = sqlite3.connect(':memory:')
 conn.execute('''CREATE TABLE student_selections(
         id INTEGER PRIMARY KEY NOT NULL,
@@ -23,18 +45,6 @@ arts_subjects = ['7ART', '7DRA', '7DAN', '7MUS']
 free_subjects = ['7ART', '7DRA', '7DAN', '7MUS', '7DPD', '7TECH', '7ITAO']
 res_subjects = ['7ART', '7DRA', '7DAN', '7MUS', '7DPD', '7TECH']
 
-# Outputs:
-# 1 Students with options in right order for timetabler
-# 1 Option Order - Arts1, Arts2, Free Choice1, Free Choice2, Reserve1, Reserve2, ReserveArt
-# 2 Students who don't have edid or student id
-# 3 Students who haven't selected subjects but allocated based on projections
-
-# TODO
-# - Output a csv / excel of students with all data but mis-matched names or no student ID (aka not in EDSAS yet!)
-
-# import future students from EDSAS Export
-future_students_df = pd.read_csv('future_students/2023 7 EDSAS Export.TXT', sep='\t', skip_blank_lines=True, skiprows=[0,1])
-
 # Split names into columns, drop columns, and rename each column
 future_students_df[['Firstname','Surname']] = future_students_df.Name.apply(lambda x: pd.Series(str(x).split(", ")))
 future_students_df.drop(['Name', 'Admin YL', 'Census YL', 'Room', 'Roll Class'], axis=1, inplace=True)
@@ -46,10 +56,6 @@ future_students_df.rename(columns={'Student ID': 'StudentID',
 # Correct text case
 future_students_df['Firstname'] = future_students_df['Firstname'].str.title()
 future_students_df['Surname'] = future_students_df['Surname'].str.title()
-
-# Import Student Subject Selections
-subject_selections_df = pd.read_excel('future_students/Subject Selections.xlsx')
-subject_selections_df.drop(['DOB'], axis=1, inplace=True)
 
 # Rename Columns of Subject Selections
 subject_selections_df.rename(columns={'Last Name': 'Surname', 
