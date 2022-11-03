@@ -133,6 +133,7 @@ with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 8 Stude
 # with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 07 Students.sfx', "r") as read_content:
 #         yr07_sfx = json.load(read_content)
 
+### YEAR 11 & 12 ###
 # Extract Line Info
 lines_df = pd.json_normalize(yrSS_sfx, record_path=['Lines'])
 lines_df.drop(['Name', 'LineTagID', 'LineNo', 'Classes'], inplace=True, axis=1)
@@ -168,6 +169,7 @@ query = """SELECT s.Name AS subject, l.Code as line, COUNT(s.Name || l.Code) as 
 
 yrSS_df = pd.read_sql(query, conn)
 
+### YEAR 10 ###
 # Extract Line Info
 lines_df = pd.json_normalize(yr10_sfx, record_path=['Lines'])
 lines_df.drop(['Name', 'LineTagID', 'LineNo', 'Classes'], inplace=True, axis=1)
@@ -203,6 +205,7 @@ query = """SELECT s.Name AS subject, l.Code as line, COUNT(s.Name || l.Code) as 
 
 yr10_df = pd.read_sql(query, conn)
 
+### YEAR 09 ###
 # Extract Line Info
 lines_df = pd.json_normalize(yr09_sfx, record_path=['Lines'])
 lines_df.drop(['Name', 'LineTagID', 'LineNo', 'Classes'], inplace=True, axis=1)
@@ -238,6 +241,7 @@ query = """SELECT s.Name AS subject, l.Code as line, COUNT(s.Name || l.Code) as 
 
 yr09_df = pd.read_sql(query, conn)
 
+### YEAR 8 ###
 # Extract Line Info
 lines_df = pd.json_normalize(yr08_sfx, record_path=['Lines'])
 for col in lines_df.columns:
@@ -274,5 +278,6 @@ query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as 
         GROUP BY s.Name, l.Name;"""
 
 yr08_df = pd.read_sql(query, conn)
+
 ### OUTPUTS
 # Semester 1 and Semester 2 Staffing Sheets
