@@ -65,6 +65,14 @@ for col in classes_df.columns:
             classes_df.drop([col], inplace=True, axis=1)
 classes_df.to_sql('yr10_classes', conn, if_exists='append', index=False)
 
+# Get all subjects by line
+query = """SELECT s.Name, l.Code, COUNT(s.Name || l.Code) from yr10_classes c
+            INNER JOIN yr10_options o ON o.OptionID = c.OptionID
+            INNER JOIN yr10_subjects s on o.SubjectID = s.SubjectID
+            INNER JOIN yr10_lines l on l.LineID = c.LineID
+            GROUP BY s.Name, l.Code;"""
 
+temp_df = pd.read_sql(query, conn)
+print(temp_df)
 ### OUTPUTS
 # Semester 1 and Semester 2 Staffing Sheets
