@@ -132,11 +132,13 @@ for preference in subject_selections_df[['Arts1', 'Arts2', 'Free1', 'Free2', 'Fr
                 FROM student_selections
                 WHERE {preference} IS NOT NULL
                 GROUP BY {preference};"""
+    # Join the percentages data into a dataframe for outputting.
     percentages_df = percentages_df.join(pd.DataFrame(pd.read_sql_query(sql, conn)).set_index('Subject')[preference])
+# Fill in NaN with 0 for percentages sheet
 percentages_df.fillna(0, inplace=True)
 
+### Write Outs
 # Write out Percentages data to Excel Sheet
 percentages_df.to_excel('V:\\Timetabler\\Documentation\\2023\\7 Selections\\student_options_percentages.xlsx', float_format="%.2f")
-
 # Export all data to csv for import into Student Options
 pd.read_sql('SELECT * FROM student_selections', conn).to_csv('V:\\Timetabler\\Documentation\\2023\\7 Selections\\student_options_import.csv')
