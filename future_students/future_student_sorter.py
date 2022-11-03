@@ -26,7 +26,7 @@ subject_selections_df.drop(['DOB'], axis=1, inplace=True)
 # Create tempory database in memory.
 conn = sqlite3.connect(':memory:')
 conn.execute('''CREATE TABLE student_selections(
-        id INTEGER PRIMARY KEY NOT NULL,
+        StudentID INTEGER PRIMARY KEY NOT NULL,
         Firstname TEXT NOT NULL,
         Surname TEXT NOT NULL,
         Gender TEXT,
@@ -46,7 +46,7 @@ free_subjects = ['7ART', '7DRA', '7DAN', '7MUS', '7DPD', '7TECH', '7ITAO']
 res_subjects = ['7ART', '7DRA', '7DAN', '7MUS', '7DPD', '7TECH']
 
 # Split names into columns, drop columns, and rename each column
-future_students_df[['Firstname','Surname']] = future_students_df.Name.apply(lambda x: pd.Series(str(x).split(", ")))
+future_students_df[['Surname','Firstname']] = future_students_df.Name.apply(lambda x: pd.Series(str(x).split(", ")))
 future_students_df.drop(['Name', 'Admin YL', 'Census YL', 'Room', 'Roll Class'], axis=1, inplace=True)
 
 future_students_df.rename(columns={'Student ID': 'StudentID',
@@ -92,7 +92,6 @@ subject_selections_df.rename(columns={'Surname_y': 'Surname',
 
 # Reorder To Correct Order for Selections, change this as needed
 subject_selections_df = subject_selections_df[['Surname', 'Firstname', 'Gender', 'EDID', 'StudentID', 'Arts1', 'Arts2', 'Free1', 'Free2', 'FreeRes1', 'FreeRes2', 'ArtsRes']]
-
 # Rename Subjects to Subject Codes, may need to add more rules in to fully sort!
 for preference in subject_selections_df[['Arts1', 'Arts2', 'Free1', 'Free2', 'FreeRes1', 'FreeRes2', 'ArtsRes']]:
     subject_selections_df.loc[subject_selections_df[preference].str.contains('Art', case=False, na=False), preference] = '7ART'
@@ -120,24 +119,24 @@ for student in subject_selections_df.itertuples():
         
     selections = selections + [np.nan] * (12 - len(selections))
     sql = '''INSERT INTO student_selections
-                (id, Firstname, Surname, Gender, Year, Arts1, Arts2, Free1, Free2, FreeRes1, FreeRes2, ArtsRes)
+                (StudentID, Firstname, Surname, Gender, Year, Arts1, Arts2, Free1, Free2, FreeRes1, FreeRes2, ArtsRes)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'''
     conn.execute(sql, tuple(selections))
     conn.commit()
 
-# Get percentage of students chosen each subject for each prefernce, loop this as needed
+# Get percentage of students chosen each subject for each prefernce, loop this as needed, output to csv file
 percentages_df = pd.DataFrame({'Subject': ['7ART', '7DRA', '7DAN', '7MUS', '7DPD', '7TECH', '7ITAO']})
 percentages_df.set_index('Subject', inplace=True)
-print(percentages_df)
 for preference in subject_selections_df[['Arts1', 'Arts2', 'Free1', 'Free2', 'FreeRes1', 'FreeRes2', 'ArtsRes']]:
-    sql = f"""SELECT {preference} as Subject, 1.0 * COUNT(*) / (SELECT COUNT(*) FROM student_selections WHERE {preference} IS NOT NULL) AS {preference}
+    sql = f"""SELECT {preference} as Subject, 100.0 * COUNT(*) / (SELECT COUNT(*) FROM student_selections WHERE {preference} IS NOT NULL) AS {preference}
                 FROM student_selections
                 WHERE {preference} IS NOT NULL
                 GROUP BY {preference};"""
-    temp_df = pd.DataFrame(pd.read_sql_query(sql, conn))
-    print(temp_df)
-    percentages_df.join(temp_df.set_index('Subject'))
+    percentages_df = percentages_df.join(pd.DataFrame(pd.read_sql_query(sql, conn)).set_index('Subject')[preference])
+percentages_df.fillna(0, inplace=True)
 
-print(percentages_df)
+# Write out Percentages data to Excel Sheet
+percentages_df.to_excel('V:\\Timetabler\\Documentation\\2023\\7 Selections\\student_options_percentages.xlsx', float_format="%.2f")
+
 # Export all data to csv for import into Student Options
-pd.read_sql('SELECT * FROM student_selections', conn).to_csv('future_students/student_options_import.csv')
+pd.read_sql('SELECT * FROM student_selections', conn).to_csv('V:\\Timetabler\\Documentation\\2023\\7 Selections\\student_options_import.csv')
