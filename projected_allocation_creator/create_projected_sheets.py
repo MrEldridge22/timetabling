@@ -632,25 +632,36 @@ def sheet_writer(semester_df, semester_sheet):
     for faculty in faculty_subjects_dict.keys():
         temp_df = semester_df[semester_df['faculty'] == faculty]
         # Line 1
-        line_1_df = temp_df[temp_df['line'] == 'Line 1'].drop(['line', 'faculty'], axis=1)
+        line_1_df = temp_df[temp_df['line'] == 'Line 1'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
+        line_1_df.rename(columns={"subject": 'Line 1', "num_classes": 'Classes'}, inplace=True)
 
         # Line 2
-        line_2_df = temp_df[temp_df['line'] == 'Line 2'].drop(['line', 'faculty'], axis=1)
+        line_2_df = temp_df[temp_df['line'] == 'Line 2'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
+        line_2_df.rename(columns={"subject": 'Line 2', "num_classes": 'Classes'}, inplace=True)
 
         # Line 3
-        line_3_df = temp_df[temp_df['line'] == 'Line 3'].drop(['line', 'faculty'], axis=1)
+        line_3_df = temp_df[temp_df['line'] == 'Line 3'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
+        line_3_df.rename(columns={"subject": 'Line 3', "num_classes": 'Classes'}, inplace=True)
 
         # Line 4
-        line_4_df = temp_df[temp_df['line'] == 'Line 4'].drop(['line', 'faculty'], axis=1)
+        line_4_df = temp_df[temp_df['line'] == 'Line 4'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
+        line_4_df.rename(columns={"subject": 'Line 4', "num_classes": 'Classes'}, inplace=True)
 
         # Line 5
-        line_5_df = temp_df[temp_df['line'] == 'Line 5'].drop(['line', 'faculty'], axis=1)
-
+        line_5_df = temp_df[temp_df['line'] == 'Line 5'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
+        line_5_df.rename(columns={"subject": 'Line 5', "num_classes": 'Classes'}, inplace=True)
+        
         # Line 6
-        line_6_df = temp_df[temp_df['line'] == 'Line 6'].drop(['line', 'faculty'], axis=1)
+        line_6_df = temp_df[temp_df['line'] == 'Line 6'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
+        line_6_df.rename(columns={"subject": 'Line 6', "num_classes": 'Classes'}, inplace=True)
 
         # Line 7
-        line_7_df = temp_df[temp_df['line'] == 'Line 7'].drop(['line', 'faculty'], axis=1)
+        line_7_df = temp_df[temp_df['line'] == 'Line 7'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
+        line_7_df.rename(columns={"subject": 'Line 7', "num_classes": 'Classes'}, inplace=True)
+
+        output_df = pd.concat([line_1_df, line_2_df, line_3_df, line_4_df, line_5_df, line_6_df, line_7_df], axis=1)
+
+        
         
 
 
