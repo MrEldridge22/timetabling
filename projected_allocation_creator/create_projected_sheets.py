@@ -2,6 +2,7 @@ import sqlite3
 import xlsxwriter
 import json
 import pandas as pd
+from datetime import date
 
 ### NOTE
 # Need to create Version 10 Files first for this to work, these are JSON enNamed rather than XML enNamed.
@@ -599,11 +600,17 @@ full_subjects_df = pd.concat([yrSS_df, yr10_df, yr09_df, yr08_df], ignore_index=
 full_subjects_df = full_subjects_df[full_subjects_df['faculty'] != "Key doesnt exist"]
 
 # Remove HPE and Italian Terms for 7's and 8's as they are semester based subjects
+### THIS NEEDS CHECKING ONCE 8's or 7's are done!
 def remove_terms_hpe(r):
     if r.subject in ["07 Health & Physical Education", '07 Italian', '07 Italian (Optional)', '08 Health & Physical Education', '08 Italian', '08 Italian (Optional)']:
         if 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
             r.line = r.line[:-3]
+    elif 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
+        r.subject = r.subject + " " + r.line[-3:]
+        r.num_classes = r.num_classes / 2
+        r.line = r.line[:-3]
     return r
+
 full_subjects_df = full_subjects_df.apply(lambda row: remove_terms_hpe(row), axis=1)
 
 # Split into Semesters and strip off Semester Codes
@@ -612,61 +619,101 @@ semester_1_df['line'] = semester_1_df['line'].str.replace("S1 ", "")
 semester_2_df = full_subjects_df[full_subjects_df.line.str.contains('S2')]
 semester_2_df['line'] = semester_2_df['line'].str.replace("S2 ", "")
 
-### OUTPUTS
+### OUTPUT ###
+# Location
 workbook = xlsxwriter.Workbook('projected_allocation_creator\Subject Allocations.xlsx')
+
+# Formats
+subject_name_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bottom': True, 'left': 2})
+subject_count_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': 'center', 'bottom': True, 'right': 2})
+
+# Create Semester Sheets
 semester_1_sheet = workbook.add_worksheet(name="Semester 1")
+semester_2_sheet = workbook.add_worksheet(name="Semester 2")
+
+# Write Headings
+semester_1_sheet.merge_range('A1:O1', f"PROJECTED SUBJECT ALLOCATION  BY LINES SEMESTER 1 {(date.today().year + 1)}", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center"}))
+semester_2_sheet.merge_range('A1:O1', f"PROJECTED SUBJECT ALLOCATION  BY LINES SEMESTER 2 {(date.today().year + 1)}", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center"}))
 
 # Fucntion to creating the excel sheet
 def sheet_writer(semester_df, semester_sheet):
-    semester_sheet.write("A2", "Lines")
-    semester_sheet.merge_range('B2:C2', "Line 1", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'align': "center", 'bg_color': "#FFC000", 'bottom': True, 'right': True}))
-    semester_sheet.merge_range('D2:E2', "Line 2", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'align': "center", 'bg_color': "#8064A2", 'bottom': True, 'right': True}))
-    semester_sheet.merge_range('F2:G2', "Line 3", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'align': "center", 'bg_color': "#FF66CC", 'bottom': True, 'right': True}))
-    semester_sheet.merge_range('H2:I2', "Line 4", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'align': "center", 'bg_color': "#FF0000", 'bottom': True, 'right': True}))
-    semester_sheet.merge_range('J2:K2', "Line 5", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'align': "center", 'bg_color': "#00B050", 'bottom': True, 'right': True}))
-    semester_sheet.merge_range('L2:M2', "Line 6", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'align': "center", 'bg_color': "#FFFF00", 'bottom': True, 'right': True}))
-    semester_sheet.merge_range('N2:O2', "Line 7", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'align': "center", 'bg_color': "#00B0F0", 'bottom': True, 'right': True}))
+    semester_sheet.set_landscape()  # Set to landscape
+    semester_sheet.set_paper(8)     # Set to A3
+    semester_sheet.set_margins(left=0.04, right=0.04, top=0.15, bottom=0.15)
+    semester_sheet.freeze_panes(2, 0)
+    # Set column widths
+    semester_sheet.set_column(0, 0, 13)
+    for i in range(1, 15):
+        if (i % 2) == 0:
+            semester_sheet.set_column(i, i, 4)
+        else:
+            semester_sheet.set_column(i, i, 30.5)
+    semester_sheet.fit_to_pages(1, 1)   # Fit to 1 A3 Page
+    
+    # Write out Headers
+    # Need Semester Heading
+    semester_sheet.write("A2", "Lines", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center"}))
+    semester_sheet.merge_range('B2:C2', "Line 1", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center", 'bg_color': "#FFC000", 'border': 2}))
+    semester_sheet.merge_range('D2:E2', "Line 2", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center", 'bg_color': "#8064A2", 'border': 2}))
+    semester_sheet.merge_range('F2:G2', "Line 3", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center", 'bg_color': "#FF66CC", 'border': 2}))
+    semester_sheet.merge_range('H2:I2', "Line 4", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center", 'bg_color': "#FF0000", 'border': 2}))
+    semester_sheet.merge_range('J2:K2', "Line 5", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center", 'bg_color': "#00B050", 'border': 2}))
+    semester_sheet.merge_range('L2:M2', "Line 6", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center", 'bg_color': "#FFFF00", 'border': 2}))
+    semester_sheet.merge_range('N2:O2', "Line 7", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'align': "center", 'bg_color': "#00B0F0", 'border': 2}))
 
-    line_counter = 0
+    # Start line to start writing a faculties data to
+    line_start = 3
 
+    # Loop through faculties and get each line into a seperate dataframe, then use xlsxwriter to write into columns
     for faculty in faculty_subjects_dict.keys():
-        temp_df = semester_df[semester_df['faculty'] == faculty]
+        temp_df = semester_df[semester_df['faculty'] == faculty].reset_index(drop=True)
+
+        # Write faculty name in the first column
+        semester_sheet.write('A' + str(line_start), faculty, workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True}))
+
+        ### Write each line out as columns, one for subject and corresponding one for number of classes running       
         # Line 1
         line_1_df = temp_df[temp_df['line'] == 'Line 1'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
-        line_1_df.rename(columns={"subject": 'Line 1', "num_classes": 'Classes'}, inplace=True)
+        semester_sheet.write_column('B' + str(line_start), line_1_df['subject'], subject_name_format)
+        semester_sheet.write_column('C' + str(line_start), line_1_df['num_classes'], subject_count_format)
 
         # Line 2
         line_2_df = temp_df[temp_df['line'] == 'Line 2'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
-        line_2_df.rename(columns={"subject": 'Line 2', "num_classes": 'Classes'}, inplace=True)
+        semester_sheet.write_column('D' + str(line_start), line_2_df['subject'], subject_name_format)
+        semester_sheet.write_column('E' + str(line_start), line_2_df['num_classes'], subject_count_format)
 
         # Line 3
         line_3_df = temp_df[temp_df['line'] == 'Line 3'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
-        line_3_df.rename(columns={"subject": 'Line 3', "num_classes": 'Classes'}, inplace=True)
+        semester_sheet.write_column('F' + str(line_start), line_3_df['subject'], subject_name_format)
+        semester_sheet.write_column('G' + str(line_start), line_3_df['num_classes'], subject_count_format)
 
         # Line 4
         line_4_df = temp_df[temp_df['line'] == 'Line 4'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
-        line_4_df.rename(columns={"subject": 'Line 4', "num_classes": 'Classes'}, inplace=True)
+        semester_sheet.write_column('H' + str(line_start), line_4_df['subject'], subject_name_format)
+        semester_sheet.write_column('I' + str(line_start), line_4_df['num_classes'], subject_count_format)
 
         # Line 5
         line_5_df = temp_df[temp_df['line'] == 'Line 5'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
-        line_5_df.rename(columns={"subject": 'Line 5', "num_classes": 'Classes'}, inplace=True)
+        semester_sheet.write_column('J'+ str(line_start), line_5_df['subject'], subject_name_format)
+        semester_sheet.write_column('K' + str(line_start), line_5_df['num_classes'], subject_count_format)
         
         # Line 6
         line_6_df = temp_df[temp_df['line'] == 'Line 6'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
-        line_6_df.rename(columns={"subject": 'Line 6', "num_classes": 'Classes'}, inplace=True)
+        semester_sheet.write_column('L' + str(line_start), line_6_df['subject'], subject_name_format)
+        semester_sheet.write_column('M' + str(line_start), line_6_df['num_classes'], subject_count_format)
 
         # Line 7
         line_7_df = temp_df[temp_df['line'] == 'Line 7'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
-        line_7_df.rename(columns={"subject": 'Line 7', "num_classes": 'Classes'}, inplace=True)
+        semester_sheet.write_column('N' + str(line_start), line_7_df['subject'], subject_name_format)
+        semester_sheet.write_column('O' + str(line_start), line_7_df['num_classes'], subject_count_format)
 
-        output_df = pd.concat([line_1_df, line_2_df, line_3_df, line_4_df, line_5_df, line_6_df, line_7_df], axis=1)
+        # Increment start counter by a number of rows in each faculty dataframe with a buffer line
+        line_start = 1 + line_start + max([len(line_1_df.index), len(line_2_df.index), len(line_3_df.index), len(line_4_df.index), len(line_5_df.index), len(line_6_df.index), len(line_7_df.index)])
 
-        
-        
-
-
-
-
-# Semester 1 and Semester 2 Staffing Sheets
-
+  
+# Create Semester 1 and Semester 2 Staffing Sheets
 sheet_writer(semester_1_df, semester_1_sheet)
+sheet_writer(semester_2_df, semester_2_sheet)
+
+# Close the workbook and write it out
+workbook.close()
