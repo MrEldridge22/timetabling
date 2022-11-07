@@ -710,6 +710,9 @@ def sheet_writer(semester_df, semester_sheet):
         # Increment start counter by a number of rows in each faculty dataframe with a buffer line
         line_start = 1 + line_start + max([len(line_1_df.index), len(line_2_df.index), len(line_3_df.index), len(line_4_df.index), len(line_5_df.index), len(line_6_df.index), len(line_7_df.index)])
 
+    # Code for anything down the bottom of the sheet goes here
+    # Need highlights for combined classes
+    
   
 # Create Semester 1 and Semester 2 Staffing Sheets
 sheet_writer(semester_1_df, semester_1_sheet)
