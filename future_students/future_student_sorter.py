@@ -82,6 +82,9 @@ for column in subject_selections_df:
 subject_selections_df['Firstname'] = subject_selections_df['Firstname'].str.split(" ").str[0]
 
 # Merge StudentID into Subject Selections
+# Drop students with no EDID
+future_students_df.dropna(subset=['EDID'], inplace=True)
+subject_selections_df.dropna(subset=['EDID'], inplace=True)
 subject_selections_df = pd.merge(subject_selections_df, future_students_df, on=['EDID'])
 
 # Drop from Selections and Keep EDSAS Surname and Firstname, rename Firstname and Surname columns
@@ -102,8 +105,12 @@ for preference in subject_selections_df[['Arts1', 'Arts2', 'Free1', 'Free2', 'Fr
     subject_selections_df.loc[subject_selections_df[preference].str.contains('Italian', case=False, na=False), preference] = '7ITAO'
     subject_selections_df.loc[subject_selections_df[preference].str.contains('Music', case=False, na=False), preference] = '7MUS'
 
+# Debug Check
+# subject_selections_df.to_csv("future_students\check.csv")
+
 # Sort the Data and Remove Duplicates at the same time, insert into db table
 for student in subject_selections_df.itertuples():
+    print(f"Processing Student: {student.Firstname} {student.Surname}")
     selections = list(dict.fromkeys([student.StudentID,
                                         student.Firstname,
                                         student.Surname,
@@ -116,13 +123,15 @@ for student in subject_selections_df.itertuples():
                                         student.FreeRes1,
                                         student.FreeRes2,
                                         student.ArtsRes]))
-        
     selections = selections + [np.nan] * (12 - len(selections))
     sql = '''INSERT INTO student_selections
                 (StudentID, Firstname, Surname, Gender, Year, Arts1, Arts2, Free1, Free2, FreeRes1, FreeRes2, ArtsRes)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'''
-    conn.execute(sql, tuple(selections))
-    conn.commit()
+    try:
+        conn.execute(sql, tuple(selections))
+        conn.commit()
+    except sqlite3.Error as er:
+        print(f"Error {er} \n Error in: {selections}")
 
 # Get percentage of students chosen each subject for each prefernce, loop this as needed, output to csv file
 percentages_df = pd.DataFrame({'Subject': ['7ART', '7DRA', '7DAN', '7MUS', '7DPD', '7TECH', '7ITAO']})
