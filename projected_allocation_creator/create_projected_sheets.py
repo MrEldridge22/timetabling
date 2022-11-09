@@ -454,7 +454,8 @@ query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as 
         INNER JOIN yrSS_options o ON o.OptionID = c.OptionID
         INNER JOIN yrSS_subjects s on o.SubjectID = s.SubjectID
         INNER JOIN yrSS_lines l on l.LineID = c.LineID
-        GROUP BY s.Name, l.Name;"""
+        GROUP BY s.Name, l.Name
+        ORDER BY s.Name DESC;"""
 
 yrSS_df = pd.read_sql(query, conn)
 
@@ -640,8 +641,8 @@ full_subjects_df = full_subjects_df[full_subjects_df['faculty'] != "Key doesnt e
 ### THIS NEEDS CHECKING ONCE 8's or 7's are done!
 def remove_terms_hpe(r):
     if r.subject in ["07 Health & Physical Education", '07 Italian', '07 Italian (Optional)', '07 Literacy', '07 EALD Literacy', '07 P Literacy', '07 Literacy (ATSI Focus)', '07 Learning Support', '08 EALD Literacy', '08 P Literacy', '08 Literacy', '08 Health & Physical Education', '08 Italian', '08 Italian (Optional),']:
-        if 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
-            r.line = r.line[:-3]
+        #if 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
+        r.line = r.line[:-3]
     elif 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
         r.subject = r.subject + " " + r.line[-3:]
         r.num_classes = r.num_classes / 2
@@ -661,8 +662,8 @@ semester_2_df['line'] = semester_2_df['line'].str.replace("S2 ", "")
 workbook = xlsxwriter.Workbook('projected_allocation_creator\Subject Allocations.xlsx')
 
 # Formats
-subject_name_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bottom': True, 'left': 2})
-subject_count_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': 'center', 'bottom': True, 'right': 2})
+subject_name_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bottom': True, 'top': True, 'left': 2})
+subject_count_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': 'center', 'bottom': True, 'top': True, 'right': 2})
 
 # Create Semester Sheets
 semester_1_sheet = workbook.add_worksheet(name="Semester 1")
@@ -705,9 +706,6 @@ def sheet_writer(semester_df, semester_sheet):
     for faculty in faculty_subjects_dict.keys():
         temp_df = semester_df[semester_df['faculty'] == faculty].reset_index(drop=True)
 
-        # Write faculty name in the first column
-        semester_sheet.write('A' + str(line_start), faculty, workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True}))
-
         ### Write each line out as columns, one for subject and corresponding one for number of classes running       
         # Line 1
         line_1_df = temp_df[temp_df['line'] == 'Line 1'].drop(['line', 'faculty'], axis=1).reset_index(drop=True)
@@ -744,12 +742,30 @@ def sheet_writer(semester_df, semester_sheet):
         semester_sheet.write_column('N' + str(line_start), line_7_df['subject'], subject_name_format)
         semester_sheet.write_column('O' + str(line_start), line_7_df['num_classes'], subject_count_format)
 
-        # Increment start counter by a number of rows in each faculty dataframe with a buffer line
-        line_start = 1 + line_start + max([len(line_1_df.index), len(line_2_df.index), len(line_3_df.index), len(line_4_df.index), len(line_5_df.index), len(line_6_df.index), len(line_7_df.index)])
+        # Get largest length line for formatting
+        max_line_length = max([len(line_1_df.index), len(line_2_df.index), len(line_3_df.index), len(line_4_df.index), len(line_5_df.index), len(line_6_df.index), len(line_7_df.index)])
 
-    # Code for anything down the bottom of the sheet goes here
-    # Need highlights for combined classes
-    
+        # Add additional formatting
+        semester_sheet.write_column('B' + str(line_start + len(line_1_df.index)), [None] * (max_line_length - len(line_1_df.index)), subject_name_format)
+        semester_sheet.write_column('C' + str(line_start + len(line_1_df.index)), [None] * (max_line_length - len(line_1_df.index)), subject_count_format)
+        semester_sheet.write_column('D' + str(line_start + len(line_2_df.index)), [None] * (max_line_length - len(line_2_df.index)), subject_name_format)
+        semester_sheet.write_column('E' + str(line_start + len(line_2_df.index)), [None] * (max_line_length - len(line_2_df.index)), subject_count_format)
+        semester_sheet.write_column('F' + str(line_start + len(line_3_df.index)), [None] * (max_line_length - len(line_3_df.index)), subject_name_format)
+        semester_sheet.write_column('G' + str(line_start + len(line_3_df.index)), [None] * (max_line_length - len(line_3_df.index)), subject_count_format)
+        semester_sheet.write_column('H' + str(line_start + len(line_4_df.index)), [None] * (max_line_length - len(line_4_df.index)), subject_name_format)
+        semester_sheet.write_column('I' + str(line_start + len(line_4_df.index)), [None] * (max_line_length - len(line_4_df.index)), subject_count_format)
+        semester_sheet.write_column('J' + str(line_start + len(line_5_df.index)), [None] * (max_line_length - len(line_5_df.index)), subject_name_format)
+        semester_sheet.write_column('K' + str(line_start + len(line_5_df.index)), [None] * (max_line_length - len(line_5_df.index)), subject_count_format)
+        semester_sheet.write_column('L' + str(line_start + len(line_6_df.index)), [None] * (max_line_length - len(line_6_df.index)), subject_name_format)
+        semester_sheet.write_column('M' + str(line_start + len(line_6_df.index)), [None] * (max_line_length - len(line_6_df.index)), subject_count_format)
+        semester_sheet.write_column('N' + str(line_start + len(line_7_df.index)), [None] * (max_line_length - len(line_7_df.index)), subject_name_format)
+        semester_sheet.write_column('O' + str(line_start + len(line_7_df.index)), [None] * (max_line_length - len(line_7_df.index)), subject_count_format)
+
+        # Write faculty name in the first column
+        semester_sheet.write('A' + str(line_start), faculty, workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'top': True}))
+        # semester_sheet.write('A' + str(line_start + max_line_length), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'bottom': True}))
+        # Increment start counter by of number of rows in each faculty dataframe with a buffer line
+        line_start = 1 + line_start + max_line_length
   
 # Create Semester 1 and Semester 2 Staffing Sheets
 sheet_writer(semester_1_df, semester_1_sheet)
