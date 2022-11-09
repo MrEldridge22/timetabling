@@ -151,3 +151,6 @@ percentages_df.fillna(0, inplace=True)
 percentages_df.to_excel('V:\\Timetabler\\Documentation\\2023\\7 Selections\\student_options_percentages.xlsx', float_format="%.2f")
 # Export all data to csv for import into Student Options
 pd.read_sql('SELECT * FROM student_selections', conn).to_csv('V:\\Timetabler\\Documentation\\2023\\7 Selections\\student_options_import.csv')
+
+### FINISH
+print("Successfully Completed!")

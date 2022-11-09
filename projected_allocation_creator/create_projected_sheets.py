@@ -59,31 +59,31 @@ choice_lines_yr09_dict = {  1:  "S1 Line 1",
 
 choice_lines_yr08_dict = { 
                             1:  "S1 Line 2 T1",
-                            2:  "S1 Line 4 T1",
-                            3:  "S1 Line 6 T1",
-                            4:  "S1 Line 2 T2",
-                            5:  "S1 Line 4 T2",
+                            2:  "S1 Line 2 T2",
+                            3:  "S1 Line 4 T1",
+                            4:  "S1 Line 4 T2",
+                            5:  "S1 Line 6 T1",
                             6:  "S1 Line 6 T2",
                             7:  "S2 Line 2 T3",
-                            8:  "S2 Line 4 T3",
-                            9:  "S2 Line 6 T3",
-                            10: "S2 Line 2 T4",
-                            11: "S2 Line 4 T4",
+                            8:  "S2 Line 2 T4",
+                            9:  "S2 Line 4 T3",
+                            10: "S2 Line 4 T4",
+                            11: "S2 Line 6 T3",
                             12: "S2 Line 6 T4"
                             }
 
 choice_lines_yr07_dict = { 
                             1:  "S1 Line 1 T1",
-                            2:  "S1 Line 4 T1",
-                            3:  "S1 Line 5 T1",
-                            4:  "S1 Line 1 T2",
-                            5:  "S1 Line 4 T2",
+                            2:  "S1 Line 1 T2",
+                            3:  "S1 Line 4 T1",
+                            4:  "S1 Line 4 T2",
+                            5:  "S1 Line 5 T1",
                             6:  "S1 Line 5 T2",
                             7:  "S2 Line 1 T3",
-                            8:  "S2 Line 4 T3",
-                            9:  "S2 Line 5 T3",
-                            10: "S2 Line 1 T4",
-                            11: "S2 Line 4 T4",
+                            8:  "S2 Line 1 T4",
+                            9:  "S2 Line 4 T3",
+                            10: "S2 Line 4 T4",
+                            11: "S2 Line 5 T3",
                             12: "S2 Line 5 T4"
                             }
 
@@ -417,10 +417,8 @@ with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 9 Stude
         yr09_sfx = json.load(read_content)
 with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 8 Students.sfx', "r") as read_content:
         yr08_sfx = json.load(read_content)
-
-# Year 07
-# with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 07 Students.sfx', "r") as read_content:
-#         yr07_sfx = json.load(read_content)
+with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 7 Students.sfx', "r") as read_content:
+        yr07_sfx = json.load(read_content)
 
 ### YEAR 11 & 12 ###
 # Extract Line Info
@@ -574,12 +572,50 @@ query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as 
 
 yr08_df = pd.read_sql(query, conn)
 
+### YEAR 7 ###
+# Extract Line Info
+lines_df = pd.json_normalize(yr07_sfx, record_path=['Lines'])
+for col in lines_df.columns:
+        if col not in ["LineID", "Name", "Subgrid"]:
+            lines_df.drop([col], inplace=True, axis=1)
+lines_df.to_sql('yr07_lines', conn, if_exists='append', index=False)
+
+# Extract Subject Info
+subjects_df = pd.json_normalize(yr07_sfx, record_path=['Subjects'])
+for col in subjects_df.columns:
+        if col not in ["SubjectID", "Name"]:
+            subjects_df.drop([col], inplace=True, axis=1)
+subjects_df.to_sql('yr07_subjects', conn, if_exists='append', index=False)
+
+# Extract Options Info
+options_df = pd.json_normalize(yr07_sfx, record_path=['Options'])
+for col in options_df.columns:
+        if col not in ["OptionID", "SubjectID"]:
+            options_df.drop([col], inplace=True, axis=1)
+options_df.to_sql('yr07_options', conn, if_exists='append', index=False)
+
+# Extract Classes Info
+classes_df = pd.json_normalize(yr07_sfx, record_path=['Classes'])
+for col in classes_df.columns:
+        if col not in ["ClassID", "OptionID", "LineID"]:
+            classes_df.drop([col], inplace=True, axis=1)
+classes_df.to_sql('yr07_classes', conn, if_exists='append', index=False)
+
+# Get all subjects by line
+query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as num_classes from yr07_classes c
+        INNER JOIN yr07_options o ON o.OptionID = c.OptionID
+        INNER JOIN yr07_subjects s on o.SubjectID = s.SubjectID
+        INNER JOIN yr07_lines l on l.LineID = c.LineID
+        GROUP BY s.Name, l.Name;"""
+
+yr07_df = pd.read_sql(query, conn)
+
 # Change Lines in Dataframes to match school line names.
 yrSS_df.replace({"line": choice_lines_SS_dict}, inplace=True)
 yr10_df.replace({"line": choice_lines_yr10_dict}, inplace=True)
 yr09_df.replace({"line": choice_lines_yr09_dict}, inplace=True)
 yr08_df.replace({"line": choice_lines_yr08_dict}, inplace=True)
-# yr07_df.replace({"line": choice_lines_yr07_dict}, inplace=True)
+yr07_df.replace({"line": choice_lines_yr07_dict}, inplace=True)
 
 # Function to get faculty name from dictionary above
 def faculty_name_return(X):
@@ -595,14 +631,15 @@ yrSS_df['faculty'] = yrSS_df.apply(lambda row: faculty_name_return(row.subject),
 yr10_df['faculty'] = yr10_df.apply(lambda row: faculty_name_return(row.subject), axis=1)
 yr09_df['faculty'] = yr09_df.apply(lambda row: faculty_name_return(row.subject), axis=1)
 yr08_df['faculty'] = yr08_df.apply(lambda row: faculty_name_return(row.subject), axis=1)
+yr07_df['faculty'] = yr07_df.apply(lambda row: faculty_name_return(row.subject), axis=1)
 
-full_subjects_df = pd.concat([yrSS_df, yr10_df, yr09_df, yr08_df], ignore_index=True)
+full_subjects_df = pd.concat([yrSS_df, yr10_df, yr09_df, yr08_df, yr07_df], ignore_index=True)
 full_subjects_df = full_subjects_df[full_subjects_df['faculty'] != "Key doesnt exist"]
 
 # Remove HPE and Italian Terms for 7's and 8's as they are semester based subjects
 ### THIS NEEDS CHECKING ONCE 8's or 7's are done!
 def remove_terms_hpe(r):
-    if r.subject in ["07 Health & Physical Education", '07 Italian', '07 Italian (Optional)', '08 Health & Physical Education', '08 Italian', '08 Italian (Optional)']:
+    if r.subject in ["07 Health & Physical Education", '07 Italian', '07 Italian (Optional)', '07 Literacy', '07 EALD Literacy', '07 P Literacy', '07 Literacy (ATSI Focus)', '07 Learning Support', '08 EALD Literacy', '08 P Literacy', '08 Literacy', '08 Health & Physical Education', '08 Italian', '08 Italian (Optional),']:
         if 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
             r.line = r.line[:-3]
     elif 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
