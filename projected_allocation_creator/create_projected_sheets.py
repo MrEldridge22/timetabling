@@ -279,7 +279,7 @@ faculty_subjects_dict = {   'English':
                                             '12 Visual Arts - Art'],
 
                             'Design Tech':
-                                        ['07 Design Technology',
+                                        ['07 Design & Technology',
                                             '08 Material Products - Metal',
                                             '08 Material Products - Wood',
                                             '09 Engineering Technology',
