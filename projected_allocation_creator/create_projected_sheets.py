@@ -640,7 +640,7 @@ full_subjects_df = full_subjects_df[full_subjects_df['faculty'] != "Key doesnt e
 # Remove HPE and Italian Terms for 7's and 8's as they are semester based subjects
 ### THIS NEEDS CHECKING ONCE 8's or 7's are done!
 def remove_terms_hpe(r):
-    if r.subject in ["07 Health & Physical Education", '07 Italian', '07 Italian (Optional)', '07 Literacy', '07 EALD Literacy', '07 P Literacy', '07 Literacy (ATSI Focus)', '07 Learning Support', '08 EALD Literacy', '08 P Literacy', '08 Literacy', '08 Health & Physical Education', '08 Italian', '08 Italian (Optional),']:
+    if r.subject in ["07 Health & Physical Education", '07 Italian', '07 Italian (Optional)', '07 Literacy', '07 EALD Literacy', '07 P Literacy', '07 Literacy (ATSI Focus)', '07 Learning Support', '08 EALD Literacy', '08 P Literacy', '08 Literacy', '08 Health & Physical Education', '08 Italian (Compulsory)', '08 Italian (Optional)']:
         #if 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
         r.line = r.line[:-3]
     elif 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
