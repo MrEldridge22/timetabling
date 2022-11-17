@@ -3,7 +3,7 @@ from datetime import datetime
 import random
 
 # List of Core Groups, Could this be read in an a csv in the future?
-core_groups_list = [' L', 'L1', ' E', 'E1', ' P', 'P1', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6', "O7"]
+core_groups_list = [' L', 'L1', ' E', 'E1', ' P', 'P1', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6', 'O7', 'O8']
 
 # Colours
 principal_color =       '#31869B'
