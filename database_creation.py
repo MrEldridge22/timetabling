@@ -11,6 +11,27 @@
 import sqlite3
 import json
 import pandas as pd
+from sqlalchemy import create_engine, types
+from sqlalchemy.dialects.sqlite import (
+    BLOB,
+    BOOLEAN,
+    CHAR,
+    DATE,
+    DATETIME,
+    DECIMAL,
+    FLOAT,
+    INTEGER,
+    NUMERIC,
+    JSON,
+    SMALLINT,
+    TEXT,
+    TIME,
+    TIMESTAMP,
+    VARCHAR,
+)
+
+# Debug and Testing Purposes
+pd.set_option('display.max_rows', None)
 
 # File Paths
 with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year SWD Students.sfx', "r") as read_content:
@@ -100,7 +121,7 @@ def create_tables(conn):
             Lines INT,
             Teachers INT,
             AutoCreate TEXT,
-            PrerequisiteType TEXT,
+            PrerequisiteType INT,
             LineJoins JSON,
             SubgridConstraints JSON,
             LineRestrictions JSON,
@@ -207,7 +228,7 @@ def create_tables(conn):
             Lines INT,
             Teachers INT,
             AutoCreate TEXT,
-            PrerequisiteType TEXT,
+            PrerequisiteType INT,
             LineJoins JSON,
             SubgridConstraints JSON,
             LineRestrictions JSON,
@@ -314,7 +335,7 @@ def create_tables(conn):
             Lines INT,
             Teachers INT,
             AutoCreate TEXT,
-            PrerequisiteType TEXT,
+            PrerequisiteType INT,
             LineJoins JSON,
             SubgridConstraints JSON,
             LineRestrictions JSON,
@@ -422,7 +443,7 @@ def create_tables(conn):
             Lines INT,
             Teachers INT,
             AutoCreate TEXT,
-            PrerequisiteType TEXT,
+            PrerequisiteType INT,
             LineJoins JSON,
             SubgridConstraints JSON,
             LineRestrictions JSON,
@@ -530,10 +551,10 @@ def create_tables(conn):
             Lines INT,
             Teachers INT,
             AutoCreate TEXT,
-            PrerequisiteType TEXT,
-            LineJoins JSON,
-            SubgridConstraints JSON,
-            LineRestrictions JSON,
+            PrerequisiteType INT,
+            LineJoins BLOB,
+            SubgridConstraints BLOB,
+            LineRestrictions BLOB,
             FOREIGN KEY (SubjectID) REFERENCES subjects_SS(SubjectID));
 
         CREATE TABLE students_SS(
@@ -621,7 +642,7 @@ def create_tables(conn):
             Units INT,
             Subgrids INT,
             ClassSizeMaximum INT,
-            CorrespondingLines TEXT,
+            CorrespondingLines TEXT,TEXT
             SameStudents TEXT,
             SpareField1 TEXT,
             SpareField2 TEXT);
@@ -637,7 +658,7 @@ def create_tables(conn):
             Lines INT,
             Teachers INT,
             AutoCreate TEXT,
-            PrerequisiteType TEXT,
+            PrerequisiteType INT,
             LineJoins JSON,
             SubgridConstraints JSON,
             LineRestrictions JSON,
@@ -690,6 +711,8 @@ def populate_tables(conn):
     lines_df = pd.json_normalize(yrSS_sfx, record_path=['Lines'])
     subjects_df = pd.json_normalize(yrSS_sfx, record_path=['Subjects'])
     options_df = pd.json_normalize(yrSS_sfx, record_path=['Options'])
+    print(options_df.dtypes)
+    obj_cols = options_df.select_dtypes(include=[object]).columns.values.tolist()
     students_df = pd.json_normalize(yrSS_sfx, record_path=['Students'])
     classes_df = pd.json_normalize(yrSS_sfx, record_path=['Classes'])
     settings_df.to_sql('settings_SS', conn, if_exists='append', index=False)
@@ -699,7 +722,10 @@ def populate_tables(conn):
     students_df.to_sql('students_SS', conn, if_exists='append', index=False)
     classes_df.to_sql('classes_SS', conn, if_exists='append', index=False)
 
-conn = sqlite3.connect(':memory:')
-create_tables(conn)
-populate_tables(conn)
+    # print(options_df['SubgridConstraints'])
 
+engine = create_engine('sqlite://',echo=True)
+with engine.begin() as conn:
+    dbapi_conn = conn.connection
+    create_tables(dbapi_conn)
+    populate_tables(dbapi_conn)
