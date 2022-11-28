@@ -11,6 +11,9 @@ import pandas as pd
 TODO:
 - UI to load tdf files, line strucutre and core groups
 """
+# Debugging
+pd.get_option('display.max_columns', None)
+pd.set_option('display.max_rows', 200)
 
 # Which version of Timetable Solutions are you using?
 v9 = False
@@ -66,16 +69,24 @@ if v9:
 elif v10:
     print("Using Verion 10 of Timetable Solutions")
     # Open the json tdx file
-    with open('ttd_files\TTDS2-2022.tfx', "r") as read_content:
+    with open("C:\\Users\\deldridge\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S2_T4.tfx", "r") as read_content:
         tfx_raw = json.load(read_content)
     
     # Read In The Data!
     read_in_v10_data(conn, tfx_raw)
 
+    # # Open the json tdx file
+    # with open("C:\\Users\\deldridge\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S1_T2.tfx", "r") as read_content:
+    #     tfx_raw = json.load(read_content)
+    
+    # # Read In The Data!
+    # read_in_v10_data(conn, tfx_raw)
+
     # Create the workbook object with filename
-    workbook = xlsxwriter.Workbook('staffing_sheet_output\Subject Allocations.xlsx')
+    workbook = xlsxwriter.Workbook('Subject Allocations.xlsx')
 
     # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
+    # print(get_df(conn))
     create_excel_sheet(workbook, get_df(conn), "All Staff")
 
     # Create separate sheets for each faculty
@@ -93,4 +104,4 @@ else:
 
 
 # Testing Area
-print(get_df(conn))
+# print(get_df(conn))

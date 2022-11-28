@@ -27,7 +27,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, fte_load="1260"):
     Returns
     None:
     """
-
+    # print(staffing_df)
     # Create new sheet
     sheet = workbook.add_worksheet(name=sheet_name)
     sheet.set_margins(left=0.04, right=0.04, top=0.15, bottom=0.15)
@@ -167,6 +167,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, fte_load="1260"):
         else:
             free_line_list.append("J")
 
+        # print(f"Teacher Code: {row.code}")
         # Fill in Notes into cells
         if row.notes != None:
             free_line = str(random.choice(free_line_list))

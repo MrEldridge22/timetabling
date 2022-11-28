@@ -64,11 +64,11 @@ def createTables(conn):
 
     conn.execute('''CREATE TABLE timetable(
         timetable_id TEXT PRIMARY KEY NOT NULL,
-        roll_class_id TEXT NOT NULL,
-        period_id TEXT NOT NULL,
-        class_id TEXT NOT NULL,
-        room_id TEXT NOT NULL,
-        teacher_id TEXT NOT NULL,
+        roll_class_id TEXT,
+        period_id TEXT,
+        class_id TEXT,
+        room_id TEXT,
+        teacher_id TEXT,
         FOREIGN KEY (period_id) REFERENCES periods(period_id),
         FOREIGN KEY (roll_class_id) REFERENCES roll_classes(roll_class_id)
         FOREIGN KEY (class_id) REFERENCES classes(class_id),
@@ -100,6 +100,7 @@ def read_in_v10_data(conn, tfx_file):
     ### Teachers ###
         # Loads are now not in teacher section, need to manaually get this out at a later point!
     teachers_df = pd.json_normalize(tfx_file, record_path=['Teachers'])
+    # print(teachers_df)
     for col in teachers_df.columns:
         if col not in ["TeacherID", "Code", "FirstName", "LastName", "SpareField1", "LoadProposed"]:
             teachers_df.drop([col], inplace=True, axis=1)
@@ -113,7 +114,7 @@ def read_in_v10_data(conn, tfx_file):
                                 "LoadProposed": "proposed_load"
                                 }, inplace=True)
     teachers_df['notes'].replace('', np.nan, inplace=True)
-    
+    # print(teachers_df)
     # Write to Database
     teachers_df.to_sql('teachers', conn, if_exists='append', index=False)
 
@@ -125,6 +126,7 @@ def read_in_v10_data(conn, tfx_file):
 
     # Rename to match database table columns
     faculties_df.rename(columns={"FacultyID": "faculty_id", "Code": "code"}, inplace=True)
+    # print(faculties_df)
     faculties_df.to_sql('faculties', conn, if_exists='append', index=False)
 
     ### Rooms ###
@@ -135,6 +137,7 @@ def read_in_v10_data(conn, tfx_file):
 
     # Rename to match database table columns
     rooms_df.rename(columns={"RoomID": "room_id", "Code": "name"}, inplace=True)
+    # print(rooms_df)
     rooms_df.to_sql('rooms', conn, if_exists='append', index=False)
 
     ### Roll Classes ###
@@ -145,6 +148,7 @@ def read_in_v10_data(conn, tfx_file):
 
     # Rename to match database table columns
     roll_classes_df.rename(columns={"RollClassID": "roll_class_id", "Code": "name"}, inplace=True)
+    # print(roll_classes_df)
     roll_classes_df.to_sql('roll_classes', conn, if_exists='append', index=False)
 
     ### Classes ###
@@ -155,6 +159,7 @@ def read_in_v10_data(conn, tfx_file):
 
     # Rename to match database table columns
     classes_df.rename(columns={"ClassNameID": "class_id", "FacultyID": "faculty_id", "SubjectName": "name"}, inplace=True)
+    # print(classes_df)
     classes_df.to_sql('classes', conn, if_exists='append', index=False)
 
     ### Days ###
@@ -165,6 +170,7 @@ def read_in_v10_data(conn, tfx_file):
 
     # Rename to match database table columns
     days_df.rename(columns={"DayID": "day_id", "Name": "name"}, inplace=True)
+    # print(days_df)
     days_df.to_sql('days', conn, if_exists='append', index=False)
 
     ### Periods ###
@@ -175,6 +181,7 @@ def read_in_v10_data(conn, tfx_file):
 
     # Rename to match database table columns
     periods_df.rename(columns={"PeriodID": "period_id", "DayID": "day_id", "Name": "name", "Load": "load"}, inplace=True)
+    # print(periods_df)
     periods_df.to_sql('periods', conn, if_exists='append', index=False)
 
     ### Timetables ###
@@ -182,6 +189,11 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     timetables_df.index.names = ["timetable_id"]
     timetables_df.rename(columns={"RollClassID": "roll_class_id", "PeriodID": "period_id", "ClassNameID": "class_id", "TeacherID": "teacher_id", "RoomID": "room_id"}, inplace=True)
+    # print(timetables_df["room_id"])
+    # Fill blank rooms with Temp Room
+    # print(timetables_df)
+    timetables_df['room_id'].replace(to_replace="", value="{A6384CE9-587E-4B14-A5D7-18D83497401E}", inplace=True)
+    # print(timetables_df['room_id'])
     timetables_df.to_sql('timetable', conn, if_exists='append')
 
     # ### Teacher Faculties ###
@@ -196,6 +208,7 @@ def read_in_v10_data(conn, tfx_file):
 
     # Rename to match database table columns
     tf_df.rename(columns={"FacultyID": "faculty_id", "TeacherID": "teacher_id"}, inplace=True)
+    # print(tf_df)
     tf_df.to_sql('teacher_faculties', conn, if_exists='append', index=False)
 
     # Populate proposed column with data from tfx file.

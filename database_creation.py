@@ -711,16 +711,19 @@ def populate_tables(conn):
     lines_df = pd.json_normalize(yrSS_sfx, record_path=['Lines'])
     subjects_df = pd.json_normalize(yrSS_sfx, record_path=['Subjects'])
     options_df = pd.json_normalize(yrSS_sfx, record_path=['Options'])
-    print(options_df.dtypes)
-    obj_cols = options_df.select_dtypes(include=[object]).columns.values.tolist()
+    print(options_df)
+
+
     students_df = pd.json_normalize(yrSS_sfx, record_path=['Students'])
     classes_df = pd.json_normalize(yrSS_sfx, record_path=['Classes'])
-    settings_df.to_sql('settings_SS', conn, if_exists='append', index=False)
-    lines_df.to_sql('lines_SS', conn, if_exists='append', index=False)
-    subjects_df.to_sql('subjects_SS', conn, if_exists='append', index=False)
-    options_df.to_sql('options_SS', conn, if_exists='append', index=False)
-    students_df.to_sql('students_SS', conn, if_exists='append', index=False)
-    classes_df.to_sql('classes_SS', conn, if_exists='append', index=False)
+    
+    
+    # settings_df.to_sql('settings_SS', conn, if_exists='append', index=False)
+    # lines_df.to_sql('lines_SS', conn, if_exists='append', index=False)
+    # subjects_df.to_sql('subjects_SS', conn, if_exists='append', index=False)
+    # options_df.to_sql('options_SS', conn, if_exists='append', index=False)
+    # students_df.to_sql('students_SS', conn, if_exists='append', index=False)
+    # classes_df.to_sql('classes_SS', conn, if_exists='append', index=False)
 
     # print(options_df['SubgridConstraints'])
 
