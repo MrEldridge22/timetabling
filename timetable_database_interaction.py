@@ -63,7 +63,7 @@ def createTables(conn):
     );''')
 
     conn.execute('''CREATE TABLE timetable(
-        timetable_id TEXT PRIMARY KEY NOT NULL,
+        timetable_id INTEGER PRIMARY KEY AUTOINCREMENT,
         roll_class_id TEXT,
         period_id TEXT,
         class_id TEXT,
@@ -116,7 +116,8 @@ def read_in_v10_data(conn, tfx_file):
     teachers_df['notes'].replace('', np.nan, inplace=True)
     # print(teachers_df)
     # Write to Database
-    teachers_df.to_sql('teachers', conn, if_exists='append', index=False)
+    for row in teachers_df.itertuples():
+        populate_teachers(conn, (row.teacher_id, row.code, row.first_name, row.last_name, row.notes, row.proposed_load))
 
     ### Faculties ###
     faculties_df = pd.json_normalize(tfx_file, record_path=['Faculties'])
@@ -127,7 +128,9 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     faculties_df.rename(columns={"FacultyID": "faculty_id", "Code": "code"}, inplace=True)
     # print(faculties_df)
-    faculties_df.to_sql('faculties', conn, if_exists='append', index=False)
+    # faculties_df.to_sql('faculties', conn, if_exists='append', index=False)
+    for row in faculties_df.itertuples():
+        populate_faculties(conn, (row.faculty_id, row.code))
 
     ### Rooms ###
     rooms_df = pd.json_normalize(tfx_file, record_path=['Rooms'])
@@ -138,7 +141,9 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     rooms_df.rename(columns={"RoomID": "room_id", "Code": "name"}, inplace=True)
     # print(rooms_df)
-    rooms_df.to_sql('rooms', conn, if_exists='append', index=False)
+    # rooms_df.to_sql('rooms', conn, if_exists='append', index=False)
+    for row in rooms_df.itertuples():
+        populate_rooms(conn, (row.room_id, row.name))
 
     ### Roll Classes ###
     roll_classes_df = pd.json_normalize(tfx_file, record_path=['RollClasses'])
@@ -149,7 +154,9 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     roll_classes_df.rename(columns={"RollClassID": "roll_class_id", "Code": "name"}, inplace=True)
     # print(roll_classes_df)
-    roll_classes_df.to_sql('roll_classes', conn, if_exists='append', index=False)
+    # roll_classes_df.to_sql('roll_classes', conn, if_exists='append', index=False)
+    for row in roll_classes_df.itertuples():
+        populate_roll_classes(conn, (row.roll_class_id, row.name))
 
     ### Classes ###
     classes_df = pd.json_normalize(tfx_file, record_path=['ClassNames'])
@@ -160,7 +167,9 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     classes_df.rename(columns={"ClassNameID": "class_id", "FacultyID": "faculty_id", "SubjectName": "name"}, inplace=True)
     # print(classes_df)
-    classes_df.to_sql('classes', conn, if_exists='append', index=False)
+    # classes_df.to_sql('classes', conn, if_exists='append', index=False)
+    for row in classes_df.itertuples():
+        populate_classes(conn, (row.class_id, row.faculty_id, row.name))
 
     ### Days ###
     days_df = pd.json_normalize(tfx_file, record_path=['Days'])
@@ -171,7 +180,9 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     days_df.rename(columns={"DayID": "day_id", "Name": "name"}, inplace=True)
     # print(days_df)
-    days_df.to_sql('days', conn, if_exists='append', index=False)
+    # days_df.to_sql('days', conn, if_exists='append', index=False)
+    for row in days_df.itertuples():
+        populate_days(conn, (row.day_id, row.name))
 
     ### Periods ###
     periods_df = pd.json_normalize(tfx_file, record_path=['Periods'])
@@ -182,19 +193,22 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     periods_df.rename(columns={"PeriodID": "period_id", "DayID": "day_id", "Name": "name", "Load": "load"}, inplace=True)
     # print(periods_df)
-    periods_df.to_sql('periods', conn, if_exists='append', index=False)
+    # periods_df.to_sql('periods', conn, if_exists='append', index=False)
+    for row in periods_df.itertuples():    
+        populate_periods(conn, (row.period_id, row.day_id, row.name, row.load))
 
     ### Timetables ###
     timetables_df = pd.json_normalize(tfx_file, record_path=['Timetable'])
     # Rename to match database table columns
     timetables_df.index.names = ["timetable_id"]
+    # print(timetables_df.index)
     timetables_df.rename(columns={"RollClassID": "roll_class_id", "PeriodID": "period_id", "ClassNameID": "class_id", "TeacherID": "teacher_id", "RoomID": "room_id"}, inplace=True)
-    # print(timetables_df["room_id"])
     # Fill blank rooms with Temp Room
-    # print(timetables_df)
     timetables_df['room_id'].replace(to_replace="", value="{A6384CE9-587E-4B14-A5D7-18D83497401E}", inplace=True)
     # print(timetables_df['room_id'])
-    timetables_df.to_sql('timetable', conn, if_exists='append')
+    # timetables_df.to_sql('timetable', conn, if_exists='append')
+    for row in timetables_df.itertuples():
+        populate_timetable(conn, (row.roll_class_id, row.period_id, row.class_id, row.room_id, row.teacher_id))
 
     # ### Teacher Faculties ###
     tf_df = pd.json_normalize(tfx_file, record_path='Faculties')
@@ -209,7 +223,9 @@ def read_in_v10_data(conn, tfx_file):
     # Rename to match database table columns
     tf_df.rename(columns={"FacultyID": "faculty_id", "TeacherID": "teacher_id"}, inplace=True)
     # print(tf_df)
-    tf_df.to_sql('teacher_faculties', conn, if_exists='append', index=False)
+    # tf_df.to_sql('teacher_faculties', conn, if_exists='append', index=False)
+    for row in tf_df.itertuples():
+        populate_faculties(conn, (row.faculty_id, row.teacher_id))
 
     # Populate proposed column with data from tfx file.
     # TODO: Filter out by term based subjects
@@ -323,7 +339,7 @@ def get_v9_fte(root):
     for settings_all in root.findall(".//{http://www.timetabling.com.au/TDV9}Settings"):
         return(settings_all.find('{http://www.timetabling.com.au/TDV9}ProposedTeacherLoad').text)
 
-
+# Insert data into database
 def populate_teachers(conn, teacher_data):
     """
     Insert into Teachers Table
@@ -331,7 +347,7 @@ def populate_teachers(conn, teacher_data):
     :param teachers:
     :return:
     """
-    sql = ''' INSERT OR IGNORE INTO teachers(teacher_id, code, first_name, last_name, proposed_load, actual_load, notes) VALUES(?,?,?,?,?,?,?)'''
+    sql = ''' INSERT OR IGNORE INTO teachers(teacher_id, code, first_name, last_name, notes, proposed_load) VALUES(?,?,?,?,?,?)'''
     cur = conn.cursor()
     cur.execute(sql, teacher_data)
     conn.commit()
@@ -344,7 +360,7 @@ def populate_faculties(conn, faculty_data):
     :param faculty_data(FacultyID, code):
     :return:
     """
-    sql = ''' INSERT INTO faculties(faculty_id, code) VALUES(?,?)'''
+    sql = ''' INSERT OR IGNORE INTO faculties(faculty_id, code) VALUES(?,?)'''
     cur = conn.cursor()
     cur.execute(sql, faculty_data)
     conn.commit()
@@ -413,7 +429,7 @@ def populate_periods(conn, period_data):
     :param perioddata (period_id, day_id, period_name):
     :return:
     """
-    sql = ''' INSERT OR IGNORE INTO periods(period_id, day_id, name) VALUES(?,?,?)'''
+    sql = ''' INSERT OR IGNORE INTO periods(period_id, day_id, name, load) VALUES(?,?,?,?)'''
     cur = conn.cursor()
     cur.execute(sql, period_data)
     conn.commit()
@@ -430,8 +446,9 @@ def populate_timetable(conn, tt_data):
     Return
     None : 
     """
-    sql = ''' INSERT INTO timetable(timetable_id, roll_class_id, period_id, class_id, room_id, teacher_id) VALUES(?,?,?,?,?,?)'''
+    sql = ''' INSERT INTO timetable(roll_class_id, period_id, class_id, room_id, teacher_id) VALUES(?,?,?,?,?)'''
     cur = conn.cursor()
+    # print(tt_data)
     cur.execute(sql, tt_data)
     conn.commit()
 

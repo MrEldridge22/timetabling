@@ -96,13 +96,13 @@ def get_df(conn, faculty=None):
 
     # Put into dataframe
     tt_df = pd.DataFrame(sql_query)
-    # print(tt_df)
+    tt_df.replace(r" \(Modified\)","", inplace=True, regex=True)
     # Sort data out to calculate which subjects are on which line and put into a dataframe with one entry of each
     teacher_data_list = []
     # Iterates over the tt_df dataframe finding corresponding line for each daily lesson and put into a list if the lesson is found.
     for row in tt_df.itertuples(index=False):
         if row.faculty != "SpEd":    # Special Ed Run different line structure, this splits it into correct lines, this is the mainstream sorter
-            for i, line_num in mainstream_lines_df[row.day].iteritems():
+            for i, line_num in mainstream_lines_df[row.day].items():
                 # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
                     # 12 Extra Class - Modify the Name
@@ -110,10 +110,11 @@ def get_df(conn, faculty=None):
                         subject = row.roll_class + " " + row.subject.split(" ", 1)[1] + " " + row.day[0] + row.lesson[1]
                         teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num])
                     else:
+                        subject = row.roll_class + " " + row.subject
                         teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num])
         
         else:    # SWD Lines
-            for i, line_num in swd_lines_df[row.day].iteritems():
+            for i, line_num in swd_lines_df[row.day].items():
                 # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
                     teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num])
@@ -167,7 +168,7 @@ def get_df(conn, faculty=None):
                         subject = split_subject[0].split(" ", 1)[1] + " / " + split_subject[1].split(" ", 1)[1] 
                         
                     flattened_list[2* int(row.line[-1]) + 6] = year + ' ' + subject
-                    flattened_list[2* int(row.line[-1]) + 7] = row.room
+                    flattened_list[2* int(row.line[-1]) + 7] = row.room.split('/')[0]
                 
                 # Standard Semester Based Single Classes
                 else:

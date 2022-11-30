@@ -3,7 +3,7 @@ from datetime import datetime
 import random
 
 # List of Core Groups, Could this be read in an a csv in the future?
-core_groups_list = [' L', 'L1', ' E', 'E1', ' P', 'P1', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6', 'O7', 'O8']
+core_groups_list = [' L', ' E', ' P', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6', 'O7', 'O8']
 
 # Colours
 principal_color =       '#31869B'
@@ -14,7 +14,7 @@ coordinator_color =     '#CCC0DA'
 other_color =           '#0066CC'
 
 
-def create_excel_sheet(workbook, staffing_df, sheet_name, fte_load="1260"):
+def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="1260"):
     """
     Creates the various sheets on the excel document
     
@@ -35,7 +35,6 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, fte_load="1260"):
     sheet.repeat_rows(0, 2)
    
     # Heading Information
-    heading = "2022 Teaching Staff Sem 2"
     export_from_tdf_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
     # Format Full Sheet

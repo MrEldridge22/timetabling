@@ -19,14 +19,12 @@ pd.set_option('display.max_rows', 200)
 v9 = False
 v10 = True
 
+title_heading = "2023 Teaching Staff Sem 2"
+
 # Database setup
-try:
-    conn = sqlite3.connect(':memory:')
-    createTables(conn)
-    print("Database Created Sucessfully!")
-except:
-    print("Database failed to create, exiting!")
-    quit()
+conn = sqlite3.connect(':memory:')
+createTables(conn)
+print("Database Created Sucessfully!")
 
 # Run Different apspects based on which application is loaded
 if v9:
@@ -69,30 +67,30 @@ if v9:
 elif v10:
     print("Using Verion 10 of Timetable Solutions")
     # Open the json tdx file
-    with open("C:\\Users\\deldridge\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S2_T4.tfx", "r") as read_content:
+    with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S2.tfx", "r") as read_content:
         tfx_raw = json.load(read_content)
     
     # Read In The Data!
     read_in_v10_data(conn, tfx_raw)
 
-    # # Open the json tdx file
-    # with open("C:\\Users\\deldridge\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S1_T2.tfx", "r") as read_content:
-    #     tfx_raw = json.load(read_content)
+    # Open the json tdx file
+    with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S2_T4.tfx", "r") as read_content:
+        tfx_raw_term = json.load(read_content)
     
-    # # Read In The Data!
-    # read_in_v10_data(conn, tfx_raw)
+    # Read In The Data!
+    read_in_v10_data(conn, tfx_raw_term)
 
     # Create the workbook object with filename
     workbook = xlsxwriter.Workbook('Subject Allocations.xlsx')
 
     # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
-    # print(get_df(conn))
-    create_excel_sheet(workbook, get_df(conn), "All Staff")
+
+    create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)
 
     # Create separate sheets for each faculty
     for faculty in get_faculties(conn):
         if faculty not in ["Care", "Exec", "PT"]:
-            create_excel_sheet(workbook, get_df(conn, faculty), faculty)
+            create_excel_sheet(workbook, get_df(conn, faculty), sheet_name=faculty, heading=title_heading)
         else:
             pass
 
