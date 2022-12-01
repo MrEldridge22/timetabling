@@ -96,6 +96,7 @@ def get_df(conn, faculty=None):
 
     # Put into dataframe
     tt_df = pd.DataFrame(sql_query)
+    # print(tt_df)
     tt_df.replace(r" \(Modified\)","", inplace=True, regex=True)
     # Sort data out to calculate which subjects are on which line and put into a dataframe with one entry of each
     teacher_data_list = []
@@ -199,9 +200,5 @@ def get_df(conn, faculty=None):
                                                     'line6_class', 'line6_room',
                                                     'line7_class', 'line7_room'])
     subject_allocation_df.sort_values('lastname', inplace=True)
-    
-    # # Modify Subject Names for 12X Class to indicate when Extra Class is
-    # for row in subject_allocation_df.loc[subject_allocation_df['line4_class'].str.contains("12Extra") == True]:
-    #     row.line4_class
 
     return(subject_allocation_df)

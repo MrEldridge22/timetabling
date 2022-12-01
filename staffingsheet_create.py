@@ -19,7 +19,7 @@ pd.set_option('display.max_rows', 200)
 v9 = False
 v10 = True
 
-title_heading = "2023 Teaching Staff Sem 2"
+title_heading = "2023 Teaching Staff Semester 2"
 
 # Database setup
 conn = sqlite3.connect(':memory:')
