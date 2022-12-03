@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 import sqlite3
 from staffingsheet_export_to_excel import create_excel_sheet, write_workbook
-from timetable_database_interaction import get_v9_fte, createTables, read_in_v9_data, read_in_v10_data, get_faculties
+from timetable_database_interaction import createTables, read_in_v10_data, get_faculties
 from staffingsheet_get_dataframes import get_df
 import xlsxwriter
 import json
@@ -9,15 +9,15 @@ import pandas as pd
 
 """ 
 TODO:
-- UI to load tdf files, line strucutre and core groups
+- UI to load tdf files, line strucutre and core groups, website?
+- Read and highlight permanent relief classes and/or split classes, ideally show which lessons they are taking
 """
 # Debugging
 pd.get_option('display.max_columns', None)
 pd.set_option('display.max_rows', 200)
 
-# Which version of Timetable Solutions are you using?
-v9 = False
-v10 = True
+school = False
+home = True
 
 title_heading = "2023 Teaching Staff Semester 2"
 
@@ -27,61 +27,56 @@ createTables(conn)
 print("Database Created Sucessfully!")
 
 # Run Different apspects based on which application is loaded
-if v9:
-    print("Using Verion 9 of Timetable Solutions")
-    
-    # Open tdf File, encoded in xml anyway.
-    tdf_semester = ET.parse('ttd_files\TTDS2-2022.tdf9')
-    # Get the root element
-    root_semester = tdf_semester.getroot()
 
-    tdf_term = ET.parse('ttd_files\TTDTerm4-2022.tdf9')
-    room_term = tdf_term.getroot()
-
-    # populate database
-    try:
-        read_in_v9_data(conn, root_semester)
-        print("Read in Semester Data")
-        read_in_v9_data(conn, room_term)
-        print("Read in Term Data")
-    except:
-        print(sqlite3.Error)
-        quit()
-
-    # Create the workbook object with filename
-    workbook = xlsxwriter.Workbook('staffing_sheet_output\Subject Allocations.xlsx')
-
-    # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
-    create_excel_sheet(workbook, get_df(conn), "All Staff", get_v9_fte(root_semester))
-
-    # Create separate sheets for each faculty
-    for faculty in get_faculties(conn):
-        if faculty not in ["Care", "Exec", "PT"]:
-            create_excel_sheet(workbook, get_df(conn, faculty), faculty, get_v9_fte(root_semester))
-        else:
-            pass
-
-    # Write out the workbook
-    write_workbook(workbook)
-
-elif v10:
-    print("Using Verion 10 of Timetable Solutions")
+if school:
     # Open the json tdx file
-    with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S2.tfx", "r") as read_content:
+    with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S1.tfx", "r") as read_content:
         tfx_raw = json.load(read_content)
     
     # Read In The Data!
     read_in_v10_data(conn, tfx_raw)
 
     # Open the json tdx file
-    with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S2_T4.tfx", "r") as read_content:
+    with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S1_T2.tfx", "r") as read_content:
         tfx_raw_term = json.load(read_content)
     
     # Read In The Data!
     read_in_v10_data(conn, tfx_raw_term)
 
     # Create the workbook object with filename
-    workbook = xlsxwriter.Workbook('Subject Allocations.xlsx')
+    workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
+
+    # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
+
+    create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)
+
+    # Create separate sheets for each faculty
+    for faculty in get_faculties(conn):
+        if faculty not in ["Care", "Exec", "PT"]:
+            create_excel_sheet(workbook, get_df(conn, faculty), sheet_name=faculty, heading=title_heading)
+        else:
+            pass
+
+    # Write out the workbook
+    write_workbook(workbook)
+
+elif home:
+    # Open the json tdx file
+    with open("C:\\Users\\demg\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S2.tfx", "r") as read_content:
+        tfx_raw = json.load(read_content)
+    
+    # Read In The Data!
+    read_in_v10_data(conn, tfx_raw)
+
+    # Open the json tdx file
+    with open("C:\\Users\\demg\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S2_T4.tfx", "r") as read_content:
+        tfx_raw_term = json.load(read_content)
+    
+    # Read In The Data!
+    read_in_v10_data(conn, tfx_raw_term)
+
+    # Create the workbook object with filename
+    workbook = xlsxwriter.Workbook('Subject Allocations Semester 2.xlsx')
 
     # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 
@@ -98,7 +93,7 @@ elif v10:
     write_workbook(workbook)
 
 else:
-    print("You need to ensure either V9 or V10 is set to True!")
+    print("You need to set school or home to true!")
 
 
 # Testing Area
