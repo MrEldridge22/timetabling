@@ -99,7 +99,9 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
         sheet.write('A' + str(start_row + 0), row.firstname, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'right': True}))
         sheet.write('A' + str(start_row + 1), row.lastname, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'right': True}))
         sheet.write('A' + str(start_row + 2), row.code, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'right': True}))
-        sheet.write('A' + str(start_row + 3), fte, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'bottom': True, 'right': True, 'num_format': '0.0'}))
+        # Turned off as it's creating some confusion!
+        # sheet.write('A' + str(start_row + 3), fte, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'bottom': True, 'right': True, 'num_format': '0.0'}))
+        sheet.write('A' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'bottom': True, 'right': True, 'num_format': '0.0'}))
 
         # Care Class
         if row.care != 0:
