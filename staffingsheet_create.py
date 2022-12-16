@@ -1,4 +1,3 @@
-import xml.etree.ElementTree as ET
 import sqlite3
 from staffingsheet_export_to_excel import create_excel_sheet, write_workbook
 from timetable_database_interaction import createTables, read_in_v10_data, get_faculties
@@ -17,11 +16,11 @@ pd.get_option('display.max_columns', None)
 pd.set_option('display.max_rows', 200)
 
 # Set file location here
-school = False
-home = True
+school = True
+home = False
 
 # Set which seMester to create sheet for here
-semester = 1
+semester = 2
 
 # Database setup
 conn = sqlite3.connect(':memory:')

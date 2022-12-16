@@ -107,8 +107,8 @@ def get_df(conn, faculty=None):
                 # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
                     # 12 Extra Class - Modify the Name
-                    if row.roll_class == '12X' and line_num == "Line 4":
-                        subject = row.roll_class + " " + row.subject.split(" ", 1)[1] + " " + row.day[0] + row.lesson[1]
+                    if (row.roll_class == '12X' or row.roll_class == '12X1') and line_num == "Line 4":
+                        subject = "12Extra" + " " + row.subject.split(" ", 1)[1] + " " + row.day[0] + row.lesson[1]
                         teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num])
                     else:
                         subject = row.roll_class + " " + row.subject

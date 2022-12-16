@@ -224,9 +224,9 @@ def write_line_details(subject, room, line_column, start_row, sheet, workbook, c
             sheet.write(line_column + str(start_row + 3), room, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
         
         # Highlight 12X Line 4
-        elif "12X" in str(subject) and line_column == "G":
-            sheet.write(line_column + str(start_row + 0), " ".join(subject.split(" ")[0:3]), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
-            sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), " ".join(subject.split(" ")[3:]), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'italic': 'true', 'right': True}))
+        elif "12Extra" in str(subject) and line_column == "G":
+            sheet.write(line_column + str(start_row + 0), "12Extra", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
+            sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), " ".join(subject.split(" ")[1:]), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'italic': 'true', 'right': True}))
             sheet.write(line_column + str(start_row + 3), " / ".join(room.split("/")), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
         
         # Spaces for combined / term classes
