@@ -6,6 +6,25 @@ import numpy as np
 Database interaction for the Staffing Sheet Creator
 """
 
+term_based_subjects = [
+    "07 Design & Technology",
+    "07 Drama",
+    "07 Digital Products",
+    "07 Digital Technology",
+    "07 Food & Nutrition",
+    "07 Music", 
+    "07 Visual Arts",
+    "08 Dance",
+    "08 Digital Technology"
+    "08 Drama",
+    "08 Food & Nutrition",
+    "08 Introduction to Media Arts",
+    "08 Material Products - Metal",
+    "08 Material Products - Wood",
+    "08 Music",
+    "08 Visual Arts"
+]
+
 
 def createTables(conn):
     """
@@ -85,7 +104,7 @@ def createTables(conn):
     );''')
 
 
-def read_in_v10_data(conn, tfx_file):
+def read_in_v10_data(conn, tfx_file, term):
     """
     Reads in the data from a tfx json encoded file
     
@@ -168,6 +187,12 @@ def read_in_v10_data(conn, tfx_file):
     classes_df.rename(columns={"ClassNameID": "class_id", "FacultyID": "faculty_id", "SubjectName": "name"}, inplace=True)
     # print(classes_df)
     # classes_df.to_sql('classes', conn, if_exists='append', index=False)
+    # Append Term Based Subjects with T1,T2,T3,T4
+    term_sub_name_appended = []
+    for i in range(len(term_based_subjects)):
+        term_sub_name_appended.append(term_based_subjects[i] + " T" + str(term))
+    # print(term_sub_name_appended)
+    classes_df.replace(to_replace=term_based_subjects, value=term_sub_name_appended, inplace=True)
     for row in classes_df.itertuples():
         populate_classes(conn, (row.class_id, row.faculty_id, row.name))
 

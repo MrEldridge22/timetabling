@@ -16,11 +16,11 @@ pd.get_option('display.max_columns', None)
 pd.set_option('display.max_rows', 200)
 
 # Set file location here
-school = True
-home = False
+school = False
+home = True
 
 # Set which seMester to create sheet for here
-semester = 2
+semester = 1
 
 # Database setup
 conn = sqlite3.connect(':memory:')
@@ -69,14 +69,14 @@ if semester == 1:
             tfx_raw = json.load(read_content)
         
         # Read In The Data!
-        read_in_v10_data(conn, tfx_raw)
+        read_in_v10_data(conn, tfx_raw, 1)
 
         # Open the json tdx file
         with open("C:\\Users\\demg\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S1_T2.tfx", "r") as read_content:
             tfx_raw_term = json.load(read_content)
         
         # Read In The Data!
-        read_in_v10_data(conn, tfx_raw_term)
+        read_in_v10_data(conn, tfx_raw_term, 2)
 
         # Create the workbook object with filename
         workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
@@ -106,14 +106,14 @@ elif semester == 2:
             tfx_raw = json.load(read_content)
         
         # Read In The Data!
-        read_in_v10_data(conn, tfx_raw)
+        read_in_v10_data(conn, tfx_raw, 3)
 
         # Open the json tdx file
         with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S2_T4.tfx", "r") as read_content:
             tfx_raw_term = json.load(read_content)
         
         # Read In The Data!
-        read_in_v10_data(conn, tfx_raw_term)
+        read_in_v10_data(conn, tfx_raw_term, 4)
 
         # Create the workbook object with filename
         workbook = xlsxwriter.Workbook('Subject Allocations Semester 2.xlsx')
