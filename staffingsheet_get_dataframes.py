@@ -125,10 +125,15 @@ def get_df(conn, faculty=None):
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
 
     # Get the Term based subjects and combine them together.
+    
+    ### Need to modify the join. with the Term removed if the names are the same then have 1 with Tx/Ty after it, otherwise leave as is or shorten? ###
+
     teacher_data_df['subject'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line']].groupby(['code', 'line'])['subject'].transform(lambda x: '/'.join(x))
     teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
     teacher_data_df.drop(columns=['id'], inplace=True)
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
+
+
     # Put all data into one line per staff member ready for export
     # Get list of staff Codes
     staff_codes = teacher_data_df['code'].unique()
