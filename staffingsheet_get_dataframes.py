@@ -118,8 +118,32 @@ def get_df(conn, faculty=None):
             for i, line_num in swd_lines_df[row.day].items():
                 # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
-                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num])
+                    # Shorten SWD Subject Names
+                    if ("Math" in row.subject):
+                        subject = row.roll_class + " Maths"
+                    elif ("Society" in row.subject):
+                        subject = row.roll_class + " Society and Culture"
+                    elif ("Science" in row.subject):
+                        subject = row.roll_class + " Science"
+                    elif ("Personal Learning Plan" in row.subject):
+                        subject = row.roll_class + " PLP"
+                    elif ("Research Project" in row.subject):
+                        subject = row.roll_class + " RP"
+                    elif ("Scien" in row.subject):
+                        subject = row.roll_class + " Science"
+                    elif ("English" in row.subject):
+                        subject = row.roll_class + " English"
+                    elif ("Cross" in row.subject):
+                        subject = row.roll_class + " Cross Disc."
+                    elif ("Health" in row.subject):
+                        subject = row.roll_class + " Health"
+                    elif ("Business" in row.subject):
+                        subject = row.roll_class + " Business Innovation"
+                    else:
+                        subject = row.subject
 
+                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num])
+                    # print(row.roll_class)
     # Put list into a dataframe, drop the duplicates
     teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line'])
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
@@ -132,7 +156,6 @@ def get_df(conn, faculty=None):
     teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
     teacher_data_df.drop(columns=['id'], inplace=True)
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
-
 
     # Put all data into one line per staff member ready for export
     # Get list of staff Codes
@@ -159,17 +182,30 @@ def get_df(conn, faculty=None):
     
                 # Get Term Based Subjects or Combined classes as these contain a /
                 if "/" in row.subject:
+                    # List of term
+                    terms = ["T1", "T2", "T3", "T4"]
+
                     # Combined and Term based Classes
                     split_subject = row.subject.split('/')
-                    year = split_subject[0].split(" ", 1)[0] + " / " + split_subject[1].split(" ", 1)[0]
+                    # Fix for SWD Classes
+                    if ("S" in split_subject[0].split(" ", 1)[0]):
+                        year = split_subject[0].split(" ", 1)[0]
+                    else:
+                        year = split_subject[0].split(" ", 1)[0] + " / " + split_subject[1].split(" ", 1)[0]
                     
                     # Catch one teacher teaching 2 12X Classes and put them on seperate lines in Excel
                     if "12X" in row.subject:
                         subject = split_subject[0].split(" ", 1)[1] + "\n" + split_subject[1].split(" ", 1)[1]
                     
+                    # Filter Term Based Subjects
+                    elif any(x in split_subject[0] for x in terms):
+                        if (split_subject[0].split(" ")[0:-1] == split_subject[1].split(" ")[0:-1]):
+                            subject = (" ".join(split_subject[0].split(" ")[1:-1]) + f" {split_subject[0].split(' ')[-1]}/{split_subject[1].split(' ')[-1]}")
+                    
                     # Don't repeat same subject name
-                    elif  split_subject[0].split(" ", 1)[1] == split_subject[1].split(" ", 1)[1]:
+                    elif split_subject[0].split(" ", 1)[1] == split_subject[1].split(" ", 1)[1]:
                         subject = split_subject[0].split(" ", 1)[1]
+                        # print(subject)
                     else:
                         subject = split_subject[0].split(" ", 1)[1] + " / " + split_subject[1].split(" ", 1)[1] 
                         

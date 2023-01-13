@@ -231,9 +231,14 @@ def write_line_details(subject, room, line_column, start_row, sheet, workbook, c
         
         # Spaces for combined / term classes
         elif " / " in str(subject):
-            sheet.write(line_column + str(start_row + 0), " ".join(subject.split(" ")[0:3]), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
-            sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), " ".join(subject.split(" ")[3:]), cell_format)
-            sheet.write(line_column + str(start_row + 3), " / ".join(room.split("/")), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
+            if "S" in subject.split(" ")[0]:
+                sheet.write(line_column + str(start_row + 0), subject.split(" ")[0], workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
+                sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), " ".join(subject.split(" ")[1:]), cell_format)
+                sheet.write(line_column + str(start_row + 3), " / ".join(room.split("/")), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
+            else:
+                sheet.write(line_column + str(start_row + 0), " ".join(subject.split(" ")[0:3]), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
+                sheet.merge_range(line_column + str(start_row + 1) + ':' + line_column + str(start_row + 2), " ".join(subject.split(" ")[3:]), cell_format)
+                sheet.write(line_column + str(start_row + 3), " / ".join(room.split("/")), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
         
         # Normal Classes
         else:

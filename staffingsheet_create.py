@@ -65,14 +65,14 @@ if semester == 1:
 
     elif home:
         # Open the json tdx file
-        with open("C:\\Users\\demg\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S1.tfx", "r") as read_content:
+        with open("C:\\Users\\deldridge\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S1.tfx", "r") as read_content:
             tfx_raw = json.load(read_content)
         
         # Read In The Data!
         read_in_v10_data(conn, tfx_raw, 1)
 
         # Open the json tdx file
-        with open("C:\\Users\\demg\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S1_T2.tfx", "r") as read_content:
+        with open("C:\\Users\\deldridge\\OneDrive - Department for Education\Documents\\Timetabling\\2023\\V10 Files\\TTD_2023_S1_T2.tfx", "r") as read_content:
             tfx_raw_term = json.load(read_content)
         
         # Read In The Data!

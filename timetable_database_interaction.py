@@ -15,7 +15,8 @@ term_based_subjects = [
     "07 Music", 
     "07 Visual Arts",
     "08 Dance",
-    "08 Digital Technology"
+    "08 Digital Technology",
+    "08 Digital Products",
     "08 Drama",
     "08 Food & Nutrition",
     "08 Introduction to Media Arts",
