@@ -16,8 +16,8 @@ pd.get_option('display.max_columns', None)
 pd.set_option('display.max_rows', 200)
 
 # Set file location here
-school = False
-home = True
+school = True
+home = False
 
 # Set which seMester to create sheet for here
 semester = 1
@@ -37,14 +37,14 @@ if semester == 1:
             tfx_raw = json.load(read_content)
         
         # Read In The Data!
-        read_in_v10_data(conn, tfx_raw)
+        read_in_v10_data(conn, tfx_raw, 1)
 
         # Open the json tdx file
         with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S1_T2.tfx", "r") as read_content:
             tfx_raw_term = json.load(read_content)
         
         # Read In The Data!
-        read_in_v10_data(conn, tfx_raw_term)
+        read_in_v10_data(conn, tfx_raw_term, 2)
 
         # Create the workbook object with filename
         workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
