@@ -108,11 +108,25 @@ def get_df(conn, faculty=None):
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
                     # 12 Extra Class - Modify the Name
                     if (row.roll_class == '12X' or row.roll_class == '12X1') and line_num == "Line 4":
-                        subject = "12Extra" + " " + row.subject.split(" ", 1)[1] + " " + row.day[0] + row.lesson[1]
-                        teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num])
+                        subject = "12Extra" + " " + row.subject.split(" ", 1)[1] + " " + row.day[0:2] + row.lesson[1]
+                        # Get Tu or Th for day
+                        if row.day == "Tuesday":
+                            day = "Tu" + row.lesson[1]
+                        elif row.day == "Thursday":
+                            day = "Th" + row.lesson[1]
+                        else:
+                            day = row.day[0] + row.lesson[1]
+                        teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day])
                     else:
                         subject = row.roll_class + " " + row.subject
-                        teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num])
+                        # Get Tu or Th for day
+                        if row.day == "Tuesday":
+                            day = "Tu" + row.lesson[1]
+                        elif row.day == "Thursday":
+                            day = "Th" + row.lesson[1]
+                        else:
+                            day = row.day[0] + row.lesson[1]
+                        teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num, day])
         
         else:    # SWD Lines
             for i, line_num in swd_lines_df[row.day].items():
@@ -141,17 +155,30 @@ def get_df(conn, faculty=None):
                         subject = row.roll_class + " Business Innovation"
                     else:
                         subject = row.subject
+                    
+                    # Get Tu or Th for day
+                    if row.day == "Tuesday":
+                        day = "Tu" + row.lesson[1]
+                    elif row.day == "Thursday":
+                        day = "Th" + row.lesson[1]
+                    else:
+                        day = row.day[0] + row.lesson[1]
 
-                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num])
+                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day])
                     # print(row.roll_class)
     # Put list into a dataframe, drop the duplicates
-    teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line'])
+    teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day'])
+        
+    # Code to catch multiple teachers for one class (permanent swaps/reliefs ect.)
+    # Group by Teacher code and id. this gives each class and the days / lesson they are on combined together
+    teacher_data_df['day'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line', 'day']].groupby(['id','code'])['day'].transform(lambda x: ','.join(x))
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
+    
+    # Filter out those classes with 3 or less lessons, put day code onto class name ### Need to filter out SWD as one line has 3 lessons
+    # Could I put SWD at the start of the SWD line strucutre? Then replace all SWD word in the line column with nothing?
+    print(teacher_data_df)
 
     # Get the Term based subjects and combine them together.
-    
-    ### Need to modify the join. with the Term removed if the names are the same then have 1 with Tx/Ty after it, otherwise leave as is or shorten? ###
-
     teacher_data_df['subject'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line']].groupby(['code', 'line'])['subject'].transform(lambda x: '/'.join(x))
     teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
     teacher_data_df.drop(columns=['id'], inplace=True)

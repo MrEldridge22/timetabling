@@ -19,8 +19,8 @@ pd.set_option('display.max_rows', 200)
 school = True
 home = False
 
-# Set which seMester to create sheet for here
-semester = 1
+# Set which semester to create sheet for here
+semester = 2
 
 # Database setup
 conn = sqlite3.connect(':memory:')
