@@ -10,11 +10,11 @@ mainstream_lines_dict = {
                         }
 
 swd_lines_dict = {
-                        "Monday":       ["Line 4", "Line 7", "Care", "Line 3", "Line 3", "PD",      "Line 5"],
-                        "Tuesday":      ["Line 4", "Line 7", "Care", "Line 6", "Line 6", "Line 2",  "Line 1"],
-                        "Wednesday":    ["Line 4", "Line 6", "Care", "Line 5", "Line 3", "Line 2",  "PLT"],
-                        "Thursday":     ["Line 4", "Line 7", "Care", "Line 1", "Line 1", "Line 6",  "Line 2"],
-                        "Friday":       ["Line 4", "Line 7", "Care", "Line 5", "Line 5", "Line 1",  "Line 3"]}
+                        "Monday":       ["SWD Line 4", "SWD Line 7", "Care", "SWD Line 3", "SWD Line 3", "PD",          "SWD Line 5"],
+                        "Tuesday":      ["SWD Line 4", "SWD Line 7", "Care", "SWD Line 6", "SWD Line 6", "SWD Line 2",  "SWD Line 1"],
+                        "Wednesday":    ["SWD Line 4", "SWD Line 6", "Care", "SWD Line 5", "SWD Line 3", "SWD Line 2",  "PLT"],
+                        "Thursday":     ["SWD Line 4", "SWD Line 7", "Care", "SWD Line 1", "SWD Line 1", "SWD Line 6",  "SWD Line 2"],
+                        "Friday":       ["SWD Line 4", "SWD Line 7", "Care", "SWD Line 5", "SWD Line 5", "SWD Line 1",  "SWD Line 3"]}
 
 # Index is the lesson number for the day
 mainstream_lines_df = pd.DataFrame(data=mainstream_lines_dict, index=   ["L1", "L2", "CG", "L3", "L4", "L5", "L6"])
@@ -108,24 +108,12 @@ def get_df(conn, faculty=None):
                 if row.lesson == i and row.subject.find("Personal Development") == -1:  # Found a Subject on a line!
                     # 12 Extra Class - Modify the Name
                     if (row.roll_class == '12X' or row.roll_class == '12X1') and line_num == "Line 4":
-                        subject = "12Extra" + " " + row.subject.split(" ", 1)[1] + " " + row.day[0:2] + row.lesson[1]
-                        # Get Tu or Th for day
-                        if row.day == "Tuesday":
-                            day = "Tu" + row.lesson[1]
-                        elif row.day == "Thursday":
-                            day = "Th" + row.lesson[1]
-                        else:
-                            day = row.day[0] + row.lesson[1]
+                        subject = "12Extra" + " " + row.subject.split(" ", 1)[1] + " " + row.day[0:3] + row.lesson[1]
+                        day = row.day[0:3] + row.lesson[1]
                         teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day])
                     else:
                         subject = row.roll_class + " " + row.subject
-                        # Get Tu or Th for day
-                        if row.day == "Tuesday":
-                            day = "Tu" + row.lesson[1]
-                        elif row.day == "Thursday":
-                            day = "Th" + row.lesson[1]
-                        else:
-                            day = row.day[0] + row.lesson[1]
+                        day = row.day[0:3] + row.lesson[1]
                         teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num, day])
         
         else:    # SWD Lines
@@ -156,13 +144,7 @@ def get_df(conn, faculty=None):
                     else:
                         subject = row.subject
                     
-                    # Get Tu or Th for day
-                    if row.day == "Tuesday":
-                        day = "Tu" + row.lesson[1]
-                    elif row.day == "Thursday":
-                        day = "Th" + row.lesson[1]
-                    else:
-                        day = row.day[0] + row.lesson[1]
+                    day = row.day[0:3] + row.lesson[1]
 
                     teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day])
                     # print(row.roll_class)
@@ -174,15 +156,27 @@ def get_df(conn, faculty=None):
     teacher_data_df['day'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line', 'day']].groupby(['id','code'])['day'].transform(lambda x: ','.join(x))
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
     
-    # Filter out those classes with 3 or less lessons, put day code onto class name ### Need to filter out SWD as one line has 3 lessons
-    # Could I put SWD at the start of the SWD line strucutre? Then replace all SWD word in the line column with nothing?
-    print(teacher_data_df)
-
+    # Filter out those classes with 3 or less lessons, put day code onto class name, flag if shared class for highlighting later.
+    for idx, row in teacher_data_df.iterrows():
+        if len(row.day.split(",")) <= 3 and "SWD" not in row.line:
+            teacher_data_df.loc[idx, 'subject'] = row.subject + " " + row.day
+            teacher_data_df.loc[idx, 'day'] = True
+        # Get SWD swaps
+        elif len(row.day.split(",")) <= 2 and "SWD" in row.line:
+            teacher_data_df.loc[idx, 'subject'] = row.subject + " " + row.day
+            teacher_data_df.loc[idx, 'day'] = True
+        else:
+            teacher_data_df.loc[idx, 'day'] = False
+        
+    # Remove SWD from SWD Line names
+    teacher_data_df['line'].replace(to_replace='SWD', value='', inplace=True)
+    
     # Get the Term based subjects and combine them together.
     teacher_data_df['subject'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line']].groupby(['code', 'line'])['subject'].transform(lambda x: '/'.join(x))
     teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
     teacher_data_df.drop(columns=['id'], inplace=True)
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
+    # print(teacher_data_df)
 
     # Put all data into one line per staff member ready for export
     # Get list of staff Codes
@@ -266,7 +260,9 @@ def get_df(conn, faculty=None):
                                                     'line4_class', 'line4_room',
                                                     'line5_class', 'line5_room',
                                                     'line6_class', 'line6_room',
-                                                    'line7_class', 'line7_room'])
+                                                    'line7_class', 'line7_room',])
     subject_allocation_df.sort_values('lastname', inplace=True)
+
+    # print(subject_allocation_df)
 
     return(subject_allocation_df)

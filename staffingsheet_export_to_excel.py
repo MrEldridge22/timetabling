@@ -12,6 +12,17 @@ teacher_leader_color =  '#C5E2FF'
 senior_leader_color =   '#009AD0'
 coordinator_color =     '#CCC0DA'
 other_color =           '#0066CC'
+shared_class_color =    '#F6FCDC'
+
+
+# Function to set the cell format for the shared subjects to be different from other subject cells
+def highlight_shared_class(workbook, subject_name):
+    if [ele for ele in ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] if (ele in str(subject_name))]:
+        cell_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bg_color': shared_class_color})
+    else:
+        cell_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True})
+
+    return cell_format
 
 
 def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="1260"):
@@ -85,9 +96,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
     for i in range (1, math.ceil(staffing_df.shape[0] / 11) + 1):
         page_breaks_list.append(i * staff_per_page * num_rows + start_row - 1)
     sheet.set_h_pagebreaks(page_breaks_list)
-
-    subject_cell_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True})
-    
+ 
     # Iterate over the data and populate the sheet
     for row in staffing_df.itertuples():
         # Set row heights for subjects to be slightly larger to accomodate long subject names, set_row is 0 indexed, so this affects the 2nd and 3rd row for each teacher
@@ -110,6 +119,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
         else:
             sheet.write('B' + str(start_row + 1), "No", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
             sheet.write('B' + str(start_row + 2), "Care", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
+        
         # Blank Cells or formatting
         sheet.write('B' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
         sheet.write('B' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
@@ -123,48 +133,47 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
         sheet.write('C' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
 
         ###Lines###
-
         free_line_list = []
 
         # Line 1
         if row.line1_class != 0:
-            write_line_details(row.line1_class, row.line1_room, 'D', start_row, sheet, workbook, subject_cell_format)
+            write_line_details(row.line1_class, row.line1_room, 'D', start_row, sheet, workbook, highlight_shared_class(workbook, row.line1_class))
         else:
             free_line_list.append("D")
             
         # Line 2
         if row.line2_class != 0:
-            write_line_details(row.line2_class, row.line2_room, 'E', start_row, sheet, workbook, subject_cell_format)
+            write_line_details(row.line2_class, row.line2_room, 'E', start_row, sheet, workbook, highlight_shared_class(workbook, row.line2_class))
         else:
             free_line_list.append("E")
         
         # Line 3
         if row.line3_class != 0:
-            write_line_details(row.line3_class, row.line3_room, 'F', start_row, sheet, workbook, subject_cell_format)
+            write_line_details(row.line3_class, row.line3_room, 'F', start_row, sheet, workbook, highlight_shared_class(workbook, row.line3_class))
         else:
             free_line_list.append("F")
 
         # Line 4
         if row.line4_class != 0:
-            write_line_details(row.line4_class, row.line4_room, 'G', start_row, sheet, workbook, subject_cell_format)
+            write_line_details(row.line4_class, row.line4_room, 'G', start_row, sheet, workbook, highlight_shared_class(workbook, row.line4_class))
         else:
             free_line_list.append("G")
         
         # Line 5
         if row.line5_class != 0:
-            write_line_details(row.line5_class, row.line5_room, 'H', start_row, sheet, workbook, subject_cell_format)
+            write_line_details(row.line5_class, row.line5_room, 'H', start_row, sheet, workbook, highlight_shared_class(workbook, row.line5_class))
         else:
             free_line_list.append("H")
 
         # Line 6
         if row.line6_class != 0:
-            write_line_details(row.line6_class, row.line6_room, 'I', start_row, sheet, workbook, subject_cell_format)
+            write_line_details(row.line6_class, row.line6_room, 'I', start_row, sheet, workbook, highlight_shared_class(workbook, row.line6_class))
         else:
             free_line_list.append("I")
         
         # Line 7
         if row.line7_class != 0:
-            write_line_details(row.line7_class, row.line7_room, 'J', start_row, sheet, workbook, subject_cell_format)
+            write_line_details(row.line7_class, row.line7_room, 'J', start_row, sheet, workbook, highlight_shared_class(workbook, row.line7_class))
         else:
             free_line_list.append("J")
 
@@ -192,7 +201,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
 
         # Write blanks for other free lines
         for free_line in free_line_list:
-            write_blank_cell(str(free_line), start_row, sheet, workbook, subject_cell_format)
+            write_blank_cell(str(free_line), start_row, sheet, workbook, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True}))
         
         # Increment start_row for next staff member
         start_row = start_row + num_rows
