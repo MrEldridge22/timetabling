@@ -20,7 +20,7 @@ school = True
 home = False
 
 # Set which semester to create sheet for here
-semester = 2
+semester = 1
 
 # Database setup
 conn = sqlite3.connect(':memory:')
@@ -37,7 +37,7 @@ if semester == 1:
             tfx_raw = json.load(read_content)
         
         # Read In The Data!
-        read_in_v10_data(conn, tfx_raw, 1)
+        read_in_v10_data(conn, tfx_raw, 2)
 
         # Open the json tdx file
         with open("V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\TTD_2023_S1_T2.tfx", "r") as read_content:

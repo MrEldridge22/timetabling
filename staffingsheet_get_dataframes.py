@@ -208,6 +208,7 @@ def get_df(conn, faculty=None):
 
                     # Combined and Term based Classes
                     split_subject = row.subject.split('/')
+                    # print(split_subject)
                     # Fix for SWD Classes
                     if ("S" in split_subject[0].split(" ", 1)[0]):
                         year = split_subject[0].split(" ", 1)[0]

@@ -135,6 +135,9 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
         ###Lines###
         free_line_list = []
 
+        ### DEBUG ###
+        # print(f"Teacher Code: {row.code} \n Line 1: {row.line1_class} \n Line 2: {row.line2_class} \n Line 3: {row.line3_class} \n Line 4: {row.line4_class} \n Line 5: {row.line5_class} \n Line 6: {row.line6_class} \n Line 7: {row.line7_class} \n\n")
+
         # Line 1
         if row.line1_class != 0:
             write_line_details(row.line1_class, row.line1_room, 'D', start_row, sheet, workbook, highlight_shared_class(workbook, row.line1_class))
@@ -180,6 +183,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
         # print(f"Teacher Code: {row.code}")
         # Fill in Notes into cells
         if row.notes != None:
+            # print(f"Teacher Code: {row.code} Free Lines: {free_line_list}")
             free_line = str(random.choice(free_line_list))
             free_line_list.remove(free_line)
             if "Principal" in row.notes:
