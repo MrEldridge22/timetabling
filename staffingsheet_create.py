@@ -9,7 +9,8 @@ import pandas as pd
 """ 
 TODO:
 - UI to load tdf files, line strucutre and core groups, website?
-- Read and highlight permanent relief classes and/or split classes, ideally show which lessons they are taking
+- Modify Code to account for Personal Development on Mondays
+- Modify for Term based subjects to only count 1
 """
 # Debugging
 pd.get_option('display.max_columns', None)
@@ -20,7 +21,7 @@ school = True
 home = False
 
 # Set which semester to create sheet for here
-semester = 1
+semester = 2
 
 # Database setup
 conn = sqlite3.connect(':memory:')
