@@ -9,6 +9,7 @@ Database interaction for the Staffing Sheet Creator
 term_based_subjects = [
     "07 Design & Technology",
     "07 Drama",
+    "07 Dance",
     "07 Digital Products",
     "07 Digital Technology",
     "07 Food & Nutrition",

@@ -9,7 +9,6 @@ import pandas as pd
 """ 
 TODO:
 - UI to load tdf files, line strucutre and core groups, website?
-- Modify Code to account for Personal Development on Mondays
 - Modify for Term based subjects to only count 1
 """
 # Debugging

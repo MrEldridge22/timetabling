@@ -185,14 +185,37 @@ def get_df(conn, faculty=None):
     teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'class_load']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
     teacher_data_df.drop(columns=['id'], inplace=True)
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
+    
+    # Get list of staff Codes
+    staff_codes = teacher_data_df['code'].unique()
+    
+    for code in staff_codes:
+        term_swap = False
+        teacher_subjects = []
+        for row in teacher_data_df.loc[teacher_data_df["code"] == code].itertuples():
+            teacher_subjects.append(row.subject)
+
+        # Search through using list comprehension and print out a list where True appears when a teacher has a subject which changes lines
+        # in the change of term and change the class_load value so it's not doubled up.
+        # LIMITIATION: Only 1 line swap subject per staff member!!!
+        results = [True if string[-2:] == "T4" and "/" not in string else False for string in teacher_subjects]
+        # print(results)
+
+        if True in results:
+            term_subject = next((string for string in teacher_subjects if string[-2:] == "T3"), None)
+            if term_subject is not None:
+                print(term_subject)
+                teacher_data_df.loc[(teacher_data_df['code'] == code) & (teacher_data_df['subject'] == term_subject), 'class_load'] = 0
+
+        
+
     # print(teacher_data_df)
 
-    # Calculate Actual Load based on taken Subjects (Still issue with Extended care on Monday arvos)  
+    # Calculate Actual Load based on taken Subjects  
     sum_of_class_loads = teacher_data_df.groupby('code')['class_load'].sum().fillna(0)
 
     # Put all data into one line per staff member ready for export
-    # Get list of staff Codes
-    staff_codes = teacher_data_df['code'].unique()
+    
 
     # Create list of lists and put into dataframe ready for export
     full_line_alloc_list = []
