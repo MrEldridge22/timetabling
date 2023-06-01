@@ -170,3 +170,5 @@ elif semester == 2:
 
 # Testing Area
 # print(get_df(conn))
+# teacher_data_df = get_df(conn)
+# print(teacher_data_df[teacher_data_df["code"] == "MSK"].transpose())

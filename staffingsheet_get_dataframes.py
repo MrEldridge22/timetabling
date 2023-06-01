@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 
 # Line structures
 mainstream_lines_dict = {
@@ -159,7 +160,7 @@ def get_df(conn, faculty=None):
     # Put list into a dataframe, drop the duplicates
     teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day', 'class_load']) 
     teacher_data_df['class_load'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day', 'class_load']].groupby(['id', 'code'])['class_load'].transform('sum')
-    # print(teacher_data_df)
+    # print(teacher_data_df[teacher_data_df["code"] == "MSK"])
     # Code to catch multiple teachers for one class (permanent swaps/reliefs ect.)
     # Group by Teacher code and id. this gives each class and the days / lesson they are on combined together
     teacher_data_df['day'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line', 'day','class_load']].groupby(['id','code'])['day'].transform(lambda x: ','.join(x))
@@ -185,7 +186,7 @@ def get_df(conn, faculty=None):
     teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'class_load']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
     teacher_data_df.drop(columns=['id'], inplace=True)
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
-    
+       
     # Get list of staff Codes
     staff_codes = teacher_data_df['code'].unique()
     
@@ -204,16 +205,15 @@ def get_df(conn, faculty=None):
         if True in results:
             term_subject = next((string for string in teacher_subjects if string[-2:] == "T3"), None)
             if term_subject is not None:
-                print(term_subject)
+                # print(term_subject)
                 teacher_data_df.loc[(teacher_data_df['code'] == code) & (teacher_data_df['subject'] == term_subject), 'class_load'] = 0
-
-        
 
     # print(teacher_data_df)
 
     # Calculate Actual Load based on taken Subjects  
     sum_of_class_loads = teacher_data_df.groupby('code')['class_load'].sum().fillna(0)
 
+    # print(teacher_data_df[teacher_data_df["code"] == "MSK"])
     # Put all data into one line per staff member ready for export
     
 
@@ -223,15 +223,22 @@ def get_df(conn, faculty=None):
     # Iterate through each staff member add their classes and rooms to a blank list based on line numbers
     # Check the dataframe below to ensure classes are going in the correct spots
     # Semester data will appear first, then term based subjects
-    for code in staff_codes:
+    staff_codes = teacher_data_df['code'].unique()
+    for staff in staff_codes:
         flattened_list = [0] * 22
-        for row in teacher_data_df.loc[teacher_data_df["code"] == code].itertuples():
-            flattened_list[0] = row.code
+        for row in teacher_data_df[teacher_data_df["code"] == staff].itertuples():
+            if staff == "MSK":
+                # print(teacher_data_df[teacher_data_df["code"] == "MSK"])
+                print(f"Pre Sort: {row.subject}")
+            flattened_list[0] = staff
             flattened_list[1] = row.firstname
             flattened_list[2] = row.lastname
             flattened_list[3] = row.proposed_load
             flattened_list[4] = row.actual_load
             flattened_list[5] = row.notes
+
+            # Reset Subject variable
+            subject = ""
             
             # Put classes into lines else put into care class slot
             if row.line[-1].isnumeric():
@@ -243,7 +250,7 @@ def get_df(conn, faculty=None):
 
                     # Combined and Term based Classes
                     split_subject = row.subject.split('/')
-                    # print(split_subject)
+                    
                     # Fix for SWD Classes
                     if ("S" in split_subject[0].split(" ", 1)[0]):
                         year = split_subject[0].split(" ", 1)[0]
@@ -258,16 +265,21 @@ def get_df(conn, faculty=None):
                     elif any(x in split_subject[0] for x in terms):
                         if (split_subject[0].split(" ")[0:-1] == split_subject[1].split(" ")[0:-1]):
                             subject = (" ".join(split_subject[0].split(" ")[1:-1]) + f" {split_subject[0].split(' ')[-1]}/{split_subject[1].split(' ')[-1]}")
+                        elif (split_subject[0][3:-3] == split_subject[1][3:-3]):
+                            subject = f"{split_subject[0][3:-3]} {split_subject[0][-2:]}/{split_subject[1][-2:]}"
+                        else:
+                            subject = f"{split_subject[0][3:-3]} / {split_subject[1][3:-3]} {split_subject[0][-2:]}/{split_subject[1][-2:]}"
                     
                     # Don't repeat same subject name
                     elif split_subject[0].split(" ", 1)[1] == split_subject[1].split(" ", 1)[1]:
                         subject = split_subject[0].split(" ", 1)[1]
-                        # print(subject)
+
                     else:
-                        subject = split_subject[0].split(" ", 1)[1] + " / " + split_subject[1].split(" ", 1)[1] 
+                        subject = split_subject[0].split(" ", 1)[1] + " / " + split_subject[1].split(" ", 1)[1]
                         
                     flattened_list[2* int(row.line[-1]) + 6] = year + ' ' + subject
                     flattened_list[2* int(row.line[-1]) + 7] = row.room.split('/')[0]
+                    
                 
                 # Standard Semester Based Single Classes
                 else:
@@ -281,6 +293,8 @@ def get_df(conn, faculty=None):
         
         # Add to list
         full_line_alloc_list.append(flattened_list)
+        if staff == "MSK":
+            print(flattened_list)
 
     # Final dataframe for processing into excel sheet
     subject_allocation_df = pd.DataFrame(full_line_alloc_list, columns=['code',
