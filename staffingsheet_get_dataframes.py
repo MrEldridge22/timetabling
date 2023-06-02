@@ -227,9 +227,6 @@ def get_df(conn, faculty=None):
     for staff in staff_codes:
         flattened_list = [0] * 22
         for row in teacher_data_df[teacher_data_df["code"] == staff].itertuples():
-            if staff == "MSK":
-                # print(teacher_data_df[teacher_data_df["code"] == "MSK"])
-                print(f"Pre Sort: {row.subject}")
             flattened_list[0] = staff
             flattened_list[1] = row.firstname
             flattened_list[2] = row.lastname
@@ -265,6 +262,7 @@ def get_df(conn, faculty=None):
                     elif any(x in split_subject[0] for x in terms):
                         if (split_subject[0].split(" ")[0:-1] == split_subject[1].split(" ")[0:-1]):
                             subject = (" ".join(split_subject[0].split(" ")[1:-1]) + f" {split_subject[0].split(' ')[-1]}/{split_subject[1].split(' ')[-1]}")
+                        # Catch subjects which change year levels or Subjects in term swap over
                         elif (split_subject[0][3:-3] == split_subject[1][3:-3]):
                             subject = f"{split_subject[0][3:-3]} {split_subject[0][-2:]}/{split_subject[1][-2:]}"
                         else:
@@ -293,8 +291,6 @@ def get_df(conn, faculty=None):
         
         # Add to list
         full_line_alloc_list.append(flattened_list)
-        if staff == "MSK":
-            print(flattened_list)
 
     # Final dataframe for processing into excel sheet
     subject_allocation_df = pd.DataFrame(full_line_alloc_list, columns=['code',
