@@ -27,16 +27,15 @@ semester_selected = 2
 ### File Paths
 # School
 main_path_school    = f"V:\\Timetabler\\Current Timetable\\{year}\\V10 Files"
-school_sem1         = f"{main_path_school}\\TTD_{year}_S1.tfx"
-school_sem1_t2      = f"{main_path_school}\\TTD_{year}_S1_T2.tfx"
-school_sem2         = f"{main_path_school}\\TTD_{year}_S2.tfx"
-school_sem2_t4      = f"{main_path_school}\\TTD_{year}_S2_T4.tfx"
+
 # Home
 main_path_home      = f"C:\\Users\\demg\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}\\V10 Files"
-home_sem1           = f"{main_path_home}\\TTD_{year}_S1.tfx"
-home_sem1_t2        = f"{main_path_home}\\TTD_{year}_S1_T2.tfx"
-home_sem2           = f"{main_path_home}\\TTD_{year}_S2.tfx"
-home_sem2_t4        = f"{main_path_home}\\TTD_{year}_S2_T4.tfx"
+
+# Semester & Term file names
+sem1         = f"\\TTD_{year}_S1.tfx"
+sem1_t2      = f"\\TTD_{year}_S1_T2.tfx"
+sem2         = f"\\TTD_{year}_S2.tfx"
+sem2_t4      = f"\\TTD_{year}_S2_T4.tfx"
 
 # Database setup
 conn = sqlite3.connect(':memory:')
@@ -47,12 +46,12 @@ print("Database Created Sucessfully!")
 if semester_selected == 1:
     title_heading = f"{year} Teaching Staff Semester 1"
     if school:
-        semester_file = school_sem1
-        term_file = school_sem1_t2
+        semester_file = f"{main_path_school}{sem1}"
+        term_file = f"{main_path_school}{sem1_t2}"
 
     elif home:
-        semester_file = home_sem1
-        term_file = home_sem1_t2
+        ssemester_file = f"{main_path_home}{sem1}"
+        term_file = f"{main_path_home}{sem1_t2}"
 
     else:
         print("You need to set school or home to true!")
@@ -65,12 +64,12 @@ if semester_selected == 1:
 elif semester_selected == 2:
     title_heading = f"{year} Teaching Staff Semester 2"
     if school:
-        semester_file = school_sem2
-        term_file = school_sem2_t4
+        semester_file = f"{main_path_school}{sem2}"
+        term_file = f"{main_path_school}{sem2_t4}"
 
     elif home:
-        semester_file = home_sem2
-        term_file = home_sem2_t4
+        ssemester_file = f"{main_path_home}{sem2}"
+        term_file = f"{main_path_home}{sem2_t4}"
 
     else:
         print("You need to set school or home to true!")
