@@ -55,10 +55,9 @@ if semester_selected == 1:
 
     else:
         print("You need to set school or home to true!")
-
-    
-    semester = 1
-    term = 2
+        
+    term_a = 1
+    term_b = 2
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
 
 elif semester_selected == 2:
@@ -75,8 +74,8 @@ elif semester_selected == 2:
         print("You need to set school or home to true!")
 
     # Set semester and term values for creating the T1-T4 subject names.
-    semester = 3
-    term = 4
+    term_a = 3
+    term_b = 4
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 2.xlsx')
 
 # Open the semester based json tdx file
@@ -88,8 +87,8 @@ with open(term_file, "r") as read_content:
     tfx_raw_term = json.load(read_content)
 
 # Read In The Data!
-read_in_v10_data(conn, tfx_raw, semester)
-read_in_v10_data(conn, tfx_raw_term, term)
+read_in_v10_data(conn, tfx_raw, term_a)
+read_in_v10_data(conn, tfx_raw_term, term_b)
 
 # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)
@@ -105,6 +104,3 @@ for faculty in get_faculties(conn):
 write_workbook(workbook)
 
 # Testing Area
-# print(get_df(conn))
-# teacher_data_df = get_df(conn)
-# print(teacher_data_df[teacher_data_df["code"] == "MSK"].transpose())
