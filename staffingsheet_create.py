@@ -16,8 +16,8 @@ pd.set_option('display.max_rows', 200)
 
 ### VARIABLES & SWITCHES ###
 # Set file location
-school = True
-home = False
+school = False
+home = True
 
 # Year Creation
 year = 2023
@@ -29,7 +29,7 @@ semester_selected = 2
 main_path_school    = f"V:\\Timetabler\\Current Timetable\\{year}\\V10 Files"
 
 # Home
-main_path_home      = f"C:\\Users\\demg\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}\\V10 Files"
+main_path_home      = f"C:\\Users\\david\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}\\V10 Files"
 
 # Semester & Term file names
 sem1         = f"\\TTD_{year}_S1.tfx"
@@ -68,14 +68,14 @@ elif semester_selected == 2:
         term_file = f"{main_path_school}{sem2_t4}"
 
     elif home:
-        ssemester_file = f"{main_path_home}{sem2}"
+        semester_file = f"{main_path_home}{sem2}"
         term_file = f"{main_path_home}{sem2_t4}"
 
     else:
         print("You need to set school or home to true!")
 
     # Set semester and term values for creating the T1-T4 subject names.
-    semester = 2
+    semester = 3
     term = 4
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 2.xlsx')
 
