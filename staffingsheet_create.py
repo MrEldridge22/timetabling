@@ -16,20 +16,20 @@ pd.set_option('display.max_rows', 200)
 
 ### VARIABLES & SWITCHES ###
 # Set file location
-school = False
-home = True
+school = True
+home = False
 
 # Year Creation
-year = 2023
+year = 2024
 # Set which semester to create sheet for
 semester_selected = 2
 
 ### File Paths
 # School
-main_path_school    = f"V:\\Timetabler\\Current Timetable\\{year}\\V10 Files"
+main_path_school    = f"V:\\Timetabler\\Current Timetable\\{year}"
 
 # Home
-main_path_home      = f"C:\\Users\\david\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}\\V10 Files"
+main_path_home      = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
 
 # Semester & Term file names
 sem1         = f"\\TTD_{year}_S1.tfx"
@@ -88,7 +88,7 @@ with open(term_file, "r") as read_content:
 
 # Read In The Data!
 read_in_v10_data(conn, tfx_raw, term_a)
-read_in_v10_data(conn, tfx_raw_term, term_b)
+# read_in_v10_data(conn, tfx_raw_term, term_b)
 
 # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)
