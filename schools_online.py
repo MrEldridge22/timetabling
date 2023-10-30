@@ -9,7 +9,7 @@ import json
 import pandas as pd
 import datetime
 
-# Year Creation
+# Year Creation and Open File
 year = datetime.date.today().year + 1 
 main_path_school        = f"V:\\Timetabler\\Current Timetable\\{year}"
 student_options_file    = f"\\{year} Year SS Students.sfx"
@@ -50,3 +50,4 @@ student_options_file    = f"\\{year} Year SS Students.sfx"
 # 18 Stage 1 Grade 1 Char False A, B, C, D or E.  (Not Essential)
 # 19 Partial Credits unctionality not yet implemented.  (Not Essential)
 # 20 ED ID Applies to EDSAS and Dux.  (Not Essential)
+

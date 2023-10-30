@@ -11,24 +11,9 @@
 import sqlite3
 import json
 import pandas as pd
-from sqlalchemy import create_engine, types
-from sqlalchemy.dialects.sqlite import (
-    BLOB,
-    BOOLEAN,
-    CHAR,
-    DATE,
-    DATETIME,
-    DECIMAL,
-    FLOAT,
-    INTEGER,
-    NUMERIC,
-    JSON,
-    SMALLINT,
-    TEXT,
-    TIME,
-    TIMESTAMP,
-    VARCHAR,
-)
+
+
+year_levels = ['07', '08', '09', '10', 'SS', 'SWD']
 
 # Debug and Testing Purposes
 pd.set_option('display.max_rows', None)
@@ -47,6 +32,7 @@ with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 8 Stude
 with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 7 Students.sfx', "r") as read_content:
     yr07_sfx = json.load(read_content)
 
+conn = sqlite3.connect(':memory:')
 
 def create_tables(conn):
     """
@@ -58,10 +44,12 @@ def create_tables(conn):
     Returns:
         None
     """
-
-    conn.executescript('''
-        --- Year 07 Student Options File
-        CREATE TABLE settings_07(
+    
+    # Iterate over the year levels and create the required tables
+    for year_level in year_levels:
+        print(f"Creating {year_level} Tables")
+        conn.executescript(f'''
+        CREATE TABLE settings_{year_level}(
             DefaultStudentUnits TEXT,
             LinesProposed INT,
             DefaultPeriods INT,
@@ -86,7 +74,7 @@ def create_tables(conn):
             ClassCodeComponents TEXT,
             DateModified REAL);
         
-        CREATE TABLE lines_07(
+        CREATE TABLE lines_{year_level}(
             LineID TEXT PRIMARY KEY,
             Code TEXT,
             Name TEXT,
@@ -95,7 +83,7 @@ def create_tables(conn):
             LineNo INT,
             Classes TEXT);
         
-        CREATE TABLE subjects_07(
+        CREATE TABLE subjects_{year_level}(
             SubjectID TEXT PRIMARY KEY,
             Code TEXT,
             Name TEXT,
@@ -110,7 +98,7 @@ def create_tables(conn):
             SpareField1 TEXT,
             SpareField2 TEXT);
 
-        CREATE TABLE options_07(
+        CREATE TABLE options_{year_level}(
             OptionID TEXT PRIMARY KEY NOT NULL,
             SubjectID TEXT,
             OptionCode TEXT,
@@ -125,9 +113,9 @@ def create_tables(conn):
             LineJoins JSON,
             SubgridConstraints JSON,
             LineRestrictions JSON,
-            FOREIGN KEY (SubjectID) REFERENCES subjects_07(SubjectID));
+            FOREIGN KEY (SubjectID) REFERENCES subjects_{year_level}(SubjectID));
 
-        CREATE TABLE students_07(
+        CREATE TABLE students_{year_level}(
             StudentID TEXT PRIMARY KEY NOT NULL,
             StudentCode INT NOT NULL,
             FirstName TEXT,
@@ -148,7 +136,7 @@ def create_tables(conn):
             Lock TEXT,
             StudentPreferences JSON);
 
-        CREATE TABLE classes_07(
+        CREATE TABLE classes_{year_level}(
             ClassID TEXT PRIMARY KEY NOT NULL,
             OptionID TEXT,
             LineID TEXT,
@@ -164,545 +152,8 @@ def create_tables(conn):
             Periods INT,
             Maximum_Class_Size INT,
             Lock TEXT,
-            FOREIGN KEY (OptionID) REFERENCES options_07(OptionID),
-            FOREIGN KEY (LineID) REFERENCES lines_07(LineID));
-
-    --- Year 08 Student Options File
-        CREATE TABLE settings_08(
-            DefaultStudentUnits TEXT,
-            LinesProposed INT,
-            DefaultPeriods INT,
-            DefaultCodeLength INT,
-            AddSuffixString TEXT,
-            SuffixType TEXT,
-            Subgrids INT,
-            ShowRollClass TEXT,
-            ShowYearLevel TEXT,
-            ShowHomeGroup TEXT,
-            ShowHouse TEXT,
-            ShowGender TEXT,
-            ShowStudentCode TEXT,
-            RestartSuffixOnLineorSubgrid INT,
-            AddSubgridNo TEXT,
-            AddLineChar TEXT,
-            TimetableNotice TEXT,
-            TimetableClassesSaved TEXT,
-            StudentSpareField1 TEXT,
-            OptionSpareField1 TEXT,
-            ConvertedFromV9 TEXT,
-            ClassCodeComponents TEXT,
-            DateModified REAL);
-        
-        CREATE TABLE lines_08(
-            LineID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            LineTagID TEXT,
-            Subgrid INT,
-            LineNo INT,
-            Classes TEXT);
-        
-        CREATE TABLE subjects_08(
-            SubjectID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            SpareField TEXT,
-            Units INT,
-            Subgrids INT,
-            ClassSizeMaximum INT,
-            CorrespondingLines TEXT,
-            SameStudents TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT);
-
-        CREATE TABLE options_08(
-            OptionID TEXT PRIMARY KEY NOT NULL,
-            SubjectID TEXT,
-            OptionCode TEXT,
-            AlternateCode TEXT,
-            AlternateName TEXT,
-            Subgrid INT,
-            Classes INT,
-            Lines INT,
-            Teachers INT,
-            AutoCreate TEXT,
-            PrerequisiteType INT,
-            LineJoins JSON,
-            SubgridConstraints JSON,
-            LineRestrictions JSON,
-            FOREIGN KEY (SubjectID) REFERENCES subjects_08(SubjectID));
-
-        CREATE TABLE students_08(
-            StudentID TEXT PRIMARY KEY NOT NULL,
-            StudentCode INT NOT NULL,
-            FirstName TEXT,
-            LastName TEXT,
-            MiddleName TEXT,
-            PreferredName TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            RollClass TEXT,
-            YearLevel TEXT,
-            House TEXT,
-            HomeGroup TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT,
-            SpareField3 TEXT,
-            Email TEXT,
-            Units INT,
-            Lock TEXT,
-            StudentPreferences JSON);
-
-        CREATE TABLE classes_08(
-            ClassID TEXT PRIMARY KEY NOT NULL,
-            OptionID TEXT,
-            LineID TEXT,
-            SameID TEXT,
-            ClassCode TEXT,
-            ClassName TEXT,
-            Suffix TEXT,
-            RollClassCode TEXT,
-            TeacherCode TEXT,
-            RoomCode TEXT,
-            TagLevel INT,
-            LessonNo INT,
-            Periods INT,
-            Maximum_Class_Size INT,
-            Lock TEXT,
-            FOREIGN KEY (OptionID) REFERENCES options_08(OptionID),
-            FOREIGN KEY (LineID) REFERENCES lines_08(LineID));
-
-    --- Year 09 Student Options File
-        CREATE TABLE settings_09(
-            DefaultStudentUnits TEXT,
-            LinesProposed INT,
-            DefaultPeriods INT,
-            DefaultCodeLength INT,
-            AddSuffixString TEXT,
-            SuffixType TEXT,
-            Subgrids INT,
-            ShowRollClass TEXT,
-            ShowYearLevel TEXT,
-            ShowHomeGroup TEXT,
-            ShowHouse TEXT,
-            ShowGender TEXT,
-            ShowStudentCode TEXT,
-            RestartSuffixOnLineorSubgrid INT,
-            AddSubgridNo TEXT,
-            AddLineChar TEXT,
-            TimetableNotice TEXT,
-            TimetableClassesSaved TEXT,
-            StudentSpareField1 TEXT,
-            OptionSpareField1 TEXT,
-            ConvertedFromV9 TEXT,
-            ClassCodeComponents TEXT,
-            DateModified REAL);
-        
-        CREATE TABLE lines_09(
-            LineID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            LineTagID TEXT,
-            Subgrid INT,
-            LineNo INT,
-            Classes TEXT);
-        
-        CREATE TABLE subjects_09(
-            SubjectID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            SpareField TEXT,
-            Units INT,
-            Subgrids INT,
-            ClassSizeMaximum INT,
-            CorrespondingLines TEXT,
-            SameStudents TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT);
-
-        CREATE TABLE options_09(
-            OptionID TEXT PRIMARY KEY NOT NULL,
-            SubjectID TEXT,
-            OptionCode TEXT,
-            AlternateCode TEXT,
-            AlternateName TEXT,
-            Subgrid INT,
-            Classes INT,
-            Lines INT,
-            Teachers INT,
-            AutoCreate TEXT,
-            PrerequisiteType INT,
-            LineJoins JSON,
-            SubgridConstraints JSON,
-            LineRestrictions JSON,
-            FOREIGN KEY (SubjectID) REFERENCES subjects_09(SubjectID));
-
-        CREATE TABLE students_09(
-            StudentID TEXT PRIMARY KEY NOT NULL,
-            StudentCode INT NOT NULL,
-            FirstName TEXT,
-            LastName TEXT,
-            MiddleName TEXT,
-            PreferredName TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            RollClass TEXT,
-            YearLevel TEXT,
-            House TEXT,
-            HomeGroup TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT,
-            SpareField3 TEXT,
-            Email TEXT,
-            Units INT,
-            Lock TEXT,
-            StudentPreferences JSON);
-
-        CREATE TABLE classes_09(
-            ClassID TEXT PRIMARY KEY NOT NULL,
-            OptionID TEXT,
-            LineID TEXT,
-            SameID TEXT,
-            ClassCode TEXT,
-            ClassName TEXT,
-            Suffix TEXT,
-            RollClassCode TEXT,
-            TeacherCode TEXT,
-            RoomCode TEXT,
-            TagLevel INT,
-            LessonNo INT,
-            Periods INT,
-            Maximum_Class_Size INT,
-            Lock TEXT,
-            FOREIGN KEY (OptionID) REFERENCES options_09(OptionID),
-            FOREIGN KEY (LineID) REFERENCES lines_09(LineID));
-
-        
-    --- Year 10 Student Options File
-        CREATE TABLE settings_10(
-            DefaultStudentUnits TEXT,
-            LinesProposed INT,
-            DefaultPeriods INT,
-            DefaultCodeLength INT,
-            AddSuffixString TEXT,
-            SuffixType TEXT,
-            Subgrids INT,
-            ShowRollClass TEXT,
-            ShowYearLevel TEXT,
-            ShowHomeGroup TEXT,
-            ShowHouse TEXT,
-            ShowGender TEXT,
-            ShowStudentCode TEXT,
-            RestartSuffixOnLineorSubgrid INT,
-            AddSubgridNo TEXT,
-            AddLineChar TEXT,
-            TimetableNotice TEXT,
-            TimetableClassesSaved TEXT,
-            StudentSpareField1 TEXT,
-            OptionSpareField1 TEXT,
-            ConvertedFromV9 TEXT,
-            ClassCodeComponents TEXT,
-            DateModified REAL);
-        
-        CREATE TABLE lines_10(
-            LineID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            LineTagID TEXT,
-            Subgrid INT,
-            LineNo INT,
-            Classes TEXT);
-        
-        CREATE TABLE subjects_10(
-            SubjectID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            SpareField TEXT,
-            Units INT,
-            Subgrids INT,
-            ClassSizeMaximum INT,
-            CorrespondingLines TEXT,
-            SameStudents TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT);
-
-        CREATE TABLE options_10(
-            OptionID TEXT PRIMARY KEY NOT NULL,
-            SubjectID TEXT,
-            OptionCode TEXT,
-            AlternateCode TEXT,
-            AlternateName TEXT,
-            Subgrid INT,
-            Classes INT,
-            Lines INT,
-            Teachers INT,
-            AutoCreate TEXT,
-            PrerequisiteType INT,
-            LineJoins JSON,
-            SubgridConstraints JSON,
-            LineRestrictions JSON,
-            FOREIGN KEY (SubjectID) REFERENCES subjects_10(SubjectID));
-
-        CREATE TABLE students_10(
-            StudentID TEXT PRIMARY KEY NOT NULL,
-            StudentCode INT NOT NULL,
-            FirstName TEXT,
-            LastName TEXT,
-            MiddleName TEXT,
-            PreferredName TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            RollClass TEXT,
-            YearLevel TEXT,
-            House TEXT,
-            HomeGroup TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT,
-            SpareField3 TEXT,
-            Email TEXT,
-            Units INT,
-            Lock TEXT,
-            StudentPreferences JSON);
-
-        CREATE TABLE classes_10(
-            ClassID TEXT PRIMARY KEY NOT NULL,
-            OptionID TEXT,
-            LineID TEXT,
-            SameID TEXT,
-            ClassCode TEXT,
-            ClassName TEXT,
-            Suffix TEXT,
-            RollClassCode TEXT,
-            TeacherCode TEXT,
-            RoomCode TEXT,
-            TagLevel INT,
-            LessonNo INT,
-            Periods INT,
-            Maximum_Class_Size INT,
-            Lock TEXT,
-            FOREIGN KEY (OptionID) REFERENCES options_10(OptionID),
-            FOREIGN KEY (LineID) REFERENCES lines_10(LineID));
-
-        
-    --- Year SS Student Options File
-        CREATE TABLE settings_SS(
-            DefaultStudentUnits TEXT,
-            LinesProposed INT,
-            DefaultPeriods INT,
-            DefaultCodeLength INT,
-            AddSuffixString TEXT,
-            SuffixType TEXT,
-            Subgrids INT,
-            ShowRollClass TEXT,
-            ShowYearLevel TEXT,
-            ShowHomeGroup TEXT,
-            ShowHouse TEXT,
-            ShowGender TEXT,
-            ShowStudentCode TEXT,
-            RestartSuffixOnLineorSubgrid INT,
-            AddSubgridNo TEXT,
-            AddLineChar TEXT,
-            TimetableNotice TEXT,
-            TimetableClassesSaved TEXT,
-            StudentSpareField1 TEXT,
-            OptionSpareField1 TEXT,
-            ConvertedFromV9 TEXT,
-            ClassCodeComponents TEXT,
-            DateModified REAL);
-        
-        CREATE TABLE lines_SS(
-            LineID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            LineTagID TEXT,
-            Subgrid INT,
-            LineNo INT,
-            Classes TEXT);
-        
-        CREATE TABLE subjects_SS(
-            SubjectID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            SpareField TEXT,
-            Units INT,
-            Subgrids INT,
-            ClassSizeMaximum INT,
-            CorrespondingLines TEXT,
-            SameStudents TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT);
-
-        CREATE TABLE options_SS(
-            OptionID TEXT PRIMARY KEY NOT NULL,
-            SubjectID TEXT,
-            OptionCode TEXT,
-            AlternateCode TEXT,
-            AlternateName TEXT,
-            Subgrid INT,
-            Classes INT,
-            Lines INT,
-            Teachers INT,
-            AutoCreate TEXT,
-            PrerequisiteType INT,
-            LineJoins BLOB,
-            SubgridConstraints BLOB,
-            LineRestrictions BLOB,
-            FOREIGN KEY (SubjectID) REFERENCES subjects_SS(SubjectID));
-
-        CREATE TABLE students_SS(
-            StudentID TEXT PRIMARY KEY NOT NULL,
-            StudentCode INT NOT NULL,
-            FirstName TEXT,
-            LastName TEXT,
-            MiddleName TEXT,
-            PreferredName TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            RollClass TEXT,
-            YearLevel TEXT,
-            House TEXT,
-            HomeGroup TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT,
-            SpareField3 TEXT,
-            Email TEXT,
-            Units INT,
-            Lock TEXT,
-            StudentPreferences JSON);
-
-        CREATE TABLE classes_SS(
-            ClassID TEXT PRIMARY KEY NOT NULL,
-            OptionID TEXT,
-            LineID TEXT,
-            SameID TEXT,
-            ClassCode TEXT,
-            ClassName TEXT,
-            Suffix TEXT,
-            RollClassCode TEXT,
-            TeacherCode TEXT,
-            RoomCode TEXT,
-            TagLevel INT,
-            LessonNo INT,
-            Periods INT,
-            Maximum_Class_Size INT,
-            Lock TEXT,
-            FOREIGN KEY (OptionID) REFERENCES options_SS(OptionID),
-            FOREIGN KEY (LineID) REFERENCES lines_SS(LineID));
-
-    --- Year SWD Student Options File
-        CREATE TABLE settings_SWD(
-            DefaultStudentUnits TEXT,
-            LinesProposed INT,
-            DefaultPeriods INT,
-            DefaultCodeLength INT,
-            AddSuffixString TEXT,
-            SuffixType TEXT,
-            Subgrids INT,
-            ShowRollClass TEXT,
-            ShowYearLevel TEXT,
-            ShowHomeGroup TEXT,
-            ShowHouse TEXT,
-            ShowGender TEXT,
-            ShowStudentCode TEXT,
-            RestartSuffixOnLineorSubgrid INT,
-            AddSubgridNo TEXT,
-            AddLineChar TEXT,
-            TimetableNotice TEXT,
-            TimetableClassesSaved TEXT,
-            StudentSpareField1 TEXT,
-            OptionSpareField1 TEXT,
-            ConvertedFromV9 TEXT,
-            ClassCodeComponents TEXT,
-            DateModified REAL);
-        
-        CREATE TABLE lines_SWD(
-            LineID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            LineTagID TEXT,
-            Subgrid INT,
-            LineNo INT,
-            Classes TEXT);
-        
-        CREATE TABLE subjects_SWD(
-            SubjectID TEXT PRIMARY KEY,
-            Code TEXT,
-            Name TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            SpareField TEXT,
-            Units INT,
-            Subgrids INT,
-            ClassSizeMaximum INT,
-            CorrespondingLines TEXT,TEXT
-            SameStudents TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT);
-
-        CREATE TABLE options_SWD(
-            OptionID TEXT PRIMARY KEY NOT NULL,
-            SubjectID TEXT,
-            OptionCode TEXT,
-            AlternateCode TEXT,
-            AlternateName TEXT,
-            Subgrid INT,
-            Classes INT,
-            Lines INT,
-            Teachers INT,
-            AutoCreate TEXT,
-            PrerequisiteType INT,
-            LineJoins JSON,
-            SubgridConstraints JSON,
-            LineRestrictions JSON,
-            FOREIGN KEY (SubjectID) REFERENCES subjects_SWD(SubjectID));
-
-        CREATE TABLE students_SWD(
-            StudentID TEXT PRIMARY KEY NOT NULL,
-            StudentCode INT NOT NULL,
-            FirstName TEXT,
-            LastName TEXT,
-            MiddleName TEXT,
-            PreferredName TEXT,
-            Gender TEXT,
-            BOSCode TEXT,
-            RollClass TEXT,
-            YearLevel TEXT,
-            House TEXT,
-            HomeGroup TEXT,
-            SpareField1 TEXT,
-            SpareField2 TEXT,
-            SpareField3 TEXT,
-            Email TEXT,
-            Units INT,
-            Lock TEXT,
-            StudentPreferences JSON);
-
-        CREATE TABLE classes_SWD(
-            ClassID TEXT PRIMARY KEY NOT NULL,
-            OptionID TEXT,
-            LineID TEXT,
-            SameID TEXT,
-            ClassCode TEXT,
-            ClassName TEXT,
-            Suffix TEXT,
-            RollClassCode TEXT,
-            TeacherCode TEXT,
-            RoomCode TEXT,
-            TagLevel INT,
-            LessonNo INT,
-            Periods INT,
-            Maximum_Class_Size INT,
-            Lock TEXT,
-            FOREIGN KEY (OptionID) REFERENCES options_SWD(OptionID),
-            FOREIGN KEY (LineID) REFERENCES lines_SWD(LineID));
+            FOREIGN KEY (OptionID) REFERENCES options_{year_level}(OptionID),
+            FOREIGN KEY (LineID) REFERENCES lines_{year_level}(LineID));
         ''')
 
 
@@ -711,8 +162,7 @@ def populate_tables(conn):
     lines_df = pd.json_normalize(yrSS_sfx, record_path=['Lines'])
     subjects_df = pd.json_normalize(yrSS_sfx, record_path=['Subjects'])
     options_df = pd.json_normalize(yrSS_sfx, record_path=['Options'])
-    print(options_df)
-
+    # print(options_df)
 
     students_df = pd.json_normalize(yrSS_sfx, record_path=['Students'])
     classes_df = pd.json_normalize(yrSS_sfx, record_path=['Classes'])
@@ -727,8 +177,6 @@ def populate_tables(conn):
 
     # print(options_df['SubgridConstraints'])
 
-engine = create_engine('sqlite://',echo=True)
-with engine.begin() as conn:
-    dbapi_conn = conn.connection
-    create_tables(dbapi_conn)
-    populate_tables(dbapi_conn)
+
+create_tables(conn)
+populate_tables(conn)
