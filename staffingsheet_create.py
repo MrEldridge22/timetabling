@@ -1,6 +1,6 @@
 import sqlite3
 from staffingsheet_export_to_excel import create_excel_sheet, write_workbook
-from timetable_database_interaction import createTables, read_in_v10_data, get_faculties
+from database_creation import create_tables, populate_tfx_data, get_faculties
 from staffingsheet_get_dataframes import get_df
 import xlsxwriter
 import json
@@ -22,7 +22,7 @@ home = False
 # Year Creation
 year = 2024
 # Set which semester to create sheet for
-semester_selected = 2
+semester_selected = 1
 
 ### File Paths
 # School
@@ -33,13 +33,13 @@ main_path_home      = f"C:\\Users\\deldridge\\OneDrive - Department for Educatio
 
 # Semester & Term file names
 sem1         = f"\\TTD_{year}_S1.tfx"
-sem1_t2      = f"\\TTD_{year}_S1_T2.tfx"
+sem1_t2      = f"\\TTD_{year}_S1.tfx"
 sem2         = f"\\TTD_{year}_S2.tfx"
 sem2_t4      = f"\\TTD_{year}_S2_T4.tfx"
 
 # Database setup
 conn = sqlite3.connect(':memory:')
-createTables(conn)
+create_tables(conn)
 print("Database Created Sucessfully!")
 
 # Run program with different semesters or locations
@@ -87,8 +87,8 @@ with open(term_file, "r") as read_content:
     tfx_raw_term = json.load(read_content)
 
 # Read In The Data!
-read_in_v10_data(conn, tfx_raw, term_a)
-# read_in_v10_data(conn, tfx_raw_term, term_b)
+populate_tfx_data(conn, tfx_raw, term_a)
+populate_tfx_data(conn, tfx_raw_term, term_b)
 
 # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)

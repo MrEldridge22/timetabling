@@ -1,9 +1,10 @@
 import math
 from datetime import datetime
 import random
+from constant_values import core_groups
 
 # List of Core Groups, Could this be read in an a csv in the future?
-core_groups_list = [' L', ' E', ' P', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6', 'O7', 'O8']
+core_groups_list = core_groups
 
 # Colours
 principal_color =       '#31869B'
