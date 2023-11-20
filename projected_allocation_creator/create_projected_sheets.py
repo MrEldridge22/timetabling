@@ -4,6 +4,9 @@ import json
 import pandas as pd
 from datetime import date
 
+### DEBUG
+pd.set_option('display.max_rows', None)
+
 ### NOTE
 # Need to create Version 10 Files first for this to work, these are JSON enNamed rather than XML enNamed.
 # Using Version 10 in 2023, no point in spending time for Version 9 creation.
@@ -17,12 +20,15 @@ from datetime import date
 
 # Choice lines, how to do this? Dictionary and have sfx lines as keys changing line number, how do I get semesters / terms then??
 
-### FILE PATHS
-# SS    "V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year SS Students.sfx"
-# Yr 10 "V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 10 Students.sfx"
-# Yr 9  "V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 9 Students.sfx"
-# Yr 8  "V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 8 Students.sfx"
-# Yr 7  "V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 7 Students.sfx"
+### sfx FILES Information ###
+# Time table year
+year = 2024
+
+# Main file path to sfx files
+main_path = f"V:\\Timetabler\\Current Timetable\\{year}"
+
+# sfx Year Levels - No SWD
+year_levels = ['SS', '10', '9', '8', '7']
 
 # Line Strucutres
 choice_lines_SS_dict = {    1:  "S1 Line 1",
@@ -41,58 +47,73 @@ choice_lines_SS_dict = {    1:  "S1 Line 1",
                             14: "S2 Line 7"
                             }
 
-choice_lines_yr10_dict = {  1:  "S1 Line 2",
-                            2:  "S1 Line 3",
-                            3:  "S1 Line 7",
-                            4:  "S2 Line 2",
-                            5:  "S2 Line 3",
-                            6:  "S2 Line 7"
+choice_lines_yr10_dict = {  1:  "S1 Line 1",
+                            2:  "S1 Line 4",
+                            3:  "S1 Line 6",
+                            4:  "S1 Line 7",
+                            5:  "S2 Line 1",
+                            6:  "S2 Line 4",
+                            7:  "S2 Line 6",
+                            8:  "S2 Line 7"
                             }
 
-choice_lines_yr09_dict = {  1:  "S1 Line 1",
-                            2:  "S1 Line 5",
-                            3:  "S1 Line 6",
-                            4:  "S2 Line 1",
-                            5:  "S2 Line 5",
-                            6:  "S2 Line 6"
+choice_lines_yr09_dict = {  1:  "S1 Line 2",
+                            2:  "S1 Line 3",
+                            3:  "S1 Line 5",
+                            4:  "S2 Line 2",
+                            5:  "S2 Line 3",
+                            6:  "S2 Line 5"
                             }
 
 choice_lines_yr08_dict = { 
-                            1:  "S1 Line 2 T1",
-                            2:  "S1 Line 2 T2",
-                            3:  "S1 Line 4 T1",
-                            4:  "S1 Line 4 T2",
-                            5:  "S1 Line 6 T1",
-                            6:  "S1 Line 6 T2",
-                            7:  "S2 Line 2 T3",
-                            8:  "S2 Line 2 T4",
-                            9:  "S2 Line 4 T3",
-                            10: "S2 Line 4 T4",
-                            11: "S2 Line 6 T3",
-                            12: "S2 Line 6 T4"
+                            1:  "S1 Line 1",
+                            2:  "S1 Line 1 T1",
+                            3:  "S1 Line 1 T2",
+                            4:  "S1 Line 3",
+                            5:  "S1 Line 3 T1",
+                            6:  "S1 Line 3 T2",
+                            7:  "S1 Line 7",
+                            8:  "S1 Line 7 T1",
+                            9:  "S1 Line 7 T2",
+                            10:  "S2 Line 1",
+                            11:  "S2 Line 1 T3",
+                            12:  "S2 Line 1 T4",
+                            13:  "S2 Line 3",
+                            14:  "S2 Line 3 T3",
+                            15:  "S2 Line 3 T4",
+                            16:  "S2 Line 7",
+                            17:  "S2 Line 7 T3",
+                            18:  "S2 Line 7 T4"
                             }
 
 choice_lines_yr07_dict = { 
-                            1:  "S1 Line 1 T1",
-                            2:  "S1 Line 1 T2",
-                            3:  "S1 Line 4 T1",
-                            4:  "S1 Line 4 T2",
-                            5:  "S1 Line 5 T1",
-                            6:  "S1 Line 5 T2",
-                            7:  "S2 Line 1 T3",
-                            8:  "S2 Line 1 T4",
-                            9:  "S2 Line 4 T3",
-                            10: "S2 Line 4 T4",
-                            11: "S2 Line 5 T3",
-                            12: "S2 Line 5 T4"
+                            1:  "S1 Line 2",
+                            2:  "S1 Line 2 T1",
+                            3:  "S1 Line 2 T2",
+                            4:  "S1 Line 4",
+                            5:  "S1 Line 4 T1",
+                            6:  "S1 Line 4 T2",
+                            7:  "S1 Line 6",
+                            8:  "S1 Line 6 T1",
+                            9:  "S1 Line 6 T2",
+                            10:  "S2 Line 2",
+                            11:  "S2 Line 2 T3",
+                            12:  "S2 Line 2 T4",
+                            13:  "S2 Line 4",
+                            14:  "S2 Line 4 T3",
+                            15:  "S2 Line 4 T4",
+                            16:  "S2 Line 6",
+                            17:  "S2 Line 6 T3",
+                            18:  "S2 Line 6 T4"
                             }
 
 # Subjects by Faculty
 faculty_subjects_dict = {   'English':            
-                                        ['07 P Literacy',
-                                            '07 Literacy (ATSI Focus)',
+                                        [   '07 Literacy P',
+                                            '07 Literacy',
                                             '08 Literacy',
-                                            '09 P Literacy',
+                                            '08 Literacy P',
+                                            '09 Literacy P',
                                             '09 Literacy',
                                             '10 Creative Writing',
                                             '11 English 1',
@@ -106,7 +127,7 @@ faculty_subjects_dict = {   'English':
                                             '12 English'],
                             
                             'EALD':         
-                                        ['07 EALD Literacy',
+                                        [   '07 EALD Literacy',
                                             '08 EALD Literacy',
                                             '09 EALD Literacy',
                                             '10 EALD Literacy',
@@ -115,7 +136,7 @@ faculty_subjects_dict = {   'English':
                                             '12 English as an Additional Language'],
 
                             'Hums':         
-                                        ['10 Civics Citizenship & Economics',
+                                        [   '10 Civics Citizenship & Economics',
                                             '11 Modern History',
                                             '11 Politics Power & People',
                                             '11 Philosophy',
@@ -124,24 +145,31 @@ faculty_subjects_dict = {   'English':
                                             '12 Cultural Explorations',
                                             '12 Politics Power & People',
                                             '12 Society & Culture',
-                                            '12 Society & Culture (Modified)'],
+                                            '12 Society & Culture (Modified)',
+                                            '12 Philosophy'],
 
                             'RP':           
-                                        ['12 Research Project A (Yr 11s)',
+                                        [   '12 Research Project A (Yr 11s)',
                                             '12 Research Project A',
                                             '12 Research Project (Modified)'],
 
                             'Language':     
-                                        ['07 Italian',
+                                        [   '07 Italian',
                                             '07 Italian (Optional)',
                                             '08 Italian',
                                             '08 Italian (Optional)',
                                             '09 Italian',
                                             '10 Italian',
-                                            '10 Italian (Beginners)'],
+                                            '10 Italian (Beginners)',
+                                            '11 Italian (Beginners)',
+                                            '11 Italian (Continuers)'],
                                     
                             'Maths':
-                                        ['10 Mathematics A',
+                                        [   '10 Mathematics Advanced',
+                                            '10 Mathematics Essential',
+                                            '10 Mathematics General',
+                                            '10 Mathematics Numeracy',
+                                            '10 Mathematics A',
                                             '11 Numeracy Development',
                                             '11 Specialist Mathematics A',
                                             '11 Specialist Mathematics B',
@@ -158,10 +186,10 @@ faculty_subjects_dict = {   'English':
                                             '12 Mathematical Methods',
                                             '12 Specalist Mathematics',
                                             '12 Mathematics Skills for Life (Modified)',
-                                            '12 Math Skills for Life (Integrated Learning)'],
+                                            '12 Math Skills for Life (IL)'],
                                     
                             'Science':      
-                                        ['11 Biology A',
+                                        [   '11 Biology A',
                                             '11 Biology B',
                                             '11 Chemistry 1',
                                             '11 Chemistry 2',
@@ -176,18 +204,20 @@ faculty_subjects_dict = {   'English':
                                             '12 Biology',
                                             '12 Chemistry',
                                             '12 Nutrition',
-                                            '12 Psychology (Integrated Learning)',
+                                            '12 Psychology (IL)',
                                             '12 Psychology',
                                             '12 Physics',
-                                            '12 Scientific Studies'],
+                                            '12 Scientific Studies',
+                                            '12 Scientific Studies (Modifed)'],
 
                             'HPE':      
-                                        ['07 Health & Physical Education',
+                                        [   '07 Health & Physical Education',
                                             '08 Health & Physical Education',
                                             '09 Health & Physical Education',
                                             '10 Health & Physical Education 1',
                                             '10 Health & Physical Education 2',
                                             '10 Aboriginal Careers Exploration',
+                                            '10 Soccer Academy (IL)',
                                             '11 Child Studies A',
                                             '11 Child Studies B',
                                             '11 Health & Wellbeing A',
@@ -201,28 +231,30 @@ faculty_subjects_dict = {   'English':
                                             '12 Power Cup (Modified)',
                                             '12 Health & Wellbeing',
                                             '12 Health & Wellbeing (Modified)',
-                                            '12 SAASTA (Integrated Learning)',
+                                            '12 SAASTA (IL)',
                                             '12 Child Studies (Modified)',
-                                            '12 Sport Health & Physical Activity (Integrated Learning)',
+                                            '12 Sport Health & Physical Activity (IL)',
                                             '12 Outdoor Education',
                                             '12 Sport Health and Physical Activity (Modified)',
-                                            '12 Physical Education'],
+                                            '12 Physical Education'
+                                            '12 Outdoor Education (Modified)',
+                                            '12 Science and Healthy Lifestyle (IL)'],
 
                             'Food Tech':
-                                        ['07 Food & Nutrition',
+                                        [   '07 Food & Nutrition',
                                             '08 Food & Nutrition',
                                             '09 Food & Nutrition',
                                             '09 Food Innovation',
                                             '10 Food & Nutrition',
                                             '10 Food Innovation',
-                                            '11 Food & Hospitality',
+                                            '11 Food and Hospitality Studies',
                                             '11 Food Innovation',
                                             '12 Food & Hospitality Studies',
                                             '12 Food & Hospitality (Modified)',
                                             '12 Food Innovation'],
 
                             'Digi Tech':
-                                        ['07 Digital Technology',
+                                        [   '07 Digital Technology',
                                             '07 Digital Products',
                                             '08 Digital Technology',
                                             '08 Digital Products',
@@ -240,46 +272,51 @@ faculty_subjects_dict = {   'English':
                                             '12 Digital Products',
                                             '12 Digital Technology'],
                             'Arts':
-                                        ['07 Dance',
+                                        [   '07 Dance',
                                             '07 Drama',
                                             '07 Music',
-                                            '07 Visual Arts',
+                                            '07 Visual Art',
                                             '08 Dance',
                                             '08 Drama',
                                             '08 Introduction to Media Arts',
                                             '08 Music',
-                                            '08 Visual Arts',
+                                            '08 Visual Art',
                                             '09 Dance',
                                             '09 Drama',
                                             '09 Media Arts A - Film & Cinematography',
                                             '09 Media Arts B - Animation',
                                             '09 Music',
-                                            '09 Visual Arts',
+                                            '09 Visual Art',
                                             '10 Dance A',
                                             '10 Dance B',
                                             '10 Drama A',
                                             '10 Drama B',
-                                            '10 Media Arts B - Film & Cinematography',
-                                            '10 Media Arts A - Animation',
+                                            '10 Media Arts: Film & Cinematography',
+                                            '10 Media Arts: Animation',
                                             '10 Music A',
                                             '10 Music B',
+                                            '10 Specialist Music - Band (IL)',
                                             '10 Visual Arts A',
                                             '10 Visual Arts B',
                                             '11 Creative Arts Music',
                                             '11 Music Experience A',
                                             '11 Music Experience B',
+                                            '11 Specialist Music - Band (IL)',
                                             '11 Urban Street & Community Art',
-                                            '11 Dance (Integrated Learning)',
+                                            '11 Dance (IL)',
                                             '11 Stage Production (Integrated Learning)',
                                             '11 Art Practical A',
                                             '11 Art Practical B',
+                                            '11 Media Film and Animation',
                                             '12 Urban Street & Community Art (Modified)',
                                             '12 Stage Production (Modified)',
-                                            '12 Urban Street and COmmunity Art (Integrated Learning)',
-                                            '12 Visual Arts - Art'],
+                                            '12 Stage Production (IL)',
+                                            '12 Urban Street & Community Art (IL)',
+                                            '12 Visual Art',
+                                            '12 Creative Arts (Music Focus)'],
 
                             'Design Tech':
-                                        ['07 Design & Technology',
+                                        [   '07 Design & Technology',
                                             '08 Material Products - Metal',
                                             '08 Material Products - Wood',
                                             '09 Engineering Technology',
@@ -290,326 +327,105 @@ faculty_subjects_dict = {   'English':
                                             '10 Jewllery Design',
                                             '10 Materials Design with Metal',
                                             '10 Materials Design with Wood',
+                                            '10 Introduction to Construction',
                                             '11 Material Solutions (Jewellery)',
-                                            '11 Material Solutions (Metal)',
-                                            '11 Material Solutions (Wood)',
+                                            '11 Material Solutions (Metalwork)',
+                                            '11 Material Solutions (Woodwork)',
                                             '11 Robotic & Electronic Systems A',
                                             '11 Robotic & Electronic Systems B',
                                             '12 Construction Technology',
                                             '12 Material Solutions Metal (Modified)',
                                             '12 Material Solutions Wood (Modified)',
-                                            '12 Material Solutions - Metalwork',
-                                            '12 Material Solutions - Furniture Construction',
-                                            '12 Robotic & Electronic Systems'],
+                                            '12 Material Solutions (Metalwork)',
+                                            '12 Material Solutions (Furniture Construction)',
+                                            '12 Robotic & Electronic Systems',
+                                            '12 Wood and Metal (Modified)',
+                                            '12 Industry Connections Construction'],
                             'PLP':
-                                        ['11 Personal Learning Plan',
+                                        [   '11 Personal Learning Plan',
                                             '12 Workplace Practices',
-                                            '12 Workplace Practices (Modified)']
+                                            '12 Workplace Practices (Modified)'],
+                            'Intervention':
+                                        [   '07 Learning Support',
+                                            '08 Learning Support',
+                                            '09 Learning Support',
+                                            '10 Learning Support']
                                     }
 
 # Create tempory database in memory.
 conn = sqlite3.connect(':memory:')
 
+### NEEDS OPTIMISING, USE LOOP AND LIST OF SFX YEARS!! ###
 ### CREATE TABLES ###
-conn.executescript('''
-                    --- Senior School (11 & 12)
-                    CREATE TABLE yrSS_lines(
+for yrLevel in year_levels:
+    # Create Database Table
+    conn.executescript(f'''
+                    CREATE TABLE yr{yrLevel}_lines(
                         LineID TEXT PRIMARY KEY NOT NULL,
                         Subgrid INT NOT NULL,
                         Name INT NOT NULL);
-                    CREATE TABLE yrSS_subjects(
+                    CREATE TABLE yr{yrLevel}_subjects(
                         SubjectID TEXT PRIMARY KEY NOT NULL,
                         Name TEXT NOT NULL);
-                    CREATE TABLE yrSS_options(
+                    CREATE TABLE yr{yrLevel}_options(
                         OptionID TEXT PRIMARY KEY NOT NULL,
                         SubjectID TEXT NOT NULL,
-                        FOREIGN KEY (SubjectID) REFERENCES yrSS_subjects(SubjectID));
-                    CREATE TABLE yrSS_classes(
+                        FOREIGN KEY (SubjectID) REFERENCES yr{yrLevel}_subjects(SubjectID));
+                    CREATE TABLE yr{yrLevel}_classes(
                         ClassID TEXT PRIMARY KEY NOT NULL,
                         OptionID TEXT NOT NULL,
                         LineID TEXT NOT NULL,
-                        FOREIGN KEY (OptionID) REFERENCES yrSS_options(OptionID),
-                        FOREIGN KEY (LineID) REFERENCES yrSS_lines(LineID));
-                    
-                    --- Year 10
-                    CREATE TABLE yr10_lines(
-                        LineID TEXT PRIMARY KEY NOT NULL,
-                        Subgrid INT NOT NULL,
-                        Name INT NOT NULL);
-                    CREATE TABLE yr10_subjects(
-                        SubjectID TEXT PRIMARY KEY NOT NULL,
-                        Name TEXT NOT NULL);
-                    CREATE TABLE yr10_options(
-                        OptionID TEXT PRIMARY KEY NOT NULL,
-                        SubjectID TEXT NOT NULL,
-                        FOREIGN KEY (SubjectID) REFERENCES yr10_subjects(SubjectID));
-                    CREATE TABLE yr10_classes(
-                        ClassID TEXT PRIMARY KEY NOT NULL,
-                        OptionID TEXT NOT NULL,
-                        LineID TEXT NOT NULL,
-                        FOREIGN KEY (OptionID) REFERENCES yr10_options(OptionID),
-                        FOREIGN KEY (LineID) REFERENCES yr10_lines(LineID));
-
-                    --- Year 09
-                    CREATE TABLE yr09_lines(
-                        LineID TEXT PRIMARY KEY NOT NULL,
-                        Subgrid INT NOT NULL,
-                        Name INT NOT NULL);
-                    CREATE TABLE yr09_subjects(
-                        SubjectID TEXT PRIMARY KEY NOT NULL,
-                        Name TEXT NOT NULL);
-                    CREATE TABLE yr09_options(
-                        OptionID TEXT PRIMARY KEY NOT NULL,
-                        SubjectID TEXT NOT NULL,
-                        FOREIGN KEY (SubjectID) REFERENCES yr09_subjects(SubjectID));
-                    CREATE TABLE yr09_classes(
-                        ClassID TEXT PRIMARY KEY NOT NULL,
-                        OptionID TEXT NOT NULL,
-                        LineID TEXT NOT NULL,
-                        FOREIGN KEY (OptionID) REFERENCES yr09_options(OptionID),
-                        FOREIGN KEY (LineID) REFERENCES yr09_lines(LineID));
-
-                    --- Year 08
-                    CREATE TABLE yr08_lines(
-                        LineID TEXT PRIMARY KEY NOT NULL,
-                        Subgrid INT NOT NULL,
-                        Name INT NOT NULL);
-                    CREATE TABLE yr08_subjects(
-                        SubjectID TEXT PRIMARY KEY NOT NULL,
-                        Name TEXT NOT NULL);
-                    CREATE TABLE yr08_options(
-                        OptionID TEXT PRIMARY KEY NOT NULL,
-                        SubjectID TEXT NOT NULL,
-                        FOREIGN KEY (SubjectID) REFERENCES yr08_subjects(SubjectID));
-                    CREATE TABLE yr08_classes(
-                        ClassID TEXT PRIMARY KEY NOT NULL,
-                        OptionID TEXT NOT NULL,
-                        LineID TEXT NOT NULL,
-                        FOREIGN KEY (OptionID) REFERENCES yr08_options(OptionID),
-                        FOREIGN KEY (LineID) REFERENCES yr08_lines(LineID));
-
-                    --- Year 07
-                    CREATE TABLE yr07_lines(
-                        LineID TEXT PRIMARY KEY NOT NULL,
-                        Subgrid INT NOT NULL,
-                        Name INT NOT NULL);
-                    CREATE TABLE yr07_subjects(
-                        SubjectID TEXT PRIMARY KEY NOT NULL,
-                        Name TEXT NOT NULL);
-                    CREATE TABLE yr07_options(
-                        OptionID TEXT PRIMARY KEY NOT NULL,
-                        SubjectID TEXT NOT NULL,
-                        FOREIGN KEY (SubjectID) REFERENCES yr07_subjects(SubjectID));
-                    CREATE TABLE yr07_classes(
-                        ClassID TEXT PRIMARY KEY NOT NULL,
-                        OptionID TEXT NOT NULL,
-                        LineID TEXT NOT NULL,
-                        FOREIGN KEY (OptionID) REFERENCES yr07_options(OptionID),
-                        FOREIGN KEY (LineID) REFERENCES yr07_lines(LineID));
+                        FOREIGN KEY (OptionID) REFERENCES yr{yrLevel}_options(OptionID),
+                        FOREIGN KEY (LineID) REFERENCES yr{yrLevel}_lines(LineID));
                     ''')
-
-# Open all sfx files
-with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year SS Students.sfx', "r") as read_content:
-        yrSS_sfx = json.load(read_content)
-with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 10 Students.sfx', "r") as read_content:
-        yr10_sfx = json.load(read_content)
-with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 9 Students.sfx', "r") as read_content:
-        yr09_sfx = json.load(read_content)
-with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 8 Students.sfx', "r") as read_content:
-        yr08_sfx = json.load(read_content)
-with open('V:\\Timetabler\\Current Timetable\\2023\\V10 Files\\2023 Year 7 Students.sfx', "r") as read_content:
-        yr07_sfx = json.load(read_content)
-
-### YEAR 11 & 12 ###
-# Extract Line Info
-lines_df = pd.json_normalize(yrSS_sfx, record_path=['Lines'])
-for col in lines_df.columns:
-    if col not in ['LineID', 'Name', 'Subgrid']:
-        lines_df.drop([col], inplace=True, axis=1)
-lines_df.to_sql('yrSS_lines', conn, if_exists='append', index=False)
-
-# Extract Subject Info
-subjects_df = pd.json_normalize(yrSS_sfx, record_path=['Subjects'])
-for col in subjects_df.columns:
-        if col not in ["SubjectID", "Name"]:
-            subjects_df.drop([col], inplace=True, axis=1)
-subjects_df.to_sql('yrSS_subjects', conn, if_exists='append', index=False)
-
-# Extract Options Info
-options_df = pd.json_normalize(yrSS_sfx, record_path=['Options'])
-for col in options_df.columns:
-        if col not in ["OptionID", "SubjectID"]:
-            options_df.drop([col], inplace=True, axis=1)
-options_df.to_sql('yrSS_options', conn, if_exists='append', index=False)
-
-# Extract Classes Info
-classes_df = pd.json_normalize(yrSS_sfx, record_path=['Classes'])
-for col in classes_df.columns:
-        if col not in ["ClassID", "OptionID", "LineID"]:
-            classes_df.drop([col], inplace=True, axis=1)
-classes_df.to_sql('yrSS_classes', conn, if_exists='append', index=False)
-
-# Get all subjects by line
-query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as num_classes from yrSS_classes c
-        INNER JOIN yrSS_options o ON o.OptionID = c.OptionID
-        INNER JOIN yrSS_subjects s on o.SubjectID = s.SubjectID
-        INNER JOIN yrSS_lines l on l.LineID = c.LineID
-        GROUP BY s.Name, l.Name
-        ORDER BY s.Name DESC;"""
-
-yrSS_df = pd.read_sql(query, conn)
-
-### YEAR 10 ###
-# Extract Line Info
-lines_df = pd.json_normalize(yr10_sfx, record_path=['Lines'])
-for col in lines_df.columns:
-    if col not in ['LineID', 'Name', 'Subgrid']:
-        lines_df.drop([col], inplace=True, axis=1)
-lines_df.to_sql('yr10_lines', conn, if_exists='append', index=False)
-
-# Extract Subject Info
-subjects_df = pd.json_normalize(yr10_sfx, record_path=['Subjects'])
-for col in subjects_df.columns:
-        if col not in ["SubjectID", "Name"]:
-            subjects_df.drop([col], inplace=True, axis=1)
-subjects_df.to_sql('yr10_subjects', conn, if_exists='append', index=False)
-
-# Extract Options Info
-options_df = pd.json_normalize(yr10_sfx, record_path=['Options'])
-for col in options_df.columns:
-        if col not in ["OptionID", "SubjectID"]:
-            options_df.drop([col], inplace=True, axis=1)
-options_df.to_sql('yr10_options', conn, if_exists='append', index=False)
-
-# Extract Classes Info
-classes_df = pd.json_normalize(yr10_sfx, record_path=['Classes'])
-for col in classes_df.columns:
-        if col not in ["ClassID", "OptionID", "LineID"]:
-            classes_df.drop([col], inplace=True, axis=1)
-classes_df.to_sql('yr10_classes', conn, if_exists='append', index=False)
-
-# Get all subjects by line
-query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as num_classes from yr10_classes c
-        INNER JOIN yr10_options o ON o.OptionID = c.OptionID
-        INNER JOIN yr10_subjects s on o.SubjectID = s.SubjectID
-        INNER JOIN yr10_lines l on l.LineID = c.LineID
-        GROUP BY s.Name, l.Name;"""
-
-yr10_df = pd.read_sql(query, conn)
-
-### YEAR 09 ###
-# Extract Line Info
-lines_df = pd.json_normalize(yr09_sfx, record_path=['Lines'])
-for col in lines_df.columns:
-    if col not in ['LineID', 'Name', 'Subgrid']:
-        lines_df.drop([col], inplace=True, axis=1)
-lines_df.to_sql('yr09_lines', conn, if_exists='append', index=False)
-
-# Extract Subject Info
-subjects_df = pd.json_normalize(yr09_sfx, record_path=['Subjects'])
-for col in subjects_df.columns:
-        if col not in ["SubjectID", "Name"]:
-            subjects_df.drop([col], inplace=True, axis=1)
-subjects_df.to_sql('yr09_subjects', conn, if_exists='append', index=False)
-
-# Extract Options Info
-options_df = pd.json_normalize(yr09_sfx, record_path=['Options'])
-for col in options_df.columns:
-        if col not in ["OptionID", "SubjectID"]:
-            options_df.drop([col], inplace=True, axis=1)
-options_df.to_sql('yr09_options', conn, if_exists='append', index=False)
-
-# Extract Classes Info
-classes_df = pd.json_normalize(yr09_sfx, record_path=['Classes'])
-for col in classes_df.columns:
-        if col not in ["ClassID", "OptionID", "LineID"]:
-            classes_df.drop([col], inplace=True, axis=1)
-classes_df.to_sql('yr09_classes', conn, if_exists='append', index=False)
-
-# Get all subjects by line
-query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as num_classes from yr09_classes c
-        INNER JOIN yr09_options o ON o.OptionID = c.OptionID
-        INNER JOIN yr09_subjects s on o.SubjectID = s.SubjectID
-        INNER JOIN yr09_lines l on l.LineID = c.LineID
-        GROUP BY s.Name, l.Name;"""
-
-yr09_df = pd.read_sql(query, conn)
-
-### YEAR 8 ###
-# Extract Line Info
-lines_df = pd.json_normalize(yr08_sfx, record_path=['Lines'])
-for col in lines_df.columns:
-        if col not in ["LineID", "Name", "Subgrid"]:
+    
+    # Open sfx file
+    with open(f'{main_path}\\{year} Year {yrLevel} Students.sfx', "r") as read_content:
+        sfx_file = json.load(read_content)
+    
+    # Extract Line Info
+    lines_df = pd.json_normalize(sfx_file, record_path=['Lines'])
+    for col in lines_df.columns:
+        if col not in ['LineID', 'Name', 'Subgrid']:
             lines_df.drop([col], inplace=True, axis=1)
-lines_df.to_sql('yr08_lines', conn, if_exists='append', index=False)
+    lines_df.to_sql(f'yr{yrLevel}_lines', conn, if_exists='append', index=False)
 
-# Extract Subject Info
-subjects_df = pd.json_normalize(yr08_sfx, record_path=['Subjects'])
-for col in subjects_df.columns:
-        if col not in ["SubjectID", "Name"]:
-            subjects_df.drop([col], inplace=True, axis=1)
-subjects_df.to_sql('yr08_subjects', conn, if_exists='append', index=False)
+    # Extract Subject Info
+    subjects_df = pd.json_normalize(sfx_file, record_path=['Subjects'])
+    for col in subjects_df.columns:
+            if col not in ["SubjectID", "Name"]:
+                subjects_df.drop([col], inplace=True, axis=1)
+    subjects_df.to_sql(f'yr{yrLevel}_subjects', conn, if_exists='append', index=False)
 
-# Extract Options Info
-options_df = pd.json_normalize(yr08_sfx, record_path=['Options'])
-for col in options_df.columns:
-        if col not in ["OptionID", "SubjectID"]:
-            options_df.drop([col], inplace=True, axis=1)
-options_df.to_sql('yr08_options', conn, if_exists='append', index=False)
+    # Extract Options Info
+    options_df = pd.json_normalize(sfx_file, record_path=['Options'])
+    for col in options_df.columns:
+            if col not in ["OptionID", "SubjectID"]:
+                options_df.drop([col], inplace=True, axis=1)
+    options_df.to_sql(f'yr{yrLevel}_options', conn, if_exists='append', index=False)
 
-# Extract Classes Info
-classes_df = pd.json_normalize(yr08_sfx, record_path=['Classes'])
-for col in classes_df.columns:
-        if col not in ["ClassID", "OptionID", "LineID"]:
-            classes_df.drop([col], inplace=True, axis=1)
-classes_df.to_sql('yr08_classes', conn, if_exists='append', index=False)
+    # Extract Classes Info
+    classes_df = pd.json_normalize(sfx_file, record_path=['Classes'])
+    for col in classes_df.columns:
+            if col not in ["ClassID", "OptionID", "LineID"]:
+                classes_df.drop([col], inplace=True, axis=1)
+    classes_df.to_sql(f'yr{yrLevel}_classes', conn, if_exists='append', index=False)
 
-# Get all subjects by line
-query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as num_classes from yr08_classes c
-        INNER JOIN yr08_options o ON o.OptionID = c.OptionID
-        INNER JOIN yr08_subjects s on o.SubjectID = s.SubjectID
-        INNER JOIN yr08_lines l on l.LineID = c.LineID
-        GROUP BY s.Name, l.Name;"""
-
-yr08_df = pd.read_sql(query, conn)
-
-### YEAR 7 ###
-# Extract Line Info
-lines_df = pd.json_normalize(yr07_sfx, record_path=['Lines'])
-for col in lines_df.columns:
-        if col not in ["LineID", "Name", "Subgrid"]:
-            lines_df.drop([col], inplace=True, axis=1)
-lines_df.to_sql('yr07_lines', conn, if_exists='append', index=False)
-
-# Extract Subject Info
-subjects_df = pd.json_normalize(yr07_sfx, record_path=['Subjects'])
-for col in subjects_df.columns:
-        if col not in ["SubjectID", "Name"]:
-            subjects_df.drop([col], inplace=True, axis=1)
-subjects_df.to_sql('yr07_subjects', conn, if_exists='append', index=False)
-
-# Extract Options Info
-options_df = pd.json_normalize(yr07_sfx, record_path=['Options'])
-for col in options_df.columns:
-        if col not in ["OptionID", "SubjectID"]:
-            options_df.drop([col], inplace=True, axis=1)
-options_df.to_sql('yr07_options', conn, if_exists='append', index=False)
-
-# Extract Classes Info
-classes_df = pd.json_normalize(yr07_sfx, record_path=['Classes'])
-for col in classes_df.columns:
-        if col not in ["ClassID", "OptionID", "LineID"]:
-            classes_df.drop([col], inplace=True, axis=1)
-classes_df.to_sql('yr07_classes', conn, if_exists='append', index=False)
 
 # Get all subjects by line
-query = """SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as num_classes from yr07_classes c
-        INNER JOIN yr07_options o ON o.OptionID = c.OptionID
-        INNER JOIN yr07_subjects s on o.SubjectID = s.SubjectID
-        INNER JOIN yr07_lines l on l.LineID = c.LineID
-        GROUP BY s.Name, l.Name;"""
-
-yr07_df = pd.read_sql(query, conn)
+def get_subjects (yrLevel):
+    query = f"""SELECT s.Name AS subject, l.Name as line, COUNT(s.Name || l.Name) as num_classes from yr{yrLevel}_classes c
+            INNER JOIN yr{yrLevel}_options o ON o.OptionID = c.OptionID
+            INNER JOIN yr{yrLevel}_subjects s on o.SubjectID = s.SubjectID
+            INNER JOIN yr{yrLevel}_lines l on l.LineID = c.LineID
+            GROUP BY s.Name, l.Name
+            ORDER BY s.Name DESC;"""
+    return pd.read_sql(query, conn)
+yrSS_df = get_subjects("SS")
+yr10_df = get_subjects("10")
+yr09_df = get_subjects("9")
+yr08_df = get_subjects("8")
+yr07_df = get_subjects("7")
 
 # Change Lines in Dataframes to match school line names.
 yrSS_df.replace({"line": choice_lines_SS_dict}, inplace=True)
@@ -638,18 +454,16 @@ full_subjects_df = pd.concat([yrSS_df, yr10_df, yr09_df, yr08_df, yr07_df], igno
 full_subjects_df = full_subjects_df[full_subjects_df['faculty'] != "Key doesnt exist"]
 
 # Remove HPE and Italian Terms for 7's and 8's as they are semester based subjects
-### THIS NEEDS CHECKING ONCE 8's or 7's are done!
 def remove_terms_hpe(r):
-    if r.subject in ["07 Health & Physical Education", '07 Italian', '07 Italian (Optional)', '07 Literacy', '07 EALD Literacy', '07 P Literacy', '07 Literacy (ATSI Focus)', '07 Learning Support', '08 EALD Literacy', '08 P Literacy', '08 Literacy', '08 Health & Physical Education', '08 Italian (Compulsory)', '08 Italian (Optional)']:
-        #if 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
-        r.line = r.line[:-3]
-    elif 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
-        r.subject = r.subject + " " + r.line[-3:]
+    if 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
+        r.subject = r.subject + r.line[-3:]
         r.num_classes = r.num_classes / 2
         r.line = r.line[:-3]
     return r
 
 full_subjects_df = full_subjects_df.apply(lambda row: remove_terms_hpe(row), axis=1)
+
+print(full_subjects_df)
 
 # Split into Semesters and strip off Semester Codes
 semester_1_df = full_subjects_df[full_subjects_df.line.str.contains('S1')]
@@ -658,6 +472,7 @@ semester_2_df = full_subjects_df[full_subjects_df.line.str.contains('S2')]
 semester_2_df['line'] = semester_2_df['line'].str.replace("S2 ", "")
 
 ### OUTPUT ###
+
 # Location
 workbook = xlsxwriter.Workbook('projected_allocation_creator\Subject Allocations.xlsx')
 
@@ -766,6 +581,10 @@ def sheet_writer(semester_df, semester_sheet):
         # semester_sheet.write('A' + str(line_start + max_line_length), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'bottom': True}))
         # Increment start counter by of number of rows in each faculty dataframe with a buffer line
         line_start = 1 + line_start + max_line_length
+
+    # Write out formulas for column sums
+    for line_column in ['C', 'E', 'G', 'I', 'K', 'M', 'O']:
+         semester_sheet.write_formula(line_column + str(line_start - 1), f'=SUM({line_column}3:{line_column}{str(line_start - 2)})')   
   
 # Create Semester 1 and Semester 2 Staffing Sheets
 sheet_writer(semester_1_df, semester_1_sheet)
