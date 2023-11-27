@@ -16,8 +16,8 @@ pd.set_option('display.max_rows', 200)
 
 ### VARIABLES & SWITCHES ###
 # Set file location
-school = True
-home = False
+school = False
+home = True
 
 # Year Creation
 year = 2024
@@ -29,11 +29,11 @@ semester_selected = 1
 main_path_school    = f"V:\\Timetabler\\Current Timetable\\{year}"
 
 # Home
-main_path_home      = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+main_path_home      = f"C:\\Users\\demg\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
 
 # Semester & Term file names
 sem1         = f"\\TTD_{year}_S1.tfx"
-sem1_t2      = f"\\TTD_{year}_S1.tfx"
+sem1_t2      = f"\\TTD_{year}_S1_T2.tfx"
 sem2         = f"\\TTD_{year}_S2.tfx"
 sem2_t4      = f"\\TTD_{year}_S2_T4.tfx"
 
@@ -50,7 +50,7 @@ if semester_selected == 1:
         term_file = f"{main_path_school}{sem1_t2}"
 
     elif home:
-        ssemester_file = f"{main_path_home}{sem1}"
+        semester_file = f"{main_path_home}{sem1}"
         term_file = f"{main_path_home}{sem1_t2}"
 
     else:
