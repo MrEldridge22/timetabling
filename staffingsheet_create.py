@@ -16,8 +16,8 @@ pd.set_option('display.max_rows', 200)
 
 ### VARIABLES & SWITCHES ###
 # Set file location
-school = False
-home = True
+school = True
+home = False
 
 # Year Creation
 year = 2024

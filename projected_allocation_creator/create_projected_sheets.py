@@ -25,7 +25,8 @@ pd.set_option('display.max_rows', None)
 year = 2024
 
 # Main file path to sfx files
-main_path = f"V:\\Timetabler\\Current Timetable\\{year}"
+# main_path = f"V:\\Timetabler\\Current Timetable\\{year}"
+main_path = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
 
 # sfx Year Levels - No SWD
 year_levels = ['SS', '10', '9', '8', '7']
@@ -304,7 +305,7 @@ faculty_subjects_dict = {   'English':
                                             '11 Specialist Music - Band (IL)',
                                             '11 Urban Street & Community Art',
                                             '11 Dance (IL)',
-                                            '11 Stage Production (Integrated Learning)',
+                                            '11 Stage Production (IL)',
                                             '11 Art Practical A',
                                             '11 Art Practical B',
                                             '11 Media Film and Animation',
@@ -584,7 +585,7 @@ def sheet_writer(semester_df, semester_sheet):
 
     # Write out formulas for column sums
     for line_column in ['C', 'E', 'G', 'I', 'K', 'M', 'O']:
-         semester_sheet.write_formula(line_column + str(line_start - 1), f'=SUM({line_column}3:{line_column}{str(line_start - 2)})')   
+         semester_sheet.write_formula(line_column + str(line_start - 1), f'=SUM({line_column}3:{line_column}{str(line_start - 2)})')
   
 # Create Semester 1 and Semester 2 Staffing Sheets
 sheet_writer(semester_1_df, semester_1_sheet)
