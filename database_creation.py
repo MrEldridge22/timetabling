@@ -290,13 +290,13 @@ def populate_tfx_data(conn, tfx_file, term):
 
     ### Classes ###
     classes_df = pd.json_normalize(tfx_file, record_path=['ClassNames'])
+    # print(classes_df)
     for col in classes_df.columns:
         if col not in ["ClassNameID", "FacultyID", "SubjectName"]:
             classes_df.drop([col], inplace=True, axis=1)
 
     # Rename to match database table columns
     classes_df.rename(columns={"ClassNameID": "class_id", "FacultyID": "faculty_id", "SubjectName": "name"}, inplace=True)
-    # print(classes_df)
     # classes_df.to_sql('classes', conn, if_exists='append', index=False)
     # Append Term Based Subjects with T1,T2,T3,T4
     term_sub_name_appended = []
@@ -335,6 +335,7 @@ def populate_tfx_data(conn, tfx_file, term):
 
     ### Timetables ###
     timetables_df = pd.json_normalize(tfx_file, record_path=['Timetable'])
+    # print(timetables_df)
     # Rename to match database table columns
     timetables_df.index.names = ["timetable_id"]
     # print(timetables_df.index)
@@ -344,6 +345,7 @@ def populate_tfx_data(conn, tfx_file, term):
     # print(timetables_df['room_id'])
     # timetables_df.to_sql('timetable', conn, if_exists='append')
     for row in timetables_df.itertuples():
+        # print(row.class_id)
         populate_timetable(conn, (row.roll_class_id, row.period_id, row.class_id, row.room_id, row.teacher_id))
 
     # ### Teacher Faculties ###

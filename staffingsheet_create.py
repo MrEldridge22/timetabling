@@ -9,6 +9,7 @@ import pandas as pd
 """ 
 TODO:
 - UI to load tdf files, line strucutre and core groups, website?
+- Put in ALP program timetable similar to SWD timetable.
 """
 # Debugging
 pd.get_option('display.max_columns', None)
@@ -22,7 +23,7 @@ home = False
 # Year Creation
 year = 2024
 # Set which semester to create sheet for
-semester_selected = 1
+semester_selected = 2
 
 ### File Paths
 # School

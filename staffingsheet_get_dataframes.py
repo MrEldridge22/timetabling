@@ -171,7 +171,7 @@ def get_df(conn, faculty=None):
         # Search through using list comprehension and print out a list where True appears when a teacher has a subject which changes lines
         # in the change of term and change the class_load value so it's not doubled up.
         # LIMITIATION: Only 1 line swap subject per staff member!!!
-        results = [True if string[-2:] == "T4" and "/" not in string else False for string in teacher_subjects]
+        results = [True if string[-2:] == ("T2" or "T4") and "/" not in string else False for string in teacher_subjects]
         # print(results)
 
         if True in results:
@@ -263,6 +263,7 @@ def get_df(conn, faculty=None):
         
         # Add to list
         full_line_alloc_list.append(flattened_list)
+        # print(flattened_list)
 
     # Final dataframe for processing into excel sheet
     subject_allocation_df = pd.DataFrame(full_line_alloc_list, columns=['code',
