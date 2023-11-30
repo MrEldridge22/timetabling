@@ -103,25 +103,25 @@ def get_df(conn, faculty=None):
                 if row.lesson == i:  # Found a Subject on a line!
                     # Shorten SWD Subject Names
                     if ("Math" in row.subject):
-                        subject = row.roll_class + " Maths"
+                        subject = row.subject[0:3] + " Maths"
                     elif ("Society" in row.subject):
-                        subject = row.roll_class + " Society and Culture"
+                        subject = row.subject[0:3] + " Society and Culture"
                     elif ("Science" in row.subject):
-                        subject = row.roll_class + " Science"
+                        subject = row.subject[0:3] + " Science"
                     elif ("Personal Learning Plan" in row.subject):
-                        subject = row.roll_class + " PLP"
+                        subject = row.subject[0:3] + " PLP"
                     elif ("Research Project" in row.subject):
-                        subject = row.roll_class + " RP"
+                        subject = row.subject[0:3] + " RP"
                     elif ("Scien" in row.subject):
-                        subject = row.roll_class + " Science"
+                        subject = row.subject[0:3] + " Science"
                     elif ("English" in row.subject):
-                        subject = row.roll_class + " English"
+                        subject = row.subject[0:3] + " English"
                     elif ("Cross" in row.subject):
-                        subject = row.roll_class + " Cross Disc."
+                        subject = row.subject[0:3] + " Cross Disc."
                     elif ("Health" in row.subject):
-                        subject = row.roll_class + " Health"
+                        subject = row.subject[0:3] + " Health"
                     elif ("Business" in row.subject):
-                        subject = row.roll_class + " Business Innovation"
+                        subject = row.subject[0:3] + " Business Innovation"
                     else:
                         subject = row.subject
                     
@@ -182,13 +182,13 @@ def get_df(conn, faculty=None):
 
     # print(teacher_data_df)
 
-    # Calculate Actual Load based on taken Subjects  
+    # Calculate Actual Load based on taken Subjects
+    # Workaround for incorrect full care load, displays as 70 not 130
+    teacher_data_df['class_load'].replace(70, 130, inplace=True)
+
     sum_of_class_loads = teacher_data_df.groupby('code')['class_load'].sum().fillna(0)
 
-    # print(teacher_data_df[teacher_data_df["code"] == "MSK"])
-    # Put all data into one line per staff member ready for export
-    
-
+    ### Put all data into one line per staff member ready for export ###
     # Create list of lists and put into dataframe ready for export
     full_line_alloc_list = []
 

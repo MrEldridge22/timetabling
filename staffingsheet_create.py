@@ -23,7 +23,7 @@ home = False
 # Year Creation
 year = 2024
 # Set which semester to create sheet for
-semester_selected = 2
+semester_selected = 1
 
 ### File Paths
 # School

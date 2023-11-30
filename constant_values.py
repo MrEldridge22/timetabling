@@ -28,11 +28,11 @@ mainstream_lines_dict = {
                         }
 
 swd_lines_dict = {
-                        "Monday":       ["SWD Line 4", "SWD Line 7", "Care", "SWD Line 3", "SWD Line 3", "Care",        "SWD Line 5"],
-                        "Tuesday":      ["SWD Line 4", "SWD Line 7", "Care", "SWD Line 6", "SWD Line 6", "SWD Line 2",  "SWD Line 1"],
-                        "Wednesday":    ["SWD Line 4", "SWD Line 6", "Care", "SWD Line 5", "SWD Line 3", "SWD Line 2",  "PLT"],
-                        "Thursday":     ["SWD Line 4", "SWD Line 7", "Care", "SWD Line 1", "SWD Line 1", "SWD Line 6",  "SWD Line 2"],
-                        "Friday":       ["SWD Line 4", "SWD Line 7", "Care", "SWD Line 5", "SWD Line 5", "SWD Line 1",  "SWD Line 3"]
+                        "Monday":       ["SWD Line 6", "SWD Line 4", "Care", "SWD Line 3", "SWD Line 3", "Care",        "SWD Line 5"],
+                        "Tuesday":      ["SWD Line 7", "SWD Line 4", "Care", "SWD Line 6", "SWD Line 6", "SWD Line 2",  "SWD Line 1"],
+                        "Wednesday":    ["SWD Line 7", "SWD Line 4", "Care", "SWD Line 5", "SWD Line 3", "SWD Line 2",  "PLT"],
+                        "Thursday":     ["SWD Line 2", "SWD Line 2", "Care", "SWD Line 1", "SWD Line 1", "SWD Line 6",  "SWD Line 7"],
+                        "Friday":       ["SWD Line 1", "SWD Line 4", "Care", "SWD Line 5", "SWD Line 5", "SWD Line 7",  "SWD Line 3"]
                         }
 
 minute_loads_dict = {
