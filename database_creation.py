@@ -476,6 +476,7 @@ def populate_classes(conn, class_data):
     """
     sql = ''' INSERT INTO classes(class_id, faculty_id, name) VALUES(?,?,?)'''
     cur = conn.cursor()
+    # print(class_data)
     cur.execute(sql, class_data)
     conn.commit()
 
