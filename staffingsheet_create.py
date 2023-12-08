@@ -10,6 +10,8 @@ import pandas as pd
 TODO:
 - UI to load tdf files, line strucutre and core groups, website?
 - Put in ALP program timetable similar to SWD timetable.
+- Recalculate Load Column
+- Create output for manual Permanent Reliefs / Line changes for EDCRAP
 """
 # Debugging
 pd.get_option('display.max_columns', None)
@@ -23,7 +25,7 @@ home = False
 # Year Creation
 year = 2024
 # Set which semester to create sheet for
-semester_selected = 2
+semester_selected = 1
 
 ### File Paths
 # School
@@ -45,7 +47,7 @@ print("Database Created Sucessfully!")
 
 # Run program with different semesters or locations
 if semester_selected == 1:
-    title_heading = f"{year} Teaching Staff Semester 1 v9"
+    title_heading = f"{year} Teaching Staff Semester 1 v10"
     if school:
         semester_file = f"{main_path_school}{sem1}"
         term_file = f"{main_path_school}{sem1_t2}"
@@ -62,7 +64,7 @@ if semester_selected == 1:
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
 
 elif semester_selected == 2:
-    title_heading = f"{year} Teaching Staff Semester 2 v5"
+    title_heading = f"{year} Teaching Staff Semester 2 v6"
     if school:
         semester_file = f"{main_path_school}{sem2}"
         term_file = f"{main_path_school}{sem2_t4}"
