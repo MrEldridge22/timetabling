@@ -1,10 +1,13 @@
 import sqlite3
 from staffingsheet_export_to_excel import create_excel_sheet, write_workbook
-from database_creation import create_tables, populate_tfx_data, get_faculties
+from database_interaction import create_tables, populate_tfx_data, get_faculties
 from staffingsheet_get_dataframes import get_df
 import xlsxwriter
 import json
 import pandas as pd
+
+#Temp import
+from edsas_lines_pr import edcrap
 
 """ 
 TODO:
@@ -19,8 +22,8 @@ pd.set_option('display.max_rows', 200)
 
 ### VARIABLES & SWITCHES ###
 # Set file location
-school = True
-home = False
+school = False
+home = True
 
 # Year Creation
 year = 2024
@@ -105,5 +108,8 @@ for faculty in get_faculties(conn):
 
 # Write out the workbook
 write_workbook(workbook)
+
+edcrap_df = edcrap(conn)
+edcrap_df.to_csv("edsashelper.csv")
 
 # Testing Area

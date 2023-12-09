@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 from constant_values import mainstream_lines_df, swd_lines_df, minute_loads_dict
+from database_interaction import get_full_timetable_data, get_faculty_timetable_data
 
 
 def get_df(conn, faculty=None):
@@ -17,78 +18,25 @@ def get_df(conn, faculty=None):
     # Pull out data in Human Readable Format and into Dataframe
     # Check to see if faculty has been supplied
     if faculty is None:
-        sql_query = pd.read_sql_query('''
-                                        SELECT d.name AS day,
-                                            p.name AS lesson,
-                                            t.first_name,
-                                            t.last_name,
-                                            t.code,
-                                            t.proposed_load,
-                                            t.actual_load,
-                                            t.notes,
-                                            c.name AS subject,
-                                            r.name AS room,
-                                            rc.name as roll_class,
-                                            f.code AS faculty,
-                                            c.class_id AS id
-                                        FROM timetable tt
-                                        INNER JOIN periods p ON tt.period_id = p.period_id
-                                        INNER JOIN days d ON p.day_id = d.day_id
-                                        INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
-                                        INNER JOIN classes c ON tt.class_id = c.class_id
-                                        INNER JOIN rooms r ON tt.room_id = r.room_id
-                                        INNER JOIN roll_classes rc ON tt.roll_class_id = rc.roll_class_id
-                                        INNER JOIN faculties f ON c.faculty_id = f.faculty_id
-                                        ORDER BY t.last_name ASC;
-                                        ''',
-                                        conn)
+        sql_query = get_full_timetable_data(conn)
     else:
-        sql_query = pd.read_sql_query('''
-                                        SELECT d.name AS day,
-                                            p.name AS lesson,
-                                            t.first_name,
-                                            t.last_name,
-                                            t.code,
-                                            t.proposed_load,
-                                            t.actual_load,
-                                            t.notes,
-                                            c.name AS subject,
-                                            r.name AS room,
-                                            rc.name as roll_class,
-                                            f.code AS faculty,
-                                            c.class_id AS id
-                                        FROM timetable tt
-                                        INNER JOIN periods p ON tt.period_id = p.period_id
-                                        INNER JOIN days d ON p.day_id = d.day_id
-                                        INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
-                                        INNER JOIN classes c ON tt.class_id = c.class_id
-                                        INNER JOIN rooms r ON tt.room_id = r.room_id
-                                        INNER JOIN roll_classes rc ON tt.roll_class_id = rc.roll_class_id
-                                        LEFT JOIN faculties f ON f.faculty_id = c.faculty_id
-                                        WHERE t.code IN (SELECT t.code
-                                                            FROM teachers t
-                                                            INNER JOIN timetable tt ON tt.teacher_id = t.teacher_id
-                                                            INNER JOIN classes c ON c.class_id = tt.class_id
-                                                            INNER JOIN faculties f ON f.faculty_id = c.faculty_id
-                                                            WHERE f.code = (?)
-                                                        )
-                                        ORDER BY t.last_name ASC;
-                                    ''',
-                                    conn, params=(faculty, ))
+        sql_query = get_faculty_timetable_data(conn, faculty)
 
     # Put into dataframe
     tt_df = pd.DataFrame(sql_query)
     # print(tt_df)
+    # Remove Modified from class names
     tt_df.replace(r" \(Modified\)","", inplace=True, regex=True)
+    
     # Sort data out to calculate which subjects are on which line and put into a dataframe with one entry of each
     teacher_data_list = []
-    # Iterates over the tt_df dataframe finding corresponding line for each daily lesson and put into a list if the lesson is found.
+    # Iterate over the tt_df dataframe finding corresponding line for each daily lesson and put into a list if the lesson is found.
     for row in tt_df.itertuples(index=False):
         if row.faculty != "SpEd":    # Special Ed Run different line structure, this splits it into correct lines, this is the mainstream sorter
             for index, (i, line_num) in enumerate(mainstream_lines_df[row.day].items()):
-                # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
+                # If the subject is found in that day, get the corresponding line which is the cell value
                 if row.lesson == i:  # Found a Subject on a line!
-                    if (row.roll_class == '12X' or row.roll_class == '12X1') and line_num == "Line 4":
+                    if (row.roll_class == '12X' or row.roll_class == '12P') and line_num == "Line 4":
                         subject = "12Extra" + " " + row.subject.split(" ", 1)[1] + " " + row.day[0:3] + row.lesson[1]
                         day = row.day[0:3] + row.lesson[1]
                         teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day, minute_loads_dict[row.day][index]])
@@ -99,7 +47,7 @@ def get_df(conn, faculty=None):
         
         else:    # SWD Lines
             for index, (i, line_num) in enumerate(swd_lines_df[row.day].items()):
-                # If the subject is found in that day, get the corresponding line which is the cell value, exclude Personal Development from results also
+                # If the subject is found in that day, get the corresponding line which is the cell value
                 if row.lesson == i:  # Found a Subject on a line!
                     # Shorten SWD Subject Names
                     if ("Math" in row.subject):
@@ -129,15 +77,18 @@ def get_df(conn, faculty=None):
 
                     teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day, minute_loads_dict[row.day][index]])
                     # print(row.roll_class)
+    
     # Put list into a dataframe, drop the duplicates
     teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day', 'class_load']) 
     teacher_data_df['class_load'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day', 'class_load']].groupby(['id', 'code'])['class_load'].transform('sum')
-    # print(teacher_data_df[teacher_data_df["code"] == "MSK"])
+    # print(teacher_data_df[teacher_data_df["code"] == "ZADO"])
+    
     # Code to catch multiple teachers for one class (permanent swaps/reliefs ect.)
     # Group by Teacher code and id. this gives each class and the days / lesson they are on combined together
     teacher_data_df['day'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line', 'day','class_load']].groupby(['id','code'])['day'].transform(lambda x: ','.join(x))
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
-    # print(teacher_data_df)
+    # print(teacher_data_df[teacher_data_df["code"] == "DONM"])
+    
     # Filter out those classes with 3 or less lessons, put day code onto class name, flag if shared class for highlighting later.
     for idx, row in teacher_data_df.iterrows():
         if len(row.day.split(",")) <= 3 and "SWD" not in row.line:

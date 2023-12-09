@@ -28,11 +28,11 @@ mainstream_lines_dict = {
                         }
 
 swd_lines_dict = {
-                        "Monday":       ["SWD Line 6", "SWD Line 4", "Care", "SWD Line 3", "SWD Line 3", "Care",        "SWD Line 5"],
-                        "Tuesday":      ["SWD Line 7", "SWD Line 4", "Care", "SWD Line 6", "SWD Line 6", "SWD Line 2",  "SWD Line 1"],
-                        "Wednesday":    ["SWD Line 7", "SWD Line 4", "Care", "SWD Line 5", "SWD Line 3", "SWD Line 2",  "PLT"],
-                        "Thursday":     ["SWD Line 2", "SWD Line 2", "Care", "SWD Line 1", "SWD Line 1", "SWD Line 6",  "SWD Line 7"],
-                        "Friday":       ["SWD Line 1", "SWD Line 4", "Care", "SWD Line 5", "SWD Line 5", "SWD Line 7",  "SWD Line 3"]
+                        "Monday":       ["Line 6",      "Line 4",       "Care",     "Line 3",       "Line 3",       "Care",         "Line 5"],
+                        "Tuesday":      ["SWD Line 7",  "SWD Line 4",   "Care",     "Line 6",       "Line 6",       "Line 2",       "Line 1"],
+                        "Wednesday":    ["SWD Line 7",  "SWD Line 4",   "Care",     "Line 5",       "Line 3",       "Line 2",       "PLT"],
+                        "Thursday":     ["Line 2",      "Line 2",       "Care",     "Line 1",       "Line 1",       "Line 6",       "Line 7"],
+                        "Friday":       ["Line 1",      "SWD Line 4",   "Care",     "Line 5",       "Line 5",       "SWD Line 7",   "Line 3"]
                         }
 
 elite_lines_dict = {    
@@ -42,7 +42,7 @@ elite_lines_dict = {
                         "Thursday":     ["SWD Line 2", "SWD Line 2", "Care", "SWD Line 1", "SWD Line 1", "SWD Line 6",  "SWD Line 7"],
                         "Friday":       ["SWD Line 1", "SWD Line 4", "Care", "SWD Line 5", "SWD Line 5", "SWD Line 7",  "SWD Line 3"]
 
-}
+                    }
 
 minute_loads_dict = {
                         "Monday":       [50, 50, 10, 50, 50, 60, 60],

@@ -17,8 +17,6 @@ from constant_values import sfx_year_levels, term_based_subjects
 # Debug and Testing Purposes
 pd.set_option('display.max_rows', None)
 
-conn = sqlite3.connect(':memory:')
-
 # Unassigned Room ID
 unassignedRoom = "{D91A444E-BCA5-4724-A8A2-0D2C7043433A}"
 
@@ -174,6 +172,7 @@ def create_tables(conn):
                             CREATE TABLE classes(
                                 class_id TEXT PRIMARY KEY NOT NULL,
                                 faculty_id TEXT NOT NULL,
+                                class_code TEXT NOT NULL,
                                 name TEXT NOT NULL,
                                 FOREIGN KEY (faculty_id) REFERENCES faculties(faculty_id)
                             );
@@ -292,11 +291,11 @@ def populate_tfx_data(conn, tfx_file, term):
     classes_df = pd.json_normalize(tfx_file, record_path=['ClassNames'])
     # print(classes_df)
     for col in classes_df.columns:
-        if col not in ["ClassNameID", "FacultyID", "SubjectName"]:
+        if col not in ["ClassNameID", "Code", "FacultyID", "SubjectName"]:
             classes_df.drop([col], inplace=True, axis=1)
 
     # Rename to match database table columns
-    classes_df.rename(columns={"ClassNameID": "class_id", "FacultyID": "faculty_id", "SubjectName": "name"}, inplace=True)
+    classes_df.rename(columns={"ClassNameID": "class_id", "Code": "class_code", "FacultyID": "faculty_id", "SubjectName": "name"}, inplace=True)
     # classes_df.to_sql('classes', conn, if_exists='append', index=False)
     # Append Term Based Subjects with T1,T2,T3,T4
     term_sub_name_appended = []
@@ -305,7 +304,7 @@ def populate_tfx_data(conn, tfx_file, term):
     # print(term_sub_name_appended)
     classes_df.replace(to_replace=term_based_subjects, value=term_sub_name_appended, inplace=True)
     for row in classes_df.itertuples():
-        populate_classes(conn, (row.class_id, row.faculty_id, row.name))
+        populate_classes(conn, (row.class_id, row.class_code, row.faculty_id, row.name))
 
     ### Days ###
     days_df = pd.json_normalize(tfx_file, record_path=['Days'])
@@ -474,7 +473,7 @@ def populate_classes(conn, class_data):
     :param class_data(class_id, faculty_id, name):
     :return:
     """
-    sql = ''' INSERT INTO classes(class_id, faculty_id, name) VALUES(?,?,?)'''
+    sql = ''' INSERT INTO classes(class_id, class_code, faculty_id, name) VALUES(?,?,?,?)'''
     cur = conn.cursor()
     # print(class_data)
     cur.execute(sql, class_data)
@@ -578,5 +577,83 @@ def populate_tables(conn):
     # print(options_df['SubgridConstraints'])
 
 
-create_tables(conn)
-# populate_tables(conn)
+def get_full_timetable_data(conn):
+    return pd.read_sql_query('''
+                                SELECT d.name AS day,
+                                    p.name AS lesson,
+                                    t.first_name,
+                                    t.last_name,
+                                    t.code,
+                                    t.proposed_load,
+                                    t.actual_load,
+                                    t.notes,
+                                    c.name AS subject,
+                                    r.name AS room,
+                                    rc.name as roll_class,
+                                    f.code AS faculty,
+                                    c.class_id AS id
+                                FROM timetable tt
+                                    INNER JOIN periods p ON tt.period_id = p.period_id
+                                    INNER JOIN days d ON p.day_id = d.day_id
+                                    INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
+                                    INNER JOIN classes c ON tt.class_id = c.class_id
+                                    INNER JOIN rooms r ON tt.room_id = r.room_id
+                                    INNER JOIN roll_classes rc ON tt.roll_class_id = rc.roll_class_id
+                                    INNER JOIN faculties f ON c.faculty_id = f.faculty_id
+                                    ORDER BY t.last_name ASC;
+                            ''', conn)
+    
+
+def get_faculty_timetable_data(conn, faculty):
+    return pd.read_sql_query('''
+                                SELECT d.name AS day,
+                                    p.name AS lesson,
+                                    t.first_name,
+                                    t.last_name,
+                                    t.code,
+                                    t.proposed_load,
+                                    t.actual_load,
+                                    t.notes,
+                                    c.name AS subject,
+                                    r.name AS room,
+                                    rc.name as roll_class,
+                                    f.code AS faculty,
+                                    c.class_id AS id
+                                FROM timetable tt
+                                    INNER JOIN periods p ON tt.period_id = p.period_id
+                                    INNER JOIN days d ON p.day_id = d.day_id
+                                    INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
+                                    INNER JOIN classes c ON tt.class_id = c.class_id
+                                    INNER JOIN rooms r ON tt.room_id = r.room_id
+                                    INNER JOIN roll_classes rc ON tt.roll_class_id = rc.roll_class_id
+                                    LEFT JOIN faculties f ON f.faculty_id = c.faculty_id
+                                WHERE t.code IN (SELECT t.code
+                                                    FROM teachers t
+                                                    INNER JOIN timetable tt ON tt.teacher_id = t.teacher_id
+                                                    INNER JOIN classes c ON c.class_id = tt.class_id
+                                                    INNER JOIN faculties f ON f.faculty_id = c.faculty_id
+                                                    WHERE f.code = (?)
+                                                )
+                                ORDER BY t.last_name ASC;
+                            ''', conn, params=(faculty, ))
+
+
+def slimed_timetable_data(conn):
+    return pd.read_sql_query('''
+                                SELECT d.name AS day,
+                                    p.name AS lesson,
+                                    t.code,
+                                    c.name AS subject,
+                                    c.class_code,
+                                    r.name AS room,
+                                    c.class_id AS id,
+                                    f.code AS faculty
+                                FROM timetable tt
+                                    INNER JOIN periods p ON tt.period_id = p.period_id
+                                    INNER JOIN days d ON p.day_id = d.day_id
+                                    INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
+                                    INNER JOIN classes c ON tt.class_id = c.class_id
+                                    INNER JOIN rooms r ON tt.room_id = r.room_id
+                                    INNER JOIN faculties f ON c.faculty_id = f.faculty_id
+                                    ORDER BY t.last_name ASC;
+                            ''', conn)
