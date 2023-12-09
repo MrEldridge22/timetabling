@@ -556,27 +556,6 @@ def get_faculties(conn):
     return faculty_list
 
 
-def populate_tables(conn):
-    settings_df = pd.json_normalize(yrSS_sfx, record_path=['Settings'])
-    lines_df = pd.json_normalize(yrSS_sfx, record_path=['Lines'])
-    subjects_df = pd.json_normalize(yrSS_sfx, record_path=['Subjects'])
-    options_df = pd.json_normalize(yrSS_sfx, record_path=['Options'])
-    # print(options_df)
-
-    students_df = pd.json_normalize(yrSS_sfx, record_path=['Students'])
-    classes_df = pd.json_normalize(yrSS_sfx, record_path=['Classes'])
-    
-    
-    # settings_df.to_sql('settings_SS', conn, if_exists='append', index=False)
-    # lines_df.to_sql('lines_SS', conn, if_exists='append', index=False)
-    # subjects_df.to_sql('subjects_SS', conn, if_exists='append', index=False)
-    # options_df.to_sql('options_SS', conn, if_exists='append', index=False)
-    # students_df.to_sql('students_SS', conn, if_exists='append', index=False)
-    # classes_df.to_sql('classes_SS', conn, if_exists='append', index=False)
-
-    # print(options_df['SubgridConstraints'])
-
-
 def get_full_timetable_data(conn):
     return pd.read_sql_query('''
                                 SELECT d.name AS day,
