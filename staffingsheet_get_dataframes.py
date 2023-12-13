@@ -36,7 +36,7 @@ def get_df(conn, faculty=None):
             for index, (i, line_num) in enumerate(mainstream_lines_df[row.day].items()):
                 # If the subject is found in that day, get the corresponding line which is the cell value
                 if row.lesson == i:  # Found a Subject on a line!
-                    if (row.roll_class == '12X' or row.roll_class == '12P') and line_num == "Line 4":
+                    if (row.roll_class == '12X' or row.roll_class == '12P') and (line_num == "Line 4" or line_num == "Line 3"):
                         subject = "12Extra" + " " + row.subject.split(" ", 1)[1] + " " + row.day[0:3] + row.lesson[1]
                         day = row.day[0:3] + row.lesson[1]
                         teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day, minute_loads_dict[row.day][index]])

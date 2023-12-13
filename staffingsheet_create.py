@@ -22,13 +22,13 @@ pd.set_option('display.max_rows', 200)
 
 ### VARIABLES & SWITCHES ###
 # Set file location
-school = False
-home = True
+school = True
+home = False
 
 # Year Creation
 year = 2024
 # Set which semester to create sheet for
-semester_selected = 1
+semester_selected = 2
 
 ### File Paths
 # School
@@ -50,7 +50,7 @@ print("Database Created Sucessfully!")
 
 # Run program with different semesters or locations
 if semester_selected == 1:
-    title_heading = f"{year} Teaching Staff Semester 1 v10"
+    title_heading = f"{year} Teaching Staff Semester 1 Final v1"
     if school:
         semester_file = f"{main_path_school}{sem1}"
         term_file = f"{main_path_school}{sem1_t2}"
@@ -67,7 +67,7 @@ if semester_selected == 1:
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
 
 elif semester_selected == 2:
-    title_heading = f"{year} Teaching Staff Semester 2 v6"
+    title_heading = f"{year} Teaching Staff Semester 2 Final v1"
     if school:
         semester_file = f"{main_path_school}{sem2}"
         term_file = f"{main_path_school}{sem2_t4}"
@@ -113,3 +113,4 @@ edcrap_df = edcrap(conn)
 edcrap_df.to_csv("edsashelper.csv")
 
 # Testing Area
+
