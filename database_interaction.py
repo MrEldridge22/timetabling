@@ -18,7 +18,7 @@ from constant_values import sfx_year_levels, term_based_subjects
 pd.set_option('display.max_rows', None)
 
 # Unassigned Room ID
-unassignedRoom = "{D91A444E-BCA5-4724-A8A2-0D2C7043433A}"
+unassignedRoom = "{EF12DA8B-1556-4024-A26F-FA7DC7E63FEA}"
 
 def create_tables(conn):
     """
