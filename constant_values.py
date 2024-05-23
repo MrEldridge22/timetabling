@@ -27,13 +27,15 @@ mainstream_lines_dict = {
                         "Friday":       ["Line 1", "Line 7", "Care", "Line 5", "Line 5", "Line 4",  "Line 3"]
                         }
 
-swd_lines_dict = {
-                        "Monday":       ["Line 6",      "Line 4",       "Care",     "Line 3",       "Line 3",       "Care",         "Line 5"],
-                        "Tuesday":      ["SWD Line 7",  "SWD Line 4",   "Care",     "Line 6",       "Line 6",       "Line 2",       "Line 1"],
-                        "Wednesday":    ["SWD Line 7",  "SWD Line 4",   "Care",     "Line 5",       "Line 3",       "Line 2",       "PLT"],
-                        "Thursday":     ["Line 2",      "Line 2",       "Care",     "Line 1",       "Line 1",       "Line 6",       "Line 7"],
-                        "Friday":       ["Line 1",      "SWD Line 4",   "Care",     "Line 5",       "Line 5",       "SWD Line 7",   "Line 3"]
-                        }
+# SWD changing to Mainstream lines, maybe temporially???
+swd_lines_dict = mainstream_lines_dict
+# swd_lines_dict = {
+#                         "Monday":       ["Line 6",      "Line 4",       "Care",     "Line 3",       "Line 3",       "Care",         "Line 5"],
+#                         "Tuesday":      ["SWD Line 7",  "SWD Line 4",   "Care",     "Line 6",       "Line 6",       "Line 2",       "Line 1"],
+#                         "Wednesday":    ["SWD Line 7",  "SWD Line 4",   "Care",     "Line 5",       "Line 3",       "Line 2",       "PLT"],
+#                         "Thursday":     ["Line 2",      "Line 2",       "Care",     "Line 1",       "Line 1",       "Line 6",       "Line 7"],
+#                         "Friday":       ["Line 1",      "SWD Line 4",   "Care",     "Line 5",       "Line 5",       "SWD Line 7",   "Line 3"]
+#                         }
 
 elite_lines_dict = {    
                         "Monday":       ["SWD Line 6", "SWD Line 4", "Care", "SWD Line 3", "SWD Line 3", "Care",        "SWD Line 5"],

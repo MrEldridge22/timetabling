@@ -32,7 +32,7 @@ def get_df(conn, faculty=None):
     teacher_data_list = []
     # Iterate over the tt_df dataframe finding corresponding line for each daily lesson and put into a list if the lesson is found.
     for row in tt_df.itertuples(index=False):
-        if row.faculty != "SpEd":    # Special Ed Run different line structure, this splits it into correct lines, this is the mainstream sorter
+        if row.faculty != "SWD":    # Special Ed Run different line structure, this splits it into correct lines, this is the mainstream sorter
             for index, (i, line_num) in enumerate(mainstream_lines_df[row.day].items()):
                 # If the subject is found in that day, get the corresponding line which is the cell value
                 if row.lesson == i:  # Found a Subject on a line!

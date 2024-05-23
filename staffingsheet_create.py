@@ -14,7 +14,9 @@ TODO:
 - UI to load tdf files, line strucutre and core groups, website?
 - Put in ALP program timetable similar to SWD timetable.
 - Recalculate Load Column
-- Create output for manual Permanent Reliefs / Line changes for EDCRAP
+- Need to have a switch or something for making a term output sheet, for example using semester 1 but
+    outputting for term 2
+
 """
 # Debugging
 pd.get_option('display.max_columns', None)
@@ -28,14 +30,14 @@ home = False
 # Year Creation
 year = 2024
 # Set which semester to create sheet for
-semester_selected = 2
+semester_selected = 1
 
 ### File Paths
 # School
 main_path_school    = f"V:\\Timetabler\\Current Timetable\\{year}"
 
 # Home
-main_path_home      = f"C:\\Users\\demg\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+main_path_home      = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
 
 # Semester & Term file names
 sem1         = f"\\TTD_{year}_S1.tfx"
@@ -62,7 +64,7 @@ if semester_selected == 1:
     else:
         print("You need to set school or home to true!")
         
-    term_a = 1
+    term_a = 2
     term_b = 2
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
 
@@ -93,8 +95,8 @@ with open(term_file, "r") as read_content:
     tfx_raw_term = json.load(read_content)
 
 # Read In The Data!
-populate_tfx_data(conn, tfx_raw, term_a)
-populate_tfx_data(conn, tfx_raw_term, term_b)
+populate_tfx_data(conn, tfx_raw, term_a)    
+# populate_tfx_data(conn, tfx_raw_term, term_b)
 
 # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)
