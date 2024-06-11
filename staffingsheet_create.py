@@ -24,13 +24,13 @@ pd.set_option('display.max_rows', 200)
 
 ### VARIABLES & SWITCHES ###
 # Set file location
-school = True
-home = False
+school = False
+home = True
 
 # Year Creation
 year = 2024
 # Set which semester to create sheet for
-semester_selected = 1
+semester_selected = 2
 
 ### File Paths
 # School
@@ -64,12 +64,12 @@ if semester_selected == 1:
     else:
         print("You need to set school or home to true!")
         
-    term_a = 2
+    term_a = 1
     term_b = 2
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
 
 elif semester_selected == 2:
-    title_heading = f"{year} Teaching Staff Semester 2 Final v1"
+    title_heading = f"{year} Teaching Staff Semester 2"
     if school:
         semester_file = f"{main_path_school}{sem2}"
         term_file = f"{main_path_school}{sem2_t4}"
@@ -96,7 +96,7 @@ with open(term_file, "r") as read_content:
 
 # Read In The Data!
 populate_tfx_data(conn, tfx_raw, term_a)    
-# populate_tfx_data(conn, tfx_raw_term, term_b)
+populate_tfx_data(conn, tfx_raw_term, term_b)
 
 # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)

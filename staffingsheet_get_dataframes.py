@@ -91,13 +91,14 @@ def get_df(conn, faculty=None):
     
     # Filter out those classes with 3 or less lessons, put day code onto class name, flag if shared class for highlighting later.
     for idx, row in teacher_data_df.iterrows():
-        if len(row.day.split(",")) <= 3 and "SWD" not in row.line:
+        # if len(row.day.split(",")) <= 3 and "SWD" not in row.line:
+        if len(row.day.split(",")) <= 3:
             teacher_data_df.loc[idx, 'subject'] = row.subject + " " + row.day
             teacher_data_df.loc[idx, 'day'] = True
         # Get SWD swaps
-        elif len(row.day.split(",")) <= 2 and "SWD" in row.line:
-            teacher_data_df.loc[idx, 'subject'] = row.subject + " " + row.day
-            teacher_data_df.loc[idx, 'day'] = True
+        # elif len(row.day.split(",")) <= 2 and "SWD" in row.line:
+        #     teacher_data_df.loc[idx, 'subject'] = row.subject + " " + row.day
+        #     teacher_data_df.loc[idx, 'day'] = True
         else:
             teacher_data_df.loc[idx, 'day'] = False
         
