@@ -66,7 +66,7 @@ term_based_subjects = [
     "07 Digital Technology",
     "07 Food & Nutrition",
     "07 Music", 
-    "07 Visual Arts",
+    "07 Visual Art",
     "08 Dance",
     "08 Digital Technology",
     "08 Digital Products",
@@ -76,5 +76,5 @@ term_based_subjects = [
     "08 Material Products - Metal",
     "08 Material Products - Wood",
     "08 Music",
-    "08 Visual Arts"
+    "08 Visual Art"
 ]
