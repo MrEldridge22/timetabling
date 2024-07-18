@@ -37,6 +37,9 @@ daymap_output.drop(["StudentID",
 # Convert student names to proper text
 daymap_output["Surname"] = daymap_output["Surname"].str.title()
 daymap_output["Firstname"] = daymap_output["Firstname"].str.title()
+daymap_output["House"] = daymap_output["House"].str.title()
+
+# print(daymap_output)
 
 # Rename Columns
 daymap_output.rename(columns={"StudentCode": "Student ID", "Form": "Home Group", "CoreClass": "Roll Class"}, inplace=True)
@@ -58,7 +61,6 @@ year11["Year"] = 12
 yearSWD = full_df[full_df['Roll Class'].str.contains('SWD') & ~full_df['Roll Class'].str.contains('12')]
 yearSWD["Year"] = yearSWD["Year"] + 1
 yearSWD["Roll Class"] = "SWD"
-
 
 year7.to_csv("edsas_files/year8.csv")
 year8.to_csv("edsas_files/year9.csv")
