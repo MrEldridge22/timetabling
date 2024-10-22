@@ -5,7 +5,7 @@
 ### NOTE
 # In Student Options file under students, they have a list of assigned options (OptionID) and classes (ClassID)
 # OptionID is the option nominated, ClassID is the Class Assigned. ClassID can be blank in this case meaning that the class was not assigned to that student.
-### Change ClassID of student who changes classes. If changing multiple classes around, ie PE classes to get another subject (3 way swap) have to change multiple classid's
+
 
 
 import sqlite3
@@ -120,7 +120,7 @@ def create_tables(conn):
             Email TEXT,
             Units INT,
             Lock TEXT,
-            StudentPreferences JSON);
+            StudentPreferences TEXT);
 
         CREATE TABLE classes_{year_level}(
             ClassID TEXT PRIMARY KEY NOT NULL,
@@ -203,7 +203,7 @@ def create_tables(conn):
                                 FOREIGN KEY (room_id) REFERENCES rooms(room_id),
                                 FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id)
                             );
-
+                       
                             CREATE TABLE teacher_faculties(
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                                 faculty_id TEXT NOT NULL,
@@ -214,7 +214,7 @@ def create_tables(conn):
                        ''')
 
 
-def populate_tfx_data(conn, tfx_file, term):
+def read_in_tfx_data(conn, tfx_file, term):
     """
     Reads in the data from a tfx json encoded file
     
@@ -394,6 +394,7 @@ def populate_tfx_data(conn, tfx_file, term):
     # Populate proposed column with data from tfx file.
     # TODO: Filter out by term based subjects
 
+    ### Calculate Teacher Load ###
     calc_actual_load_sql = """
                             SELECT t.code AS code, SUM(p.load) AS actual_load FROM timetable tt
                             INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
@@ -408,6 +409,28 @@ def populate_tfx_data(conn, tfx_file, term):
         cur.execute(sql, (row.actual_load, row.code))
         conn.commit()
     
+
+def read_in_sfx_data(conn, sfx_file, year_level):
+    """
+    Reads in sfx file and manipulates it to be put into sqlite database table
+    
+    Parameters:
+    conn (sqlite3.Connection): SQLite database connection.
+    sfx_file (json): Student Options File loaded in as a json file
+    year_level (int): The year level of the corresponding sfx file, 07, 08, 09, 10, SS or SWD
+
+    Returns: None (none)   
+    
+    """
+    ### Students ###
+    students_df = pd.json_normalize(sfx_file, record_path="Students")
+    for col in students_df.columns:
+        if col not in ["StudentID", "StudentCode", "FirstName", "LastName", "YearLevel", "StudentPreferences"]:
+            students_df.drop([col], inplace=True, axis=1)
+    for row in students_df.itertuples():
+        populateTable_students(conn, (row.StudentID, row.StudentCode, row.FirstName, row.LastName, row.YearLevel, row.StudentPreferences), year_level)
+    # print(students_df)
+
 
 # Insert data into database
 def populate_teachers(conn, teacher_data):
@@ -541,6 +564,26 @@ def populate_teacher_faculties(conn, teacher_faculties):
     conn.commit()
 
 
+
+
+def populateTable_students(conn, students, year_level):
+    """
+    Insert data into Students Table
+
+    Parameters
+    conn : db connection:
+    students (tuple) : Student Details (StudentID, StudentCode, firstName, lastName, yearLevel, studentPreferences)
+    
+    Return
+    None : 
+    """
+    sql = f'''INSERT INTO students_{year_level}(StudentID, StudentCode, FirstName, LastName, YearLevel, StudentPreferences) VALUES (?, ?, ?, ?, ? ,?)'''
+    cur = conn.cursor()
+    cur.execute(sql, students)
+    conn.commit()
+
+
+### Functions to Get Data Out ###
 def get_faculties(conn):
     """
     Retrieve Faculty List from Database

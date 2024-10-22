@@ -1,6 +1,6 @@
 import sqlite3
 from staffingsheet_export_to_excel import create_excel_sheet, write_workbook
-from database_interaction import create_tables, populate_tfx_data, get_faculties
+from database_interaction import create_tables, read_in_tfx_data, get_faculties
 from staffingsheet_get_dataframes import get_df
 import xlsxwriter
 import json
@@ -95,8 +95,8 @@ with open(term_file, "r") as read_content:
     tfx_raw_term = json.load(read_content)
 
 # Read In The Data!
-populate_tfx_data(conn, tfx_raw, term_a)    
-populate_tfx_data(conn, tfx_raw_term, term_b)
+read_in_tfx_data(conn, tfx_raw, term_a)    
+read_in_tfx_data(conn, tfx_raw_term, term_b)
 
 # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)
