@@ -432,7 +432,7 @@ def read_in_sfx_data(conn, sfx_file, year_level):
     # print(students_df)
 
 
-# Insert data into database
+### INSERTING DATA INTO DATABASE TABLES ###
 def populate_teachers(conn, teacher_data):
     """
     Insert into Teachers Table
@@ -583,7 +583,7 @@ def populateTable_students(conn, students, year_level):
     conn.commit()
 
 
-### Functions to Get Data Out ###
+### GET DATA OUT OF DATABASE TABLES ###
 def get_faculties(conn):
     """
     Retrieve Faculty List from Database
