@@ -22,14 +22,14 @@ pd.set_option('display.max_rows', None)
 
 ### sfx FILES Information ###
 # Time table year
-year = 2024
+year = 2025
 
 # Main file path to sfx files
-# main_path = f"V:\\Timetabler\\Current Timetable\\{year}"
-main_path = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+main_path = f"V:\\Timetabler\\Current Timetable\\{year}"
+# main_path = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
 
 # sfx Year Levels - No SWD
-year_levels = ['SS', '10', '9', '8', '7']
+year_levels = ['SeniorSchool', '10', '9', '8', '7']
 
 # Line Strucutres
 choice_lines_SS_dict = {    1:  "S1 Line 1",
@@ -45,61 +45,43 @@ choice_lines_SS_dict = {    1:  "S1 Line 1",
                             11: "S2 Line 4",
                             12: "S2 Line 5",
                             13: "S2 Line 6",
-                            14: "S2 Line 7"
+                            14: "S2 Line 7",
+                            15: "S2 Line 8",
                             }
 
-choice_lines_yr10_dict = {  1:  "S1 Line 1",
-                            2:  "S1 Line 4",
-                            3:  "S1 Line 6",
-                            4:  "S1 Line 7",
-                            5:  "S2 Line 1",
-                            6:  "S2 Line 4",
+choice_lines_yr10_dict = {  1:  "S1 Line 5",
+                            2:  "S1 Line 6",
+                            3:  "S1 Line 7",
+                            4:  "S1 Line 2",
+                            5:  "S1 Line 4",
+                            6:  "S2 Line 5",
                             7:  "S2 Line 6",
-                            8:  "S2 Line 7"
+                            8:  "S2 Line 7",
+                            9:  "S2 Line 2",
+                            10:  "S2 Line 4"
                             }
 
 choice_lines_yr09_dict = {  1:  "S1 Line 2",
-                            2:  "S1 Line 3",
-                            3:  "S1 Line 5",
+                            2:  "S1 Line 4",
+                            3:  "S1 Line 7",
                             4:  "S2 Line 2",
-                            5:  "S2 Line 3",
-                            6:  "S2 Line 5"
+                            5:  "S2 Line 4",
+                            6:  "S2 Line 7"
                             }
 
 choice_lines_yr08_dict = { 
                             1:  "S1 Line 1",
                             2:  "S1 Line 1 T1",
                             3:  "S1 Line 1 T2",
-                            4:  "S1 Line 3",
-                            5:  "S1 Line 3 T1",
-                            6:  "S1 Line 3 T2",
-                            7:  "S1 Line 7",
-                            8:  "S1 Line 7 T1",
-                            9:  "S1 Line 7 T2",
-                            10:  "S2 Line 1",
-                            11:  "S2 Line 1 T3",
-                            12:  "S2 Line 1 T4",
-                            13:  "S2 Line 3",
-                            14:  "S2 Line 3 T3",
-                            15:  "S2 Line 3 T4",
-                            16:  "S2 Line 7",
-                            17:  "S2 Line 7 T3",
-                            18:  "S2 Line 7 T4"
-                            }
-
-choice_lines_yr07_dict = { 
-                            1:  "S1 Line 2",
-                            2:  "S1 Line 2 T1",
-                            3:  "S1 Line 2 T2",
                             4:  "S1 Line 4",
                             5:  "S1 Line 4 T1",
                             6:  "S1 Line 4 T2",
                             7:  "S1 Line 6",
                             8:  "S1 Line 6 T1",
                             9:  "S1 Line 6 T2",
-                            10:  "S2 Line 2",
-                            11:  "S2 Line 2 T3",
-                            12:  "S2 Line 2 T4",
+                            10:  "S2 Line 1",
+                            11:  "S2 Line 1 T3",
+                            12:  "S2 Line 1 T4",
                             13:  "S2 Line 4",
                             14:  "S2 Line 4 T3",
                             15:  "S2 Line 4 T4",
@@ -108,138 +90,206 @@ choice_lines_yr07_dict = {
                             18:  "S2 Line 6 T4"
                             }
 
+choice_lines_yr07_dict = { 
+                            1:  "S1 Line 1",
+                            2:  "S1 Line 1 T1",
+                            3:  "S1 Line 1 T2",
+                            4:  "S1 Line 3",
+                            5:  "S1 Line 3 T1",
+                            6:  "S1 Line 3 T2",
+                            7:  "S1 Line 5",
+                            8:  "S1 Line 5 T1",
+                            9:  "S1 Line 5 T2",
+                            10:  "S2 Line 1",
+                            11:  "S2 Line 1 T3",
+                            12:  "S2 Line 1 T4",
+                            13:  "S2 Line 3",
+                            14:  "S2 Line 3 T3",
+                            15:  "S2 Line 3 T4",
+                            16:  "S2 Line 5",
+                            17:  "S2 Line 5 T3",
+                            18:  "S2 Line 5 T4"
+                            }
+
 # Subjects by Faculty
-faculty_subjects_dict = {   'English':            
-                                        [   '07 Literacy P',
+faculty_subjects_dict = {   
+                            'Care Group': [
+                                '07 Care Group',
+                                '08 Care Group',
+                                '09 Care',
+                                '10 Care Group',
+                                'Stage 1 Care Group',
+                                '12 Care Group'],
+
+                            'English':            
+                                        [   '07 English',
+                                            '07 Literacy P',
                                             '07 Literacy',
+                                            '08 English',
                                             '08 Literacy',
                                             '08 Literacy P',
+                                            '09 English',
                                             '09 Literacy P',
                                             '09 Literacy',
+                                            '10 English',
                                             '10 Creative Writing',
-                                            '11 English 1',
-                                            '11 English 2',
-                                            '11 Essential English 1',
-                                            '11 Essential English 2',
-                                            '11 Essential English (Literacy) 1',
-                                            '11 Essential English (Literacy) 2',
-                                            '12 Essential English',
-                                            '12 Essential English (Modified)',
-                                            '12 English'],
+                                            'Stage 1 English 1',
+                                            'Stage 1 English 2',
+                                            'Stage 1 English',
+                                            'Stage 1 Essential English 1',
+                                            'Stage 1 Essential English 2',
+                                            'Stage 1 Essential English',
+                                            'Stage 1 Essential English (Literacy) 1',
+                                            'Stage 1 Essential English (Literacy) 2',
+                                            'Stage 1 Essential English (Literacy)',
+                                            'Stage 2 Essential English',
+                                            'Stage 2 Essential English (Modified)',
+                                            'Stage 2 English'],
                             
                             'EALD':         
                                         [   '07 EALD Literacy',
+                                            '07 Literacy E',
                                             '08 EALD Literacy',
                                             '09 EALD Literacy',
                                             '10 EALD Literacy',
-                                            '11 English as an Additional Language 1',
-                                            '11 English as an Additional Language 2',
-                                            '12 English as an Additional Language'],
+                                            'Stage 1 English as an Additional Language 1',
+                                            'Stage 1 English as an Additional Language',
+                                            'Stage 1 English as an Additional Language 2',
+                                            'Stage 2 English as an Additional Language'],
 
                             'Hums':         
-                                        [   '10 Civics Citizenship & Economics',
-                                            '11 Modern History',
-                                            '11 Politics Power & People',
-                                            '11 Philosophy',
-                                            '11 Society & Culture',
-                                            '11 Tourism',
-                                            '12 Cultural Explorations',
-                                            '12 Politics Power & People',
-                                            '12 Society & Culture',
-                                            '12 Society & Culture (Modified)',
-                                            '12 Philosophy'],
+                                        [   '07 Humanities',
+                                            '08 Humanities',
+                                            '09 Humanities',
+                                            '10 History',
+                                            '10 Civics Citizenship Economics & Business',
+                                            '10 Civics Citizenship & Economics',
+                                            'Stage 1 Modern History',
+                                            'Stage 1 Politics Power and People',
+                                            'Stage 1 Philosophy',
+                                            'Stage 1 Society & Culture',
+                                            'Stage 1 Tourism',
+                                            "Stage 1 Women's Studies",
+                                            'Stage 2 Cultural Explorations (CD)',
+                                            'Stage 2 Politics Power & People',
+                                            'Stage 2 Society & Culture',
+                                            'Stage 2 Society & Culture (Modified)',
+                                            'Stage 2 Philosophy',
+                                            'Stage 2 Modern History'],
 
-                            'RP':           
-                                        [   '12 Research Project A (Yr 11s)',
-                                            '12 Research Project A',
-                                            '12 Research Project (Modified)'],
+                            'EIF-AIF':           
+                                        [   'Stage 1 Exploring Indentities and Futures',
+                                            '11 Exploring Identities and Futures',
+                                            'Stage 2 Activating Identities and Futures',
+                                            'Stage 2 Activating Identities and Futures (ATAR)',
+                                            'Stage 2 Workplace Practices'],
 
                             'Language':     
                                         [   '07 Italian',
+                                            '07 Italian (Extra)',
                                             '07 Italian (Optional)',
                                             '08 Italian',
-                                            '08 Italian (Optional)',
+                                            '08 Italian (Extra)',
                                             '09 Italian',
                                             '10 Italian',
                                             '10 Italian (Beginners)',
-                                            '11 Italian (Beginners)',
-                                            '11 Italian (Continuers)'],
+                                            'Stage 1 Italian (Beginners)',
+                                            'Stage 1 Italian (Continuers)'],
                                     
                             'Maths':
-                                        [   '10 Mathematics Advanced',
+                                        [   '07 Mathematics',
+                                            '08 Mathematics',
+                                            '09 Mathematics',
+                                            '10 Mathematics Advanced',
                                             '10 Mathematics Essential',
                                             '10 Mathematics General',
                                             '10 Mathematics Numeracy',
                                             '10 Mathematics A',
-                                            '11 Numeracy Development',
-                                            '11 Specialist Mathematics A',
-                                            '11 Specialist Mathematics B',
-                                            '11 Mathematical Methods A',
-                                            '11 Mathematical Methods B',
-                                            '11 Essential Mathematics (Vocational) 1',
-                                            '11 Essential Mathematics (Vocational) 2',
-                                            '11 Essential Mathematics (Numeracy) 1',
-                                            '11 Essential Mathematics (Numeracy) 2',
-                                            '11 General Mathematics A',
-                                            '11 General Mathematics B',
-                                            '12 Essential Mathematics',
-                                            '12 General Mathematics',
-                                            '12 Mathematical Methods',
-                                            '12 Specalist Mathematics',
-                                            '12 Mathematics Skills for Life (Modified)',
-                                            '12 Math Skills for Life (IL)'],
+                                            'Stage 1 Numeracy Development',
+                                            'Stage 1 Specialist Mathematics A',
+                                            'Stage 1 Specialist Mathematics B',
+                                            'Stage 1 Mathematical Methods A',
+                                            'Stage 1 Mathematical Methods B',
+                                            'Stage 1 Essential Mathematics (Vocational) 1',
+                                            'Stage 1 Essential Mathematics (Vocational) 2',
+                                            'Stage 1 Essential Mathematics (Numeracy) 1',
+                                            'Stage 1 Essential Mathematics (Numeracy) 2',
+                                            'Stage 1 General Mathematics A',
+                                            'Stage 1 General Mathematics B',
+                                            'Stage 1 Numeracy Development (IL)',
+                                            'Stage 2 Essential Mathematics',
+                                            'Stage 2 General Mathematics',
+                                            'Stage 2 Mathematical Methods',
+                                            'Stage 2 Specialist Mathematics',
+                                            'Stage 2 Mathematics Skills for Life (Modified)',
+                                            'Stage 2 Maths Skills for Life (IL)'],
                                     
                             'Science':      
-                                        [   '11 Biology A',
-                                            '11 Biology B',
-                                            '11 Chemistry 1',
-                                            '11 Chemistry 2',
-                                            '11 Nutrition A',
-                                            '11 Nutrition B',
-                                            '11 Psychology A',
-                                            '11 Psychology B',
-                                            '11 Physics 1',
-                                            '11 Physics 2',
-                                            '11 Scientific Studies A',
-                                            '11 Scientific Studies B',
-                                            '12 Biology',
-                                            '12 Chemistry',
-                                            '12 Nutrition',
-                                            '12 Psychology (IL)',
-                                            '12 Psychology',
-                                            '12 Physics',
-                                            '12 Scientific Studies',
-                                            '12 Scientific Studies (Modifed)'],
+                                        [   
+                                             '07 Science',
+                                             '08 Science',
+                                             '09 Science',
+                                             '10 General Science',
+                                            '10 PreSACE Science',
+                                            'Stage 1 Biology 1',
+                                            'Stage 1 Biology 2',
+                                            'Stage 1 Chemistry 1',
+                                            'Stage 1 Chemistry 2',
+                                            'Stage 1 Nutrition A',
+                                            'Stage 1 Nutrition B',
+                                            'Stage 1 Psychology A',
+                                            'Stage 1 Psychology B',
+                                            'Stage 1 Physics 1',
+                                            'Stage 1 Physics 2',
+                                            'Stage 1 Scientific Studies A',
+                                            'Stage 1 Scientific Studies B',
+                                            'Stage 2 Biology',
+                                            'Stage 2 Chemistry',
+                                            'Stage 2 Nutrition',
+                                            'Stage 2 Psychology (IL)',
+                                            'Stage 2 Psychology',
+                                            'Stage 2 Integrated Psychology (IL)',
+                                            'Stage 2 Physics',
+                                            'Stage 2 Scientific Studies',
+                                            'Stage 2 Scientific Studies (Modifed)'],
 
                             'HPE':      
                                         [   '07 Health & Physical Education',
                                             '08 Health & Physical Education',
                                             '09 Health & Physical Education',
                                             '10 Health & Physical Education 1',
+                                            '10 Health & Physical Education A',
+                                            '10 Health & Physical Education B',
                                             '10 Health & Physical Education 2',
                                             '10 Aboriginal Careers Exploration',
+                                            '10 SAASTA ACE',
                                             '10 Soccer Academy (IL)',
-                                            '11 Child Studies A',
-                                            '11 Child Studies B',
-                                            '11 Health & Wellbeing A',
-                                            '11 Health & Wellbeing B',
-                                            '11 Positive Education',
-                                            '11 Outdoor Education A',
-                                            '11 Outdoor Education B',
-                                            '11 Physical Education A',
-                                            '11 Physical Education B',
-                                            '12 Child Studies',
-                                            '12 Power Cup (Modified)',
-                                            '12 Health & Wellbeing',
-                                            '12 Health & Wellbeing (Modified)',
-                                            '12 SAASTA (IL)',
-                                            '12 Child Studies (Modified)',
-                                            '12 Sport Health & Physical Activity (IL)',
-                                            '12 Outdoor Education',
-                                            '12 Sport Health and Physical Activity (Modified)',
-                                            '12 Physical Education'
-                                            '12 Outdoor Education (Modified)',
-                                            '12 Science and Healthy Lifestyle (IL)'],
+                                            '10 Child Studies',
+                                            'Stage 1 Child Studies A',
+                                            'Stage 1 Child Studies B',
+                                            'Stage 1 Health & Wellbeing A',
+                                            'Stage 1 Health & Wellbeing B',
+                                            'Stage 1 Positive Education',
+                                            'Stage 1 Outdoor Education A',
+                                            'Stage 1 Outdoor Education B',
+                                            'Stage 1 Physical Education A',
+                                            'Stage 1 Physical Education B',
+                                            'Stage 1 Soccer Academy (IL)',
+                                            'Stage 1 Sports Studies A (IL)',
+                                            'Stage 1 Sports Studies B (IL)',
+                                            'Stage 1 SAASTA',
+                                            'Stage 2 Child Studies',
+                                            'Stage 2 Power Cup (Modified)',
+                                            'Stage 2 Health & Wellbeing',
+                                            'Stage 2 Health & Wellbeing (Modified)',
+                                            'Stage 2 SAASTA',
+                                            'Stage 2 Child Studies (Modified)',
+                                            'Stage 2 Sport Health & Physical Activity (IL)',
+                                            'Stage 2 Outdoor Education',
+                                            'Stage 2 Sport Health and Physical Activity (Modified)',
+                                            'Stage 2 Physical Education',
+                                            'Stage 2 Outdoor Education (Modified)',
+                                            'Stage 2 Science and Healthy Lifestyle (IL)'],
 
                             'Food Tech':
                                         [   '07 Food & Nutrition',
@@ -248,11 +298,13 @@ faculty_subjects_dict = {   'English':
                                             '09 Food Innovation',
                                             '10 Food & Nutrition',
                                             '10 Food Innovation',
-                                            '11 Food and Hospitality Studies',
-                                            '11 Food Innovation',
-                                            '12 Food & Hospitality Studies',
-                                            '12 Food & Hospitality (Modified)',
-                                            '12 Food Innovation'],
+                                            'Stage 1 Food and Hospitality Studies',
+                                            'Stage 1 Food & Hospitality',
+                                            'Stage 1 Food Innovation',
+                                            'Stage 2 Food & Hospitality Studies',
+                                            'Stage 2 Food and Hospitality',
+                                            'Stage 2 Food & Hospitality (Modified)',
+                                            'Stage 2 Food Innovation'],
 
                             'Digi Tech':
                                         [   '07 Digital Technology',
@@ -262,16 +314,20 @@ faculty_subjects_dict = {   'English':
                                             '09 Digital Technology',
                                             '09 Digital Products',
                                             '09 Digital Photography',
+                                            '09 Photography',
                                             '10 Digital Technology',
+                                            '10 Cyber Security Studies',
                                             '10 Digital Products',
                                             '10 Digital Photography',
-                                            '11 Photography A',
-                                            '11 Photography B',
-                                            '11 Digital Products',
-                                            '11 Digital Technology',
-                                            '12 Digital Photography',
-                                            '12 Digital Products',
-                                            '12 Digital Technology'],
+                                            'Stage 1 Digital Photography A',
+                                            'Stage 1 Digital Photography B',
+                                            'Stage 1 Digital Products',
+                                            'Stage 1 Digital Technology',
+                                            'Stage 1 Game Development (IL)',
+                                            'Stage 2 Digital Photography',
+                                            'Stage 2 Digital Products',
+                                            'Stage 2 Digital Technology'],
+                            
                             'Arts':
                                         [   '07 Dance',
                                             '07 Drama',
@@ -279,78 +335,119 @@ faculty_subjects_dict = {   'English':
                                             '07 Visual Art',
                                             '08 Dance',
                                             '08 Drama',
-                                            '08 Introduction to Media Arts',
+                                            '08 Media',
                                             '08 Music',
+                                            '08 Music - Extension',
                                             '08 Visual Art',
                                             '09 Dance',
                                             '09 Drama',
-                                            '09 Media Arts A - Film & Cinematography',
-                                            '09 Media Arts B - Animation',
+                                            '09 Film & Cinematography',
+                                            '09 Animation',
                                             '09 Music',
+                                            '09 Music - Extension',
                                             '09 Visual Art',
                                             '10 Dance A',
                                             '10 Dance B',
                                             '10 Drama A',
                                             '10 Drama B',
-                                            '10 Media Arts: Film & Cinematography',
-                                            '10 Media Arts: Animation',
+                                            '10 Film & Cinematography',
+                                            '10 Animation',
                                             '10 Music A',
                                             '10 Music B',
-                                            '10 Specialist Music - Band (IL)',
-                                            '10 Visual Arts A',
-                                            '10 Visual Arts B',
-                                            '11 Creative Arts Music',
-                                            '11 Music Experience A',
-                                            '11 Music Experience B',
-                                            '11 Specialist Music - Band (IL)',
-                                            '11 Urban Street & Community Art',
-                                            '11 Dance (IL)',
-                                            '11 Stage Production (IL)',
-                                            '11 Art Practical A',
-                                            '11 Art Practical B',
-                                            '11 Media Film and Animation',
-                                            '12 Urban Street & Community Art (Modified)',
-                                            '12 Stage Production (Modified)',
-                                            '12 Stage Production (IL)',
-                                            '12 Urban Street & Community Art (IL)',
-                                            '12 Visual Art',
-                                            '12 Creative Arts (Music Focus)'],
+                                            '10 Music',
+                                            '10 Specialist Music A',
+                                            '10 Specialist Music B',
+                                            '10 Visual Art A',
+                                            '10 Visual Art B',
+                                            'Stage 1 Creative Arts Music',
+                                            'Stage 1 Creative Arts (Media)',
+                                            'Stage 1 Music Experience A',
+                                            'Stage 1 Music Experience B',
+                                            'Stage 1 Specialist Music - Bands (IL)',
+                                            'Stage 1 Urban Street & Community Art',
+                                            'Stage 1 Urban & Community Art',
+                                            'Stage 1 Dance (IL)',
+                                            'Stage 1 Stage Production (IL)',
+                                            'Stage 1 Art Practical A',
+                                            'Stage 1 Art Practical B',
+                                            'Stage 1 Visual Art A',
+                                            'Stage 1 Visual Art B',
+                                            'Stage 1 Media Film and Animation',
+                                            'Stage 2 Urban Street & Community Art (Modified)',
+                                            'Stage 2 Urban & Community Art (IL)',
+                                            'Stage 2 Stage Production (Modified)',
+                                            'Stage 2 Stage Production (IL)',
+                                            'Stage 2 Urban Street & Community Art (IL)',
+                                            'Stage 2 Visual Arts',
+                                            'Stage 2 Creative Arts (Music Focus)'],
 
                             'Design Tech':
                                         [   '07 Design & Technology',
-                                            '08 Material Products - Metal',
-                                            '08 Material Products - Wood',
+                                            '08 Metalwork',
+                                            '08 Woodwork',
                                             '09 Engineering Technology',
-                                            '09 Material Products - Metal',
-                                            '09 Material Products - Wood',
+                                            '09 Material Products - Metalwork',
+                                            '09 Material Products - Woodwork',
                                             '10 3D Modelling',
                                             '10 Engineering Technology',
                                             '10 Jewllery Design',
                                             '10 Materials Design with Metal',
+                                            '10 Material Products - Metalwork',
                                             '10 Materials Design with Wood',
+                                            '10 Material Products - Woodwork',
                                             '10 Introduction to Construction',
-                                            '11 Material Solutions (Jewellery)',
-                                            '11 Material Solutions (Metalwork)',
-                                            '11 Material Solutions (Woodwork)',
-                                            '11 Robotic & Electronic Systems A',
-                                            '11 Robotic & Electronic Systems B',
-                                            '12 Construction Technology',
-                                            '12 Material Solutions Metal (Modified)',
-                                            '12 Material Solutions Wood (Modified)',
-                                            '12 Material Solutions (Metalwork)',
-                                            '12 Material Solutions (Furniture Construction)',
-                                            '12 Robotic & Electronic Systems',
-                                            '12 Wood and Metal (Modified)',
-                                            '12 Industry Connections Construction'],
-                            'PLP':
-                                        [   '11 Personal Learning Plan',
-                                            '12 Workplace Practices',
-                                            '12 Workplace Practices (Modified)'],
+                                            '10 LEGO Design',
+                                            'Stage 1 Material Solutions - Jewellery',
+                                            'Stage 1 Material Solutions - Metalwork',
+                                            'Stage 1 Material Solutions - Woodwork',
+                                            'Stage 1 Robotic & Electronic Systems A',
+                                            'Stage 1 Robotic & Electronic Systems B',
+                                            'Stage 2 Construction Technology',
+                                            'Stage 2 Material Solutions Metal (Modified)',
+                                            'Stage 2 Material Solutions Wood (Modified)',
+                                            'Stage 2 Material Solutions (Metalwork)',
+                                            'Stage 2 Material Solutions (Furniture Construction)',
+                                            'Stage 2 Robotic & Electronic Systems',
+                                            'Stage 2 Wood and Metal (Modified)',
+                                            'Stage 2 Industry Connections Construction',
+                                            'Stage 2 Metalwork',
+                                            'Stage 2 Furniture Construction',
+                                            'Stage 2 Industry Connections'],
+                            
                             'Intervention':
                                         [   '07 Learning Support',
                                             '08 Learning Support',
                                             '09 Learning Support',
-                                            '10 Learning Support']
+                                            '10 Learning Support'],
+
+
+                            'VET': [
+                                            "Advanced Animal Care",
+                                            "Advanced Bricklaying and Blocklaying",
+                                            "Advanced Carpentry Skills",
+                                            "Advanced Skills Cluster Electrotechnology (Stackable)",
+                                            "Certificate II Animal Studies",
+                                            "Certificate II Automotive Servicing",
+                                            "Certificate II Automotive Servicing Year 2",
+                                            "Certificate II Community Services",
+                                            "Certificate II Construction Pathways",
+                                            "Certificate II Electro-Technology (Career Start)",
+                                            "Certificate II Engineering Pathways",
+                                            "Certificate II Food Processing (Bakery Focus)",
+                                            "Certificate III Early Childhood Education and Care",
+                                            "Certificate III Early Childhood Education and Care (Year 2)",
+                                            "Certificate III Health Services Assistance",
+                                            "Certificate III Individual Support (Ageing or Disability)",
+                                            "Certificate III Information Technology",
+                                            "Certificate III Screen and Media",
+                                            "Certificate II Plumbing",
+                                            "Certificate II Retail Cosmetics",
+                                            "Certificate II in Resources and Infrastructure Work Preparation",
+                                            "Certificate II Salon Assistant",
+                                            "Semester 2 Vocational and General Mathematics Exemption",
+                                            "Extra Blk",
+                                            "No VET Course"
+                                    ]
                                     }
 
 # Create tempory database in memory.
@@ -360,6 +457,7 @@ conn = sqlite3.connect(':memory:')
 ### CREATE TABLES ###
 for yrLevel in year_levels:
     # Create Database Table
+    # print(yrLevel)
     conn.executescript(f'''
                     CREATE TABLE yr{yrLevel}_lines(
                         LineID TEXT PRIMARY KEY NOT NULL,
@@ -397,6 +495,12 @@ for yrLevel in year_levels:
             if col not in ["SubjectID", "Name"]:
                 subjects_df.drop([col], inplace=True, axis=1)
     subjects_df.to_sql(f'yr{yrLevel}_subjects', conn, if_exists='append', index=False)
+    
+    # Check for missing subject names in the faculty_subjects_dict above
+    for subject in subjects_df['Name']:
+        missing_subject = all(subject not in values for values in faculty_subjects_dict.values())
+        if missing_subject:
+             print(subject)
 
     # Extract Options Info
     options_df = pd.json_normalize(sfx_file, record_path=['Options'])
@@ -422,7 +526,9 @@ def get_subjects (yrLevel):
             GROUP BY s.Name, l.Name
             ORDER BY s.Name DESC;"""
     return pd.read_sql(query, conn)
-yrSS_df = get_subjects("SS")
+
+
+yrSS_df = get_subjects("SeniorSchool")
 yr10_df = get_subjects("10")
 yr09_df = get_subjects("9")
 yr08_df = get_subjects("8")
@@ -456,15 +562,17 @@ full_subjects_df = full_subjects_df[full_subjects_df['faculty'] != "Key doesnt e
 
 # Remove HPE and Italian Terms for 7's and 8's as they are semester based subjects
 def remove_terms_hpe(r):
+    # print(r)
     if 'T1' in r.line or 'T2' in r.line or 'T3' in r.line or 'T4' in r.line:
         r.subject = r.subject + r.line[-3:]
         r.num_classes = r.num_classes / 2
         r.line = r.line[:-3]
     return r
 
+
 full_subjects_df = full_subjects_df.apply(lambda row: remove_terms_hpe(row), axis=1)
 
-print(full_subjects_df)
+# print(full_subjects_df)
 
 # Split into Semesters and strip off Semester Codes
 semester_1_df = full_subjects_df[full_subjects_df.line.str.contains('S1')]
@@ -475,7 +583,7 @@ semester_2_df['line'] = semester_2_df['line'].str.replace("S2 ", "")
 ### OUTPUT ###
 
 # Location
-workbook = xlsxwriter.Workbook('projected_allocation_creator\Subject Allocations.xlsx')
+workbook = xlsxwriter.Workbook(f'projected_allocation_creator\\Subject Allocations {year}.xlsx')
 
 # Formats
 subject_name_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bottom': True, 'top': True, 'left': 2})
@@ -579,7 +687,7 @@ def sheet_writer(semester_df, semester_sheet):
 
         # Write faculty name in the first column
         semester_sheet.write('A' + str(line_start), faculty, workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'top': True}))
-        # semester_sheet.write('A' + str(line_start + max_line_length), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 11, 'bold': True, 'bottom': True}))
+        # semester_sheet.write('A' + str(line_start + max_line_length), " ", workbook.add_format({'font_name': 'Arial', 'font_size': Stage 1, 'bold': True, 'bottom': True}))
         # Increment start counter by of number of rows in each faculty dataframe with a buffer line
         line_start = 1 + line_start + max_line_length
 
