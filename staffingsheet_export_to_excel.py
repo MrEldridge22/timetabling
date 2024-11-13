@@ -73,7 +73,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
     line_struct_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'italic': True, 'align': "center"})
     sheet.merge_range('A2:B2', "M - 6 4 3 PD 5", cell_format=line_struct_format)
     sheet.merge_range('C2:D2', "Tu - 7 6 2 1", cell_format=line_struct_format)
-    sheet.merge_range('E2:F2', "W - 4 PD 5 3 2", cell_format=line_struct_format)
+    sheet.merge_range('E2:F2', "W - 5 3 PD 4 2", cell_format=line_struct_format)
     sheet.merge_range('G2:H2', "Th -  2 1 6 7", cell_format=line_struct_format)
     sheet.merge_range('I2:J2', "F - 1 7 5 4 3", cell_format=line_struct_format)
     sheet.write('A3', col_headings[0], workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'bold': True, 'bottom': True, 'left': True, 'right': True}))

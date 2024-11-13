@@ -334,12 +334,13 @@ def read_in_tfx_data(conn, tfx_file, term):
 
     ### Timetables ###
     timetables_df = pd.json_normalize(tfx_file, record_path=['Timetable'])
-    # print(timetables_df)
+    print(timetables_df)
     # Rename to match database table columns
     timetables_df.index.names = ["timetable_id"]
     # print(timetables_df.index)
     timetables_df.rename(columns={"RollClassID": "roll_class_id", "PeriodID": "period_id", "ClassNameID": "class_id", "TeacherID": "teacher_id", "RoomID": "room_id"}, inplace=True)
     # Fill blank rooms with Temp Room
+    # print(timetables_df)
     timetables_df['room_id'].replace(to_replace="", value=unassignedRoom, inplace=True)
     # print(timetables_df['room_id'])
     # timetables_df.to_sql('timetable', conn, if_exists='append')

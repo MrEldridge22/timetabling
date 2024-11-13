@@ -22,7 +22,7 @@ core_groups = [' E', ' P', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6', 'O7', 'O8']
 mainstream_lines_dict = {
                         "Monday":       ["Line 6", "Line 4", "Care", "Line 3", "Line 3", "Care",    "Line 5"],
                         "Tuesday":      ["Line 7", "Line 7", "Care", "Line 6", "Line 6", "Line 2",  "Line 1"],
-                        "Wednesday":    ["Line 4", "Line 4", "Care", "Line 5", "Line 3", "Line 2",  "PLT"],
+                        "Wednesday":    ["Line 5", "Line 3", "Care", "Line 4", "Line 4", "Line 2",  "PLT"],
                         "Thursday":     ["Line 2", "Line 2", "Care", "Line 1", "Line 1", "Line 6",  "Line 7"],
                         "Friday":       ["Line 1", "Line 7", "Care", "Line 5", "Line 5", "Line 4",  "Line 3"]
                         }
@@ -49,7 +49,7 @@ elite_lines_dict = {
 minute_loads_dict = {
                         "Monday":       [50, 50, 10, 50, 50, 60, 60],
                         "Tuesday":      [50, 50, 10, 50, 50, 60, 60],
-                        "Wednesday":    [50, 50, 30, 50, 50, 50, 00],
+                        "Wednesday":    [50, 50, 40, 50, 50, 50, 00],
                         "Thursday":     [50, 50, 10, 50, 50, 60, 60],
                         "Friday":       [50, 50, 10, 50, 50, 60, 60]
                     }
