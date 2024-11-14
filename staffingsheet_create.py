@@ -41,7 +41,7 @@ main_path_home      = f"C:\\Users\\deldridge\\OneDrive - Department for Educatio
 
 # Semester & Term file names
 sem1         = f"\\TTD_{year}_S1.tfx"
-# sem1_t2      = f"\\TTD_{year}_S1_T2.tfx"
+sem1_t2      = f"\\TTD_{year}_S1_T2.tfx"
 sem2         = f"\\TTD_{year}_S2.tfx"
 sem2_t4      = f"\\TTD_{year}_S2_T4.tfx"
 
@@ -55,11 +55,11 @@ if semester_selected == 1:
     title_heading = f"{year} Teaching Staff Semester 1 DRAFT DO NOT DISTRIBUTE"
     if school:
         semester_file = f"{main_path_school}{sem1}"
-        # term_file = f"{main_path_school}{sem1_t2}"
+        term_file = f"{main_path_school}{sem1_t2}"
 
     elif home:
         semester_file = f"{main_path_home}{sem1}"
-        # erm_file = f"{main_path_home}{sem1_t2}"
+        term_file = f"{main_path_home}{sem1_t2}"
 
     else:
         print("You need to set school or home to true!")
@@ -91,12 +91,12 @@ with open(semester_file, "r") as read_content:
     tfx_raw = json.load(read_content)
 
 # Open the term based json tdx file
-# with open(term_file, "r") as read_content:
-#     tfx_raw_term = json.load(read_content)
+with open(term_file, "r") as read_content:
+    tfx_raw_term = json.load(read_content)
 
 # Read In The Data!
 read_in_tfx_data(conn, tfx_raw, term_a)    
-# read_in_tfx_data(conn, tfx_raw_term, term_b)
+read_in_tfx_data(conn, tfx_raw_term, term_b)
 
 # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)

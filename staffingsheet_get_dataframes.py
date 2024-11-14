@@ -103,7 +103,8 @@ def get_df(conn, faculty=None):
             teacher_data_df.loc[idx, 'day'] = False
         
     # Remove SWD from SWD Line names
-    teacher_data_df['line'].replace(to_replace='SWD', value='', inplace=True)
+    teacher_data_df.replace({'line': "SWD"}, inplace=True)
+    # teacher_data_df['line'].replace(to_replace='SWD', value='', inplace=True)
     
     # Get the Term based subjects and combine them together.
     teacher_data_df['subject'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line', 'class_load']].groupby(['code', 'line'])['subject'].transform(lambda x: '/'.join(x))
@@ -136,7 +137,7 @@ def get_df(conn, faculty=None):
 
     # Calculate Actual Load based on taken Subjects
     # Workaround for incorrect full care load, displays as 70 not 130
-    teacher_data_df['class_load'].replace(70, 130, inplace=True)
+    teacher_data_df['class_load'].replace(70, 140, inplace=True)
 
     sum_of_class_loads = teacher_data_df.groupby('code')['class_load'].sum().fillna(0)
 

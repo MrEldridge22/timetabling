@@ -296,6 +296,11 @@ def read_in_tfx_data(conn, tfx_file, term):
 
     # Rename to match database table columns
     classes_df.rename(columns={"ClassNameID": "class_id", "Code": "class_code", "FacultyID": "faculty_id", "SubjectName": "name"}, inplace=True)
+    # Rename Stage 1 and Stage 2 part of name to be 11 or 12 respectively
+    
+    classes_df['name'] = classes_df['name'].str.replace("Stage 1", "11", regex=False)
+    classes_df['name'] = classes_df['name'].str.replace("Stage 2", "12", regex=False)
+
     # classes_df.to_sql('classes', conn, if_exists='append', index=False)
     # Append Term Based Subjects with T1,T2,T3,T4
     term_sub_name_appended = []
