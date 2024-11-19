@@ -6,8 +6,6 @@ import xlsxwriter
 import json
 import pandas as pd
 
-#Temp import
-from edsas_lines_pr import edcrap
 
 """ 
 TODO:
@@ -30,7 +28,7 @@ home = False
 # Year Creation
 year = 2025
 # Set which semester to create sheet for
-semester_selected = 1
+semester_selected = 2
 
 ### File Paths
 # School
@@ -69,7 +67,7 @@ if semester_selected == 1:
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
 
 elif semester_selected == 2:
-    title_heading = f"{year} Teaching Staff Semester 2"
+    title_heading = f"{year} Teaching Staff Semester 2 DRAFT DO NOT DISTRIBUTE"
     if school:
         semester_file = f"{main_path_school}{sem2}"
         term_file = f"{main_path_school}{sem2_t4}"

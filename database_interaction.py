@@ -339,7 +339,7 @@ def read_in_tfx_data(conn, tfx_file, term):
 
     ### Timetables ###
     timetables_df = pd.json_normalize(tfx_file, record_path=['Timetable'])
-    print(timetables_df)
+    # print(timetables_df)
     # Rename to match database table columns
     timetables_df.index.names = ["timetable_id"]
     # print(timetables_df.index)
