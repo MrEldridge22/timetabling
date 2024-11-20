@@ -103,11 +103,11 @@ read_in_tfx_data(conn, tfx_raw_term, term_b)
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)
 
 # # Create separate sheets for each faculty
-# for faculty in get_faculties(conn):
-#     if faculty not in ["Care", "Exec", "PT"]:
-#         create_excel_sheet(workbook, get_df(conn, faculty), sheet_name=faculty, heading=title_heading)
-#     else:
-#         pass
+for faculty in get_faculties(conn):
+    if faculty not in ["Care", "Exec", "PT"]:
+        create_excel_sheet(workbook, get_df(conn, faculty), sheet_name=faculty, heading=title_heading)
+    else:
+        pass
 
 # Write out the workbook
 write_workbook(workbook)
