@@ -19,6 +19,8 @@ TODO:
 # Debugging
 pd.get_option('display.max_columns', None)
 pd.set_option('display.max_rows', 200)
+pd.set_option("future.no_silent_downcasting", True)
+
 
 ### VARIABLES & SWITCHES ###
 # Set file location
@@ -28,7 +30,8 @@ home = False
 # Year Creation
 year = 2025
 # Set which semester to create sheet for
-semester_selected = 2
+
+semester_selected = int(input("Enter 1 for Semester 1 or 2 for Semester 2: "))
 
 ### File Paths
 # School
@@ -99,12 +102,12 @@ read_in_tfx_data(conn, tfx_raw_term, term_b)
 # Populate excel sheet, do not pass faculty value to get_df function to get entire staff!
 create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title_heading)
 
-# Create separate sheets for each faculty
-for faculty in get_faculties(conn):
-    if faculty not in ["Care", "Exec", "PT"]:
-        create_excel_sheet(workbook, get_df(conn, faculty), sheet_name=faculty, heading=title_heading)
-    else:
-        pass
+# # Create separate sheets for each faculty
+# for faculty in get_faculties(conn):
+#     if faculty not in ["Care", "Exec", "PT"]:
+#         create_excel_sheet(workbook, get_df(conn, faculty), sheet_name=faculty, heading=title_heading)
+#     else:
+#         pass
 
 # Write out the workbook
 write_workbook(workbook)

@@ -16,8 +16,6 @@ sfx_year_levels = ['07', '08', '09', '10', 'SS', 'SWD']
 # Core groups that the school runs
 core_groups = [' E', ' P', 'O1', 'O2', 'O3', 'O4', 'O5', 'O6', 'O7', 'O8']
 
-# File Paths to sfx and tfx files
-
 # Line structures
 mainstream_lines_dict = {
                         "Monday":       ["Line 6", "Line 4", "Care", "Line 3", "Line 3", "Care",    "Line 5"],
@@ -73,7 +71,7 @@ term_based_subjects = [
     "08 Drama",
     "08 Food & Nutrition",
     "08 Introduction to Media Arts",
-    "08 Material Products - Metal",
+    "08 Metalwork",
     "08 Material Products - Wood",
     "08 Music",
     "08 Visual Art"

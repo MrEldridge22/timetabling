@@ -78,16 +78,20 @@ def get_df(conn, faculty=None):
                     teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day, minute_loads_dict[row.day][index]])
                     # print(row.roll_class)
     
+    
+    
     # Put list into a dataframe, drop the duplicates
     teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day', 'class_load']) 
+    # Correct Loads here
     teacher_data_df['class_load'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day', 'class_load']].groupby(['id', 'code'])['class_load'].transform('sum')
-    # print(teacher_data_df[teacher_data_df["code"] == "ZADO"])
-    
+       
+    # Remove 12X Class Loads
+    teacher_data_df.loc[teacher_data_df['subject'].str.startswith('12Extra'), 'class_load'] = 0
+
     # Code to catch multiple teachers for one class (permanent swaps/reliefs ect.)
     # Group by Teacher code and id. this gives each class and the days / lesson they are on combined together
     teacher_data_df['day'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line', 'day','class_load']].groupby(['id','code'])['day'].transform(lambda x: ','.join(x))
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
-    # print(teacher_data_df[teacher_data_df["code"] == "DONM"])
     
     # Filter out those classes with 3 or less lessons, put day code onto class name, flag if shared class for highlighting later.
     for idx, row in teacher_data_df.iterrows():
@@ -125,22 +129,16 @@ def get_df(conn, faculty=None):
         # in the change of term and change the class_load value so it's not doubled up.
         # LIMITIATION: Only 1 line swap subject per staff member!!!
         results = [True if string[-2:] == ("T2" or "T4") and "/" not in string else False for string in teacher_subjects]
-        # print(results)
-
+        
         if True in results:
-            term_subject = next((string for string in teacher_subjects if string[-2:] == "T3"), None)
+            term_subject = next((string for string in teacher_subjects if string[-2:] == ("T1" or "T3")), None)
             if term_subject is not None:
                 # print(term_subject)
                 teacher_data_df.loc[(teacher_data_df['code'] == code) & (teacher_data_df['subject'] == term_subject), 'class_load'] = 0
 
-    # print(teacher_data_df)
-
     # Calculate Actual Load based on taken Subjects
-    # Workaround for incorrect full care load, displays as 70 not 130
-    teacher_data_df['class_load'].replace(70, 140, inplace=True)
-
     sum_of_class_loads = teacher_data_df.groupby('code')['class_load'].sum().fillna(0)
-
+    
     ### Put all data into one line per staff member ready for export ###
     # Create list of lists and put into dataframe ready for export
     full_line_alloc_list = []

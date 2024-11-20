@@ -242,7 +242,8 @@ def read_in_tfx_data(conn, tfx_file, term):
                                 "SpareField1": "notes",
                                 "LoadProposed": "proposed_load"
                                 }, inplace=True)
-    teachers_df['notes'].replace('', np.nan, inplace=True)
+    # teachers_df['notes'].replace('', np.nan, inplace=True)
+    teachers_df.loc[teachers_df['notes'] == '', 'notes'] = np.nan
     # print(teachers_df)
     # Write to Database
     for row in teachers_df.itertuples():
@@ -346,7 +347,8 @@ def read_in_tfx_data(conn, tfx_file, term):
     timetables_df.rename(columns={"RollClassID": "roll_class_id", "PeriodID": "period_id", "ClassNameID": "class_id", "TeacherID": "teacher_id", "RoomID": "room_id"}, inplace=True)
     # Fill blank rooms with Temp Room
     # print(timetables_df)
-    timetables_df['room_id'].replace(to_replace="", value=unassignedRoom, inplace=True)
+    # timetables_df['room_id'].replace(to_replace="", value=unassignedRoom, inplace=True)
+    timetables_df.loc[timetables_df['room_id'] == '', 'room_id'] = unassignedRoom
     # print(timetables_df['room_id'])
     # timetables_df.to_sql('timetable', conn, if_exists='append')
     for row in timetables_df.itertuples():
