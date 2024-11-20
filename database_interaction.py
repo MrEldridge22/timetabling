@@ -358,44 +358,15 @@ def read_in_tfx_data(conn, tfx_file, term):
     # ### Teacher Faculties ###
     tf_df = pd.json_normalize(tfx_file, record_path='Faculties')
 
-    # No idea how this work except it does!
-    ### From Google Bard ###
-    """
-    This code snippet involves creating a new DataFrame from an existing DataFrame, tf_df, and manipulating its structure. Let's break down the code step by step:
-    Extracting FacultyTeachers:
-    *tf_df['FacultyTeachers']: This part extracts the FacultyTeachers column from the tf_df DataFrame.
-    The asterisk (*) operator unpacks the list of lists in the FacultyTeachers column, resulting in a single list of individual faculty teachers.
-    
-    Creating a Temporary DataFrame:
-    pd.DataFrame([*tf_df['FacultyTeachers']], tf_df.index): This creates a temporary DataFrame using the extracted list of faculty teachers and
-    the index of the tf_df DataFrame. This essentially replicates the FacultyTeachers column as a new DataFrame.
-    
-    Stacking the DataFrame:
-    .stack(): The .stack() method converts the temporary DataFrame from a single column format to a multi-level column format.
-    This basically converts the list of faculty teachers into a single column with a hierarchical index representing the original row and column indices.
-    
-    Renaming Axes:
-    .rename_axis([None,'drop1']): This renames the axes of the stacked DataFrame.
-    The None value indicates that the first axis (outer level) doesn't have a name, and 'drop1' is the name assigned to the second axis (inner level).
-    
-    Resetting Index:
-    .reset_index(1, name='Teachers'): This resets the index of the stacked DataFrame, removing the hierarchical index created by stacking.
-    The 1 parameter specifies that the second axis ('drop1') should be used as the new index, and the name='Teachers' parameter names the
-    new index column as 'Teachers'.
-    The resulting DataFrame, temp_df, has a structure where each row represents a faculty teacher and the index is named 'Teachers'.
-    This new DataFrame effectively transforms the original FacultyTeachers column into a separate DataFrame with a more organized structure.
-    """
+    # Explode the 'FacultyTeachers' column to individual rows
+    tf_df = tf_df.explode('FacultyTeachers').reset_index(drop=True)
 
-    temp_df = pd.DataFrame([*tf_df['FacultyTeachers']], tf_df.index).stack().rename_axis([None,'drop1']).reset_index(1, name='Teachers')
-    tf_df = tf_df[['FacultyID']].join(temp_df)
-    tf_df = pd.concat([tf_df, tf_df["Teachers"].apply(pd.Series)], axis=1)
-    tf_df.drop(columns=['drop1', 'Teachers'], inplace=True)
-    tf_df.reset_index(drop=True, inplace=True)
+    # Concatenate the exploded DataFrame with the original DataFrame
+    tf_df = pd.concat([tf_df.drop(columns=['FacultyTeachers']), tf_df['FacultyTeachers'].apply(pd.Series)], axis=1)
+
 
     # Rename to match database table columns
     tf_df.rename(columns={"FacultyID": "faculty_id", "TeacherID": "teacher_id"}, inplace=True)
-    # print(tf_df)
-    # tf_df.to_sql('teacher_faculties', conn, if_exists='append', index=False)
     for row in tf_df.itertuples():
         populate_faculties(conn, (row.faculty_id, row.teacher_id))
 
