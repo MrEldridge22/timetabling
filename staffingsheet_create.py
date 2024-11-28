@@ -5,6 +5,8 @@ from staffingsheet_get_dataframes import get_df
 import xlsxwriter
 import json
 import pandas as pd
+from pathlib import Path
+import sys
 
 
 """ 
@@ -23,22 +25,40 @@ pd.set_option("future.no_silent_downcasting", True)
 
 
 ### VARIABLES & SWITCHES ###
-# Set file location
-school = True
-home = False
 
 # Year Creation
 year = 2025
-# Set which semester to create sheet for
 
+# Set which semester to create sheet for
 semester_selected = int(input("Enter 1 for Semester 1 or 2 for Semester 2: "))
 
 ### File Paths
 # School
-main_path_school    = f"V:\\Timetabler\\Current Timetable\\{year}"
+main_path_school      = f"V:\\Timetabler\\Current Timetable\\{year}"
 
-# Home
-main_path_home      = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+# Laptop OneDrive
+main_path_laptop      = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+
+# Desktop OneDrive
+main_path_desktop     = f"C:\\Users\\demg\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+
+# Check if the path exists and set the file path, make it easier to switch between locations.
+try:
+    if Path(main_path_school).exists():
+        filePath = main_path_school
+        
+    elif Path(main_path_laptop).exists():
+        filePath = main_path_laptop
+    
+    elif Path(main_path_desktop).exists():
+        filePath = main_path_desktop
+
+    print(f"Using the following Timetabling Location: {filePath}")
+
+except: 
+    print("Timetabling Folder Can Not Be Found!")
+    sys.exit(1)
+
 
 # Semester & Term file names
 sem1         = f"\\TTD_{year}_S1.tfx"
@@ -54,33 +74,17 @@ print("Database Created Sucessfully!")
 # Run program with different semesters or locations
 if semester_selected == 1:
     title_heading = f"{year} Teaching Staff Semester 1 DRAFT DO NOT DISTRIBUTE"
-    if school:
-        semester_file = f"{main_path_school}{sem1}"
-        term_file = f"{main_path_school}{sem1_t2}"
+    semester_file = f"{filePath}{sem1}"
+    term_file = f"{filePath}{sem1_t2}"
 
-    elif home:
-        semester_file = f"{main_path_home}{sem1}"
-        term_file = f"{main_path_home}{sem1_t2}"
-
-    else:
-        print("You need to set school or home to true!")
-        
     term_a = 1
     term_b = 2
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
 
 elif semester_selected == 2:
     title_heading = f"{year} Teaching Staff Semester 2 DRAFT DO NOT DISTRIBUTE"
-    if school:
-        semester_file = f"{main_path_school}{sem2}"
-        term_file = f"{main_path_school}{sem2_t4}"
-
-    elif home:
-        semester_file = f"{main_path_home}{sem2}"
-        term_file = f"{main_path_home}{sem2_t4}"
-
-    else:
-        print("You need to set school or home to true!")
+    semester_file = f"{filePath}{sem2}"
+    term_file = f"{filePath}{sem2_t4}"
 
     # Set semester and term values for creating the T1-T4 subject names.
     term_a = 3

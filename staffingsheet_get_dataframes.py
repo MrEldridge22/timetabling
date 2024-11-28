@@ -1,5 +1,4 @@
 import pandas as pd
-import time
 from constant_values import mainstream_lines_df, swd_lines_df, minute_loads_dict
 from database_interaction import get_full_timetable_data, get_faculty_timetable_data
 

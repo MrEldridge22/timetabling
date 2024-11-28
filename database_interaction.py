@@ -6,10 +6,6 @@
 # In Student Options file under students, they have a list of assigned options (OptionID) and classes (ClassID)
 # OptionID is the option nominated, ClassID is the Class Assigned. ClassID can be blank in this case meaning that the class was not assigned to that student.
 
-
-
-import sqlite3
-import json
 import pandas as pd
 import numpy as np
 from constant_values import sfx_year_levels, term_based_subjects
@@ -33,7 +29,7 @@ def create_tables(conn):
     
     # Iterate over the year levels and create the required tables for Student Options Database
     for year_level in sfx_year_levels:
-        print(f"Creating {year_level} Tables")
+        # print(f"Creating {year_level} Tables")
         conn.executescript(f'''
         CREATE TABLE settings_{year_level}(
             DefaultStudentUnits TEXT,
