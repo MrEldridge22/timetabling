@@ -55,9 +55,12 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
     sheet.set_margins(left=0.04, right=0.04, top=0.15, bottom=0.15)
     sheet.freeze_panes(3, 0)
     sheet.repeat_rows(0, 2)
-   
+    sheet.set_paper(9)  # A4 Paper Size
+    sheet.center_horizontally()
+       
     # Heading Information
     export_from_tdf_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    sheet.set_footer(f'&8&K808080 Staffing Sheet Created On: {export_from_tdf_date}')
 
     # Format Full Sheet
     sheet.set_column('A:A', width=11)
@@ -66,8 +69,8 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
     sheet.set_column('D:J', width=10)
 
     # Heading
-    sheet.merge_range('A1:H1', heading, workbook.add_format({'font_name': 'Arial Black', 'font_size': 12, 'bold': True, 'align': "center"}))
-    sheet.write('I1', export_from_tdf_date, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'font_color': 'red'}))
+    sheet.merge_range('A1:J1', heading, workbook.add_format({'font_name': 'Arial Black', 'font_size': 12, 'bold': True, 'align': "center"}))
+    # sheet.write('I1', export_from_tdf_date, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'font_color': 'red'}))
 
     # Line Structures and column Headings
     col_headings = ["Staff",

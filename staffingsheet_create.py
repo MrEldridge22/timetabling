@@ -112,6 +112,7 @@ for faculty in get_faculties(conn):
     else:
         pass
 
+
 # Write out the workbook
 write_workbook(workbook)
 
