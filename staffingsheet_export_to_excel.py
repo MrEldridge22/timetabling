@@ -2,6 +2,7 @@ import math
 from datetime import datetime
 import random
 from constant_values import core_groups
+import re
 
 # List of Core Groups, Could this be read in an a csv in the future?
 core_groups_list = core_groups
@@ -15,6 +16,15 @@ coordinator_color =     '#CCC0DA'
 other_color =           '#0066CC'
 shared_class_color =    '#F6FCDC'
 
+# Mapping for Care Class day replacements
+day_replacements = {
+    "Mon5": "PD",
+    "MonG": "M",
+    "TueG": "Tu",
+    "WedG": "W",
+    "ThuG": "Th",
+    "FriG": "F"
+}
 
 # Function to set the cell format for the shared subjects to be different from other subject cells
 def highlight_shared_class(workbook, subject_name):
@@ -115,15 +125,27 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
 
         # Care Class
         if row.care != 0:
+            care_info = re.search(r'(?i)care\s*(.*)', row.care)
+            if care_info:
+                care_info = care_info.group(1)
+            else:
+                care_info = ""
+
+            # Replace day codes with appropriate values
+            for key, value in day_replacements.items():
+                care_info = care_info.replace(key, value)
+
             sheet.write('B' + str(start_row + 1), row.care[:2], workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
             sheet.write('B' + str(start_row + 2), row.care_room, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
+            sheet.write('B' + str(start_row + 3), care_info, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
         else:
             sheet.write('B' + str(start_row + 1), "No", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
             sheet.write('B' + str(start_row + 2), "Care", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
-        
+            sheet.write('B' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
+
         # Blank Cells or formatting
         sheet.write('B' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
-        sheet.write('B' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
+        
 
         # Load
         # Calculates how much underloaded a teacher is and returns 0 if overloaded by minutes

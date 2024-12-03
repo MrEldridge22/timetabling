@@ -31,8 +31,9 @@ year = 2025
 
 # Set which semester to create sheet for
 semester_selected = int(input("Enter 1 for Semester 1 or 2 for Semester 2: "))
+title_heading = f"{year} Teaching Staff Semester {semester_selected} DRAFT 1"
 
-### File Paths
+""" File Paths """
 # School
 main_path_school      = f"V:\\Timetabler\\Current Timetable\\{year}"
 
@@ -73,7 +74,6 @@ print("Database Created Sucessfully!")
 
 # Run program with different semesters or locations
 if semester_selected == 1:
-    title_heading = f"{year} Teaching Staff Semester 1 DRAFT DO NOT DISTRIBUTE"
     semester_file = f"{filePath}{sem1}"
     term_file = f"{filePath}{sem1_t2}"
 
@@ -82,7 +82,6 @@ if semester_selected == 1:
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 1.xlsx')
 
 elif semester_selected == 2:
-    title_heading = f"{year} Teaching Staff Semester 2 DRAFT DO NOT DISTRIBUTE"
     semester_file = f"{filePath}{sem2}"
     term_file = f"{filePath}{sem2_t4}"
 

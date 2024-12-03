@@ -235,5 +235,6 @@ def get_df(conn, faculty=None):
     subject_allocation_df['actual_load'] = subject_allocation_df['code'].replace(sum_of_class_loads)
 
     # print(subject_allocation_df)
+    # subject_allocation_df.to_csv("Subject_Allocations.csv", index=False)
 
     return(subject_allocation_df)
