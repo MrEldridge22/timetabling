@@ -10,10 +10,10 @@ core_groups_list = core_groups
 # Colours
 principal_color =       '#31869B'
 ect_color =             '#92D050'
-teacher_leader_color =  '#C5E2FF'
+teacher_leader_color =  '#CCC0DA'
 senior_leader_color =   '#009AD0'
-coordinator_color =     '#CCC0DA'
-other_color =           '#0066CC'
+coordinator_color =     '#9EC3DA'
+other_color =           '#AFD7FF'
 shared_class_color =    '#F6FCDC'
 
 # Mapping for Care Class day replacements
@@ -214,21 +214,21 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
             free_line = str(random.choice(free_line_list))
             free_line_list.remove(free_line)
             if "Principal" in row.notes:
-                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bg_color': principal_color})
+                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bottom': True, 'bg_color': principal_color})
             elif any(x in row.notes for x in ["B3", "B4", "B5"]):
-                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bg_color': senior_leader_color})
+                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bottom': True, 'bg_color': senior_leader_color})
             elif any(x in row.notes for x in ["B1", "B2"]):
-                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bg_color': coordinator_color})
+                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bottom': True, 'bg_color': coordinator_color})
             elif "Teacher Leader" in row.notes:
-                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bg_color': teacher_leader_color})
+                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bottom': True, 'bg_color': teacher_leader_color})
             elif "ECT" in row.notes:
-                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bg_color': ect_color})
+                notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bottom': True, 'bg_color': ect_color})
             else:
-               notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bg_color': other_color}) 
+               notes_format = workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'valign': 'vcenter', 'text_wrap': 'true', 'right': True, 'bottom': True, 'bg_color': other_color}) 
             
-            sheet.write(str(free_line) + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
-            sheet.merge_range(str(free_line) + str(start_row + 1) + ':' + str(free_line) + str(start_row + 2), row.notes, notes_format)
-            sheet.write(str(free_line) + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))    
+            # sheet.write(str(free_line) + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
+            sheet.merge_range(str(free_line) + str(start_row + 0) + ':' + str(free_line) + str(start_row + 3), row.notes, notes_format)
+            # sheet.write(str(free_line) + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))    
 
         # Write blanks for other free lines
         for free_line in free_line_list:

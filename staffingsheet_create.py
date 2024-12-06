@@ -30,8 +30,11 @@ pd.set_option("future.no_silent_downcasting", True)
 year = 2025
 
 # Set which semester to create sheet for
-semester_selected = int(input("Enter 1 for Semester 1 or 2 for Semester 2: "))
-title_heading = f"{year} Teaching Staff Semester {semester_selected} DRAFT 1"
+semester_selected = 0
+while semester_selected not in [1, 2]:
+    semester_selected = int(input("Enter 1 for Semester 1 or 2 for Semester 2: "))
+
+title_heading = f"{year} Teaching Staff Semester {semester_selected}"
 
 """ File Paths """
 # School
