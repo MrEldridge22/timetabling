@@ -60,7 +60,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
        
     # Heading Information
     export_from_tdf_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    sheet.set_footer(f'&8&K808080 Staffing Sheet Created On: {export_from_tdf_date}')
+    sheet.set_footer(f'&8&K808080 Page: &P - Staffing Sheet Created On: {export_from_tdf_date}')
 
     # Format Full Sheet
     sheet.set_column('A:A', width=11)
@@ -121,8 +121,15 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
         fte = float(row.proposed_load) / (float(fte_load) * 100)
         sheet.write('A' + str(start_row + 0), row.firstname, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'right': True}))
         sheet.write('A' + str(start_row + 1), row.lastname, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'right': True}))
-        sheet.write('A' + str(start_row + 2), row.code, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'right': True}))
-        # Turned off as it's creating some confusion!
+        
+        ### Pick one of the following 2 lines of code, this turns on and off printing the Staff ED ID in the Staffing Sheet ###
+        # ON
+        # sheet.write('A' + str(start_row + 2), row.code, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'right': True}))
+        # OFF
+        sheet.write('A' + str(start_row + 2), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'right': True}))
+        
+        # FTE, turned off until further notice, need to come up with a different way to caluclate FTE
+        # Could use FTE from teacher details but this doesn't take into account leadership roles as FTE calculated on teaching load.
         # sheet.write('A' + str(start_row + 3), fte, workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'bottom': True, 'right': True, 'num_format': '0.0'}))
         sheet.write('A' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'left': True, 'bottom': True, 'right': True, 'num_format': '0.0'}))
 
