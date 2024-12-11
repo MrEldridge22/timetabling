@@ -110,7 +110,7 @@ create_excel_sheet(workbook, get_df(conn), sheet_name="All Staff", heading=title
 
 # # Create separate sheets for each faculty
 for faculty in get_faculties(conn):
-    if faculty not in ["Care", "Exec", "PT"]:
+    if faculty not in ["Care", "Exec", "PT", "VET"]:
         create_excel_sheet(workbook, get_df(conn, faculty), sheet_name=faculty, heading=title_heading)
     else:
         pass

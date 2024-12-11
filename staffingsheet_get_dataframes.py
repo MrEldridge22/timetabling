@@ -114,7 +114,7 @@ def get_df(conn, faculty=None):
     teacher_data_df['room'] = teacher_data_df[['code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'class_load']].groupby(['code', 'line'])['room'].transform(lambda x: '/'.join(x))
     teacher_data_df.drop(columns=['id'], inplace=True)
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
-       
+    
     # Get list of staff Codes
     staff_codes = teacher_data_df['code'].unique()
     
@@ -146,6 +146,11 @@ def get_df(conn, faculty=None):
     # Check the dataframe below to ensure classes are going in the correct spots
     # Semester data will appear first, then term based subjects
     staff_codes = teacher_data_df['code'].unique()
+    
+    # Remove the VET staff code as this is only for VET classes and not an actual physical person.
+    if 'VET' in staff_codes:
+        staff_codes = staff_codes[staff_codes != 'VET']
+
     for staff in staff_codes:
         flattened_list = [0] * 22
         for row in teacher_data_df[teacher_data_df["code"] == staff].itertuples():
