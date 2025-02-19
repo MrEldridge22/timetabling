@@ -5,7 +5,7 @@ import datetime
 # Year Creation and Open File
 year = datetime.date.today().year
 main_path_school = f"V:\\Timetabler\\Current Timetable\\{year}"
-seniors_sfx_file    = f"\\{year} Year SS Students.sfx"
+seniors_sfx_file    = f"\\{year} Year SeniorSchool Students.sfx"
 swd_sfx_file    = f"\\{year} Year SWD Students.sfx"
 semester1_tfx_file = f"\\TTD_{year}_S1.tfx"
 semester2_tfx_file = f"\\TTD_{year}_S2.tfx"
@@ -17,9 +17,7 @@ schoolNumber = 245
 # These are SACE subjects NOT assigned to students within Student Options, rather in Timetable Development instead.
 tfx_subjects = [
     "1EIF10", # Exploring Identities and Futures
-    "1EIM10",
-    "1PLP10", # Personal Learning Plan (Can remove for 2025, only here for testing purposes)
-    "1PLM10"
+    "1EIM10"
 ]
 
 
@@ -311,6 +309,8 @@ def get_teachers_dataframe(sem1_tfx, sem2_tfx):
     
     teachers_df.rename(columns={'TeacherCode': "Teacher Code"}, inplace=True)
 
+    # print(teachers_df)
+
     return teachers_df
 
 
@@ -344,6 +344,7 @@ def organise_classes_dataframe(teacher_df, classes_tfx, semester):
     organised_classes_df["Program Variant"] = ""
     organised_classes_df["Semester"] = semester
     organised_classes_df["Teacher Code"] = teachers_class_details_df["Teacher Code"]
+
     organised_classes_df["School Class Code"] = teachers_class_details_df["Code"]
     organised_classes_df["Results Due"] = organised_classes_df.apply(
         lambda row: (
@@ -413,6 +414,11 @@ def get_only_sace_teachers(teacher_df, classes_df):
     sace_teachers_df.dropna(subset=["Year"], inplace=True)
     sace_teachers_df.drop(columns=["TeacherID"], axis=1, inplace=True)
     sace_teachers_df.drop_duplicates(ignore_index=True, inplace=True)
+
+    # Update Teacher Code with the first 3 letters of their surname and first letter of their firstname all as capitals
+    sace_teachers_df["Teacher Code"] = sace_teachers_df.apply(
+        lambda row: (row["Family Name"][:3] + row["Given Names"][0]).upper(), axis=1
+    )
 
     return sace_teachers_df
 

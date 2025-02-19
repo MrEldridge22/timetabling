@@ -298,6 +298,10 @@ def read_in_tfx_data(conn, tfx_file, term):
     classes_df['name'] = classes_df['name'].str.replace("Stage 1", "11", regex=False)
     classes_df['name'] = classes_df['name'].str.replace("Stage 2", "12", regex=False)
 
+    # Drop PBL Mentor Class
+    classes_df = classes_df[~classes_df['name'].str.contains("PBL")]
+
+
     # classes_df.to_sql('classes', conn, if_exists='append', index=False)
     # Append Term Based Subjects with T1,T2,T3,T4
     term_sub_name_appended = []
