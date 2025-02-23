@@ -34,6 +34,11 @@ except:
     print("Timetabling Folder Can Not Be Found!")
     sys.exit(1)
 
+# Output Folder, if it exists, pass, else create it.
+if Path("schools_online_import_files").exists():
+    pass
+else:  
+    Path("schools_online_import_files").mkdir()
 
 # Semester & Term file names
 seniors_sfx_file    = f"\\{year} Year SeniorSchool Students.sfx"
