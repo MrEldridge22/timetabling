@@ -1,14 +1,45 @@
 import json
 import pandas as pd
 import datetime
+from pathlib import Path
+import sys
 
 # Year Creation and Open File
 year = datetime.date.today().year
-main_path_school = f"V:\\Timetabler\\Current Timetable\\{year}"
+
+""" File Paths """
+# School
+filePath      = f"V:\\Timetabler\\Current Timetable\\{year}"
+
+# Laptop OneDrive
+main_path_laptop      = f"C:\\Users\\deldridge\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+
+# Desktop OneDrive
+main_path_desktop     = f"C:\\Users\\demg\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+
+# Check if the path exists and set the file path, make it easier to switch between locations.
+try:
+    if Path(filePath).exists():
+        filePath = filePath
+        
+    elif Path(main_path_laptop).exists():
+        filePath = main_path_laptop
+    
+    elif Path(main_path_desktop).exists():
+        filePath = main_path_desktop
+
+    print(f"Using the following Timetabling Location: {filePath}")
+
+except: 
+    print("Timetabling Folder Can Not Be Found!")
+    sys.exit(1)
+
+
+# Semester & Term file names
 seniors_sfx_file    = f"\\{year} Year SeniorSchool Students.sfx"
-swd_sfx_file    = f"\\{year} Year SWD Students.sfx"
-semester1_tfx_file = f"\\TTD_{year}_S1.tfx"
-semester2_tfx_file = f"\\TTD_{year}_S2.tfx"
+swd_sfx_file        = f"\\{year} Year SWD Students.sfx"
+semester1_tfx_file  = f"\\TTD_{year}_S1.tfx"
+semester2_tfx_file  = f"\\TTD_{year}_S2.tfx"
 
 # School Contact Number
 schoolNumber = 245
@@ -19,6 +50,23 @@ tfx_subjects = [
     "1EIF10", # Exploring Identities and Futures
     "1EIM10"
 ]
+
+
+def update_teacher_code(df):
+    """
+    Updates the Teacher Code column in the DataFrame to be in a format we want.    
+
+    Parameters:
+    df (pd.DataFrame): The input DataFrame containing teacher information.
+
+    Returns:
+        pd.DataFrame: The DataFrame with the updated 'Teacher Code' column.
+    """
+    # print(df)
+    df["Teacher Code"] = df.apply(
+        lambda row: (row["Given Names"] + row["Family Name"][0]), axis=1
+    )
+    return df
 
 
 def expand_studentPreferences_column(df):
@@ -117,14 +165,18 @@ def get_enrollments_dataframe(sfx_file, msswd="ms"):
     # Get Students and Choices into Dataframe
     students_df = pd.json_normalize(sfx_file, record_path="Students")
 
+    ### NOTE: Could I put SACE ID into Student Options File to make importing easier? BOS Code or Column? ###
+    
+    # Remove Unwanted Columns
     for col in students_df.columns:
         if col not in ["StudentCode", "FirstName", "LastName", "YearLevel", "StudentPreferences"]:
             students_df.drop([col], inplace=True, axis=1)
 
-    studnets_df_expanded = expand_studentPreferences_column(students_df)
-    # print(seniors_df_expanded)
+    # Expand Student Preferences Column
+    students_df_expanded = expand_studentPreferences_column(students_df)
 
-    organised_df = pd.merge(studnets_df_expanded, classes_df, left_on="OptionID", right_on="OptionID", how='left').drop("OptionID", axis=1)
+    # Merge Students with Classes
+    organised_df = pd.merge(students_df_expanded, classes_df, left_on="OptionID", right_on="OptionID", how='left').drop("OptionID", axis=1)
 
     # print(generate_class_number(organised_df))
 
@@ -334,6 +386,9 @@ def organise_classes_dataframe(teacher_df, classes_tfx, semester):
 
     teachers_class_details_df.drop_duplicates(subset=["TeacherID", "ClassNameID"], inplace=True)
     teachers_class_details_df.dropna(subset=["SubjectCode"], inplace=True)
+    
+    # print(teachers_class_details_df)
+    teachers_class_details_df = update_teacher_code(teachers_class_details_df)
 
     organised_classes_df = pd.DataFrame()
     
@@ -369,7 +424,8 @@ def organise_classes_dataframe(teacher_df, classes_tfx, semester):
         organised_classes_df["Stage"].isin(["1", "2"]) &
         (~organised_classes_df["School Class Code"].str.contains('Care', case=False))
     ]
-    
+    # print("Organised Classes")
+    # print(organised_classes_df)
     return organised_classes_df
 
 
@@ -396,6 +452,8 @@ def get_classes_dataframe(teachers_df, sem_tfx, semester, sace_enrollments_df):
 
     df.drop_duplicates(subset=["Teacher Code", "School Class Code"], ignore_index=True, inplace=True)
     df.dropna(subset=["Class Number"], inplace=True) # This will sort for SWD and Mainstream
+    # print('Get Classes Dataframe')
+    # print(df)
     return df
 
 
@@ -410,15 +468,11 @@ def get_only_sace_teachers(teacher_df, classes_df):
     Returns:
     pd.DataFrame: The filtered DataFrame containing only SACE teachers.
     """
+    teacher_df = update_teacher_code(teacher_df)
     sace_teachers_df = pd.merge(teacher_df, classes_df[["Teacher Code", "Year"]], how='left', on="Teacher Code")
     sace_teachers_df.dropna(subset=["Year"], inplace=True)
     sace_teachers_df.drop(columns=["TeacherID"], axis=1, inplace=True)
     sace_teachers_df.drop_duplicates(ignore_index=True, inplace=True)
-
-    # Update Teacher Code with the first 3 letters of their surname and first letter of their firstname all as capitals
-    sace_teachers_df["Teacher Code"] = sace_teachers_df.apply(
-        lambda row: (row["Family Name"][:3] + row["Given Names"][0]).upper(), axis=1
-    )
 
     return sace_teachers_df
 
@@ -426,16 +480,16 @@ def get_only_sace_teachers(teacher_df, classes_df):
 ### CODE START ###
 
 # Open Files
-with open (f"{main_path_school}{semester1_tfx_file}", "r") as semester1_tfx_file:
+with open (f"{filePath}{semester1_tfx_file}", "r") as semester1_tfx_file:
     semester1_tfx = json.load(semester1_tfx_file)
 
-with open (f"{main_path_school}{semester2_tfx_file}", "r") as semester2_tfx_file:
+with open (f"{filePath}{semester2_tfx_file}", "r") as semester2_tfx_file:
     semester2_tfx = json.load(semester2_tfx_file)
 
-with open (f"{main_path_school}{seniors_sfx_file}", "r") as seniors_sfx_file:
+with open (f"{filePath}{seniors_sfx_file}", "r") as seniors_sfx_file:
     seniors_sfx = json.load(seniors_sfx_file)
 
-with open (f"{main_path_school}{swd_sfx_file}", "r") as swd_sfx_file:
+with open (f"{filePath}{swd_sfx_file}", "r") as swd_sfx_file:
     swd_sfx = json.load(swd_sfx_file)
 
 # Get Teachers Dataframe
