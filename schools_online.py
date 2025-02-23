@@ -169,7 +169,7 @@ def get_enrollments_dataframe(sfx_file, msswd="ms"):
     
     # Remove Unwanted Columns
     for col in students_df.columns:
-        if col not in ["StudentCode", "FirstName", "LastName", "YearLevel", "StudentPreferences"]:
+        if col not in ["StudentCode", "FirstName", "LastName", "BOSCode", "YearLevel", "StudentPreferences"]:
             students_df.drop([col], inplace=True, axis=1)
 
     # Expand Student Preferences Column
@@ -178,11 +178,9 @@ def get_enrollments_dataframe(sfx_file, msswd="ms"):
     # Merge Students with Classes
     organised_df = pd.merge(students_df_expanded, classes_df, left_on="OptionID", right_on="OptionID", how='left').drop("OptionID", axis=1)
 
-    # print(generate_class_number(organised_df))
-
     # Add in extra columns needed for Schools Online
     organised_df["Contact School Number"] = schoolNumber
-    organised_df["Registration Number"] = ""
+    organised_df["Registration Number"] = organised_df["BOSCode"]
     organised_df["Student Code"] = organised_df["StudentCode"]
     organised_df["Year"] = datetime.date.today().year
     organised_df["Semester"] = organised_df["Subgrid"]
