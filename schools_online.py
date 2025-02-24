@@ -69,7 +69,7 @@ def update_teacher_code(df):
     """
     # print(df)
     df["Teacher Code"] = df.apply(
-        lambda row: (row["Given Names"] + row["Family Name"][0]), axis=1
+        lambda row: (row["Given Names"][:min(7, len(row["Given Names"]))] + row["Family Name"][0]), axis=1
     )
     return df
 
@@ -334,6 +334,7 @@ def organise_teachers_df(df):
     organised_df["Family Name"] = df["LastName"]
     organised_df["Initials"] = df["FirstName"].str[0]
     organised_df["Title"] = df["Salutation"]
+    organised_df["Type"] = "T"
     organised_df["Teachers Registration Number"] = ""
     organised_df["Email Address"] = ""
     organised_df["Given Names"] = df["FirstName"]
@@ -474,7 +475,7 @@ def get_only_sace_teachers(teacher_df, classes_df):
     teacher_df = update_teacher_code(teacher_df)
     sace_teachers_df = pd.merge(teacher_df, classes_df[["Teacher Code", "Year"]], how='left', on="Teacher Code")
     sace_teachers_df.dropna(subset=["Year"], inplace=True)
-    sace_teachers_df.drop(columns=["TeacherID"], axis=1, inplace=True)
+    sace_teachers_df.drop(columns=["TeacherID", "Year"], axis=1, inplace=True)
     sace_teachers_df.drop_duplicates(ignore_index=True, inplace=True)
 
     return sace_teachers_df
@@ -521,7 +522,7 @@ all_classes = pd.concat([semester1_classes_import, semester2_classes_import, sem
 
 ### OUTPUT FILES ###
 # Teachers
-get_only_sace_teachers(teachers_df, all_classes).to_csv("schools_online_import_files\\Teacher Import.csv", index=False)
+get_only_sace_teachers(teachers_df, all_classes).to_csv("schools_online_import_files\\TCHRIMP.csv", index=False)
 
 # Classes
 semester1_classes_import[(semester1_classes_import["Stage"] == "1")].to_csv('schools_online_import_files\\Stage1 Semester 1 Classes.csv', index=False)

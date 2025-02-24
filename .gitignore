@@ -3,3 +3,4 @@
 *.pyc
 edsas_files/
 schools_online_import_files/
+.venv/
