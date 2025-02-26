@@ -89,9 +89,23 @@ def update_codes(df):
     df['SACE Code'] = df['SACE Code'].str.replace('FOG', 'FOH')
     df['School Class Code'] = df['School Class Code'].str.replace('FOG', 'FOH')
 
-    df.loc[df['Stage'] == "2", 'SACE Code'] = df.loc[df['Stage'] == "2", 'SACE Code'].str.replace('SOM', 'SUA')
+    df.loc[df['Stage'] == 2, 'SACE Code'] = df.loc[df['Stage'] == 2, 'SACE Code'].str.replace('SOM', 'SUA')
     df['School Class Code'] = df['School Class Code'].str.replace('2SOM', '2SUA')
-    
+
+    df.loc[df['Stage'] == 2, 'SACE Code'] = df.loc[df['Stage'] == 2, 'SACE Code'].str.replace('BVM', 'BVA')
+    df['School Class Code'] = df['School Class Code'].str.replace('2BVM', '2BVA')
+
+    df.loc[df['Stage'] == 2, 'SACE Code'] = df.loc[df['Stage'] == 2, 'SACE Code'].str.replace('CVM', 'CEA')
+    df['School Class Code'] = df['School Class Code'].str.replace('2CVM', '2CEA')
+
+    df.loc[df['Stage'] == 2, 'SACE Code'] = df.loc[df['Stage'] == 2, 'SACE Code'].str.replace('DTM', 'DTA')
+    df['School Class Code'] = df['School Class Code'].str.replace('2DTM', '2DTA')
+
+    df.loc[df['Stage'] == 2, 'SACE Code'] = df.loc[df['Stage'] == 2, 'SACE Code'].str.replace('HWM', 'HWA')
+    df['School Class Code'] = df['School Class Code'].str.replace('2HWM', '2HWA')
+
+    df.loc[df['Stage'] == 2, 'SACE Code'] = df.loc[df['Stage'] == 2, 'SACE Code'].str.replace('SFM', 'SFA')
+    df['School Class Code'] = df['School Class Code'].str.replace('2SFM', '2SFA')
                                                                   
     df['SACE Code'] = df['SACE Code'].str.replace('PEM', 'PEA')
     df['School Class Code'] = df['School Class Code'].str.replace('PEM', 'PEA')
@@ -457,8 +471,8 @@ def organise_classes_dataframe(teacher_df, classes_tfx, semester, msswd="ms"):
             'D' if msswd == "swd" else
             'J' if row['Semester'] == 1 and row['Stage'] == 1 else  # Stage 1, Semester 1
             'D' if row['Semester'] == 2 and row['Stage'] == 1 else  # Stage 1, Semester 2
-            'J' if row['SACE Code'] in ['RPA', 'RPM', 'AIF', 'AIM'] and row['Semester'] == 1 else  # Stage 2, Semester 1 for special codes
-            'D' if row['SACE Code'] in ['RPA', 'RPM', 'AIF', 'AIM'] and row['Semester'] == 2 else  # Stage 2, Semester 2 for special codes
+            'J' if row['SACE Code'] in ['AIF', 'AFM'] and row['Semester'] == 1 else  # Stage 2, Semester 1 for special codes
+            'D' if row['SACE Code'] in ['AIF', 'AFM'] and row['Semester'] == 2 else  # Stage 2, Semester 2 for special codes
             'D'  # Default return for all other Stage 2 subjects
         ),
         axis=1
@@ -496,8 +510,6 @@ def get_classes_dataframe(teachers_df, sem_tfx, semester, sace_enrollments_df, m
     pd.DataFrame: The combined and organized DataFrame with class information.
     """
     df = organise_classes_dataframe(teachers_df, sem_tfx, semester, msswd)
-
-    df.to_clipboard()
 
     # Merge and handle column name conflicts
     df = pd.merge(df, sace_enrollments_df[["School Class Code", "Class Number"]], on="School Class Code", how='left', suffixes=('', '_y'))
@@ -582,7 +594,7 @@ def classes_file_output(df, semester, stage, swd=False):
     
     # Output to CSV
     df = df[df["Stage"] == str(stage)]
-    if stage == 1:
+    if stage == "1":
         if swd == True:
             df.to_csv(f'schools_online_import_files\\SWD_Stage{stage}_S{semester}_CLASSIMP.csv', index=False)
         else:
@@ -646,13 +658,13 @@ all_classes = pd.concat([semester1_classes_import, semester2_classes_import, sem
 get_only_sace_teachers(teachers_df, all_classes).to_csv("schools_online_import_files\\TCHRIMP.csv", index=False)
 
 # Classes
-classes_file_output(classes_import, 1, 1)
-classes_file_output(classes_import, 2, 1)
-classes_file_output(classes_import, 1, 2)
+classes_file_output(classes_import, 1, "1")
+classes_file_output(classes_import, 2, "1")
+classes_file_output(classes_import, 1, "2")
 
-classes_file_output(swd_classes_import, 1, 1, True)
-classes_file_output(swd_classes_import, 2, 1, True)
-classes_file_output(swd_classes_import, 1, 2, True)
+classes_file_output(swd_classes_import, 1, "1", True)
+classes_file_output(swd_classes_import, 2, "1", True)
+classes_file_output(swd_classes_import, 1, "2", True)
 
 # Enrollments
 seniors_df[(seniors_df["Semester"] == 1) & (seniors_df["Stage"] == 1)].to_csv('schools_online_import_files\\Stage1_S1_ENRLIMP.csv', index=False)
