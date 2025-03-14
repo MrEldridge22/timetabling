@@ -453,6 +453,7 @@ def organise_classes_dataframe(teacher_df, classes_tfx, semester, msswd="ms"):
     
     # print(teachers_class_details_df)
     teachers_class_details_df = update_teacher_code(teachers_class_details_df)
+    teachers_class_details_df.to_clipboard()
 
     organised_classes_df = pd.DataFrame()
     
@@ -469,10 +470,10 @@ def organise_classes_dataframe(teacher_df, classes_tfx, semester, msswd="ms"):
         lambda row: (
             'D' if row['Credits'] == "20" else
             'D' if msswd == "swd" else
-            'J' if row['Semester'] == 1 and row['Stage'] == 1 else  # Stage 1, Semester 1
-            'D' if row['Semester'] == 2 and row['Stage'] == 1 else  # Stage 1, Semester 2
-            'J' if row['SACE Code'] in ['AIF', 'AFM'] and row['Semester'] == 1 else  # Stage 2, Semester 1 for special codes
-            'D' if row['SACE Code'] in ['AIF', 'AFM'] and row['Semester'] == 2 else  # Stage 2, Semester 2 for special codes
+            'J' if row['Semester'] == 1 and row['Stage'] == "1" else  # Stage 1, Semester 1
+            'D' if row['Semester'] == 2 and row['Stage'] == "1" else  # Stage 1, Semester 2
+            'J' if row['SACE Code'] in ['RPA', 'RPM', 'AIF', 'AIM'] and row['Semester'] == 1 else  # Stage 2, Semester 1 for special codes
+            'D' if row['SACE Code'] in ['RPA', 'RPM', 'AIF', 'AIM'] and row['Semester'] == 2 else  # Stage 2, Semester 2 for special codes
             'D'  # Default return for all other Stage 2 subjects
         ),
         axis=1
@@ -658,8 +659,8 @@ all_classes = pd.concat([semester1_classes_import, semester2_classes_import, sem
 get_only_sace_teachers(teachers_df, all_classes).to_csv("schools_online_import_files\\TCHRIMP.csv", index=False)
 
 # Classes
-classes_file_output(classes_import, 1, "1")
-classes_file_output(classes_import, 2, "1")
+classes_file_output(classes_import[(classes_import["Semester"] == 1)], 1, "1")
+classes_file_output(classes_import[(classes_import["Semester"] == 2)], 2, "1")
 classes_file_output(classes_import, 1, "2")
 
 classes_file_output(swd_classes_import, 1, "1", True)
