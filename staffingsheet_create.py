@@ -19,7 +19,7 @@ TODO:
 
 """
 # Debugging
-pd.get_option('display.max_columns', None)
+# pd.get_option('display.max_columns', None)
 pd.set_option('display.max_rows', 200)
 pd.set_option("future.no_silent_downcasting", True)
 
@@ -45,6 +45,13 @@ main_path_laptop      = f"C:\\Users\\deldridge\\OneDrive - Department for Educat
 
 # Desktop OneDrive
 main_path_desktop     = f"C:\\Users\\demg\\OneDrive - Department for Education\\Documents\\Timetabling\\{year}"
+
+filePath = None
+semester_file = None
+term_file = None
+term_a = None
+term_b = None
+workbook = None
 
 # Check if the path exists and set the file path, make it easier to switch between locations.
 try:
@@ -93,13 +100,17 @@ elif semester_selected == 2:
     term_b = 4
     workbook = xlsxwriter.Workbook('Subject Allocations Semester 2.xlsx')
 
-# Open the semester based json tdx file
-with open(semester_file, "r") as read_content:
-    tfx_raw = json.load(read_content)
+if semester_file is None or term_file is None:
+    print("Semester or Term file paths are not set correctly!")
+    sys.exit(1)
+else:
+    # Open the semester based json tdx file
+    with open(semester_file, "r") as read_content:
+        tfx_raw = json.load(read_content)
 
-# Open the term based json tdx file
-with open(term_file, "r") as read_content:
-    tfx_raw_term = json.load(read_content)
+    # Open the term based json tdx file
+    with open(term_file, "r") as read_content:
+        tfx_raw_term = json.load(read_content)
 
 # Read In The Data!
 read_in_tfx_data(conn, tfx_raw, term_a)    

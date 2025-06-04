@@ -70,7 +70,7 @@ term_based_subjects = [
     "08 Digital Products",
     "08 Drama",
     "08 Food & Nutrition",
-    "08 Introduction to Media Arts",
+    "08 Media",
     "08 Metalwork",
     "08 Material Products - Wood",
     "08 Music",
