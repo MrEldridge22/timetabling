@@ -146,7 +146,7 @@ def create_tables(conn):
                                 first_name TEXT NOT NULL,
                                 last_name TEXT NOT NULL,
                                 proposed_load TEXT NOT NULL,
-                                actual_load TEXT,
+                                final_load INT,
                                 notes TEXT
                             );
                             
@@ -227,7 +227,7 @@ def read_in_tfx_data(conn, tfx_file, term):
     teachers_df = pd.json_normalize(tfx_file, record_path=['Teachers'])
     # print(teachers_df)
     for col in teachers_df.columns:
-        if col not in ["TeacherID", "Code", "FirstName", "LastName", "SpareField1", "LoadProposed"]:
+        if col not in ["TeacherID", "Code", "FirstName", "LastName", "SpareField1", "LoadProposed", "LoadFinal"]:
             teachers_df.drop([col], inplace=True, axis=1)
     
     # Rename columns to match database table columns
@@ -236,14 +236,18 @@ def read_in_tfx_data(conn, tfx_file, term):
                                 "FirstName": "first_name",
                                 "LastName": "last_name",
                                 "SpareField1": "notes",
-                                "LoadProposed": "proposed_load"
+                                "LoadProposed": "proposed_load",
+                                "LoadFinal": "actual_load"
                                 }, inplace=True)
     # teachers_df['notes'].replace('', np.nan, inplace=True)
     teachers_df.loc[teachers_df['notes'] == '', 'notes'] = np.nan
+    if term == 2 or term == 4:
+        # If term 2 or 4, set actual load to 0 as these generally match up with other terms and only want to count the load once.
+        teachers_df['actual_load'] = 0
     # print(teachers_df)
     # Write to Database
     for row in teachers_df.itertuples():
-        populate_teachers(conn, (row.teacher_id, row.code, row.first_name, row.last_name, row.notes, row.proposed_load))
+        populate_teachers(conn, (row.teacher_id, row.code, row.first_name, row.last_name, row.notes, row.proposed_load, row.actual_load))
 
     ### Faculties ###
     faculties_df = pd.json_normalize(tfx_file, record_path=['Faculties'])
@@ -373,20 +377,20 @@ def read_in_tfx_data(conn, tfx_file, term):
     # Populate proposed column with data from tfx file.
     # TODO: Filter out by term based subjects
 
-    ### Calculate Teacher Load ###
-    calc_actual_load_sql = """
-                            SELECT t.code AS code, SUM(p.load) AS actual_load FROM timetable tt
-                            INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
-                            INNER JOIN periods p on tt.period_id = p.period_id
-                            GROUP BY t.code;
-                            """  
-    load_df = pd.read_sql(calc_actual_load_sql, conn)
-    # Iterate over all staff and update values in table
-    for row in load_df.itertuples():
-        sql = """UPDATE teachers SET actual_load = (?) WHERE code = (?);"""
-        cur = conn.cursor()
-        cur.execute(sql, (row.actual_load, row.code))
-        conn.commit()
+    # ### Calculate Teacher Load ###
+    # calc_actual_load_sql = """
+    #                         SELECT t.code AS code, SUM(p.load) AS actual_load FROM timetable tt
+    #                         INNER JOIN teachers t ON tt.teacher_id = t.teacher_id
+    #                         INNER JOIN periods p on tt.period_id = p.period_id
+    #                         GROUP BY t.code;
+    #                         """  
+    # load_df = pd.read_sql(calc_actual_load_sql, conn)
+    # # Iterate over all staff and update values in table
+    # for row in load_df.itertuples():
+    #     sql = """UPDATE teachers SET actual_load = (?) WHERE code = (?);"""
+    #     cur = conn.cursor()
+    #     cur.execute(sql, (row.actual_load, row.code))
+    #     conn.commit()
     
 
 def read_in_sfx_data(conn, sfx_file, year_level):
@@ -419,7 +423,7 @@ def populate_teachers(conn, teacher_data):
     :param teachers:
     :return:
     """
-    sql = ''' INSERT OR IGNORE INTO teachers(teacher_id, code, first_name, last_name, notes, proposed_load) VALUES(?,?,?,?,?,?)'''
+    sql = ''' INSERT OR IGNORE INTO teachers(teacher_id, code, first_name, last_name, notes, proposed_load, final_load) VALUES(?,?,?,?,?,?,?)'''
     cur = conn.cursor()
     cur.execute(sql, teacher_data)
     conn.commit()
@@ -586,7 +590,7 @@ def get_full_timetable_data(conn):
                                     t.last_name,
                                     t.code,
                                     t.proposed_load,
-                                    t.actual_load,
+                                    t.final_load,
                                     t.notes,
                                     c.name AS subject,
                                     r.name AS room,
@@ -613,7 +617,7 @@ def get_faculty_timetable_data(conn, faculty):
                                     t.last_name,
                                     t.code,
                                     t.proposed_load,
-                                    t.actual_load,
+                                    t.final_load,
                                     t.notes,
                                     c.name AS subject,
                                     r.name AS room,

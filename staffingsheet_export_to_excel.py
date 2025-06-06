@@ -36,7 +36,7 @@ def highlight_shared_class(workbook, subject_name):
     return cell_format
 
 
-def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="1260"):
+def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="1200"):
     """
     Creates the various sheets on the excel document
     
@@ -159,8 +159,7 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="126
 
         # Load
         # Calculates how much underloaded a teacher is and returns 0 if overloaded by minutes
-        # under_load = max(0, (int(int(row.proposed_load) / 100) - int(row.actual_load)))
-        under_load = int(int(row.proposed_load) / 100) - int(row.actual_load)
+        under_load = round(int(int(row.proposed_load) / 100) - (int(row.actual_load) / 100), 0)
         sheet.write('C' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 1), (int(row.proposed_load) / 100), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 2), (under_load), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))

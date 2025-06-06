@@ -21,6 +21,12 @@ def get_df(conn, faculty=None):
     else:
         sql_query = get_faculty_timetable_data(conn, faculty)
 
+    # Variables
+    subject = None
+    day = None
+
+
+
     # Put into dataframe
     tt_df = pd.DataFrame(sql_query)
     # print(tt_df)
@@ -32,49 +38,75 @@ def get_df(conn, faculty=None):
     # Iterate over the tt_df dataframe finding corresponding line for each daily lesson and put into a list if the lesson is found.
     for row in tt_df.itertuples(index=False):
         if row.faculty != "SWD":    # Special Ed Run different line structure, this splits it into correct lines, this is the mainstream sorter
-            for index, (i, line_num) in enumerate(mainstream_lines_df[row.day].items()):
+            for index, (i, line_num) in enumerate(mainstream_lines_df[str(row.day)].items()):
                 # If the subject is found in that day, get the corresponding line which is the cell value
                 if row.lesson == i:  # Found a Subject on a line!
                     if (row.roll_class == '12X' or row.roll_class == '12P') and (line_num == "Line 4" or line_num == "Line 3"):
-                        subject = "12Extra" + " " + row.subject.split(" ", 1)[1] + " " + row.day[0:3] + row.lesson[1]
-                        day = row.day[0:3] + row.lesson[1]
-                        teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day, minute_loads_dict[row.day][index]])
+                        subject_str = str(row.subject)
+                        subject_parts = subject_str.split(" ", 1)
+                        subject = f"12Extra {subject_parts[1] if len(subject_parts) > 1 else subject_str} {str(row.day)[:3]} {str(row.lesson)[1]}"
+                        day = f"{str(row.day)[:3]} {str(row.lesson)[1]}"
+                        teacher_data_list.append([row.id,
+                                                  row.code,
+                                                  row.first_name,
+                                                  row.last_name,
+                                                  row.proposed_load,
+                                                  row.final_load,
+                                                  row.notes,
+                                                  subject,
+                                                  row.room,
+                                                  line_num,
+                                                  day,
+                                                  minute_loads_dict[str(row.day)][index]]
+                                                )
                     else:
-                        subject = row.roll_class + " " + row.subject
-                        day = row.day[0:3] + row.lesson[1]
-                        teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, row.subject, row.room, line_num, day, minute_loads_dict[row.day][index]])
+                        subject = f"{row.roll_class} {row.subject}"
+                        day = f"{str(row.day)[0:3]} {str(row.lesson)[1]}"
+                        teacher_data_list.append([row.id,
+                                                  row.code,
+                                                  row.first_name,
+                                                  row.last_name,
+                                                  row.proposed_load,
+                                                  row.final_load,
+                                                  row.notes,
+                                                  row.subject,
+                                                  row.room,
+                                                  line_num,
+                                                  day,
+                                                  minute_loads_dict[str(row.day)][index]]
+                                                )
         
         else:    # SWD Lines
-            for index, (i, line_num) in enumerate(swd_lines_df[row.day].items()):
+            for index, (i, line_num) in enumerate(swd_lines_df[str(row.day)].items()):
                 # If the subject is found in that day, get the corresponding line which is the cell value
                 if row.lesson == i:  # Found a Subject on a line!
                     # Shorten SWD Subject Names
-                    if ("Math" in row.subject):
-                        subject = row.subject[0:3] + " Maths"
-                    elif ("Society" in row.subject):
-                        subject = row.subject[0:3] + " Society and Culture"
-                    elif ("Science" in row.subject):
-                        subject = row.subject[0:3] + " Science"
-                    elif ("Personal Learning Plan" in row.subject):
-                        subject = row.subject[0:3] + " PLP"
-                    elif ("Research Project" in row.subject):
-                        subject = row.subject[0:3] + " RP"
-                    elif ("Scien" in row.subject):
-                        subject = row.subject[0:3] + " Science"
-                    elif ("English" in row.subject):
-                        subject = row.subject[0:3] + " English"
-                    elif ("Cross" in row.subject):
-                        subject = row.subject[0:3] + " Cross Disc."
-                    elif ("Health" in row.subject):
-                        subject = row.subject[0:3] + " Health"
-                    elif ("Business" in row.subject):
-                        subject = row.subject[0:3] + " Business Innovation"
+                    if ("Math" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " Maths"
+                    elif ("Society" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " Society and Culture"
+                    elif ("Science" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " Science"
+                    elif ("Personal Learning Plan" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " PLP"
+                    elif ("Research Project" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " RP"
+                    elif ("Scien" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " Science"
+                    elif ("English" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " English"
+                    elif ("Cross" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " Cross Disc."
+                    elif ("Health" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " Health"
+                    elif ("Business" in str(row.subject)):
+                        subject = str(row.subject)[0:3] + " Business Innovation"
                     else:
-                        subject = row.subject
+                        subject = str(row.subject)
                     
-                    day = row.day[0:3] + row.lesson[1]
+                    day = f"{str(row.day)[0:3]} {str(row.lesson)[1]}"
 
-                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day, minute_loads_dict[row.day][index]])
+                    teacher_data_list.append([row.id, row.code, row.first_name, row.last_name, row.proposed_load, row.actual_load, row.notes, subject, row.room, line_num, day, minute_loads_dict[str(row.day)][index]])
                     # print(row.roll_class)
     
     
@@ -82,28 +114,54 @@ def get_df(conn, faculty=None):
     # Put list into a dataframe, drop the duplicates
     teacher_data_df = pd.DataFrame(teacher_data_list, columns=['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day', 'class_load']) 
     # Correct Loads here
-    teacher_data_df['class_load'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes', 'subject', 'room', 'line', 'day', 'class_load']].groupby(['id', 'code'])['class_load'].transform('sum')
+    teacher_data_df['class_load'] = teacher_data_df[
+                                                        ['id',
+                                                        'code',
+                                                        'firstname',
+                                                        'lastname',
+                                                        'proposed_load',
+                                                        'actual_load',
+                                                        'notes',
+                                                        'subject',
+                                                        'room',
+                                                        'line',
+                                                        'day',
+                                                        'class_load']
+                                                    ].groupby(['id', 'code'])['class_load'].transform('sum')
        
     # Remove 12X Class Loads
     teacher_data_df.loc[teacher_data_df['subject'].str.startswith('12Extra'), 'class_load'] = 0
 
     # Code to catch multiple teachers for one class (permanent swaps/reliefs ect.)
     # Group by Teacher code and id. this gives each class and the days / lesson they are on combined together
-    teacher_data_df['day'] = teacher_data_df[['id', 'code', 'firstname', 'lastname', 'proposed_load', 'actual_load', 'notes' , 'subject', 'room', 'line', 'day','class_load']].groupby(['id','code'])['day'].transform(lambda x: ','.join(x))
+    teacher_data_df['day'] = teacher_data_df[
+                                                ['id',
+                                                 'code',
+                                                 'firstname',
+                                                 'lastname',
+                                                 'proposed_load',
+                                                 'actual_load',
+                                                 'notes',
+                                                 'subject',
+                                                 'room',
+                                                 'line',
+                                                 'day',
+                                                 'class_load']
+                                            ].groupby(['id','code'])['day'].transform(lambda x: ','.join(x))
     teacher_data_df.drop_duplicates(inplace=True, ignore_index=True)
     
     # Filter out those classes with 3 or less lessons, put day code onto class name, flag if shared class for highlighting later.
     for idx, row in teacher_data_df.iterrows():
         # if len(row.day.split(",")) <= 3 and "SWD" not in row.line:
         if len(row.day.split(",")) <= 3:
-            teacher_data_df.loc[idx, 'subject'] = row.subject + " " + row.day
-            teacher_data_df.loc[idx, 'day'] = True
+            teacher_data_df.at[idx, 'subject'] = row.subject + " " + row.day
+            teacher_data_df.at[idx, 'day'] = True
         # Get SWD swaps
         # elif len(row.day.split(",")) <= 2 and "SWD" in row.line:
         #     teacher_data_df.loc[idx, 'subject'] = row.subject + " " + row.day
         #     teacher_data_df.loc[idx, 'day'] = True
         else:
-            teacher_data_df.loc[idx, 'day'] = False
+            teacher_data_df.at[idx, 'day'] = False
         
     # Remove SWD from SWD Line names
     teacher_data_df.replace({'line': "SWD"}, inplace=True)
@@ -237,7 +295,7 @@ def get_df(conn, faculty=None):
                                                     'line7_class', 'line7_room',])
     subject_allocation_df.sort_values('lastname', inplace=True)
     
-    subject_allocation_df['actual_load'] = subject_allocation_df['code'].replace(sum_of_class_loads)
+    # subject_allocation_df['actual_load'] = subject_allocation_df['code'].replace(sum_of_class_loads)
 
     # print(subject_allocation_df)
     # subject_allocation_df.to_csv("Subject_Allocations.csv", index=False)
