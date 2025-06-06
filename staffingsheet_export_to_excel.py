@@ -18,12 +18,12 @@ shared_class_color =    '#F6FCDC'
 
 # Mapping for Care Class day replacements
 day_replacements = {
-    "Mon5": "PD",
-    "MonG": "M",
-    "TueG": "Tu",
-    "WedG": "W",
-    "ThuG": "Th",
-    "FriG": "F"
+    "Mon 5": "PD",
+    "Mon G": "M",
+    "Tue G": "Tu",
+    "Wed G": "W",
+    "Thu G": "Th",
+    "Fri G": "F"
 }
 
 # Function to set the cell format for the shared subjects to be different from other subject cells
