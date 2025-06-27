@@ -159,9 +159,10 @@ def create_excel_sheet(workbook, staffing_df, sheet_name, heading, fte_load="120
 
         # Load
         # Calculates how much underloaded a teacher is and returns 0 if overloaded by minutes
+        # Also rounds the proposed load to the nearest Minute, Yard Duties are 0.1 "minutes" in TTD
         under_load = round(int(int(row.proposed_load) / 100) - (int(row.actual_load) / 100), 0)
         sheet.write('C' + str(start_row + 0), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
-        sheet.write('C' + str(start_row + 1), (int(row.proposed_load) / 100), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
+        sheet.write('C' + str(start_row + 1), round((int(row.proposed_load) / 100), 0), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 2), (under_load), workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'right': True}))
         sheet.write('C' + str(start_row + 3), " ", workbook.add_format({'font_name': 'Arial', 'font_size': 8, 'align': "center", 'bottom': True, 'right': True}))
 
